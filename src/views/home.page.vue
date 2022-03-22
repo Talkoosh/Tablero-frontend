@@ -1,5 +1,5 @@
 <template>
-    <section></section>
+    <section class="home-page">Hello home</section>
 </template>
 
 <script>

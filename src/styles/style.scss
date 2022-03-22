@@ -1,7 +1,14 @@
-body {
-  margin: 0;
-}
+// SETUP
+@import 'basics/variables';
 
-* {
-  box-sizing: border-box;
-}
+// BASICS
+// @import 'basics/helpers';
+@import 'basics/base';
+// @import 'basics/layout';
+
+// COMPONENTS
+// @import 'components/main-header';
+
+// VIEWS
+@import 'views/home';
+// @import 'views/login';
