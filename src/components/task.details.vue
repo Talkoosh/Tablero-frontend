@@ -1,28 +1,34 @@
 <template>
-    <section class="task-edit-main">
-        <div class="edit-main">
-            <h1>{{ task.title }}</h1>
-            <div class="description-container">
-                <h2>Description</h2>
-                <p>{{ task.description }}</p>
+    <section class="task-details-main">
+        <div class="head">
+            <div class="text">
+                <h1>{{ task.title }}</h1>
+                <p>in list ...</p>
             </div>
-            <div class="activities-container">
-                <h2>Activity</h2>
-                <textarea placeholder="Write a comment..."></textarea>
-                <ul class="comments-list">
-                    <li v-for="comment in task.comments" :key="comment.id">
-                        <img :src="comment.byMember.imgUrl" />
-                        <span class="comment-fullname">{{ comment.byMember.fullname }}</span>
-                        <span class="comment-time">{{ comment.createdAt }}</span>
-                        <div class="comment-text-container">
-                            <p>{{ comment.txt }}</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <button>X</button>
         </div>
-        <div class="actions-menu">
-            <div class>
+        <div class="details-main">
+            <div class="content">
+                <div class="description-container module">
+                    <h2>Description</h2>
+                    <p>{{ task.description }}</p>
+                </div>
+                <div class="activities-container module">
+                    <h2>Activity</h2>
+                    <textarea placeholder="Write a comment..."></textarea>
+                    <ul class="comments-list">
+                        <li v-for="comment in task.comments" :key="comment.id">
+                            <img :src="comment.byMember.imgUrl" />
+                            <span class="comment-fullname">{{ comment.byMember.fullname }}</span>
+                            <span class="comment-time">{{ comment.createdAt }}</span>
+                            <div class="comment-text-container">
+                                <p>{{ comment.txt }}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="actions-menu">
                 <h3>Add to card</h3>
                 <button>
                     <span>Members</span>
