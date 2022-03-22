@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import homePage from '../views/home.page.vue';
 import boardPage from '../views/board.page.vue';
+import taskEdit from '../components/task.edit.vue';
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,10 @@ const router = createRouter({
       path: '/board/:boardId',
       name: 'board',
       component: boardPage,
+    },
+    {
+      path: '/card/:cardId',
+      component: taskEdit,
     },
   ],
 });
