@@ -1,27 +1,102 @@
 <template>
   <section class="main-header">
-    <img src="../img/logo.png" alt />
+    <div class="main-logo">Tablero</div>
+
     <div class="main-header-dropdowns">
         <div class="workspace-drop">
-            <button class="drop-btn" >Workspaces </button>
+            <button class="drop-btn" >Workspaces</button>
+            <div class="workspace-drop-content">
+                <header>
+                    <div class="drop-header">Workspaces</div>
+                    <button>X</button>
+                </header>
+                <li v-for="board in boards" :key="board._id">
+                     <div class="board-details">
+                        <div class="board-img-container">
+                            <img src="" alt="">
+                        </div>
+                        <div>{{board.title}}</div>
+                        <div>{{board.createdBy.fullname}} workspace</div>
+                    </div>
+                </li>
+            </div>
         </div>
 
         <div class="recent-drop">
             <button class="drop-btn" >Recent</button>
+            <div class="recent-drop-content">
+                <header>
+                    <div class="drop-header">Recent boards</div>
+                    <button>X</button>
+                </header>
+                <li v-for="board in boards" :key="board._id">
+                    <div class="board-details">
+                        <div class="board-img-container">
+                            <img src="" alt="">
+                        </div>
+                        <div>{{board.title}}</div>
+                        <div>{{board.createdBy.fullname}} workspace</div>
+                    </div>
+
+                </li>
+            </div>
+
         </div>
 
         <div class="starred-drop">   
            <button class="drop-btn" >Starred </button>
+            <div class="starred-drop-content">
+                <header>
+                    <div class="drop-header">Starred boards</div>
+                    <button>X</button>
+                </header>
+                <li v-for="board in boards" :key="board._id">
+
+                </li>
+            </div>
+
         </div> 
 
 
-       <div class="templates-drop">
+       <!-- <div class="templates-drop">
           <button class="drop-btn" >Templates</button>
-       </div>
-       
+            <div class="templatese-drop-content">
+                <header>
+                    <div class="drop-header">Templates</div>
+                    <button>X</button>
+                </header>
+                <li v-for="board in boards" :key="board._id">
+
+                </li>
+            </div>
+       </div> -->
+
+       <button class="create-board-btn">Create</button>
     </div>
+
+    <div class="seperator"></div>
+
+    <div class="right-navbar">
+         <section class="board-search">
+                  <form class="search-container" action="">
+                      <input  class="main-input"  type="text"  >
+                  </form>
+           </section>
+           <button>
+               <span>i</span>
+           </button>
+           <button>
+               <span>💡</span>
+           </button>
+           <div>
+               <span>icon</span>
+           </div>
+
+    </div>
+
   </section>
 </template>
+
 <script>
 // import '' from ''
 export default {
@@ -30,7 +105,7 @@ export default {
   created() {},
   data() {
     return {
-      board: [{
+      boards: [{
         _id: "b101",
         title: "Robot dev proj",
         createdAt: 1589983468418,

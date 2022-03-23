@@ -7,9 +7,10 @@
 // @import 'basics/layout';
 
 // COMPONENTS
-// @import 'components/main-header';
+@import 'components/main.header';
 @import 'components/task.details';
 @import 'components/board.header';
+
 
 // VIEWS
 @import 'views/home';
