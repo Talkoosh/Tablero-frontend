@@ -21,6 +21,7 @@ async function addBoard(title) {
     throw err;
   }
 }
+
 async function updateBoard(board) {
   try {
     return await storageService.put(board);
@@ -31,7 +32,7 @@ async function updateBoard(board) {
 
 // GROUP CRUD
 
-function saveGroup(boardId, title) {
+async function saveGroup(boardId, title) {
   const board = storageService.get(KEY, boardId);
   const groupToSave = {
     _id: utilService.makeId(),
@@ -40,8 +41,11 @@ function saveGroup(boardId, title) {
   };
   board.groups.push(groupToSave);
 
-  storageService.put(KEY, board);
-  return groupToSave;
+  try {
+    await updateBoard(board)
+  } catch(err){
+    throw err;
+  }
 }
 
 // TASK CRUD
