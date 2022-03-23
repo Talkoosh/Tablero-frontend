@@ -13,20 +13,7 @@
                     <h2>Description</h2>
                     <p>{{ task.description }}</p>
                 </div>
-                <div class="activities-container module">
-                    <h2>Activity</h2>
-                    <textarea placeholder="Write a comment..."></textarea>
-                    <ul class="comments-list">
-                        <li v-for="comment in task.comments" :key="comment.id">
-                            <img :src="comment.byMember.imgUrl" />
-                            <span class="comment-fullname">{{ comment.byMember.fullname }}</span>
-                            <span class="comment-time">{{ comment.createdAt }}</span>
-                            <div class="comment-text-container">
-                                <p>{{ comment.txt }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <task-activities @add-comment="saveComment" :comments="task.comments"></task-activities>
             </div>
             <div class="actions-menu">
                 <h3>Add to card</h3>
@@ -48,6 +35,8 @@
 </template>
 
 <script>
+import taskActivities from './task.activities.vue'
+
 export default {
     data() {
         return {
@@ -111,10 +100,15 @@ export default {
 
     },
     methods: {
-
+        async addComment(txt){
+           await this.$store.dispatch({type: 'addComment', txt})
+        }
     },
     computed: {
 
+    },
+    components: {
+        taskActivities
     }
 }
 </script>

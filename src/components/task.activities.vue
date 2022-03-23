@@ -1,0 +1,45 @@
+<template>
+    <section>
+        <div class="activities-container module">
+            <h2>Activity</h2>
+            <div class="comment-box">
+                <textarea placeholder="Write a comment..." v-model="txt"></textarea>
+                <button @click="saveComment">Save</button>
+            </div>
+            <ul class="comments-list">
+                <li v-for="comment in comments" :key="comment.id">
+                    <img :src="comment.byMember.imgUrl" />
+                    <span class="comment-fullname">{{ comment.byMember.fullname }}</span>
+                    <span class="comment-time">{{ comment.createdAt }}</span>
+                    <div class="comment-text-container">
+                        <p>{{ comment.txt }}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</template>
+
+<script>
+export default {
+    props: {
+        comments: Array
+    },
+    data() {
+        return {
+            txt: ''
+        }
+    },
+    created() {
+
+    },
+    methods: {
+        saveComment(){
+            this.$emit('add-comment', this.txt)
+        }
+    },
+    computed: {
+
+    }
+}
+</script>
