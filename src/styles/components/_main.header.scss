@@ -1,0 +1,39 @@
+.main-header{
+    background-color: #026AA7;
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    max-height: 44px;
+    padding: 6px 4px;
+
+    .main-logo{
+        padding: 0 6px;
+        height: 32px;
+        border-radius: 3px;
+    }
+
+    .main-header-dropdowns{
+        display: flex;
+        flex-shrink: 0;
+        margin: 0 4px;
+    }
+
+    .seperator{
+    flex-shrink: 1;
+    min-width: 1px;
+    margin: 0;
+    width: 100%;
+    position: relative;
+    }
+
+    .right-navbar{
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    }
+
+
+
+}
