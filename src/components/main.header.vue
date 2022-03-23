@@ -3,9 +3,17 @@
     <div class="main-logo">Tablero</div>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
-        <div class="workspace-drop ">
-          <button class="drop-btn workspace-btn">Workspaces</button>
-          <div class="workspace-drop-content dropdown">
+        <div class="workspace-drop">
+          <button
+            class="drop-btn workspace-btn"
+            @click="toggleWorkspaceDrop"
+          >
+            Workspaces
+          </button>
+          <div
+            class="workspace-drop-content dropdown"
+            :class="toggleWorkspaceDropdown"
+          >
             <header class="drop-header">
               <div class="drop-header">Workspaces</div>
               <button>X</button>
@@ -16,17 +24,22 @@
                   <img src="" alt="" />
                 </div>
                 <div class="board-text">
-                    <div>{{ board.title }}</div>
-                    <div>{{ board.createdBy.fullname }} workspace</div>
+                  <div>{{ board.title }}</div>
+                  <div>{{ board.createdBy.fullname }} workspace</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="recent-drop ">
-          <button class="drop-btn recent-btn">Recent</button>
-          <div class="recent-drop-content dropdown">
+        <div class="recent-drop">
+          <button class="drop-btn recent-btn" @click="toggleRecentDrop">
+            Recent
+          </button>
+          <div
+            class="recent-drop-content dropdown"
+            :class="toggleRecentDropdown"
+          >
             <header class="drop-header">
               <div class="drop-header">Recent boards</div>
               <button>X</button>
@@ -37,32 +50,40 @@
                   <img src="" alt="" />
                 </div>
                 <div class="board-text">
-                    <div>{{ board.title }}</div>
-                    <div>{{ board.createdBy.fullname }} workspace</div>
+                  <div>{{ board.title }}</div>
+                  <div>{{ board.createdBy.fullname }} workspace</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="starred-drop ">
-          <button class="drop-btn starred-btn">Starred</button>
-          <div class="starred-drop-content dropdown">
+        <div class="starred-drop">
+          <button
+            class="drop-btn starred-btn"
+            @click="toggleStarredDrop"
+          >
+            Starred
+          </button>
+          <div
+            class="starred-drop-content dropdown"
+            :class="toggleStarredDropdown"
+          >
             <header class="drop-header">
               <div class="drop-header">Starred boards</div>
               <button>X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
-                 <div class="board-details">
+              <div class="board-details">
                 <div class="board-img-container">
                   <img src="" alt="" />
                 </div>
                 <div class="corad-text">
-                   <div>{{ board.title }}</div>
-                   <div>{{ board.createdBy.fullname }} workspace</div>
+                  <div>{{ board.title }}</div>
+                  <div>{{ board.createdBy.fullname }} workspace</div>
                 </div>
                 <div class="star-container">
-                    <span>🎁</span>
+                  <span>🎁</span>
                 </div>
               </div>
             </div>
@@ -88,7 +109,7 @@
     <div class="right-navbar">
       <div class="board-search">
         <!-- <form class="search-container" action=""> -->
-          <input  class="main-input" type="text" placeholder="Search" />
+        <input class="main-input" type="text" placeholder="Search" />
         <!-- </form> -->
       </div>
       <button class="right-nav-btn">
@@ -109,143 +130,47 @@
 export default {
   name: "",
   components: {},
-  created() {
-  },
+  created() {},
   data() {
     return {
-      boards: [
-        {
-          _id: "b101",
-          title: "Robot dev proj",
-          createdAt: 1589983468418,
-          createdBy: {
-            _id: "u101",
-            fullname: "Abi Abambi",
-            imgUrl: "http://some-img",
-          },
-          style: {},
-          labels: [
-            {
-              id: "l101",
-              title: "Done",
-              color: "#61bd4f",
-            },
-            {
-              id: "l102",
-              title: "Progress",
-              color: "#61bd33",
-            },
-          ],
-          members: [
-            {
-              _id: "u101",
-              fullname: "Tal Tarablus",
-              imgUrl: "https://www.google.com",
-            },
-          ],
-          groups: [
-            {
-              id: "g101",
-              title: "Group 1",
-              tasks: [
-                {
-                  id: "c101",
-                  title: "Replace logo",
-                },
-                {
-                  id: "c102",
-                  title: "Add Samples",
-                },
-              ],
-              style: {},
-            },
-            {
-              id: "g102",
-              title: "Group 2",
-              tasks: [
-                {
-                  id: "c103",
-                  title: "Do that",
-                },
-                {
-                  id: "c104",
-                  title: "Help me",
-                  status: "in-progress",
-                  description: "description",
-                  comments: [
-                    {
-                      id: "ZdPnm",
-                      txt: "also @yaronb please CR this",
-                      createdAt: 1590999817436.0,
-                      byMember: {
-                        _id: "u101",
-                        fullname: "Tal Tarablus",
-                        imgUrl:
-                          "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
-                      },
-                    },
-                  ],
-                  checklists: [
-                    {
-                      id: "YEhmF",
-                      title: "Checklist",
-                      todos: [
-                        {
-                          id: "212jX",
-                          title: "To Do 1",
-                          isDone: false,
-                        },
-                      ],
-                    },
-                  ],
-                  members: [
-                    {
-                      _id: "u101",
-                      username: "Tal",
-                      fullname: "Tal Tarablus",
-                      imgUrl:
-                        "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
-                    },
-                  ],
-                  labelIds: ["l101", "l102"],
-                  createdAt: 1590999730348,
-                  dueDate: 16156215211,
-                  byMember: {
-                    _id: "u101",
-                    username: "Tal",
-                    fullname: "Tal Tarablus",
-                    imgUrl:
-                      "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
-                  },
-                  style: {
-                    bgColor: "#26de81",
-                  },
-                },
-              ],
-              style: {},
-            },
-          ],
-          activities: [
-            {
-              id: "a101",
-              txt: "Changed Color",
-              createdAt: 154514,
-              byMember: {
-                _id: "u101",
-                fullname: "Abi Abambi",
-                imgUrl: "http://some-img",
-              },
-              task: {
-                id: "c101",
-                title: "Replace Logo",
-              },
-            },
-          ],
-        },
-      ],
+      isRecentDropOpen: false,
+      isStarredDropOpen: false,
+      isWorkspaceDropOpen: false,
     };
   },
-  computed: {},
-  methods: {},
+  computed: {
+    boards() {
+      return this.$store.getters.boards;
+    },
+    toggleWorkspaceDrop() {
+      this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
+    },
+    toggleRecentDrop() {
+      this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
+    },
+    toggleStarredDrop() {
+      this.isStarredDropOpen = !this.isStarredDropOpen;
+    },
+  },
+  methods: {
+    toggleWorkspaceDropdown() {
+      //   if (key === "workspace") {
+      this.isRecentDropOpen = false;
+      this.isStarredDropOpen = false;
+      return this.isWorkspaceDropOpen ? 'open-drop' : 'close-drop';
+    },
+    toggleStarredDropdown() {
+      //   } else if (key === "starred") {
+      this.isRecentDropOpen = false;
+      this.isWorkspaceDropOpen = false;
+      return this.isStarredDropOpen ? 'open-drop' : 'close-drop';
+    },
+    toggleRecentDropdown() {
+      //   } else if (key === "recent") {
+      this.isStarredDropOpen = false;
+      this.isWorkspaceDropOpen = false;
+      return this.isRecentDropOpen ? 'open-drop' : 'close-drop';
+    },
+  },
 };
 </script>

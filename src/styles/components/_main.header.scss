@@ -57,15 +57,15 @@
             width: 304px;
             will-change: top, left;
             top: 48px;
-            left: 249px;
+            left: 244px;
         }
 
         .starred-drop-content{
-      position: fixed;
-      width: 304px;
-      will-change: top, left;
-      top: 48px;
-      left: 338px;
+           position: fixed;
+           width: 304px;
+           will-change: top, left;
+           top: 48px;
+           left: 331px;
         }
 
         .create-board-btn{
@@ -237,4 +237,12 @@
 
 .drop-btn:hover{
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+.open-drop{
+    display: block;
+}
+
+.close-drop{
+    display: none;
 }
