@@ -25,7 +25,7 @@ export default {
         boardHeader,
         boardGroup
     },
-    created() {
+    async created() {
         this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
         this.$store.commit({ type: 'setCurrBoardId', boardId: id })
