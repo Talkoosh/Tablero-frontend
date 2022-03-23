@@ -4,7 +4,12 @@
             <board-header :board="board" />
         </header>
         <div class="groups-container">
-            <board-group v-for="group in board.groups" :key="board._id" :group="group" />
+            <board-group
+                v-for="group in board.groups"
+                :key="group._id"
+                :group="group"
+                :boardId="board._id"
+            />
             <div class="add-group">
                 <span v-if="!isAddGroup" @click="toggleAddGroup">+ Add another list</span>
                 <div v-else>

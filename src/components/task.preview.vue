@@ -1,6 +1,6 @@
 <template>
     <section>
-        <a class="task-preview-container" href>
+        <router-link class="task-preview-container" :to="'/board/' + boardId + '/card/' + task._id">
             <div v-if="task.cover" class="task-cover" :style="cover"></div>
             <span class="task-quick-edit">I</span>
             <div class="task-preview">
@@ -9,7 +9,7 @@
                 <div v-if="task.badges" class="task-badges"></div>
                 <div v-if="task.members" class="task-members"></div>
             </div>
-        </a>
+        </router-link>
     </section>
 </template>
 
@@ -18,6 +18,7 @@
 export default {
     props: {
         task: Object,
+        boardId: String,
     },
     components: {},
     created() { },

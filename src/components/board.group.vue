@@ -8,7 +8,12 @@
                         <div>...</div>
                     </div>
                 </div>
-                <task-preview v-for="task in group.tasks" :key="task._id" :task="task" />
+                <task-preview
+                    v-for="task in group.tasks"
+                    :key="task._id"
+                    :task="task"
+                    :boardId="boardId"
+                />
                 <div class="add-task">
                     <span>+</span> Add a card
                 </div>
@@ -22,6 +27,7 @@ import taskPreview from "./task.preview.vue"
 export default {
     props: {
         group: Object,
+        boardId: String,
     },
     components: {
         taskPreview,
