@@ -1,7 +1,10 @@
 <template>
     <section>
         <div class="activities-container module">
-            <h2>Activity</h2>
+            <div class="header">
+                <h2>Activity</h2>
+                <button>Hide details</button>
+            </div>
             <div class="comment-box">
                 <textarea placeholder="Write a comment..." v-model="txt"></textarea>
                 <button @click="saveComment">Save</button>
@@ -21,6 +24,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         comments: Array
@@ -34,12 +38,14 @@ export default {
 
     },
     methods: {
-        saveComment(){
+        saveComment() {
             this.$emit('add-comment', this.txt)
         }
     },
     computed: {
 
+    },
+    components: {
     }
 }
 </script>

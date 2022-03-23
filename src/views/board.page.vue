@@ -10,6 +10,7 @@
             <button @click="isAddList = false" class="cancel-add-group-btn">X</button>
         </div>
     </div>
+    <router-view></router-view>
 </template>
 
 <script>
