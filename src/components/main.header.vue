@@ -138,10 +138,8 @@ export default {
       isWorkspaceDropOpen: false,
     };
   },
-  computed: {
-    boards() {
-      return this.$store.getters.boards;
-    },
+  methods: {
+   
     toggleWorkspaceDrop() {
       this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
     },
@@ -152,7 +150,10 @@ export default {
       this.isStarredDropOpen = !this.isStarredDropOpen;
     },
   },
-  methods: {
+  computed: {
+       boards() {
+      return this.$store.getters.boards;
+    },
     toggleWorkspaceDropdown() {
       //   if (key === "workspace") {
       this.isRecentDropOpen = false;
