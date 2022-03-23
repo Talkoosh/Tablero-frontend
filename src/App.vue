@@ -1,8 +1,8 @@
 <template>
-<section class="app-container">
-   <main-header/>
-   <router-view />
-</section>
+  <section class="app-container">
+    <main-header />
+    <router-view />
+  </section>
 </template>
 
 
@@ -14,7 +14,9 @@ export default {
   components: {
     mainHeader
   },
-  created() { },
+  created() {
+    // this.$store.
+  },
   data() {
     return {}
   },
