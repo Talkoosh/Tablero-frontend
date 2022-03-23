@@ -21,11 +21,14 @@ const router = createRouter({
       path: '/board/:boardId',
       name: 'board',
       component: boardPage,
+      children: [
+        {
+          path: 'card/:cardId',
+          component: taskDetails,
+        },
+      ]
     },
-    {
-      path: '/card/:cardId',
-      component: taskDetails,
-    },
+
   ],
 });
 
