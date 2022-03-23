@@ -3,7 +3,6 @@ export const boardStore = {
   state: {
     boards: [],
     currBoardId: null,
-    // groupToAdd: boardService.(),
   },
   getters: {
     boards(state) {
