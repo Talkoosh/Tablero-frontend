@@ -5,7 +5,11 @@ export const boardService = {
   addBoard,
   updateBoard,
   getBoard,
+  removeBoard,
   saveGroup,
+  removeGroup,
+  saveTask,
+  removeTask
 };
 
 const KEY = 'board';
@@ -54,11 +58,19 @@ async function getBoard(boardId) {
   }
 }
 
+async function removeBoard(boardId) {
+  try {
+    return await storageService.remove(KEY, boardId);
+  } catch (err) {
+    throw err;
+  }
+}
+
 // GROUP CRUD
 
 async function saveGroup(boardId, group) {
-  const board = await getBoard(boardId);
   try {
+    const board = await getBoard(boardId);
     if (group._id) {
       const idx = board.groups.findIndex((g) => g._id === group._id);
       board.groups[idx] = group;
@@ -79,11 +91,54 @@ async function saveGroup(boardId, group) {
   }
 }
 
+async function removeGroup(boardId, groupId) {
+  try {
+    const board = await getBoard(boardId);
+    const idx = board.groups.findIndex((g) => g._id === groupId);
+    board.groups.splice(idx, 1);
+    return await updateBoard(board);
+  } catch (err) {
+    throw err;
+  }
+
+}
+
 // TASK CRUD
 
-function saveTask(task, groupId, boardId) {
-  const board = storageService.get(KEY, boardId);
-  const group = board.groups.find();
+async function saveTask(task, groupId, boardId) {
+  try {
+    const board = await getBoard(boardId);
+    const group = board.groups.find((g) => g._id === groupId);
+    if (task._id) {
+      const idx = group.tasks.findIndex(t => t._id === task._id);
+      group.tasks[idx] = task;
+      await updateBoard(board);
+      return task;
+    } else {
+      const taskToAdd = _createTask(task.title);
+      group.push(taskToAdd);
+      await updateBoard(board);
+      return taskToAdd;
+    }
+  } catch (err) {
+    throw err
+  }
+}
+
+async function removeTask(taskId, boardId) {
+  try {
+    const board = await getBoard(boardId);
+    const group = board.groups.find(g => {
+      const t = g.tasks.find(t => t._id === taskId);
+      if (t) return true
+    })
+    if(!group) return 
+    const taskIdx = group.tasks.findIndex(t => t._id === taskId);
+    group.tasks.splice(taskIdx, 1);
+    return await updateBoard(board);
+  } catch (err) {
+    throw err
+  }
 }
 
 function _getEmptyBoard() {
@@ -95,7 +150,14 @@ function _getEmptyBoard() {
   };
 }
 
-function _getEmptyTask() {}
+function _createTask(title) {
+  return {
+    title,
+    description: '',
+    _id: utilService.makeId(),
+    createdAt: Date.now()
+  }
+}
 
 async function _makeBoard() {
   try {
@@ -110,12 +172,12 @@ async function _makeBoard() {
       style: {},
       labels: [
         {
-          id: 'l101',
+          _id: 'l101',
           title: 'Done',
           color: '#61bd4f',
         },
         {
-          id: 'l102',
+          _id: 'l102',
           title: 'Progress',
           color: '#61bd33',
         },
@@ -129,36 +191,36 @@ async function _makeBoard() {
       ],
       groups: [
         {
-          id: 'g101',
+          _id: 'g101',
           title: 'Group 1',
           tasks: [
             {
-              id: 'c101',
+              _id: 'c101',
               title: 'Replace logo',
             },
             {
-              id: 'c102',
+              _id: 'c102',
               title: 'Add Samples',
             },
           ],
           // "style": {} style is not editable in trello
         },
         {
-          id: 'g102',
+          _id: 'g102',
           title: 'Group 2',
           tasks: [
             {
-              id: 'c103',
+              _id: 'c103',
               title: 'Do that',
             },
             {
-              id: 'c104',
+              _id: 'c104',
               title: 'Help me',
               status: 'in-progress',
               description: 'description',
               comments: [
                 {
-                  id: 'ZdPnm',
+                  _id: 'ZdPnm',
                   txt: 'also @yaronb please CR this',
                   createdAt: 1590999817436.0,
                   byMember: {
@@ -171,11 +233,11 @@ async function _makeBoard() {
               ],
               checklists: [
                 {
-                  id: 'YEhmF',
+                  _id: 'YEhmF',
                   title: 'Checklist',
                   todos: [
                     {
-                      id: '212jX',
+                      _id: '212jX',
                       title: 'To Do 1',
                       isDone: false,
                     },
@@ -220,7 +282,7 @@ async function _makeBoard() {
             imgUrl: 'http://some-img',
           },
           task: {
-            id: 'c101',
+            _id: 'c101',
             title: 'Replace Logo',
           },
         },

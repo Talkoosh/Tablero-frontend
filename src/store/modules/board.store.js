@@ -7,12 +7,11 @@ export const boardStore = {
   },
   getters: {
     boards(state) {
+      if(!state.boards.length) return
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
-      if (!state.currBoardId) return;
-      console.log(state.currBoardId);
-      console.log('boards', state.boards);
+      if (!state.currBoardId || !state.boards.length) return;
       const board = state.boards.find((b) => b._id === state.currBoardId);
       return JSON.parse(JSON.stringify(board));
     },

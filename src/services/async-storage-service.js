@@ -56,9 +56,7 @@ function put(entityType, updatedEntity) {
 
 function remove(entityType, entityId) {
   return query(entityType).then((entities) => {
-    console.log(entities);
     const idx = entities.findIndex((entity) => entity._id === entityId);
-    console.log(idx);
     if (idx === -1)
       return Promise.reject(
         `Unknown Entity ${entityType} with Id: ${entityId}`

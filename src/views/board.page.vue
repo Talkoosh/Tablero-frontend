@@ -10,9 +10,6 @@
             <button @click="isAddList = false" class="cancel-add-group-btn">X</button>
         </div>
     </div>
-    <pre>
-    {{ board }}
-    </pre>
 </template>
 
 <script>

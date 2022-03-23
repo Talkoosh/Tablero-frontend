@@ -1,9 +1,6 @@
 <template>
     <section>
         <router-link v-for="board in boards" :to="'/board/' + board._id">BOARD</router-link>
-        <pre>
-            {{ boards }}
-        </pre>
     </section>
 </template>
 
