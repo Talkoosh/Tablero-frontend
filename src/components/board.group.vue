@@ -1,13 +1,17 @@
 <template>
     <section>
-        <div class="group">
-            <div class="group-header">
-                <h2 class="group-title">{{ group.title }}</h2>
-                <div class="group-extras">...</div>
-            </div>
-            <task-preview v-for="task in group.tasks" :key="task._id" :task="task" />
-            <div class="add-task">
-                <span>+</span> Add a card
+        <div class="group-container">
+            <div class="group">
+                <div class="group-header">
+                    <h2 class="group-title">{{ group.title }}</h2>
+                    <div class="group-extras">
+                        <div>...</div>
+                    </div>
+                </div>
+                <task-preview v-for="task in group.tasks" :key="task._id" :task="task" />
+                <div class="add-task">
+                    <span>+</span> Add a card
+                </div>
             </div>
         </div>
     </section>

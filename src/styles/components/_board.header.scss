@@ -3,19 +3,44 @@
     display: flex;
     width: 100vw;
     justify-content: space-between;
-    // > * {
-    //   background-color: #ffffff3d;
-    //   margin-right: 4px;
-    // }
+    padding: 8px 4px 4px 8px;
+    height: auto;
+    a {
+      color: white;
+      @include button-default;
+      margin: 0 4px 4px 0;
+    }
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 25em;
+      object-fit: cover;
+    }
+    .board-members {
+      height: 32px;
+      padding: 5px 0;
+      margin: 0 12px;
+      width: max-content;
+      > * {
+        position: absolute;
+      }
+    }
+    .board-header-btn {
+      height: 32px;
+      padding: 5px 0;
+      background-color: #ffffff3d;
+    }
     .board-header-left {
       display: flex;
       > * {
         margin-right: 4px;
+        position: relative;
       }
     }
     .board-header-right {
       display: flex;
       > * {
+        position: relative;
         margin-right: 4px;
       }
     }

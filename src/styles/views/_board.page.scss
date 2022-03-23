@@ -7,35 +7,70 @@
     padding: 8px;
     gap: 8px;
     overflow-x: auto;
-
-    .group {
-      display: flex;
-      flex-direction: column;
+    .group-container {
       background-color: #ebecf0;
       padding: 8px;
       width: 272px;
       border-radius: 3px;
+      .group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
 
-      .group-header {
-        h2 {
-          font-size: 16px;
-          font-weight: 550;
+        .group-title {
+          margin-bottom: 8px;
+          padding: 0 8px;
         }
-      }
-      .add-task {
-        padding: 8px;
-      }
-      .task-preview-container {
-        & > * {
+        .group-extras {
+          @include icon;
+          cursor: pointer;
+          border-radius: 3px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          font-weight: 600;
+          div {
+            transform: translateY(-20%);
+          }
+          &:hover {
+            background-color: #a5a5a5;
+          }
+        }
+        .group-header {
+          h2 {
+            font-size: 16px;
+            font-weight: 550;
+          }
+        }
+        .add-task {
           padding: 8px;
         }
+        .task-preview-container {
+          position: relative;
+          & > * {
+            padding: 8px;
+          }
+          .task-quick-edit {
+            position: absolute;
+          }
 
-        .task-preview {
-          box-shadow: 0 1px 0 #091e4240;
-          border-radius: 3px;
-          width: 256px;
-          background-color: #fff;
+          .task-preview {
+            box-shadow: 0 1px 0 #091e4240;
+            margin-bottom: 8px;
+            border-radius: 3px;
+            width: 256px;
+            background-color: #fff;
+          }
         }
+      }
+    }
+    .add-group {
+      @include button-default;
+      background-color: #ffffff3d;
+      padding: 8px;
+      > * {
+        display: flex;
+        flex-direction: column;
       }
     }
   }

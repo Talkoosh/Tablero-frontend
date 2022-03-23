@@ -9,7 +9,7 @@ export const boardService = {
   saveGroup,
   removeGroup,
   saveTask,
-  removeTask
+  removeTask,
 };
 
 const KEY = 'board';
@@ -100,7 +100,6 @@ async function removeGroup(boardId, groupId) {
   } catch (err) {
     throw err;
   }
-
 }
 
 // TASK CRUD
@@ -110,7 +109,7 @@ async function saveTask(task, groupId, boardId) {
     const board = await getBoard(boardId);
     const group = board.groups.find((g) => g._id === groupId);
     if (task._id) {
-      const idx = group.tasks.findIndex(t => t._id === task._id);
+      const idx = group.tasks.findIndex((t) => t._id === task._id);
       group.tasks[idx] = task;
       await updateBoard(board);
       return task;
@@ -121,23 +120,23 @@ async function saveTask(task, groupId, boardId) {
       return taskToAdd;
     }
   } catch (err) {
-    throw err
+    throw err;
   }
 }
 
 async function removeTask(taskId, boardId) {
   try {
     const board = await getBoard(boardId);
-    const group = board.groups.find(g => {
-      const t = g.tasks.find(t => t._id === taskId);
-      if (t) return true
-    })
-    if(!group) return 
-    const taskIdx = group.tasks.findIndex(t => t._id === taskId);
+    const group = board.groups.find((g) => {
+      const t = g.tasks.find((t) => t._id === taskId);
+      if (t) return true;
+    });
+    if (!group) return;
+    const taskIdx = group.tasks.findIndex((t) => t._id === taskId);
     group.tasks.splice(taskIdx, 1);
     return await updateBoard(board);
   } catch (err) {
-    throw err
+    throw err;
   }
 }
 
@@ -155,8 +154,8 @@ function _createTask(title) {
     title,
     description: '',
     _id: utilService.makeId(),
-    createdAt: Date.now()
-  }
+    createdAt: Date.now(),
+  };
 }
 
 async function _makeBoard() {
@@ -167,7 +166,8 @@ async function _makeBoard() {
       createdBy: {
         _id: 'u101',
         fullname: 'Abi Abambi',
-        imgUrl: 'http://some-img',
+        imgUrl:
+          'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
       },
       style: {},
       labels: [
@@ -186,7 +186,14 @@ async function _makeBoard() {
         {
           _id: 'u101',
           fullname: 'Tal Tarablus',
-          imgUrl: 'https://www.google.com',
+          imgUrl:
+            'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        },
+        {
+          _id: 'u102',
+          fullname: 'Tal Tarablus',
+          imgUrl:
+            'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
         },
       ],
       groups: [
@@ -279,7 +286,8 @@ async function _makeBoard() {
           byMember: {
             _id: 'u101',
             fullname: 'Abi Abambi',
-            imgUrl: 'http://some-img',
+            imgUrl:
+              'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
           },
           task: {
             _id: 'c101',

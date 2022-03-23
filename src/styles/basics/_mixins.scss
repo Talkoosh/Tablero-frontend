@@ -1,7 +1,18 @@
-@mixin button-default{
-    height: 32px;
-    border-radius: 3px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    padding: 0 12px;
+@mixin button-default {
+  height: 32px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0 12px;
+}
+
+@mixin icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  height: 30px;
+  width: 30px;
+  line-height: 20px;
+  padding: 6px 12px;
 }

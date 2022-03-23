@@ -2,40 +2,46 @@
     <section class="board-header">
         <nav class="board-header-nav">
             <div class="board-header-left">
-                <div class="board-name">
+                <div class="board-header-btn board-name">
                     <a href>
-                        <h1>{{ board.title }}</h1>
+                        <span>{{ board.title }}</span>
                     </a>
                 </div>
-                <div class="board-starred">
+                <div class="board-header-btn board-starred">
                     <a href>
                         <span class="star-icon">S</span>
                     </a>
                 </div>
-                <div class="board-privacy">
+                <div class="board-header-btn board-privacy">
                     <a href>
                         <span class="privacy-icon">{{ boardPrivacyIcon }}</span>
                         <span class="board-privacy-text">Private</span>
                     </a>
                 </div>
-                <div class="board-members">
-                    <a v-for="member in board.members" href>
+                <div class="board-members" :style="'width: ' + board.members.length * 75 + 'px'">
+                    <span
+                        v-for="(member, idx) in board.members"
+                        href
+                        :style="'left:' + idx * 18 + 'px'"
+                    >
                         <img :src="member.imgUrl" alt="member img" />
-                    </a>
-                    <a href>
-                        <span class="invite-icon">I</span>
-                        <span>Invite</span>
+                    </span>
+
+                    <a href style="right:20px">
+                        <button>
+                            <span class="invite-icon">I</span>Invite
+                        </button>
                     </a>
                 </div>
             </div>
             <div class="board-header-right">
-                <div class="board-filter">
+                <div class="board-header-btn board-filter">
                     <a href>
                         <span class="filter-icon">F</span>
                         <span>Filter</span>
                     </a>
                 </div>
-                <div class="board-menu">
+                <div class="board-header-btn board-menu">
                     <a href>
                         <span class="menu-icon">M</span>
                         <span>Show menu</span>
