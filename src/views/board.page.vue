@@ -1,13 +1,16 @@
 <template>
-    <div v-if="board">
-        <board-header />
-        <section>{{ board.title }}</section>
-        <board-group v-for="group in board.groups" :key="board._id" :group="group" />
-        <div class="add-group">
-            <span>+ Add another list</span>
-            <input type="text" v-model="groupToAdd.title" placeholder="Enter list title..." />
-            <button @click="addGroup" class="add-group-btn">Add list</button>
-            <button @click="isAddList = false" class="cancel-add-group-btn">X</button>
+    <div v-if="board" class="main-board">
+        <header>
+            <board-header :board="board" />
+        </header>
+        <div class="groups-container">
+            <board-group v-for="group in board.groups" :key="board._id" :group="group" />
+            <div class="add-group">
+                <span>+ Add another list</span>
+                <input type="text" v-model="groupToAdd.title" placeholder="Enter list title..." />
+                <button @click="addGroup" class="add-group-btn">Add list</button>
+                <button @click="isAddList = false" class="cancel-add-group-btn">X</button>
+            </div>
         </div>
     </div>
 </template>

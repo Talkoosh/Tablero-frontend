@@ -48,26 +48,13 @@
 
 <script>
 export default {
-    // props: [''],
+    props: {
+        board: Object,
+    },
     components: {},
     created() { },
     data() {
         return {
-            board: {
-                title: 'TestTest',
-                members: [
-                    {
-                        _id: 'u101',
-                        fullname: 'Tal Tarablus',
-                        imgUrl: 'https://www.google.com',
-                    },
-                    {
-                        _id: 'u102',
-                        fullname: 'Tomer kushtai',
-                        imgUrl: 'https://www.google.com',
-                    },
-                ],
-            }
         }
     },
     methods: {},

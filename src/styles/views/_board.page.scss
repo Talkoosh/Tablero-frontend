@@ -1,0 +1,42 @@
+.main-board {
+  height: 100%;
+  background-color: #0079bf;
+
+  .groups-container {
+    display: flex;
+    padding: 8px;
+    gap: 8px;
+    overflow-x: auto;
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      background-color: #ebecf0;
+      padding: 8px;
+      width: 272px;
+      border-radius: 3px;
+
+      .group-header {
+        h2 {
+          font-size: 16px;
+          font-weight: 550;
+        }
+      }
+      .add-task {
+        padding: 8px;
+      }
+      .task-preview-container {
+        & > * {
+          padding: 8px;
+        }
+
+        .task-preview {
+          box-shadow: 0 1px 0 #091e4240;
+          border-radius: 3px;
+          width: 256px;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

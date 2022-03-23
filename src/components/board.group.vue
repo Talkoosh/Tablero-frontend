@@ -6,6 +6,9 @@
                 <div class="group-extras">...</div>
             </div>
             <task-preview v-for="task in group.tasks" :key="task._id" :task="task" />
+            <div class="add-task">
+                <span>+</span> Add a card
+            </div>
         </div>
     </section>
 </template>
