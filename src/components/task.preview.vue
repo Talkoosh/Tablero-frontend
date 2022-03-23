@@ -6,7 +6,8 @@
             <div class="task-preview">
                 <div class="task-labels">{{ taskLabels }}</div>
                 <span>{{ task.title }}</span>
-                <div class="badges"></div>
+                <div v-if="task.badges" class="task-badges"></div>
+                <div v-if="task.members" class="task-members"></div>
             </div>
         </a>
     </section>
