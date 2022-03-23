@@ -14,6 +14,41 @@
         border-radius: 3px;
     }
 
+    .left-navbar{
+        align-items: stretch;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 0;
+        // height: 100%;
+        position: relative;
+
+        .workspace-drop-content{
+            position: fixed;
+            width: 304px;
+            will-change: top, left;
+            top: 48px;
+            left: 127px;
+        }
+
+        .recent-drop-content{
+            position: fixed;
+            width: 304px;
+            will-change: top, left;
+            top: 48px;
+            left: 249px;
+        }
+
+        .starred-drop-content{
+      position: fixed;
+      width: 304px;
+      will-change: top, left;
+      top: 48px;
+      left: 338px;
+        }
+
+    }
+
     .main-header-dropdowns{
         display: flex;
         flex-shrink: 0;
@@ -34,6 +69,76 @@
     flex-grow: 1;
     }
 
+}
 
+.dropdown{
+    color: #172b4d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+    box-sizing: border-box;
+    outline: 0;
+    overflow: hidden;
+}
 
+.drop-header{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+    color: #5e6c84;
+    height: 40px;
+    display: block;
+    line-height: 40px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 32px;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+}
+
+.board-details{
+
+    display: flex;
+    font-weight: 700;
+    height: 32px;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.boards-list{
+    max-height: 464px;
+}
+
+.drop-btn{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 6px 12px;
+    text-decoration: none;
+    white-space: normal;
+    background-color: rgba(9, 30, 66, 0.04);
+    box-shadow: none;
+    border: none;
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 85ms;
+    transition-timing-function: ease;
 }
