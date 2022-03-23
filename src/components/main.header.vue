@@ -14,9 +14,11 @@
             class="workspace-drop-content dropdown"
             :class="toggleWorkspaceDropdown"
           >
-            <header class="drop-header">
-              <div class="drop-header">Workspaces</div>
-              <button>X</button>
+          <header class="drop-padding">
+            <div class="drop-header">
+              <div class="header-text">Workspaces</div>
+              <span class="close-header" @click="toggleWorkspaceDrop">X</span>
+            </div>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -40,9 +42,11 @@
             class="recent-drop-content dropdown"
             :class="toggleRecentDropdown"
           >
-            <header class="drop-header">
-              <div class="drop-header">Recent boards</div>
-              <button>X</button>
+          <header class="drop-padding">
+            <div class="drop-header">
+              <div class="header-text">Recent boards</div>
+              <span class="close-header" @click="toggleRecentDrop">X</span>
+            </div>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -69,9 +73,11 @@
             class="starred-drop-content dropdown"
             :class="toggleStarredDropdown"
           >
-            <header class="drop-header">
-              <div class="drop-header">Starred boards</div>
-              <button>X</button>
+            <header class="drop-padding">
+            <div class="drop-header">
+              <div class="header-text">Starred boards</div>
+              <span @click="toggleStarredDrop" class="close-header">X</span>
+            </div>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -155,19 +161,16 @@ export default {
       return this.$store.getters.boards;
     },
     toggleWorkspaceDropdown() {
-      //   if (key === "workspace") {
       this.isRecentDropOpen = false;
       this.isStarredDropOpen = false;
       return this.isWorkspaceDropOpen ? 'open-drop' : 'close-drop';
     },
     toggleStarredDropdown() {
-      //   } else if (key === "starred") {
       this.isRecentDropOpen = false;
       this.isWorkspaceDropOpen = false;
       return this.isStarredDropOpen ? 'open-drop' : 'close-drop';
     },
     toggleRecentDropdown() {
-      //   } else if (key === "recent") {
       this.isStarredDropOpen = false;
       this.isWorkspaceDropOpen = false;
       return this.isRecentDropOpen ? 'open-drop' : 'close-drop';
