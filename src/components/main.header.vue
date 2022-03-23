@@ -4,13 +4,13 @@
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="workspace-drop ">
-          <button class="drop-btn">Workspaces</button>
+          <button class="drop-btn workspace-btn">Workspaces</button>
           <div class="workspace-drop-content dropdown">
             <header class="drop-header">
               <div class="drop-header">Workspaces</div>
               <button>X</button>
             </header>
-            <li class="boards-list" v-for="board in boards" :key="board._id">
+            <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
                 <div class="board-img-container">
                   <img src="" alt="" />
@@ -20,18 +20,18 @@
                     <div>{{ board.createdBy.fullname }} workspace</div>
                 </div>
               </div>
-            </li>
+            </div>
           </div>
         </div>
 
         <div class="recent-drop ">
-          <button class="drop-btn">Recent</button>
+          <button class="drop-btn recent-btn">Recent</button>
           <div class="recent-drop-content dropdown">
             <header class="drop-header">
               <div class="drop-header">Recent boards</div>
               <button>X</button>
             </header>
-            <li class="boards-list" v-for="board in boards" :key="board._id">
+            <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
                 <div class="board-img-container">
                   <img src="" alt="" />
@@ -41,18 +41,18 @@
                     <div>{{ board.createdBy.fullname }} workspace</div>
                 </div>
               </div>
-            </li>
+            </div>
           </div>
         </div>
 
         <div class="starred-drop ">
-          <button class="drop-btn">Starred</button>
+          <button class="drop-btn starred-btn">Starred</button>
           <div class="starred-drop-content dropdown">
             <header class="drop-header">
               <div class="drop-header">Starred boards</div>
               <button>X</button>
             </header>
-            <li class="boards-list" v-for="board in boards" :key="board._id">
+            <div class="boards-list" v-for="board in boards" :key="board._id">
                  <div class="board-details">
                 <div class="board-img-container">
                   <img src="" alt="" />
@@ -65,7 +65,7 @@
                     <span>🎁</span>
                 </div>
               </div>
-            </li>
+            </div>
           </div>
         </div>
 
@@ -82,19 +82,19 @@
             </div>
        </div> -->
       </div>
-      <button class="create-board-btn">Create</button>
+      <button class="create-board-btn drop-btn">Create</button>
       <div class="seperator"></div>
     </div>
     <div class="right-navbar">
-      <section class="board-search">
-        <form class="search-container" action="">
-          <input class="main-input" type="text" />
-        </form>
-      </section>
-      <button>
+      <div class="board-search">
+        <!-- <form class="search-container" action=""> -->
+          <input  class="main-input" type="text" placeholder="Search" />
+        <!-- </form> -->
+      </div>
+      <button class="right-nav-btn">
         <span>i</span>
       </button>
-      <button>
+      <button class="right-nav-btn">
         <span>💡</span>
       </button>
       <div>
