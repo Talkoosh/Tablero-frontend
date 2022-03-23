@@ -1,15 +1,18 @@
 <template>
     <board-header />
     <section>{{ board.title }}</section>
+    <board-group v-for="group in board.groups" :key="board._id" :group="group" />
 </template>
 
 <script>
 import boardHeader from "../components/board.header.vue"
+import boardGroup from "../components/board.group.vue"
 
 export default {
     // props: [''],
     components: {
         boardHeader,
+        boardGroup
     },
     created() { },
     data() {
