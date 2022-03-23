@@ -1,0 +1,23 @@
+.board-header {
+  .board-header-nav {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    // > * {
+    //   background-color: #ffffff3d;
+    //   margin-right: 4px;
+    // }
+    .board-header-left {
+      display: flex;
+      > * {
+        margin-right: 4px;
+      }
+    }
+    .board-header-right {
+      display: flex;
+      > * {
+        margin-right: 4px;
+      }
+    }
+  }
+}
