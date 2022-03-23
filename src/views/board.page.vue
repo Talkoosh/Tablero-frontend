@@ -1,7 +1,18 @@
 <template>
-    <board-header />
-    <section>{{ board.title }}</section>
-    <board-group v-for="group in board.groups" :key="board._id" :group="group" />
+    <div v-if="board">
+        <board-header />
+        <section>{{ board.title }}</section>
+        <board-group v-for="group in board.groups" :key="board._id" :group="group" />
+        <div class="add-group">
+            <span>+ Add another list</span>
+            <input type="text" v-model="groupToAdd.title" placeholder="Enter list title..." />
+            <button @click="addGroup" class="add-group-btn">Add list</button>
+            <button @click="isAddList = false" class="cancel-add-group-btn">X</button>
+        </div>
+    </div>
+    <pre>
+    {{ board }}
+    </pre>
 </template>
 
 <script>
@@ -14,142 +25,28 @@ export default {
         boardHeader,
         boardGroup
     },
-    created() { },
+    created() {
+        this.$store.dispatch('loadBoards')
+        const id = this.$route.params.boardId
+        this.$store.commit({ type: 'setCurrBoardId', boardId: id })
+    },
     data() {
         return {
-            board: {
-                _id: 'b101',
-                title: 'Robot dev proj',
-                createdAt: 1589983468418,
-                createdBy: {
-                    _id: 'u101',
-                    fullname: 'Abi Abambi',
-                    imgUrl: 'http://some-img',
-                },
-                style: {},
-                labels: [
-                    {
-                        id: 'l101',
-                        title: 'Done',
-                        color: '#61bd4f',
-                    },
-                    {
-                        id: 'l102',
-                        title: 'Progress',
-                        color: '#61bd33',
-                    },
-                ],
-                members: [
-                    {
-                        _id: 'u101',
-                        fullname: 'Tal Tarablus',
-                        imgUrl: 'https://www.google.com',
-                    },
-                ],
-                groups: [
-                    {
-                        id: 'g101',
-                        title: 'Group 1',
-                        tasks: [
-                            {
-                                id: 'c101',
-                                title: 'Replace logo',
-                            },
-                            {
-                                id: 'c102',
-                                title: 'Add Samples',
-                            },
-                        ],
-                        // "style": {} style is not editable in trello
-                    },
-                    {
-                        id: 'g102',
-                        title: 'Group 2',
-                        tasks: [
-                            {
-                                id: 'c103',
-                                title: 'Do that',
-                            },
-                            {
-                                id: 'c104',
-                                title: 'Help me',
-                                status: 'in-progress',
-                                description: 'description',
-                                comments: [
-                                    {
-                                        id: 'ZdPnm',
-                                        txt: 'also @yaronb please CR this',
-                                        createdAt: 1590999817436.0,
-                                        byMember: {
-                                            _id: 'u101',
-                                            fullname: 'Tal Tarablus',
-                                            imgUrl:
-                                                'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                                        },
-                                    },
-                                ],
-                                checklists: [
-                                    {
-                                        id: 'YEhmF',
-                                        title: 'Checklist',
-                                        todos: [
-                                            {
-                                                id: '212jX',
-                                                title: 'To Do 1',
-                                                isDone: false,
-                                            },
-                                        ],
-                                    },
-                                ],
-                                members: [
-                                    {
-                                        _id: 'u101',
-                                        username: 'Tal',
-                                        fullname: 'Tal Tarablus',
-                                        imgUrl:
-                                            'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                                    },
-                                ],
-                                labelIds: ['l101', 'l102'],
-                                createdAt: 1590999730348,
-                                dueDate: 16156215211,
-                                byMember: {
-                                    _id: 'u101',
-                                    // "username": "Tal", not sure if necessary
-                                    fullname: 'Tal Tarablus',
-                                    imgUrl:
-                                        'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                                },
-                                style: {
-                                    bgColor: '#26de81',
-                                },
-                            },
-                        ],
-                        // "style": {}
-                    },
-                ],
-                activities: [
-                    {
-                        _id: 'a101',
-                        txt: 'Changed Color',
-                        createdAt: 154514,
-                        byMember: {
-                            _id: 'u101',
-                            fullname: 'Abi Abambi',
-                            imgUrl: 'http://some-img',
-                        },
-                        task: {
-                            id: 'c101',
-                            title: 'Replace Logo',
-                        },
-                    },
-                ],
-            },
-            // groupToAdd: 
+            isAddGroup: false,
+            groupToAdd: { title: '' }
         }
     },
-    methods: {},
-    computed: {},
+    methods: {
+        addGroup() {
+            if (!this.groupToAdd.title) return
+            this.$store.dispatch({ type: 'addGroup', boardId: this.board._id, groupToAdd: this.groupToAdd })
+        }
+    },
+    computed: {
+        board() {
+            return this.$store.getters.currBoard
+        },
+    },
     unmounted() { },
 }
 </script>

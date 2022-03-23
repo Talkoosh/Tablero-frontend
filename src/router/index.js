@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import homePage from '../views/home.page.vue';
+import boardsPage from '../views/boards.page.vue';
 import boardPage from '../views/board.page.vue';
 import taskDetails from '../components/task.details.vue';
 
@@ -10,6 +11,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: homePage,
+    },
+    {
+      path: '/board',
+      name: 'boards',
+      component: boardsPage,
     },
     {
       path: '/board/:boardId',
