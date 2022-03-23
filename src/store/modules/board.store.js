@@ -3,10 +3,11 @@ export const boardStore = {
   state: {
     boards: [],
     currBoardId: null,
+    currTask: null,
   },
   getters: {
     boards(state) {
-      if(!state.boards.length) return
+      if (!state.boards.length) return
       return JSON.parse(JSON.stringify(state.boards));
     },
     currBoard(state) {
@@ -14,6 +15,10 @@ export const boardStore = {
       const board = state.boards.find((b) => b._id === state.currBoardId);
       return JSON.parse(JSON.stringify(board));
     },
+    currTask(state){
+      if(!state.currTask) return;
+      return JSON.parse(JSON.stringify(state.currTask))
+    }
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -28,9 +33,11 @@ export const boardStore = {
       );
       state.boards[boardIdx].groups.push(savedGroup);
     },
+    setCurrTask(state, {task}){
+      state.currTask = task; 
+    }
   },
   actions: {
-    // addComment({ commit }, { txt }) {},
     async loadBoards({ commit, state }) {
       try {
         if (state.boards.length) return;
@@ -48,5 +55,13 @@ export const boardStore = {
         throw err;
       }
     },
+    async getTask({ commit }, { taskId, boardId }) {
+      try {
+        const task = await boardService.getTask(taskId, boardId);
+        commit({type:'setCurrTask', task})
+      } catch (err) {
+
+      }
+    }
   },
 };

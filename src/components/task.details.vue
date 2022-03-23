@@ -1,5 +1,5 @@
-<template>
-    <section class="task-details-main">
+<template >
+    <section v-if="task" class="task-details-main">
         <div class="head">
             <div class="text">
                 <h1>{{ task.title }}</h1>
@@ -9,11 +9,14 @@
         </div>
         <div class="details-main">
             <div class="content">
-                <div class="description-container module">
-                    <h2>Description</h2>
-                    <p>{{ task.description }}</p>
+                <div class="description module">
+                    <div>
+                        <h2>Description</h2>
+                        <p>{{ task.description }}</p>
+                    </div>
+                    <button>Edit</button>
                 </div>
-                <task-activities @add-comment="saveComment" :comments="task.comments"></task-activities>
+                <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
             </div>
             <div class="actions-menu">
                 <h3>Add to card</h3>
@@ -40,72 +43,27 @@ import taskActivities from './task.activities.vue'
 export default {
     data() {
         return {
-            task: {
-                id: 'c104',
-                title: 'Help me',
-                status: 'in-progress',
-                description: 'description',
-                comments: [
-                    {
-                        id: 'ZdPnm',
-                        txt: 'also @yaronb please CR this',
-                        createdAt: 1590999817436.0,
-                        byMember: {
-                            _id: 'u101',
-                            fullname: 'Tal Tarablus',
-                            imgUrl:
-                                'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                        },
-                    },
-                ],
-                checklists: [
-                    {
-                        id: 'YEhmF',
-                        title: 'Checklist',
-                        todos: [
-                            {
-                                id: '212jX',
-                                title: 'To Do 1',
-                                isDone: false,
-                            },
-                        ],
-                    },
-                ],
-                members: [
-                    {
-                        _id: 'u101',
-                        username: 'Tal',
-                        fullname: 'Tal Tarablus',
-                        imgUrl:
-                            'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                    },
-                ],
-                labelIds: ['l101', 'l102'],
-                createdAt: 1590999730348,
-                dueDate: 16156215211,
-                byMember: {
-                    _id: 'u101',
-                    // "username": "Tal", not sure if necessary
-                    fullname: 'Tal Tarablus',
-                    imgUrl:
-                        'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                },
-                style: {
-                    bgColor: '#26de81',
-                },
-            },
         }
     },
-    created() {
-
+    async created() {
+        const boardId = this.$route.params.boardId;
+        const taskId = this.$route.params.cardId;
+        await this.$store.dispatch({ type: 'getTask', taskId, boardId })
     },
     methods: {
-        async addComment(txt){
-           await this.$store.dispatch({type: 'addComment', txt})
+        async addComment(txt) {
+            if(!this.task.comments || this.task.comments.length) this.task.comments = [];
+
+            const comment = {
+                txt,
+                createdAt: Date.now(),
+            }
         }
     },
     computed: {
-
+        task() {
+            return this.$store.getters.currTask;
+        }
     },
     components: {
         taskActivities

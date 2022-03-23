@@ -12,10 +12,14 @@
             <ul class="comments-list">
                 <li v-for="comment in comments" :key="comment.id">
                     <img :src="comment.byMember.imgUrl" />
-                    <span class="comment-fullname">{{ comment.byMember.fullname }}</span>
-                    <span class="comment-time">{{ comment.createdAt }}</span>
-                    <div class="comment-text-container">
-                        <p>{{ comment.txt }}</p>
+                    <div class="content">
+                        <div class="header">
+                            <span class="comment-fullname">{{ comment.byMember.fullname }}</span>
+                            <p>{{ comment.txt }}</p>
+                        </div>
+                        <div class="comment-time">
+                            <span class="comment-time">{{ comment.createdAt }}</span>
+                        </div>
                     </div>
                 </li>
             </ul>

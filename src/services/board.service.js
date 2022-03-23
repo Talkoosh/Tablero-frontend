@@ -9,6 +9,7 @@ export const boardService = {
   saveGroup,
   removeGroup,
   saveTask,
+  getTask,
   removeTask
 };
 
@@ -125,6 +126,22 @@ async function saveTask(task, groupId, boardId) {
   }
 }
 
+async function getTask(taskId, boardId) {
+  const board = await getBoard(boardId);
+  try {
+    const group = board.groups.find(g => {
+      const t = g.tasks.find(t => t._id === taskId);
+      if (t) return true
+    })
+    if (!group) return;
+    const task = group.tasks.find(t => t._id === taskId);
+    return task;
+  } catch (err) {
+    throw err
+  }
+
+}
+
 async function removeTask(taskId, boardId) {
   try {
     const board = await getBoard(boardId);
@@ -132,7 +149,7 @@ async function removeTask(taskId, boardId) {
       const t = g.tasks.find(t => t._id === taskId);
       if (t) return true
     })
-    if(!group) return 
+    if (!group) return
     const taskIdx = group.tasks.findIndex(t => t._id === taskId);
     group.tasks.splice(taskIdx, 1);
     return await updateBoard(board);
