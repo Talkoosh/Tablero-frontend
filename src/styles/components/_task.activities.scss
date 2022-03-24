@@ -1,9 +1,10 @@
 .activities-container {
   position: relative;
   .icon {
+    @include icon;
     @include icon-lg;
     position: absolute;
-    left: -38px;  
+    left: -40px;  
     &::before{
       content: "\e900";
     }

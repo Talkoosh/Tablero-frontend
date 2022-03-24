@@ -25,6 +25,9 @@
   background-color: $task-bcg;
   color: $clr3;
 
+  .icon {
+    color: $task-icon-clr;
+  }
   button {
     color: $clr4;
   }
@@ -35,13 +38,13 @@
 
   h1 {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 630;
     margin-bottom: 5px;
   }
 
   h2 {
     margin-bottom: 15px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 550;
   }
 
@@ -51,25 +54,28 @@
   .head {
     position: relative;
     min-height: 32px;
-    margin-bottom: 8px;
+    margin-bottom: 24px;
     .icon {
+      @include icon;
       @include icon-lg;
       position: absolute;
+      font-size: 20px;
       right: -8px;
-      top: -10px;
-      display:flex;
+      top: -18px;
+      display: flex;
       justify-content: center;
       border-radius: 50%;
       &::before {
         content: "\e91c";
       }
-      &:hover{
+      &:hover {
         cursor: pointer;
         background-color: $task-btn-hvr;
       }
     }
     .text {
       .icon {
+        @include icon;
         @include icon-lg;
         left: -38px;
         top: -6px;
@@ -97,8 +103,19 @@
       display: flex;
       flex-direction: column;
       .description {
+        position: relative;
         display: flex;
         align-items: flex-start;
+        .desc-icon {
+          @include icon;
+          @include icon-lg;
+          position: absolute;
+          left: -39px;
+          top: -6px;
+          &::before {
+            content: "\e922";
+          }
+        }
         pre {
           white-space: pre-wrap;
           word-wrap: break-word;
