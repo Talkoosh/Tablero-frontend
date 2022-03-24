@@ -1,9 +1,9 @@
 <template>
   <section class="main-header">
-    <div class="main-logo">Tablero</div>
+    <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
-        <div class="workspace-drop">
+        <!-- <div class="workspace-drop">
           <button
             class="drop-btn workspace-btn"
             @click="toggleWorkspaceDrop"
@@ -22,9 +22,9 @@
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
-                <div class="board-img-container">
-                  <img src="" alt="" />
-                </div>
+                <div class="board-img-container"> -->
+                  <!-- <img src="" alt="" /> -->
+                <!-- </div>
                 <div class="board-text">
                   <div>{{ board.title }}</div>
                   <div>{{ board.createdBy.fullname }} workspace</div>
@@ -32,7 +32,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="recent-drop">
           <button class="drop-btn recent-btn" @click="toggleRecentDrop">
@@ -51,7 +51,7 @@
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
                 <div class="board-img-container">
-                  <img src="" alt="" />
+                  <!-- <img src="" alt="" /> -->
                 </div>
                 <div class="board-text">
                   <div>{{ board.title }}</div>
@@ -82,7 +82,7 @@
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
                 <div class="board-img-container">
-                  <img src="" alt="" />
+                  <!-- <img src="" alt="" /> -->
                 </div>
                 <div class="corad-text">
                   <div>{{ board.title }}</div>
@@ -119,13 +119,10 @@
         <!-- </form> -->
       </div>
       <button class="right-nav-btn">
-        <span>i</span>
-      </button>
-      <button class="right-nav-btn">
         <span>💡</span>
       </button>
-      <div>
-        <span>icon</span>
+      <div class="main-header-icon">
+        <span class="main-header-icon-img">icon</span>
       </div>
     </div>
   </section>
@@ -146,11 +143,11 @@ export default {
   },
   methods: {
    
-    toggleWorkspaceDrop() {
-      this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
-    },
+    // toggleWorkspaceDrop() {
+    //   this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
+    // },
     toggleRecentDrop() {
-      this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
+      this.isRecentDropOpen = !this.isRecentDropOpen;
     },
     toggleStarredDrop() {
       this.isStarredDropOpen = !this.isStarredDropOpen;
@@ -160,11 +157,11 @@ export default {
        boards() {
       return this.$store.getters.boards;
     },
-    toggleWorkspaceDropdown() {
-      this.isRecentDropOpen = false;
-      this.isStarredDropOpen = false;
-      return this.isWorkspaceDropOpen ? 'open-drop' : 'close-drop';
-    },
+    // toggleWorkspaceDropdown() {
+    //   this.isRecentDropOpen = false;
+    //   this.isStarredDropOpen = false;
+    //   return this.isWorkspaceDropOpen ? 'open-drop' : 'close-drop';
+    // },
     toggleStarredDropdown() {
       this.isRecentDropOpen = false;
       this.isWorkspaceDropOpen = false;

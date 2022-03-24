@@ -1,48 +1,57 @@
 <template>
-    <section class="boards-page">
-        <div class="boards-page-nav"></div>
-        <div class="starred-boards-container">
-        <div class="all-boards">
-            <div class="starred-boards">
-                <div class="icon">😎</div>
-                <h3 class="starred-header">Starred boards</h3>
-            </div>
+  <section class="boards-page">
+    <div class="boards-page-nav"></div>
+
+    <div class="all boards">
+      <div class="starred-boards-container">
+        <div class="starred-boards-title">
+          <div class="icon">😎</div>
+          <h3 class="starred-header">Starred boards</h3>
         </div>
         <div class="starred-boards-list-container">
-            <ul class="starred-boards-list">
+          <ul class="starred-boards-list">
 
-            </ul>
+          </ul>
         </div>
-        </div>
+      </div>
 
-        <div class="your-boards">
+      <div class="your-boards-container">
+          <div class="your-boards-title">
+              <div class="icon">😎</div>
+              <h3 class="your-boards-header">Your boards</h3>
+          </div>
+          <div class="your-boards-list-container">
+              <ul class="your-boards-list">
+
+              </ul>
+          </div>
 
 
+      </div>
+    </div>
 
-        </div>
-
-        <router-link v-for="board in boards" :to="'/board/' + board._id">BOARD</router-link>
-    </section>
+    <router-link v-for="board in boards" :to="'/board/' + board._id">BOARD</router-link>
+  </section>
 </template>
 
 <script>
-// import '' from ''
+import boardPreview from "../components/board.preview.vue";
 
 export default {
-    // props: [''],
-    components: {},
-    created() {
-        this.$store.dispatch('loadBoards')
+  // props: [''],
+  components: { boardPreview },
+  created() {
+    this.$store.dispatch("loadBoards");
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {
+    boards() {
+      return this.$store.getters.boards;
     },
-    data() {
-        return {}
-    },
-    methods: {},
-    computed: {
-        boards() {
-            return this.$store.getters.boards
-        }
-    },
-    unmounted() { },
-}
+  },
+  unmounted() {},
+};
 </script>
