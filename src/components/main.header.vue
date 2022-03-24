@@ -122,7 +122,7 @@
         <span>💡</span>
       </button>
       <div class="main-header-icon">
-        <span class="main-header-icon-img">icon</span>
+        <img src="@/assets/img/headerIcon.png" class="main-header-icon-img"/>
       </div>
     </div>
   </section>

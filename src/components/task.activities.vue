@@ -2,6 +2,7 @@
     <section>
         <div class="activities-container module">
             <div class="header">
+                <span class="icon"></span>
                 <h2>Activity</h2>
                 <button>Hide details</button>
             </div>

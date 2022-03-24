@@ -105,18 +105,20 @@ async function removeGroup(boardId, groupId) {
 
 // TASK CRUD
 
-async function saveTask(task, groupId, boardId) {
+async function saveTask(task, boardId) {
   try {
     const board = await getBoard(boardId);
-    const group = board.groups.find((g) => g._id === groupId);
     if (task._id) {
+      const groupId = await _getGroupIdByTaskId(task._id, boardId);
+      const group = board.groups.find((g) => g._id === groupId);
       const idx = group.tasks.findIndex((t) => t._id === task._id);
       group.tasks[idx] = task;
       await updateBoard(board);
       return task;
     } else {
+      const group = board.groups.find((g) => g._id === task.groupId);
       const taskToAdd = _createTask(task.title);
-      group.push(taskToAdd);
+      group.tasks.push(taskToAdd);
       await updateBoard(board);
       return taskToAdd;
     }
@@ -151,6 +153,19 @@ async function removeTask(taskId, boardId) {
     const taskIdx = group.tasks.findIndex((t) => t._id === taskId);
     group.tasks.splice(taskIdx, 1);
     return await updateBoard(board);
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function _getGroupIdByTaskId(taskId, boardId) {
+  try {
+    const board = await getBoard(boardId);
+    const group = board.groups.find((g) => {
+      const task = g.tasks.find((t) => t._id === taskId);
+      if (task) return true;
+    });
+    return group._id;
   } catch (err) {
     throw err;
   }

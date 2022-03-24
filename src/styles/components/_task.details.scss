@@ -1,143 +1,138 @@
+.task-details-overlay {
+  padding: 45px 0;
+  background-color: #000000a3;
+  height: 100%;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+}
+
 .task-details-main {
-    width: 768px;
-    min-height: 600px;
-    padding: 25px 17px 0 55px;
-    margin: auto;
-    border: 1px solid black;
+  top: 50px;
+  left: 50px;
+  width: 768px;
+  min-height: 600px;
+  border-radius: 3px;
+  overflow: auto;
+  padding: 25px 17px 0 55px;
+  margin: auto;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  background-color: $task-bcg;
+  color: $clr3;
+
+  button {
+    color: $clr4;
+  }
+
+  .module {
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  h2 {
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 550;
+  }
+
+  p {
+    margin: 0;
+  }
+  .head {
+    position: relative;
+    min-height: 32px;
+    margin-bottom: 8px;
+    .icon {
+      @include icon-lg;
+      position: absolute;
+      right: -8px;
+      top: -10px;
+      display:flex;
+      justify-content: center;
+      border-radius: 50%;
+      &::before {
+        content: "\e91c";
+      }
+      &:hover{
+        cursor: pointer;
+        background-color: $task-btn-hvr;
+      }
+    }
+    .text {
+      .icon {
+        @include icon-lg;
+        left: -38px;
+        top: -6px;
+        position: absolute;
+        &::before {
+          content: "\e912";
+        }
+      }
+    }
+    .text {
+      p {
+        color: $clr5;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .details-main {
     display: flex;
-    flex-direction: column;
-    background-color: $task-bcg;
-    color: $clr3;
+    justify-content: space-between;
 
-    button {
-        color: $clr4;
-    }
-
-    .module {
-        margin-bottom: 24px;
-    }
-
-    h1 {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-
-    h2 {
-        margin-bottom: 15px;
-        font-size: 15px;
-        font-weight: 550;
-    }
-
-    p {
-        margin: 0;
-    }
-    .head {
+    .content {
+      width: 515px;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      .description {
         display: flex;
-        justify-content: space-between;
         align-items: flex-start;
-        min-height: 32px;
-        margin-bottom: 8px;
-        .text{
-            p{
-                color: $clr5;
-                font-weight: 400;
-            }
+        pre {
+          white-space: pre-wrap;
+          word-wrap: break-word;
         }
-    }
-
-    .details-main {
-        display: flex;
-        justify-content: space-between;
-
-        .content {
-            width: 515px;
-            padding-top: 10px;
-            display: flex;
-            flex-direction: column;
-            .description{
-                display:flex;
-                align-items: flex-start;
-                h2{
-                    // margin-top: 5px;
-                }
-                button{
-                    @include button-default;
-                    margin-inline-start: 10px;
-                    transform: translateY(-15%);
-                    &:hover{
-                        background-color: $task-btn-hvr;
-                    }
-                }
-            }
-            .activities-container {
-                .header {
-                    h2{
-                        margin: 0;
-                    }
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 15px;
-                    button {
-                        @include button-default;
-                        background-color: $task-btn-clr;
-                        &:hover {
-                            background-color: $task-btn-hvr;
-                        }
-                    }
-                }
-                textarea {
-                    width: 100%;
-                    min-height: 36px;
-                    padding: 8px 12px;
-                    border: 1px solid #e0e3e8;
-                    border-radius: 4px;
-                    outline: none;
-                    overflow: hidden;
-                    overflow-wrap: break-word;
-                    resize: none;
-                }
-                .comments-list {
-                    list-style: none;
-                    padding: 0;
-                    position: relative;
-                    .header{
-                        span {
-                            font-weight: 700;
-                            font-size: 1em;
-                            margin-inline-end: 5px;
-                        }
-                        display: flex;
-                        justify-content: flex-start
-                    }
-                    img {
-                        @include avatar;
-                        position: absolute;
-                        left: -42px;
-                        top: 8px;
-                    }
-                }
-            }
+        button {
+          @include button-default;
+          margin-inline-start: 10px;
+          transform: translateY(-15%);
+          &:hover {
+            background-color: $task-btn-hvr;
+          }
         }
+        .desc-edit {
+          width: 515px;
+          .desc-edit-txt {
+            min-height: 108px;
+            width: 100%;
+            border-color: transparent;
+            resize: none;
+          }
 
-        .actions-menu {
-            width: 167px;
-            display: flex;
-            flex-direction: column;
-            h3 {
-                font-size: 11px;
-                font-weight: 550;
-                color: $clr5;
-            }
+          .edit-btns {
+            margin-top: 8px;
             button {
-                @include button-default;
-                margin-top: 8px;
-                text-align: start;
-                &:hover {
-                    background-color: $task-btn-hvr;
-                }
+              &:first-child {
+                background-color: #0079bf;
+                color: white;
+              }
+              margin-inline-start: 0;
+              margin-inline-end: 15px;
             }
+          }
         }
+      }
     }
+  }
 }

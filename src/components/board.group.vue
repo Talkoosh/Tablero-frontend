@@ -8,14 +8,37 @@
                         <div>...</div>
                     </div>
                 </div>
-                <task-preview
-                    v-for="task in group.tasks"
-                    :key="task._id"
-                    :task="task"
-                    :boardId="boardId"
-                />
-                <div class="add-task">
-                    <span>+</span> Add a card
+                <div class="group-tasks">
+                    <task-preview
+                        v-for="task in group.tasks"
+                        :key="task._id"
+                        :task="task"
+                        :boardId="boardId"
+                    />
+                </div>
+                <div class="add-task" :class="addTaskCondition">
+                    <div @click="toggleAddTask" v-if="!isAddTask" class="add-task-unactive">
+                        <span>+</span>
+                        Add a card
+                    </div>
+                    <div
+                        v-clickoutside="toggleAddTask"
+                        class="add-task-active"
+                        @blur="toggleAddTask"
+                        v-else
+                    >
+                        <div class="textarea-container">
+                            <textarea
+                                v-model="taskToAdd.title"
+                                ref="addTask"
+                                placeholder="Enter a title for this card..."
+                            />
+                        </div>
+                        <div class="add-task-btns">
+                            <button @mouseup="addTask" class="add-task-btn">Add Card</button>
+                            <button @click="isAddTask = false" class="cancel-add-task-btn">X</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,10 +57,42 @@ export default {
     },
     created() { },
     data() {
-        return {}
+        return {
+            isAddTask: false,
+            taskToAdd: {
+                title: '',
+                groupId: this.group._id
+            }
+        }
     },
-    methods: {},
-    computed: {},
+    methods: {
+        toggleAddTask(e) {
+            if (this.isAddTask) {
+                setTimeout(() => {
+                    this.isAddTask = false
+                }, 100)
+            } else {
+                this.isAddTask = true
+                setTimeout(() => {
+                    this.$refs.addTask.focus();
+                }, 100)
+            }
+        },
+        addTask() {
+            this.$refs.addTask.focus();
+            if (!this.taskToAdd.title) return
+            this.$emit('task-added', this.taskToAdd)
+            this.taskToAdd = {
+                title: '',
+                groupId: this.group._id
+            }
+        }
+    },
+    computed: {
+        addTaskCondition() {
+            return this.isAddTask ? 'add-task-active' : '';
+        }
+    },
     unmounted() { },
 }
 </script>

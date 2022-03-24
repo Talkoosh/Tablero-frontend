@@ -1,53 +1,54 @@
-.boards-page{
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    justify-content: center;
+.boards-page {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
 
-    .boards-page-nav{
-        width: 255px;
-        border-right: 1px solid gray;
-    }
+  .boards-page-nav {
+    width: 255px;
+    border-right: 1px solid gray;
+  }
 
-    .all-boards{
-        margin: 40px 16px 0;
-        max-width: 825px;
-        min-width: 288px;
-        width: 100%;
+  .all-boards {
+    margin: 40px 16px 0;
+    max-width: 825px;
+    min-width: 288px;
+    width: 100%;
 
-        .starred-boards{
-         display: flex;
-         margin: 0 0 0 40px;
-         padding: 0 0 11px;
-         position: relative;
+    .starred-boards {
+      display: flex;
+      margin: 0 0 0 40px;
+      padding: 0 0 11px;
+      position: relative;
 
-         .icon{
-            left: -40px;
-            position: absolute;
-            top: 0;
-         }
-         
-         .starred-header{
-            display: inline-block;
-            flex: 1;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 24px;
-            margin: 6px 0 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-         }
+      .icon {
+        left: -40px;
+        position: absolute;
+        top: 0;
+        &::before {
+          content: '\e946';
         }
-    }
+      }
 
-    .starred-boards-list-container{
-        .starred-boards-list{
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: flex-start;
-        }
+      .starred-header {
+        display: inline-block;
+        flex: 1;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        margin: 6px 0 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
-   
+  }
+
+  .starred-boards-list-container {
+    .starred-boards-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
 }
-

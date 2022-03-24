@@ -2,12 +2,12 @@
     <section>
         <router-link class="task-preview-container" :to="'/board/' + boardId + '/card/' + task._id">
             <div v-if="task.cover" class="task-cover" :style="cover"></div>
-            <span class="task-quick-edit">I</span>
             <div class="task-preview">
                 <div class="task-labels">{{ taskLabels }}</div>
                 <span>{{ task.title }}</span>
                 <div v-if="task.badges" class="task-badges"></div>
                 <div v-if="task.members" class="task-members"></div>
+                <span @click.prevent="openQuickEdit" class="icon task-quick-edit"></span>
             </div>
         </router-link>
     </section>
