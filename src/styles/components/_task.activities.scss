@@ -1,0 +1,58 @@
+.activities-container {
+  position: relative;
+  .icon {
+    @include icon-lg;
+    position: absolute;
+    left: -38px;  
+    &::before{
+      content: "\e900";
+    }
+  }
+  .header {
+    h2 {
+      margin: 0;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    button {
+      @include button-default;
+      background-color: $task-btn-clr;
+      &:hover {
+        background-color: $task-btn-hvr;
+      }
+    }
+  }
+  textarea {
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #e0e3e8;
+    border-radius: 4px;
+    outline: none;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+  }
+  .comments-list {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    .header {
+      span {
+        font-weight: 700;
+        font-size: 1em;
+        margin-inline-end: 5px;
+      }
+      display: flex;
+      justify-content: flex-start;
+    }
+    img {
+      @include avatar;
+      position: absolute;
+      left: -42px;
+      top: 8px;
+    }
+  }
+}

@@ -3,10 +3,11 @@
         <section @click="stopProg" v-if="task" class="task-details-main">
             <div class="head">
                 <div class="text">
+                    <span class="icon"></span>
                     <h1>{{ task.title }}</h1>
                     <p>in list ...</p>
                 </div>
-                <button @click="closeTaskDetails">X</button>
+                <span class="icon" @click="closeTaskDetails"></span>
             </div>
             <div class="details-main">
                 <div class="content">
