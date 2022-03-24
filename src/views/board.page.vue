@@ -10,7 +10,7 @@
                 :group="group"
                 :boardId="board._id"
             />
-            <div class="add-group">
+            <div class="add-group" :class="addGroupCondition">
                 <span v-if="!isAddGroup" @click="toggleAddGroup">+ Add another list</span>
                 <div v-else>
                     <input
@@ -22,7 +22,7 @@
                     />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>
-                        <button @click="isAddList = false" class="cancel-add-group-btn">X</button>
+                        <button @click="isAddGroup = false" class="cancel-add-group-btn">X</button>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@ export default {
     },
     data() {
         return {
-            isAddGroup: true,
+            isAddGroup: false,
             groupToAdd: { title: '' }
         }
     },
@@ -56,22 +56,27 @@ export default {
         addGroup() {
             if (!this.groupToAdd.title) return
             this.$store.dispatch({ type: 'addGroup', boardId: this.board._id, groupToAdd: this.groupToAdd })
+            groupToAdd = { title: '' }
         },
         toggleAddGroup() {
             if (this.isAddGroup) {
-                this.isAddGroup = false
+                setTimeout(() => {
+                    this.isAddGroup = false
+                }, 100)
             } else {
                 this.isAddGroup = true
                 setTimeout(() => {
                     this.$refs.addGroup.focus();
                 }, 100)
             }
-
         }
     },
     computed: {
         board() {
             return this.$store.getters.currBoard
+        },
+        addGroupCondition() {
+            return this.isAddGroup ? 'add-group-active' : ''
         },
     },
     unmounted() { },

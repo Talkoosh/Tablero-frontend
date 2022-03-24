@@ -8,7 +8,7 @@
     gap: 8px;
     overflow-x: auto;
     .group-container {
-      background-color: #ebecf0;
+      background-color: $group-bgc;
       padding: 8px;
       width: 272px;
       border-radius: 3px;
@@ -33,17 +33,14 @@
             transform: translateY(-20%);
           }
           &:hover {
-            background-color: #a5a5a5;
+            background-color: darken($group-bgc, 6%);
           }
         }
         .group-header {
           h2 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 550;
           }
-        }
-        .add-task {
-          padding: 8px;
         }
         .task-preview-container {
           position: relative;
@@ -62,15 +59,73 @@
             background-color: #fff;
           }
         }
+        .add-task {
+          border-radius: 3px;
+          .add-task-unactive {
+            padding: 4px 8px;
+            cursor: pointer;
+            &:hover {
+              background-color: darken($group-bgc, 6%);
+            }
+          }
+          .add-task-active {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 #091e4240;
+            .textarea-container {
+              textarea {
+                resize: none;
+                margin: 0;
+                width: 100%;
+                max-height: 162px;
+                min-height: 54px;
+                padding: 6px 8px 2px;
+                margin-bottom: 4px;
+                border: none;
+              }
+            }
+          }
+        }
       }
     }
     .add-group {
       @include button-default;
       background-color: #ffffff3d;
       padding: 8px;
+      height: 40px;
+      min-width: 272px;
+      transition: all 0.3s;
+      color: white;
       > * {
         display: flex;
         flex-direction: column;
+      }
+      &.add-group-active {
+        padding: 3px;
+        background-color: $group-bgc;
+        height: 80px;
+        input {
+          height: 32px;
+          padding: 8px 12px;
+          margin-bottom: 2px;
+          border-radius: 3px;
+          border: none;
+          box-shadow: inset 0 0 0 2px #0079bf;
+        }
+        .add-group-btn {
+          @include button-default;
+          color: white;
+          background-color: $clr1;
+          font-weight: 540;
+        }
+        .cancel-add-group-btn {
+          @include button-default;
+          font-size: 1.3rem;
+          transform: translateY(10%);
+          background: none;
+          border: none;
+        }
       }
     }
   }
