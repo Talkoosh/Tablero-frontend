@@ -1,6 +1,6 @@
 <template>
-    <span @click.prevent="isTitleShown = !isTitleShown" class="label" :style="labelStyle">
-        <span class="label-text">{{ labelTitle }}</span>
+    <span @click.prevent="showTitle" class="label" :style="labelStyle" :class="isLabelOpen">
+        <span class="label-text" :class="isLabelOpen">{{ labelTitle }}</span>
     </span>
 </template>
 
@@ -17,6 +17,7 @@ export default {
     data() {
         return {
             isTitleShown: false,
+            startAnimation: false,
         }
     },
     methods: {
@@ -25,6 +26,20 @@ export default {
             const board = this.$store.getters.currBoard
             const label = board.labels.find(l => l._id === labelId)
             return label
+        },
+        showTitle() {
+            if (!this.isTitleShown) {
+                this.startAnimation = true
+                setTimeout(() => {
+                    this.isTitleShown = true
+                }, 300)
+
+            } else {
+                this.startAnimation = false
+                setTimeout(() => {
+                    this.isTitleShown = false
+                }, 300)
+            }
         }
     },
     computed: {
@@ -36,6 +51,9 @@ export default {
             const label = this.getLabel(this.label)
             return this.isTitleShown ? label.title : ''
         },
+        isLabelOpen() {
+            return this.startAnimation ? 'label-open' : 'label-closing';
+        }
     },
     unmounted() { },
 }

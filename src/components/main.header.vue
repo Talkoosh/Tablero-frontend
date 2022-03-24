@@ -3,37 +3,6 @@
     <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
-        <!-- <div class="workspace-drop">
-          <button
-            class="drop-btn workspace-btn"
-            @click="toggleWorkspaceDrop"
-          >
-            Workspaces
-          </button>
-          <div
-            class="workspace-drop-content dropdown"
-            :class="toggleWorkspaceDropdown"
-          >
-          <header class="drop-padding">
-            <div class="drop-header">
-              <div class="header-text">Workspaces</div>
-              <span class="close-header" @click="toggleWorkspaceDrop">X</span>
-            </div>
-            </header>
-            <div class="boards-list" v-for="board in boards" :key="board._id">
-              <div class="board-details">
-                <div class="board-img-container"> -->
-                  <!-- <img src="" alt="" /> -->
-                <!-- </div>
-                <div class="board-text">
-                  <div>{{ board.title }}</div>
-                  <div>{{ board.createdBy.fullname }} workspace</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
         <div class="recent-drop">
           <button class="drop-btn recent-btn" @click="toggleRecentDrop">
             Recent
@@ -42,11 +11,11 @@
             class="recent-drop-content dropdown"
             :class="toggleRecentDropdown"
           >
-          <header class="drop-padding">
-            <div class="drop-header">
-              <div class="header-text">Recent boards</div>
-              <span class="close-header" @click="toggleRecentDrop">X</span>
-            </div>
+            <header class="drop-padding">
+              <div class="drop-header">
+                <div class="header-text">Recent boards</div>
+                <span class="close-header" @click="toggleRecentDrop">X</span>
+              </div>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -63,10 +32,7 @@
         </div>
 
         <div class="starred-drop">
-          <button
-            class="drop-btn starred-btn"
-            @click="toggleStarredDrop"
-          >
+          <button class="drop-btn starred-btn" @click="toggleStarredDrop">
             Starred
           </button>
           <div
@@ -74,10 +40,10 @@
             :class="toggleStarredDropdown"
           >
             <header class="drop-padding">
-            <div class="drop-header">
-              <div class="header-text">Starred boards</div>
-              <span @click="toggleStarredDrop" class="close-header">X</span>
-            </div>
+              <div class="drop-header">
+                <div class="header-text">Starred boards</div>
+                <span @click="toggleStarredDrop" class="close-header">X</span>
+              </div>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -95,29 +61,46 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="templates-drop">
-          <button class="drop-btn" >Templates</button>
-            <div class="templatese-drop-content">
-                <header>
-                    <div class="drop-header">Templates</div>
-                    <button>X</button>
-                </header>
-                <li v-for="board in boards" :key="board._id">
-
-                </li>
-            </div>
-       </div> -->
       </div>
+      
       <div class="create-board">
-         <button class="create-board-btn drop-btn" @click="toggleCreateBoard">Create</button>
-         <div class="create-board-modal">
-           <header class="modal-header">
-             <div class="modal-title">Create board</div>
-             <button class="close-create-modal-btn">X</button>
-           </header>
-           <div class="modal-content"></div>
-         </div>
+        <div class="create-board-btn-container">
+        <button class="create-board-btn drop-btn" @click="toggleCreateBoard">
+          Create
+        </button>
+        </div>
+        <div class="create-board-modal" :class="toggleCreateBoardModal">
+          <header class="modal-header">
+            <div class="modal-title">Create board</div>
+            <button class="close-create-modal-btn" @click="toggleCreateBoard">X</button>
+          </header>
+          <div class="modal-content">
+
+            <div class="background-picker-container">
+              <label for="background-picker-title">Background</label>
+              <div class="background-options">
+                <ul class="background-imgs-options">
+                  <li></li>
+                  <li></li>
+                </ul>
+                <ul class="background-colors-options">
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="create-board-input-container">
+              <div class="input-title">Board title</div>
+              <input type="text" class="create-board-input" 
+              v-model="boardToAdd.title">
+            </div>
+
+            <button class="submit-create-btn" :class="submitStatus">Create</button>
+
+
+          </div>
+        </div>
       </div>
       <div class="seperator"></div>
     </div>
@@ -131,7 +114,7 @@
         <span>💡</span>
       </button>
       <div class="main-header-icon">
-        <img src="@/assets/img/headerIcon.png" class="main-header-icon-img"/>
+        <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" />
       </div>
     </div>
   </section>
@@ -145,41 +128,49 @@ export default {
   created() {},
   data() {
     return {
+      boardToAdd : {title:''},
       isRecentDropOpen: false,
       isStarredDropOpen: false,
-      isWorkspaceDropOpen: false,
+      isCreateBoardOpen: false,
+      isTypingBoardName : false,
+      
     };
   },
   methods: {
-   
-    // toggleWorkspaceDrop() {
-    //   this.isWorkspaceDropOpen = !this.isWorkspaceDropOpen;
-    // },
     toggleRecentDrop() {
       this.isRecentDropOpen = !this.isRecentDropOpen;
     },
     toggleStarredDrop() {
       this.isStarredDropOpen = !this.isStarredDropOpen;
     },
+    toggleCreateBoard(){
+      this.isCreateBoardOpen = !this.isCreateBoardOpen;
+    },
   },
   computed: {
-       boards() {
+    boards() {
       return this.$store.getters.boards;
     },
-    // toggleWorkspaceDropdown() {
-    //   this.isRecentDropOpen = false;
-    //   this.isStarredDropOpen = false;
-    //   return this.isWorkspaceDropOpen ? 'open-drop' : 'close-drop';
-    // },
+    submitStatus(){
+      return this.boardToAdd.title ? "submit-possible" : "submit-unpossible"
+    },
+   
+    toggleCreateBoardModal(){
+       this.isRecentDropOpen = false;
+      this.isStarredDropOpen = false;
+      return this.isCreateBoardOpen ? "open-drop" : "close-drop"
+
+    },
+    
     toggleStarredDropdown() {
       this.isRecentDropOpen = false;
-      this.isWorkspaceDropOpen = false;
-      return this.isStarredDropOpen ? 'open-drop' : 'close-drop';
+      this.isCreateBoardOpen = false;
+      return this.isStarredDropOpen ? "open-drop" : "close-drop";
     },
     toggleRecentDropdown() {
       this.isStarredDropOpen = false;
-      this.isWorkspaceDropOpen = false;
-      return this.isRecentDropOpen ? 'open-drop' : 'close-drop';
+      this.isCreateBoardOpen = false;
+      return this.isRecentDropOpen ? "open-drop" : "close-drop";
     },
   },
 };

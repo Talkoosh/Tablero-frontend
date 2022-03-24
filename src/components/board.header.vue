@@ -3,19 +3,20 @@
         <nav class="board-header-nav">
             <div class="board-header-left">
                 <div class="board-header-btn board-name">
-                    <a href>
-                        <span>{{ board.title }}</span>
-                    </a>
+                    <div class="title">
+                        <span @click="toggleEditTitle" v-if="!isEditTitle">{{ board.title }}</span>
+                        <input
+                            v-else
+                            type="text"
+                            v-model="boardToEdit.title"
+                            ref="titleEdit"
+                            v-clickoutside="saveBoardTitle"
+                        />
+                    </div>
                 </div>
                 <div class="board-header-btn board-starred">
                     <a href>
-                        <span class="star-icon">S</span>
-                    </a>
-                </div>
-                <div class="board-header-btn board-privacy">
-                    <a href>
-                        <span class="privacy-icon">{{ boardPrivacyIcon }}</span>
-                        <span class="board-privacy-text">Private</span>
+                        <span class="star-icon"></span>
                     </a>
                 </div>
                 <div class="board-members" :style="'width: ' + board.members.length * 75 + 'px'">
@@ -35,15 +36,9 @@
                 </div>
             </div>
             <div class="board-header-right">
-                <div class="board-header-btn board-filter">
-                    <a href>
-                        <span class="filter-icon">F</span>
-                        <span>Filter</span>
-                    </a>
-                </div>
                 <div class="board-header-btn board-menu">
                     <a href>
-                        <span class="menu-icon">M</span>
+                        <span class="menu-icon"></span>
                         <span>Show menu</span>
                     </a>
                 </div>
@@ -61,13 +56,25 @@ export default {
     created() { },
     data() {
         return {
+            isEditTitle: false,
+            boardToEdit: {
+                title: this.board.title
+            }
         }
     },
-    methods: {},
-    computed: {
-        boardPrivacyIcon() {
-            return 'Locked'
+    methods: {
+        toggleEditTitle() {
+            this.isEditTitle = !this.isEditTitle
+            setTimeout(() => {
+                this.$refs.titleEdit.focus()
+            }, 100)
+        },
+        saveBoardTitle() {
+            this.isEditTitle = !this.isEditTitle
+            console.log('a')
         }
+    },
+    computed: {
     },
     unmounted() { },
 }
