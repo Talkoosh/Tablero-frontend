@@ -33,5 +33,15 @@
     &:hover {
       background-color: darken(#fff, 5%);
     }
+
+    .task-labels {
+      width: 100%;
+      .label {
+        display: inline-block;
+        // max-width: 40px;
+        min-width: 40px;
+        min-height: 8px;
+      }
+    }
   }
 }
