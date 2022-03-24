@@ -3,7 +3,6 @@ import App from './App.vue';
 import router from './router';
 import { store } from './store/index.js';
 import './styles/style.scss';
-// import Draggable from 'vue3-draggable';
 
 const app = createApp(App);
 app.directive('clickoutside', {

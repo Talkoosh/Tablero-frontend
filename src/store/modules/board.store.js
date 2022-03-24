@@ -19,14 +19,12 @@ export const boardStore = {
       if (!state.currTask) return;
       return JSON.parse(JSON.stringify(state.currTask));
     },
-    boardLabels(state){
+    boardLabels(state) {
       if (!state.currBoardId || !state.boards.length) return;
       const board = state.boards.find((b) => b._id === state.currBoardId);
-      if(!board.labels || !board.labels.length) return;
-      return JSON.parse(JSON.stringify(board.labels))
-
-    }
-
+      if (!board.labels || !board.labels.length) return;
+      return JSON.parse(JSON.stringify(board.labels));
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -52,6 +50,13 @@ export const boardStore = {
         (g) => g._id === groupId
       );
       group.tasks.push(task);
+    },
+    editGroup(state, { groupToEdit, boardId }) {
+      const boardIdx = state.boards.findIndex((b) => b._id === boardId);
+      const groupIdx = state.boards[boardIdx].groups.findIndex(
+        (g) => g._id === groupToEdit._id
+      );
+      state.boards[boardIdx].groups[groupIdx] = groupToEdit;
     },
   },
   actions: {
@@ -85,6 +90,10 @@ export const boardStore = {
     async addTask({ commit }, { task, boardId }) {
       const taskToAdd = await boardService.saveTask(task, boardId);
       commit({ type: 'addTask', task: taskToAdd, groupId: task.groupId });
+    },
+    async editGroup({ commit }, { groupToEdit, boardId }) {
+      boardService.saveGroup(boardId, groupToEdit);
+      commit({ type: 'editGroup', groupToEdit, boardId });
     },
   },
 };
