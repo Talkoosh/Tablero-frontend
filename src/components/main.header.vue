@@ -109,7 +109,16 @@
             </div>
        </div> -->
       </div>
-      <button class="create-board-btn drop-btn">Create</button>
+      <div class="create-board">
+         <button class="create-board-btn drop-btn" @click="toggleCreateBoard">Create</button>
+         <div class="create-board-modal">
+           <header class="modal-header">
+             <div class="modal-title">Create board</div>
+             <button class="close-create-modal-btn">X</button>
+           </header>
+           <div class="modal-content"></div>
+         </div>
+      </div>
       <div class="seperator"></div>
     </div>
     <div class="right-navbar">

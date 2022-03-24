@@ -5,11 +5,12 @@
     <div class="all boards">
       <div class="starred-boards-container">
         <div class="starred-boards-title">
-          <div class="icon">😎</div>
+          <div class="icon"></div>
           <h3 class="starred-header">Starred boards</h3>
         </div>
         <div class="starred-boards-list-container">
           <ul class="starred-boards-list">
+
 
           </ul>
         </div>
@@ -17,7 +18,7 @@
 
       <div class="your-boards-container">
           <div class="your-boards-title">
-              <div class="icon">😎</div>
+              <div class="icon"></div>
               <h3 class="your-boards-header">Your boards</h3>
           </div>
           <div class="your-boards-list-container">
