@@ -10,11 +10,18 @@
         <div class="details-main">
             <div class="content">
                 <div class="description module">
-                    <div>
+                    <div class="text">
                         <h2>Description</h2>
-                        <p>{{ task.description }}</p>
+                        <pre v-if="!isEditingDesc" @click.stop="isEditingDesc = !isEditingDesc">{{ task.description }}</pre>
+                        <div v-else class="desc-edit">
+                            <textarea placeholder="Add a more detailed description..." class="desc-edit-txt" v-model="task.description"></textarea>
+                            <div class="edit-btns">
+                                <button @click.stop="isEditingDesc = false; setDescTxt()">Save</button>
+                                <button @click.stop="isEditingDesc=false; task.description=currDescTxt">X</button>
+                            </div>
+                        </div>
                     </div>
-                    <button>Edit</button>
+                    <button v-if="!isEditingDesc" @click="isEditingDesc = true">Edit</button>
                 </div>
                 <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
             </div>
@@ -43,12 +50,9 @@ import taskActivities from './task.activities.vue'
 export default {
     data() {
         return {
+            isEditingDesc: false,
+            currDescTxt: ''
         }
-    },
-    async created() {
-        // const boardId = this.$route.params.boardId;
-        // const taskId = this.$route.params.cardId;
-        // await this.$store.dispatch({ type: 'getTask', taskId, boardId })
     },
     methods: {
         async addComment(txt) {
@@ -58,6 +62,11 @@ export default {
                 txt,
                 createdAt: Date.now(),
             }
+        },
+        async setDescTxt(){
+            const boardId = this.$route.params.boardId;
+            this.task.description = this.task.description.trim()
+            this.$store.dispatch({type:'saveTask', task: this.task, boardId})
         }
     },
     computed: {
@@ -77,7 +86,12 @@ export default {
             },
             deep: true,
             immediate: true,
-        }
+        },
+       isEditingDesc: {
+           handler(){
+               if(this.isEditingDesc) this.currDescTxt = this.task.description;  
+           }
+       }
     }
 }
 </script>

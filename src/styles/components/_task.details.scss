@@ -38,8 +38,8 @@
         align-items: flex-start;
         min-height: 32px;
         margin-bottom: 8px;
-        .text{
-            p{
+        .text {
+            p {
                 color: $clr5;
                 font-weight: 400;
             }
@@ -55,24 +55,46 @@
             padding-top: 10px;
             display: flex;
             flex-direction: column;
-            .description{
-                display:flex;
+            .description {
+                display: flex;
                 align-items: flex-start;
-                h2{
-                    // margin-top: 5px;
+                pre {
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
                 }
-                button{
+                button {
                     @include button-default;
                     margin-inline-start: 10px;
                     transform: translateY(-15%);
-                    &:hover{
+                    &:hover {
                         background-color: $task-btn-hvr;
+                    }
+                }
+                .desc-edit {
+                    width: 515px;
+                    .desc-edit-txt {
+                        min-height: 108px;
+                        width: 100%;
+                        border-color: transparent;
+                        resize: none;
+                    }
+
+                    .edit-btns {
+                        margin-top: 8px;
+                        button {
+                            &:first-child {
+                                background-color: #0079bf;
+                                color: white;
+                            }
+                            margin-inline-start: 0;
+                            margin-inline-end: 15px;
+                        }
                     }
                 }
             }
             .activities-container {
                 .header {
-                    h2{
+                    h2 {
                         margin: 0;
                     }
                     display: flex;
@@ -102,14 +124,14 @@
                     list-style: none;
                     padding: 0;
                     position: relative;
-                    .header{
+                    .header {
                         span {
                             font-weight: 700;
                             font-size: 1em;
                             margin-inline-end: 5px;
                         }
                         display: flex;
-                        justify-content: flex-start
+                        justify-content: flex-start;
                     }
                     img {
                         @include avatar;

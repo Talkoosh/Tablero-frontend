@@ -62,6 +62,10 @@ export const boardStore = {
       } catch (err) {
 
       }
+    },
+    async saveTask({commit}, {task, boardId}){
+      const editedTask = await boardService.saveTask(task, boardId);
+      commit({type: 'setCurrTask', task: editedTask})
     }
   },
 };
