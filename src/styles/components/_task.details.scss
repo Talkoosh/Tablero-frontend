@@ -49,11 +49,36 @@
     margin: 0;
   }
   .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    position: relative;
     min-height: 32px;
     margin-bottom: 8px;
+    .icon {
+      @include icon-lg;
+      position: absolute;
+      right: -8px;
+      top: -10px;
+      display:flex;
+      justify-content: center;
+      border-radius: 50%;
+      &::before {
+        content: "\e91c";
+      }
+      &:hover{
+        cursor: pointer;
+        background-color: $task-btn-hvr;
+      }
+    }
+    .text {
+      .icon {
+        @include icon-lg;
+        left: -38px;
+        top: -6px;
+        position: absolute;
+        &::before {
+          content: "\e912";
+        }
+      }
+    }
     .text {
       p {
         color: $clr5;
@@ -106,74 +131,6 @@
               margin-inline-end: 15px;
             }
           }
-        }
-      }
-      .activities-container {
-        .header {
-          h2 {
-            margin: 0;
-          }
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 15px;
-          button {
-            @include button-default;
-            background-color: $task-btn-clr;
-            &:hover {
-              background-color: $task-btn-hvr;
-            }
-          }
-        }
-        textarea {
-          width: 100%;
-          min-height: 36px;
-          padding: 8px 12px;
-          border: 1px solid #e0e3e8;
-          border-radius: 4px;
-          outline: none;
-          overflow: hidden;
-          overflow-wrap: break-word;
-          resize: none;
-        }
-        .comments-list {
-          list-style: none;
-          padding: 0;
-          position: relative;
-          .header {
-            span {
-              font-weight: 700;
-              font-size: 1em;
-              margin-inline-end: 5px;
-            }
-            display: flex;
-            justify-content: flex-start;
-          }
-          img {
-            @include avatar;
-            position: absolute;
-            left: -42px;
-            top: 8px;
-          }
-        }
-      }
-    }
-
-    .actions-menu {
-      width: 167px;
-      display: flex;
-      flex-direction: column;
-      h3 {
-        font-size: 11px;
-        font-weight: 550;
-        color: $clr5;
-      }
-      button {
-        @include button-default;
-        margin-top: 8px;
-        text-align: start;
-        &:hover {
-          background-color: $task-btn-hvr;
         }
       }
     }
