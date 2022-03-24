@@ -1,0 +1,37 @@
+.task-preview-container {
+  & > * {
+    padding: 8px;
+  }
+  .task-quick-edit {
+    position: absolute;
+    padding: 6px;
+    display: none;
+    right: 2px;
+    top: 2px;
+    color: black;
+    border-radius: 3px;
+    opacity: 0.7;
+    &:before {
+      content: '\e928';
+    }
+    &:hover {
+      background-color: rgb(215, 215, 215);
+    }
+  }
+  &:hover .task-quick-edit {
+    display: block;
+  }
+  .task-preview {
+    position: relative;
+    box-shadow: 0 1px 0 #091e4240;
+    margin-bottom: 8px;
+    border-radius: 3px;
+    width: 256px;
+    background-color: #fff;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    &:hover {
+      background-color: darken(#fff, 5%);
+    }
+  }
+}

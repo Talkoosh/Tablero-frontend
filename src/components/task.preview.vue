@@ -7,7 +7,7 @@
                 <span>{{ task.title }}</span>
                 <div v-if="task.badges" class="task-badges"></div>
                 <div v-if="task.members" class="task-members"></div>
-                <span class="icon task-quick-edit"></span>
+                <span @click.prevent="openQuickEdit" class="icon task-quick-edit"></span>
             </div>
         </router-link>
     </section>

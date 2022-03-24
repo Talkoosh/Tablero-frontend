@@ -49,42 +49,10 @@
             font-weight: 550;
           }
         }
-        .task-preview-container {
-          & > * {
-            padding: 8px;
-          }
-          .task-quick-edit {
-            position: absolute;
-            display: none;
-            right: 10px;
-            top: 5px;
-            font-size: 16px;
-            color: black;
-            &:before {
-              content: '\e928';
-            }
-          }
-          &:hover .task-quick-edit {
-            display: block;
-          }
-          .task-preview {
-            position: relative;
-            box-shadow: 0 1px 0 #091e4240;
-            margin-bottom: 8px;
-            border-radius: 3px;
-            width: 256px;
-            background-color: #fff;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            &:hover {
-              background-color: darken(#fff, 5%);
-            }
-          }
-        }
         .add-task {
           color: #5e6c84;
-          border-radius: 3px;
           .add-task-unactive {
+            border-radius: 3px;
             padding: 4px 8px;
             cursor: pointer;
             &:hover {

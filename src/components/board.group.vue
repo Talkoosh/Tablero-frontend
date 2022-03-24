@@ -21,11 +21,15 @@
                         <span>+</span>
                         Add a card
                     </div>
-                    <div class="add-task-active" @blur="toggleAddTask" v-else>
+                    <div
+                        v-clickoutside="toggleAddTask"
+                        class="add-task-active"
+                        @blur="toggleAddTask"
+                        v-else
+                    >
                         <div class="textarea-container">
                             <textarea
                                 v-model="taskToAdd.title"
-                                @blur="toggleAddTask"
                                 ref="addTask"
                                 placeholder="Enter a title for this card..."
                             />
@@ -62,7 +66,7 @@ export default {
         }
     },
     methods: {
-        toggleAddTask() {
+        toggleAddTask(e) {
             if (this.isAddTask) {
                 setTimeout(() => {
                     this.isAddTask = false
