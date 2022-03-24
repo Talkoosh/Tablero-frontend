@@ -3,25 +3,22 @@ import App from './App.vue';
 import router from './router';
 import { store } from './store/index.js';
 import './styles/style.scss';
+// import Draggable from 'vue3-draggable';
 
 const app = createApp(App);
 app.directive('clickoutside', {
-  mounted: (el, binding, vnode) => {
-    // assign event to the element
-    el.clickOutsideEvent = function (event) {
-      // here we check if the click event is outside the element and it's children
-      if (!(el == event.target || el.contains(event.target))) {
-        // if clicked outside, call the provided method
-        console.log(vnode);
-        vnode.context[binding.expression](event);
-      }
-    };
-    // register click and touch events
-    document.body.addEventListener('click', el.clickOutsideEvent);
-    document.body.addEventListener('touchstart', el.clickOutsideEvent);
+  mounted: (el, binding) => {
+    setTimeout(() => {
+      el.clickOutsideEvent = function (event) {
+        if (!(el == event.target || el.contains(event.target))) {
+          binding.value(event, el);
+        }
+      };
+      document.body.addEventListener('click', el.clickOutsideEvent);
+      document.body.addEventListener('touchstart', el.clickOutsideEvent);
+    }, 100);
   },
   unmounted: function (el) {
-    // unregister click and touch events before the element is unmounted
     document.body.removeEventListener('click', el.clickOutsideEvent);
     document.body.removeEventListener('touchstart', el.clickOutsideEvent);
   },

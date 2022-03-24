@@ -21,12 +21,7 @@
                         <span>+</span>
                         Add a card
                     </div>
-                    <div
-                        v-clickoutside="toggleAddTask"
-                        class="add-task-active"
-                        @blur="toggleAddTask"
-                        v-else
-                    >
+                    <div v-clickoutside="toggleAddTask" class="add-task-active" v-else>
                         <div class="textarea-container">
                             <textarea
                                 v-model="taskToAdd.title"
@@ -66,22 +61,13 @@ export default {
         }
     },
     methods: {
-        toggleAddTask(e) {
-            if (this.isAddTask) {
-                setTimeout(() => {
-                    this.isAddTask = false
-                }, 100)
-            } else {
-                this.isAddTask = true
-                setTimeout(() => {
-                    this.$refs.addTask.focus();
-                }, 100)
-            }
+        toggleAddTask() {
+            this.isAddTask = !this.isAddTask;
         },
-        addTask() {
-            this.$refs.addTask.focus();
+        async addTask() {
             if (!this.taskToAdd.title) return
-            this.$emit('task-added', this.taskToAdd)
+            const a = await this.$emit('task-added', this.taskToAdd)
+            console.log(a)
             this.taskToAdd = {
                 title: '',
                 groupId: this.group._id
@@ -94,5 +80,6 @@ export default {
         }
     },
     unmounted() { },
+
 }
 </script>
