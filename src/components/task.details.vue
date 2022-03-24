@@ -13,6 +13,7 @@
                 <div class="content">
                     <div class="description module">
                         <div class="text">
+                            <span class="icon desc-icon"></span>
                             <h2>Description</h2>
                             <pre v-if="!isEditingDesc" @click.stop="isEditingDesc = !isEditingDesc">{{ task.description }}</pre>
                             <div v-else class="desc-edit">
@@ -36,16 +37,20 @@
                 <div class="actions-menu">
                     <h3>Add to card</h3>
                     <button>
+                        <span class="icon members-icon"></span>
                         <span>Members</span>
                     </button>
                     <button>
+                        <span class="icon labels-icon"></span>
                         <span>Labels</span>
                     </button>
                     <button>
-                        <span>Checklist</span>
+                        <span class="icon cover-icon"></span>
+                        <span>Cover</span>
                     </button>
                     <button>
-                        <span>Dates</span>
+                        <span class="icon checklist-icon"></span>
+                        <span>Checklist</span>
                     </button>
                 </div>
             </div>

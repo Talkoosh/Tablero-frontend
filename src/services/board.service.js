@@ -205,12 +205,32 @@ async function _makeBoard() {
         {
           _id: 'l101',
           title: 'Done',
-          color: '#61bd4f',
+          color: '#61BD4F',
         },
         {
           _id: 'l102',
           title: 'Progress',
-          color: '#61bd33',
+          color: '#F2D600',
+        },
+        {
+          _id: 'l103',
+          title: 'IT',
+          color: '#EB5A46',
+        },
+        {
+          _id: 'l104',
+          title: 'ABC',
+          color: '#C377E0',
+        },
+        {
+          _id: 'l105',
+          title: 'DEF',
+          color: '#0079BF',
+        },
+        {
+          _id: 'l106',
+          title: 'GHI',
+          color: '#00C2E0',
         },
       ],
       members: [
@@ -291,7 +311,7 @@ async function _makeBoard() {
                     'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                 },
               ],
-              labelIds: ['l101', 'l102'],
+              labelIds: ['l101', 'l102', 'l105'],
               createdAt: 1590999730348,
               dueDate: 16156215211,
               byMember: {

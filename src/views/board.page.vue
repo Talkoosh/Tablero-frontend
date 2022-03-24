@@ -72,8 +72,9 @@ export default {
                 }, 100)
             }
         },
-        addTask(task) {
-            this.$store.dispatch({ type: 'addTask', task, boardId: this.board._id })
+        async addTask(task) {
+            await this.$store.dispatch({ type: 'addTask', task, boardId: this.board._id })
+            return 'zibi'
         }
     },
     computed: {
