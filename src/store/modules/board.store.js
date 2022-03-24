@@ -19,6 +19,14 @@ export const boardStore = {
       if (!state.currTask) return;
       return JSON.parse(JSON.stringify(state.currTask));
     },
+    boardLabels(state){
+      if (!state.currBoardId || !state.boards.length) return;
+      const board = state.boards.find((b) => b._id === state.currBoardId);
+      if(!board.labels || !board.labels.length) return;
+      return JSON.parse(JSON.stringify(board.labels))
+
+    }
+
   },
   mutations: {
     loadBoards(state, { boards }) {

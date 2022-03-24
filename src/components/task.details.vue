@@ -1,13 +1,13 @@
 <template >
-    <div @click="closeTaskDetails" class="task-details-overlay">
-        <section @click="stopProg" v-if="task" class="task-details-main">
+    <div class="task-details-overlay">
+        <section v-clickoutside="closeTaskDetails" v-if="task" class="task-details-main">
             <div class="head">
                 <div class="text">
                     <span class="icon"></span>
                     <h1>{{ task.title }}</h1>
                     <p>in list ...</p>
                 </div>
-                <span class="icon" @click="closeTaskDetails"></span>
+                <span class="icon" @click="closeTaskDetails.stop"></span>
             </div>
             <div class="details-main">
                 <div class="content">
@@ -30,19 +30,20 @@
                                 </div>
                             </div>
                         </div>
-                        <button v-if="!isEditingDesc" @click="isEditingDesc = true">Edit</button>
+                        <button v-if="!isEditingDesc" @click.stop="isEditingDesc = true">Edit</button>
                     </div>
                     <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
                 </div>
                 <div class="actions-menu">
                     <h3>Add to card</h3>
+                    <component v-clickoutside="closeAction" :labels="labels" :is="currAction"></component>
                     <button>
                         <span class="icon members-icon"></span>
                         <span>Members</span>
                     </button>
                     <button>
                         <span class="icon labels-icon"></span>
-                        <span>Labels</span>
+                        <span @click.stop="onSetLabels">Labels</span>
                     </button>
                     <button>
                         <span class="icon cover-icon"></span>
@@ -60,12 +61,14 @@
 
 <script>
 import taskActivities from './task.activities.vue'
+import labelMenu from './label.menu.vue'
 
 export default {
     data() {
         return {
             isEditingDesc: false,
-            currDescTxt: ''
+            currDescTxt: '',
+            currAction: ''
         }
     },
     methods: {
@@ -86,18 +89,25 @@ export default {
             const boardId = this.$route.params.boardId;
             this.$router.push('/board/' + boardId)
         },
-        stopProg(e) {
-            e.stopPropagation();
-
+        onSetLabels(){
+            this.currAction = 'labelMenu'
+        },
+        closeAction(ev){
+            console.log(ev);
+            this.currAction = null;
         }
     },
     computed: {
         task() {
             return this.$store.getters.currTask;
+        },
+        labels(){
+            return this.$store.getters.boardLabels;
         }
     },
     components: {
-        taskActivities
+        taskActivities,
+        labelMenu
     },
     watch: {
         '$route.params.taskId': {
