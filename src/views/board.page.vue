@@ -5,6 +5,7 @@
         </header>
         <div class="groups-container">
             <board-group
+                @task-added="addTask"
                 v-for="group in board.groups"
                 :key="group._id"
                 :group="group"
@@ -19,6 +20,7 @@
                         v-model="groupToAdd.title"
                         placeholder="Enter list title..."
                         @blur="toggleAddGroup"
+                        @keyup.enter="addGroup"
                     />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>
@@ -56,7 +58,7 @@ export default {
         addGroup() {
             if (!this.groupToAdd.title) return
             this.$store.dispatch({ type: 'addGroup', boardId: this.board._id, groupToAdd: this.groupToAdd })
-            groupToAdd = { title: '' }
+            this.groupToAdd = { title: '' }
         },
         toggleAddGroup() {
             if (this.isAddGroup) {
@@ -69,6 +71,9 @@ export default {
                     this.$refs.addGroup.focus();
                 }, 100)
             }
+        },
+        addTask(task) {
+            this.$store.dispatch({ type: 'addTask', task, boardId: this.board._id })
         }
     },
     computed: {

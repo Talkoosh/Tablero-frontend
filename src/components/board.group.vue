@@ -8,18 +8,20 @@
                         <div>...</div>
                     </div>
                 </div>
-                <task-preview
-                    v-for="task in group.tasks"
-                    :key="task._id"
-                    :task="task"
-                    :boardId="boardId"
-                />
+                <div class="group-tasks">
+                    <task-preview
+                        v-for="task in group.tasks"
+                        :key="task._id"
+                        :task="task"
+                        :boardId="boardId"
+                    />
+                </div>
                 <div class="add-task" :class="addTaskCondition">
                     <div @click="toggleAddTask" v-if="!isAddTask" class="add-task-unactive">
                         <span>+</span>
                         Add a card
                     </div>
-                    <div class="add-task-active" v-else>
+                    <div class="add-task-active" @blur="toggleAddTask" v-else>
                         <div class="textarea-container">
                             <textarea
                                 v-model="taskToAdd.title"
@@ -27,6 +29,10 @@
                                 ref="addTask"
                                 placeholder="Enter a title for this card..."
                             />
+                        </div>
+                        <div class="add-task-btns">
+                            <button @mouseup="addTask" class="add-task-btn">Add Card</button>
+                            <button @click="isAddTask = false" class="cancel-add-task-btn">X</button>
                         </div>
                     </div>
                 </div>
@@ -48,8 +54,11 @@ export default {
     created() { },
     data() {
         return {
-            isAddTask: true,
-            taskToAdd: { title: '' }
+            isAddTask: false,
+            taskToAdd: {
+                title: '',
+                groupId: this.group._id
+            }
         }
     },
     methods: {
@@ -63,6 +72,15 @@ export default {
                 setTimeout(() => {
                     this.$refs.addTask.focus();
                 }, 100)
+            }
+        },
+        addTask() {
+            this.$refs.addTask.focus();
+            if (!this.taskToAdd.title) return
+            this.$emit('task-added', this.taskToAdd)
+            this.taskToAdd = {
+                title: '',
+                groupId: this.group._id
             }
         }
     },
