@@ -44,9 +44,12 @@ export default {
                 return `background-color: ${this.task.style.color}; height: 34px`
             }
             if (this.task.style.photo) {
-                return `  background-image: url('${this.task.style.photo}'); min-height: 260px; background-size: cover`
+                return `background-image: url('${this.task.style.photo}'); min-height: 260px; background-size: cover`
             }
         },
+        taskCover() {
+            return
+        }
     },
     unmounted() { },
 }
