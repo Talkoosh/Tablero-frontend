@@ -3,7 +3,19 @@
         <div class="group-container">
             <div class="group">
                 <div class="group-header">
-                    <h2 class="group-title">{{ group.title }}</h2>
+                    <h2
+                        @click="toggleEditGroupTitle"
+                        v-if="!isEditGroupTitle"
+                        class="group-title"
+                    >{{ group.title }}</h2>
+                    <input
+                        v-clickoutside="saveGroupTitle"
+                        @keyup.enter="saveGroupTitle"
+                        v-else
+                        ref="editGroupTitle"
+                        type="text"
+                        v-model="groupToEdit.title"
+                    />
                     <div class="group-extras">
                         <div>...</div>
                     </div>
@@ -54,10 +66,11 @@ export default {
     data() {
         return {
             isAddTask: false,
+            isEditGroupTitle: false,
             taskToAdd: {
                 title: '',
                 groupId: this.group._id
-            }
+            },
         }
     },
     methods: {
@@ -72,14 +85,28 @@ export default {
                 title: '',
                 groupId: this.group._id
             }
-        }
+        },
+        toggleEditGroupTitle() {
+            this.isEditGroupTitle = !this.isEditGroupTitle;
+            if (this.isEditGroupTitle) {
+                setTimeout(() => {
+                    this.$refs.editGroupTitle.focus();
+                }, 100)
+            }
+        },
+        saveGroupTitle() {
+            this.$emit('group-title-changed', this.groupToEdit)
+            this.isEditGroupTitle = !this.isEditGroupTitle;
+        },
     },
     computed: {
         addTaskCondition() {
             return this.isAddTask ? 'add-task-active' : '';
+        },
+        groupToEdit() {
+            const group = { ...this.group }
+            return group
         }
-    },
-    unmounted() { },
-
+    }
 }
 </script>
