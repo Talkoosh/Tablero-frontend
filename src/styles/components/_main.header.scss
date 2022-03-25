@@ -60,6 +60,10 @@
                     @include close-dropdwon-btn;
                 }
             }
+
+            .boards-list {
+                @include dropdown-content;
+            }
         }
 
         .starred-drop-content {
@@ -80,7 +84,36 @@
                     @include close-dropdwon-btn;
                 }
             }
+
+            .boards-list {
+                @include dropdown-content;
+
+                .star-container {
+                    transform: translateX(65px);
+                    margin-top: 5px;
+
+                    .star {
+                        @include icon;
+                        color: #f2d600;
+                        margin-right: 6px;
+                        opacity: 1;
+                        width: 18px;
+
+                        &::before {
+                            content: "\e967";
+                        }
+
+                        &:hover {
+                            font-size: 18px;
+                            &::before {
+                                content: "\e966";
+                            }
+                        }
+                    }
+                }
+            }
         }
+
         .create-board {
             .create-board-btn-container {
                 height: 32px;
@@ -100,7 +133,6 @@
             }
 
             .create-board-modal {
-                // display: none;
                 position: fixed;
                 width: 304px;
                 will-change: top, left;
@@ -239,21 +271,6 @@
         }
     }
 
-    .recent-drop-content {
-        position: fixed;
-        width: 304px;
-        top: 48px;
-        left: 244px;      
-    }
-
-    .starred-drop-content {
-        position: fixed;
-        width: 304px;
-        top: 48px;
-        left: 331px;
-
-    }
-
     .create-board-btn {
         margin: 0;
         font-weight: 400;
@@ -375,37 +392,6 @@
     }
 }
 
-.board-details {
-    display: flex;
-    font-weight: 700;
-    // height: 32px;
-    padding: 0;
-    position: relative;
-    text-decoration: none;
-    -webkit-user-select: none;
-    user-select: none;
-
-    &:hover{
-        background-color: #EBECF0;
-        border-radius: 3px;
-    }
-
-    .board-text{
-        padding: 0 12px;
-    }
-}
-
-.board-cover-container {
-    display: inline-block;
-    flex: 0 0 auto;
-    background-size: cover;
-    border-radius: 3px;
-    height: 32px;
-    width: 40px;
-    position: relative;
-    opacity: 1;
-    margin-top: 5px;
-}
 .dropdown {
     color: #172b4d;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
@@ -419,12 +405,6 @@
     box-sizing: border-box;
     outline: 0;
     overflow: hidden;
-}
-
-.boards-list {
-    max-height: 464px;
-    min-height: 50px;
-    padding: 0 12px;
 }
 
 .drop-btn {

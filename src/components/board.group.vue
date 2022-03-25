@@ -43,7 +43,9 @@
                         </div>
                         <div class="add-task-btns">
                             <button @mouseup="addTask" class="add-task-btn">Add Card</button>
-                            <button @click="isAddTask = false" class="cancel-add-task-btn">X</button>
+                            <button @click="isAddTask = false" class="cancel-add-task-btn">
+                                <span class="x-icon"></span>
+                            </button>
                         </div>
                     </div>
                 </div>

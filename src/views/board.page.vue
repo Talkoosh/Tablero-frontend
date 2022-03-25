@@ -25,7 +25,9 @@
                     />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>
-                        <button @click="isAddGroup = false" class="cancel-add-group-btn">X</button>
+                        <button @click="isAddGroup = false" class="cancel-add-group-btn">
+                            <span class="x-icon"></span>
+                        </button>
                     </div>
                 </div>
             </div>

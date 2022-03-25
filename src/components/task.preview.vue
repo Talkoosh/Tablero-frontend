@@ -5,9 +5,14 @@
                 class="task-preview-container"
                 :to="'/board/' + boardId + '/card/' + task._id"
             >
-                <div v-if="task.style" class="task-cover" :style="cover"></div>
-                <div class="task-preview" :style="taskCover">
-                    <div class="task-labels">
+                <div
+                    v-if="task.style.color && !task.style.isBackground || task.style.photo && !task.style.isBackground"
+                    class="task-cover"
+                    :style="cover"
+                ></div>
+                <!-- <div v-if="task.style.photo" class="task-photo"></div> -->
+                <div class="task-preview" :class="taskCover" :style="taskBg">
+                    <div class="task-labels" v-if="!task.style.isBackground">
                         <label-preview v-for="label in task.labelIds" :label="label" :key="label" />
                     </div>
                     <span>{{ task.title }}</span>
@@ -48,7 +53,13 @@ export default {
             }
         },
         taskCover() {
-            return
+            if (!this.task.style.isBackground) return
+            else return 'task-bg-cover'
+        },
+        taskBg() {
+            if (!this.task.style.isBackground) return
+            if (this.task.style.photo) return `background-image: url('${this.task.style.photo}'); height: 260px;display:flex;`
+            else return `background-color: ${this.task.style.color}; min-height: 56px;display:flex;`
         }
     },
     unmounted() { },

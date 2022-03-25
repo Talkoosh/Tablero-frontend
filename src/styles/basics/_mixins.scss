@@ -138,3 +138,56 @@
     opacity: 0.7;
   }
 }
+
+@mixin dropdown-content {
+  max-height: 464px;
+  min-height: 50px;
+  padding: 0 12px;
+
+  .board-details {
+      display: flex;
+      font-weight: 700;
+      height: 32px;
+      padding: 0;
+      position: relative;
+      text-decoration: none;
+      -webkit-user-select: none;
+      user-select: none;
+
+      &:hover {
+          background-color: #ebecf0;
+          border-radius: 3px;
+
+          .board-cover-container {
+              opacity: 0.6;
+          }
+      }
+
+      .board-cover-container {
+          display: inline-block;
+          flex: 0 0 auto;
+          background-size: cover;
+          border-radius: 3px;
+          height: 32px;
+          width: 40px;
+          position: relative;
+          opacity: 1;
+      }
+
+      .board-text {
+          padding: 0 12px;
+
+          .board-title {
+              height: 15px;
+          }
+
+          .board-user {
+              height: 16px;
+              font-weight: 400;
+              font-size: 12px;
+          }
+      }
+  }
+}
+  
+
