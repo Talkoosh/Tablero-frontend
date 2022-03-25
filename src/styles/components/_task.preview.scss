@@ -1,70 +1,79 @@
-.task-preview-container {
-  & > * {
-    padding: 8px;
-  }
-  .task-quick-edit {
-    @include icon;
-    position: absolute;
-    padding: 6px;
-    display: none;
-    right: 2px;
-    top: 2px;
-    color: black;
-    border-radius: 3px;
-    opacity: 0.6;
-    &::before {
-      content: '\e928';
-    }
-    &:hover {
-      background-color: rgb(215, 215, 215);
-    }
-  }
-  &:hover .task-quick-edit {
-    display: block;
-  }
-  .task-preview {
-    position: relative;
-    box-shadow: 0 1px 0 #091e4240;
-    margin-bottom: 8px;
-    border-radius: 3px;
-    width: 256px;
-    background-color: #fff;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    &:hover {
-      background-color: darken(#fff, 5%);
+.main-task-container {
+  position: relative;
+
+  .task-preview-container {
+    & > * {
+      padding: 8px;
     }
 
-    .task-labels {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      .label {
-        color: #fff;
-        font-weight: 700;
-        line-height: 16px;
-        font-size: 12px;
-        text-shadow: none;
-        display: block;
-        min-width: 40px;
-        min-height: 8px;
-        padding: 0 8px;
-        border-radius: 4px;
-        margin-right: 4px;
-        margin-bottom: 4px;
+    .task-quick-edit {
+      @include icon;
+      background-color: $group-bgc;
+      position: absolute;
+      padding: 6px;
+      display: none;
+      border-radius: 3px;
+      right: 2px;
+      top: 2px;
+      color: black;
+      opacity: 0.4;
+      &::before {
+        content: '\e928';
+      }
+      &:hover {
+        background-color: rgb(215, 215, 215);
+      }
+    }
+    .task-cover {
+      border-radius: 3px 3px 0 0;
+    }
+    &:hover .task-quick-edit {
+      display: block;
+    }
+    .task-preview {
+      border-radius: 3px;
+      box-shadow: 0 1px 0 #091e4240;
+      margin-bottom: 8px;
+      width: 256px;
+      // position: relative;
+      background-color: #fff;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      &:hover {
+        background-color: darken(#fff, 5%);
+      }
 
-        &.label-open {
-          animation: label-text-appear 0.2s ease-in;
-        }
-        &.label-closing {
-          animation: label-text-disappear 0.2s ease-in;
-        }
-        .label-text {
+      .task-labels {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        .label {
+          color: #fff;
+          font-weight: 700;
+          line-height: 16px;
+          font-size: 12px;
+          text-shadow: none;
+          display: block;
+          min-width: 40px;
+          min-height: 8px;
+          padding: 0 8px;
+          border-radius: 4px;
+          margin-right: 4px;
+          margin-bottom: 4px;
+
           &.label-open {
-            animation: label-text-appear-title 0.5s ease-in;
+            animation: label-text-appear 0.2s ease-in;
           }
           &.label-closing {
-            animation: label-text-disappear-title 0.5s ease-in;
+            animation: label-text-disappear 0.2s ease-in;
+          }
+          .label-text {
+            &.label-open {
+              animation: label-text-appear-title 0.5s ease-in;
+            }
+            &.label-closing {
+              animation: label-text-disappear-title 0.5s ease-in;
+            }
           }
         }
       }
