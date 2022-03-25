@@ -8,19 +8,19 @@
   top: 0;
   width: 100%;
   z-index: 20;
-  display: flex;
   justify-content: center;
 }
 
 .task-total-container {
   width: 768px;
+  margin: auto;
 }
 
 .task-details-cover {
   height: 116px;
   width: 100%;
   position: relative;
-  .task-close-btn{
+  .task-close-btn {
     @include icon;
     background-color: #00000014;
     font-size: 24px;
@@ -31,10 +31,10 @@
     top: 3px;
     right: 3px;
     cursor: pointer;
-    &::before{
-      content: "\e91c";
+    &::before {
+      content: '\e91c';
     }
-    &:hover{
+    &:hover {
       background-color: #00000029;
     }
   }
@@ -56,7 +56,7 @@
         left: 0;
         top: 0;
         &::before {
-          content: "\e914";
+          content: '\e914';
         }
       }
       &:hover {
@@ -118,7 +118,7 @@
     }
     .task-close-btn {
       &::before {
-        content: "\e91c";
+        content: '\e91c';
       }
       &:hover {
         cursor: pointer;
@@ -133,7 +133,7 @@
         top: -6px;
         position: absolute;
         &::before {
-          content: "\e912";
+          content: '\e912';
         }
       }
     }
@@ -191,7 +191,7 @@
         left: 0;
         color: $task-icon-clr;
         &::before {
-          content: "\e901";
+          content: '\e901';
         }
       }
     }
@@ -217,7 +217,7 @@
           left: -39px;
           top: -6px;
           &::before {
-            content: "\e922";
+            content: '\e922';
           }
         }
         pre {

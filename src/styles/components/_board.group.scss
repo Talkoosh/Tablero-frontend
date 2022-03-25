@@ -79,9 +79,16 @@
         .cancel-add-task-btn {
           @include button-default;
           font-size: 1.3rem;
-          transform: translateY(10%);
+          transform: translateY(18%);
           background: none;
           border: none;
+          .x-icon {
+            @include icon;
+            font-size: 24px;
+            &::before {
+              content: '\e91c';
+            }
+          }
         }
       }
     }
