@@ -24,7 +24,6 @@ export const boardStore = {
       const board = state.boards.find((b) => b._id === state.currBoardId);
       if(!board.labels || !board.labels.length) return;
       return JSON.parse(JSON.stringify(board.labels))
-
     }
 
   },
