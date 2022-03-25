@@ -49,7 +49,7 @@ export default {
         },
         labelTitle() {
             const label = this.getLabel(this.label)
-            return this.isTitleShown ? label.title : ''
+            return label.title
         },
         isLabelOpen() {
             return this.startAnimation ? 'label-open' : 'label-closing';

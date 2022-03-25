@@ -7,7 +7,7 @@
             <div class="close-menu">
                 <span @click="closeMenu" class="close-icon"></span>
             </div>
-            <div @click="currNav = 'Menu'" class="back-menu">
+            <div v-if="currNav !== 'Menu'" @click="currNav = 'Menu'" class="back-menu">
                 <span class="back-icon"></span>
             </div>
             <hr class="menu-header-divider" />

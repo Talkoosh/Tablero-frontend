@@ -202,8 +202,8 @@ function _createTask(title) {
     labelIds: [],
     style: {
       color: '',
-      isBackground: false
-    }
+      isBackground: false,
+    },
   };
 }
 
@@ -285,7 +285,8 @@ async function _makeBoard() {
               _id: 'c102',
               title: 'Add Samples',
               style: {
-                color: '#af4632',
+                photo:
+                  'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                 isBackground: false,
               },
             },
@@ -355,10 +356,10 @@ async function _makeBoard() {
                   'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
               },
               style: {
-                color: '#4abf6a',
-                // photo:
-                //   'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                isBackground: false,
+                // color: '#4abf6a',
+                photo:
+                  'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                isBackground: true,
               },
             },
           ],
