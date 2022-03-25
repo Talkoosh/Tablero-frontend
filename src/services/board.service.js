@@ -200,6 +200,10 @@ function _createTask(title) {
     _id: utilService.makeId(),
     createdAt: Date.now(),
     labelIds: [],
+    style: {
+      color: '',
+      isBackground: false
+    }
   };
 }
 
@@ -272,10 +276,18 @@ async function _makeBoard() {
             {
               _id: 'c101',
               title: 'Replace logo',
+              style: {
+                color: '#af4632',
+                isBackground: false,
+              },
             },
             {
               _id: 'c102',
               title: 'Add Samples',
+              style: {
+                color: '#af4632',
+                isBackground: false,
+              },
             },
           ],
           // "style": {} style is not editable in trello
@@ -343,9 +355,9 @@ async function _makeBoard() {
                   'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
               },
               style: {
-                // color: '#4abf6a',
-                photo:
-                  'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                color: '#4abf6a',
+                // photo:
+                //   'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                 isBackground: false,
               },
             },
@@ -367,6 +379,10 @@ async function _makeBoard() {
           task: {
             _id: 'c101',
             title: 'Replace Logo',
+            style: {
+              color: '#FA45E',
+              isBackground: false,
+            },
           },
         },
       ],
