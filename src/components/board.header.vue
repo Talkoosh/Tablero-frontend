@@ -37,26 +37,22 @@
             </div>
             <div class="board-header-right">
                 <div class="board-header-btn board-menu">
-                    <a href>
+                    <button @click="openMenu">
                         <span class="menu-icon"></span>
                         <span>Show menu</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </nav>
-        <board-menu @change-board-bgc="changeBoardBgc" />
     </section>
 </template>
 
 <script>
-import boardMenu from "./board.menu.vue"
 export default {
     props: {
         board: Object,
     },
     components: {
-        boardMenu
-
     },
     created() { },
     data() {
@@ -78,8 +74,8 @@ export default {
             this.isEditTitle = !this.isEditTitle
             console.log('a')
         },
-        changeBoardBgc(bgc) {
-            this.$emit('change-board-bgc', bgc)
+        openMenu() {
+            this.$emit('open-menu')
         }
     },
     computed: {

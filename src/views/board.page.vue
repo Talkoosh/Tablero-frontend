@@ -1,7 +1,7 @@
 <template>
     <div v-if="board" class="main-board" :style="boardBg">
         <header>
-            <board-header @change-board-bgc="changeBoardBgc" :board="board" />
+            <board-header @open-menu="openMenu" @change-board-bgc="changeBoardBgc" :board="board" />
         </header>
         <div class="groups-container">
             <board-group
@@ -31,18 +31,22 @@
             </div>
         </div>
     </div>
+    <board-menu v-if="isMenuOpen" @change-board-bgc="changeBoardBgc" @close-menu="closeMenu" />
     <router-view></router-view>
 </template>
 
 <script>
 import boardHeader from "../components/board.header.vue"
 import boardGroup from "../components/board.group.vue"
+import boardMenu from "../components/board.menu.vue"
+
 
 export default {
     // props: [''],
     components: {
         boardHeader,
         boardGroup,
+        boardMenu
     },
     async created() {
         this.$store.dispatch('loadBoards')
@@ -52,7 +56,8 @@ export default {
     data() {
         return {
             isAddGroup: false,
-            groupToAdd: { title: '' }
+            groupToAdd: { title: '' },
+            isMenuOpen: false,
         }
     },
     methods: {
@@ -79,8 +84,14 @@ export default {
         updateGroup(groupToEdit) {
             this.$store.dispatch({ type: 'editGroup', groupToEdit, boardId: this.board._id })
         },
+        openMenu() {
+            this.isMenuOpen = true
+        },
         changeBoardBgc(bgc) {
             this.$store.dispatch({ type: 'changeBoardBgc', bgc, boardId: this.board._id })
+        },
+        closeMenu() {
+            this.isMenuOpen = false
         }
     },
     computed: {

@@ -39,8 +39,9 @@ export const boardStore = {
       );
       state.boards[boardIdx].groups.push(savedGroup);
     },
-    setCurrTask(state, { task }) {
+    setCurrTask(state, { task, boardIdx, groupIdx, taskIdx }) {
       state.currTask = task;
+      state.boards[boardIdx].groups[groupIdx].tasks[taskIdx] = task;
     },
     addTask(state, { task, groupId }) {
       const boardIdx = state.boards.findIndex(
@@ -57,6 +58,10 @@ export const boardStore = {
         (g) => g._id === groupToEdit._id
       );
       state.boards[boardIdx].groups[groupIdx] = groupToEdit;
+    },
+    updateBoard(state, { board }) {
+      const boardIdx = state.boards.findIndex((b) => b._id === board._id);
+      state.boards[boardIdx] = board;
     },
   },
   actions: {
@@ -83,9 +88,22 @@ export const boardStore = {
         commit({ type: 'setCurrTask', task });
       } catch (err) {}
     },
-    async saveTask({ commit }, { task, boardId }) {
+    async saveTask({ commit, state }, { task, boardId }) {
       const editedTask = await boardService.saveTask(task, boardId);
-      commit({ type: 'setCurrTask', task: editedTask });
+      const board = state.boards.find((b) => b._id === boardId);
+      const boardIdx = state.boards.findIndex((b) => b._id === boardId);
+      const groupId = await boardService.getGroupIdByTaskId(task._id, boardId);
+      console.log(groupId);
+      const group = board.groups.find((g) => g._id === groupId);
+      const groupIdx = board.groups.findIndex((g) => g._id === groupId);
+      const taskIdx = group.tasks.findIndex((t) => t._id === task._id);
+      commit({
+        type: 'setCurrTask',
+        task: editedTask,
+        boardIdx,
+        groupIdx,
+        taskIdx,
+      });
     },
     async addTask({ commit }, { task, boardId }) {
       const taskToAdd = await boardService.saveTask(task, boardId);
@@ -96,8 +114,15 @@ export const boardStore = {
       commit({ type: 'editGroup', groupToEdit, boardId });
     },
     async changeBoardBgc({ commit }, { bgc, boardId }) {
-      // const board =
-      // boardService.
+      const board = JSON.parse(
+        JSON.stringify(await boardService.getBoardById(boardId))
+      );
+      console.log(board);
+      delete board.style.backgroundColor;
+      delete board.style.photo;
+      board.style.backgroundColor = bgc;
+      await boardService.updateBoard(board);
+      commit({ type: 'updateBoard', board });
     },
   },
 };

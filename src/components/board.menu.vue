@@ -4,6 +4,9 @@
             <div class="title">
                 <h3>{{ currNav || 'Menu' }}</h3>
             </div>
+            <div class="close-menu">
+                <span @click="closeMenu" class="close-icon"></span>
+            </div>
             <hr class="menu-header-divider" />
         </header>
         <div class="main-menu">
@@ -50,6 +53,9 @@ export default {
         },
         changeBoardBgc(bgc) {
             this.$emit('change-board-bgc', bgc)
+        },
+        closeMenu() {
+            this.$emit('close-menu')
         }
     },
     computed: {},

@@ -2,12 +2,14 @@ import { utilService } from './util.service.js';
 import { storageService } from './async-storage-service.js';
 export const boardService = {
   query,
+  getBoardById,
   addBoard,
   updateBoard,
   getBoard,
   removeBoard,
   saveGroup,
   removeGroup,
+  getGroupIdByTaskId,
   saveTask,
   getTask,
   removeTask,
@@ -25,6 +27,17 @@ async function query() {
       boards.push(board);
     }
     return boards;
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getBoardById(boardId) {
+  try {
+    const boards = await query();
+    const board = boards.find((b) => b._id === boardId);
+    console.log(board);
+    return board;
   } catch (err) {
     throw err;
   }
@@ -109,7 +122,7 @@ async function saveTask(task, boardId) {
   try {
     const board = await getBoard(boardId);
     if (task._id) {
-      const groupId = await _getGroupIdByTaskId(task._id, boardId);
+      const groupId = await getGroupIdByTaskId(task._id, boardId);
       const group = board.groups.find((g) => g._id === groupId);
       const idx = group.tasks.findIndex((t) => t._id === task._id);
       group.tasks[idx] = task;
@@ -158,7 +171,7 @@ async function removeTask(taskId, boardId) {
   }
 }
 
-async function _getGroupIdByTaskId(taskId, boardId) {
+async function getGroupIdByTaskId(taskId, boardId) {
   try {
     const board = await getBoard(boardId);
     const group = board.groups.find((g) => {

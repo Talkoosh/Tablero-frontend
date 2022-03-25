@@ -1,0 +1,120 @@
+.cover-menu {
+    @include action-menu;
+    top: 44px;
+    .cover-menu-header {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+    }
+
+    .cover-menu-exit {
+        @include icon;
+        position: absolute;
+        right: -5px;
+        color: $clr5;
+        cursor: pointer;
+        &::before {
+            content: "\e91c";
+        }
+        &:hover {
+            color: black;
+        }
+    }
+
+    .main {
+        .cover-size-container {
+            margin-bottom: 15px;
+            .imgs-container {
+                display: flex;
+                gap: 8px;
+                .half-cover,
+                .full-cover {
+                    width: 134px;
+                    height: 65px;
+                    border-radius: 3px;
+                    border: 1px solid rgba(9, 30, 66, 0.08);
+                    .head {
+                        margin: 0;
+                        min-height: unset;
+                        height: 28px;
+                        background-color: yellow;
+                    }
+                    .cover-content {
+                        padding: 6px 4px 4px 6px;
+                        .row-lg {
+                            background: #6b778c;
+                            height: 4px;
+                            border-radius: 2px;
+                            width: 122px;
+                        }
+                        .row-sml {
+                            width: 98px;
+                            margin-top: 4px;
+                            background: #6b778c;
+                            height: 4px;
+                            border-radius: 2px;
+                        }
+                        .cover-show-bottom {
+                            display: flex;
+                            position: relative;
+                            margin-top: 5px;
+                            .cover-show-btns {
+                                display: flex;
+                                .cover-show-btn {
+                                    width: 16px;
+                                    height: 6px;
+                                    background: #6b778c;
+                                    border-radius: 2px;
+                                    margin-right: 2px;
+                                }
+                            }
+                            .cover-show-member {
+                                position: absolute;
+                                width: 10px;
+                                height: 10px;
+                                right: 4px;
+                                bottom: -1px;
+                                background: #6b778c;
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+                }
+                .full-cover {
+                    position: relative;
+                    .cover-content {
+                        position: absolute;
+                        bottom: 4px;
+                    }
+                }
+            }
+            button {
+                @include button-default;
+                width: 100%;
+                text-align: center;
+                font-size: 14px;
+            }
+        }
+
+        .colors-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            column-gap: 5px;
+            row-gap: 8px;
+            overflow-x: hidden;
+            margin-bottom: 15px;
+            .color {
+                cursor: pointer;
+                display: block;
+                border-radius: 3px;
+                width: 50px;
+                height: 32px;
+                &:hover {
+                    filter: saturate(85%) brightness(85%);
+                }
+            }
+        }
+    }
+}
