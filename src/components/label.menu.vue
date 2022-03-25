@@ -1,5 +1,4 @@
 <template>
-    <section>
         <section class="label-menu">
             <div class="label-menu-header">
                 <h3 class="menu-title">Labels</h3>
@@ -23,7 +22,6 @@
                 <button class="create-btn">Create a new label</button>
             </div>
         </section>
-    </section>
 </template>
 
 <script>
