@@ -243,11 +243,7 @@
         position: fixed;
         width: 304px;
         top: 48px;
-        left: 244px;
-
-        .drop-padding {
-            padding: 0 12px;
-        }
+        left: 244px;      
     }
 
     .starred-drop-content {
@@ -256,9 +252,6 @@
         top: 48px;
         left: 331px;
 
-        .drop-padding {
-            padding: 0 12px;
-        }
     }
 
     .create-board-btn {
@@ -385,15 +378,24 @@
 .board-details {
     display: flex;
     font-weight: 700;
-    height: 32px;
+    // height: 32px;
     padding: 0;
     position: relative;
     text-decoration: none;
     -webkit-user-select: none;
     user-select: none;
+
+    &:hover{
+        background-color: #EBECF0;
+        border-radius: 3px;
+    }
+
+    .board-text{
+        padding: 0 12px;
+    }
 }
 
-.board-img-container {
+.board-cover-container {
     display: inline-block;
     flex: 0 0 auto;
     background-size: cover;
@@ -402,6 +404,7 @@
     width: 40px;
     position: relative;
     opacity: 1;
+    margin-top: 5px;
 }
 .dropdown {
     color: #172b4d;
@@ -416,17 +419,6 @@
     box-sizing: border-box;
     outline: 0;
     overflow: hidden;
-}
-
-.board-details {
-    display: flex;
-    font-weight: 700;
-    height: 32px;
-    padding: 0;
-    position: relative;
-    text-decoration: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 .boards-list {

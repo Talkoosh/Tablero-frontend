@@ -21,15 +21,13 @@
               <button class="close-header" @click="toggleRecentDrop">X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
-              <div class="board-details">
-                <router-link class="board-link" :to="'/board/' + board._id">
-                  <div class="board-cover-container"></div>
+              <router-link class="board-details" :to="'/board/' + board._id">
+                  <div v-if="board" class="board-cover-container" :style="'background-color:'+board.style.backgroundColor"></div>
                   <div class="board-text">
                     <div>{{ board.title }}</div>
                     <div>{{ board.createdBy.fullname }} workspace</div>
                   </div>
                 </router-link>
-              </div>
             </div>
           </div>
         </div>
@@ -52,9 +50,8 @@
               <button @click="toggleStarredDrop" class="close-header">X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
-              <div class="board-details">
-                <div class="board-img-container">
-                  <!-- <img src="" alt="" /> -->
+              <router-link class="board-details" :to="'/board/' + board._id">
+                <div class="board-cover-container" :style="'background-color:'+board.style.backgroundColor">
                 </div>
                 <div class="borad-text">
                   <div>{{ board.title }}</div>
@@ -63,7 +60,7 @@
                 <div class="star-container">
                   <span>🎁</span>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -169,6 +166,8 @@ export default {
     // },
   },
   computed: {
+
+
     boards() {
       return this.$store.getters.boards;
     },

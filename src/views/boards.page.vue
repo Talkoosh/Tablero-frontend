@@ -1,6 +1,7 @@
 <template>
   <section class="boards-page">
-    <div class="boards-page-nav"></div>
+    <!-- <div class="boards-page-nav"></div> -->
+    <hompage-nav/>
 
     <div class="all-boards">
       <div v-if="boards.length" class="starred-boards-container">
@@ -66,10 +67,14 @@
 
 <script>
 import boardPreview from "../components/board.preview.vue";
+import hompageNav from "../components/homepage.nav.vue"
 
 export default {
   // props: [''],
-  components: { boardPreview },
+  components: {
+       boardPreview,
+       hompageNav 
+       },
   created() {
     this.$store.dispatch("loadBoards");
   },
