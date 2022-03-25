@@ -11,7 +11,17 @@
         <div class="starred-boards-list-container">
           <ul class="starred-boards-list">
             <li class="board-card" v-for="board in boards" :key="board._id">
-              <div class="board-card-details"></div>
+              <router-link class="board-link" :to="'/board/' + board._id">
+                <span class="link-block"></span>
+                <div class="board-card-details">
+                  <div class="card-header-name">{{ board.title }}</div>
+                  <div class="card-star">
+                    <span class="card-star-container">
+                      <span class="star"></span>
+                    </span>
+                  </div>
+                </div>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -26,24 +36,22 @@
           <ul class="your-boards-list">
             <li class="board-card" v-for="board in boards" :key="board._id">
               <router-link class="board-link" :to="'/board/' + board._id">
-              <span class="link-block"></span>
+                <span class="link-block"></span>
                 <div class="board-card-details">
-                    <div class="card-header-name">{{board.title}}</div>
-                    <div class="card-star">
-                        <span class="card-star-container">
-                            <span class="star"></span>
-                        </span>
-                    </div>
+                  <div class="card-header-name">{{ board.title }}</div>
+                  <div class="card-star">
+                    <span class="card-star-container">
+                      <span class="star"></span>
+                    </span>
+                  </div>
                 </div>
               </router-link>
-
-              <div></div>
             </li>
             <li class="create-new-board-card">
               <div class="new-board-card">
-                  <p>
-                      <span>Create new board</span>
-                  </p>
+                <p>
+                  <span>Create new board</span>
+                </p>
               </div>
             </li>
           </ul>
@@ -51,9 +59,8 @@
       </div>
     </div>
 
-    <router-link v-for="board in boards" :to="'/board/' + board._id"
-      >BOARD</router-link
-    >
+    <!-- <router-link v-for="board in boards" :to="'/board/' + board._id"
+      >BOARD</router-link > -->
   </section>
 </template>
 
