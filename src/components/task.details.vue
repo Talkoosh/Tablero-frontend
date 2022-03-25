@@ -18,7 +18,17 @@
                 <div class="head">
                     <div class="text">
                         <span class="icon"></span>
-                        <h1>{{ task.title }}</h1>
+                        <input
+                            @focus="isEditingTitle = true"
+                            @blur="closeEditingTitle"
+                            :style="{
+                                backgrounColor: isEditingTitle ? '#fff' : '',
+                                boxShadow: isEditingTitle ? 'inset 0 0 0 2px #0079bf' : ''
+                            }"
+                            class="title-txt"
+                            v-model="task.title"
+                            type="text"
+                        >
                         <p>in list ...</p>
                     </div>
                     <span
@@ -50,12 +60,18 @@
                             <div class="text">
                                 <span class="icon desc-icon"></span>
                                 <h2>Description</h2>
+                                <div
+                                    class="placeholder-desc"
+                                    @click.stop="isEditingDesc = true"
+                                    v-if="!task.description && !isEditingDesc"
+                                >Add a more detailed description...</div>
                                 <pre
                                     v-if="!isEditingDesc"
                                     @click.stop="isEditingDesc = !isEditingDesc"
                                 >{{ task.description }}</pre>
                                 <div v-else class="desc-edit">
                                     <textarea
+                                        autofocus
                                         placeholder="Add a more detailed description..."
                                         class="desc-edit-txt"
                                         v-model="task.description"
@@ -64,13 +80,18 @@
                                         <button
                                             @click.stop="isEditingDesc = false; setDescTxt()"
                                         >Save</button>
-                                        <button
+                                        <span
+                                            class="desc-close-icon"
                                             @click.stop="isEditingDesc = false; task.description = currDescTxt"
-                                        >X</button>
+                                        ></span>
                                     </div>
                                 </div>
                             </div>
-                            <button v-if="!isEditingDesc" @click.stop="isEditingDesc = true">Edit</button>
+                            <button
+                                class="edit-btn"
+                                v-if="!isEditingDesc && task.description"
+                                @click.stop="isEditingDesc = true"
+                            >Edit</button>
                         </div>
                         <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
                     </div>
@@ -118,8 +139,9 @@ export default {
     data() {
         return {
             isEditingDesc: false,
+            isEditingTitle: false,
             currDescTxt: '',
-            currAction: ''
+            currAction: '',
         }
     },
     methods: {
@@ -147,6 +169,11 @@ export default {
         closeAction(ev) {
             ev.stopPropagation();
             this.currAction = null;
+        },
+        closeEditingTitle() {
+            this.isEditingTitle = false;
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
         onSetLabel(labelIds) {
             this.task.labelIds = labelIds;
