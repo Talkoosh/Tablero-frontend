@@ -1,38 +1,45 @@
 <template>
   <section class="main-header">
-    <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
+    <router-link class="main-logo" :to="'/board/'"> Tablero</router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="recent-drop">
-          <button class="drop-btn recent-btn" @click="toggleRecentDrop">
+          <button
+            class="drop-btn recent-btn"
+            @click="toggleRecentDrop"
+            :class="toggleRecentDropBGC"
+          >
             Recent
           </button>
           <div
             class="recent-drop-content dropdown"
             v-if="isRecentDropOpen"
             v-clickoutside="toggleRecentDrop"
-            
           >
             <header class="drop-header">
-                <div class="header-text">Recent boards</div>
-                <button class="close-header" @click="toggleRecentDrop">X</button>
+              <div class="header-text">Recent boards</div>
+              <button class="close-header" @click="toggleRecentDrop">X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
-                <div class="board-img-container">
-                  <!-- <img src="" alt="" /> -->
-                </div>
-                <div class="board-text">
-                  <div>{{ board.title }}</div>
-                  <div>{{ board.createdBy.fullname }} workspace</div>
-                </div>
+                <router-link class="board-link" :to="'/board/' + board._id">
+                  <div class="board-cover-container"></div>
+                  <div class="board-text">
+                    <div>{{ board.title }}</div>
+                    <div>{{ board.createdBy.fullname }} workspace</div>
+                  </div>
+                </router-link>
               </div>
             </div>
           </div>
         </div>
 
         <div class="starred-drop">
-          <button class="drop-btn starred-btn" @click="toggleStarredDrop">
+          <button
+            class="drop-btn starred-btn"
+            @click="toggleStarredDrop"
+            :class="toggleStarredDropBGC"
+          >
             Starred
           </button>
           <div
@@ -41,8 +48,8 @@
             v-clickoutside="toggleStarredDrop"
           >
             <header class="drop-header">
-                <div class="header-text">Starred boards</div>
-                <button @click="toggleStarredDrop" class="close-header">X</button>
+              <div class="header-text">Starred boards</div>
+              <button @click="toggleStarredDrop" class="close-header">X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -61,10 +68,10 @@
           </div>
         </div>
       </div>
-      
-      <div class="create-board">
+
+      <!-- <div class="create-board">
         <div class="create-board-btn-container">
-        <button class="create-board-btn drop-btn" @click="toggleCreateBoard">
+        <button class="create-board-btn drop-btn" @click="toggleCreateBoard" :class="toggleCreateBtnBGC">
           Create
         </button>
         </div>
@@ -114,7 +121,7 @@
 
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="seperator"></div>
     </div>
     <div class="right-navbar">
@@ -134,19 +141,20 @@
 </template>
 
 <script>
-// import '' from ''
+import createBoardDrop from "./create.board.drop.vue";
 export default {
   name: "",
-  components: {},
+  components: {
+    createBoardDrop,
+  },
   created() {},
   data() {
     return {
-      boardToAdd : {title:'', style:{}},
+      // boardToAdd : {title:'', style:{}},
       isRecentDropOpen: false,
       isStarredDropOpen: false,
-      isCreateBoardOpen: false,
-      isTypingBoardName : false,
-      
+      // isCreateBoardOpen: false,
+      // isTypingBoardName : false,
     };
   },
   methods: {
@@ -156,18 +164,30 @@ export default {
     toggleStarredDrop() {
       this.isStarredDropOpen = !this.isStarredDropOpen;
     },
-    toggleCreateBoard(){
-      this.isCreateBoardOpen = !this.isCreateBoardOpen;
-    },
+    // toggleCreateBoard(){
+    //   this.isCreateBoardOpen = !this.isCreateBoardOpen;
+    // },
   },
   computed: {
     boards() {
       return this.$store.getters.boards;
     },
-    submitStatus(){
-      return this.boardToAdd.title ? "submit-possible" : "submit-unpossible"
+
+    toggleRecentDropBGC() {
+      return this.isRecentDropOpen ? "open-drop" : "";
     },
-   
+
+    toggleStarredDropBGC() {
+      return this.isStarredDropOpen ? "open-drop" : "";
+    },
+
+    //   toggleCreateBtnBGC(){
+    //   return this.isCreateBoardOpen ? 'open-drop' : '';
+    // },
+
+    // submitStatus(){
+    //   return this.boardToAdd.title ? "submit-possible" : "submit-unpossible"
+    // },
   },
 };
 </script>

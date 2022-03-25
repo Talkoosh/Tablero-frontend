@@ -43,22 +43,81 @@
           display: flex;
           flex-wrap: wrap;
           justify-content: flex-start;
-          background-color: #519839;
           list-style: none;
           border-radius: 3px;
 
           .board-card {
-            margin: 0 2% 2% 0;
+            margin: 0 8px 8px 0;
             padding: 0;
             transform: translate(0);
-            width: 23.5%;
+            margin-right: 2%;
+            width: 166px;
+            height: 96px;
+            position: relative;
 
-            .board-card-details {
-              display: flex;
-              flex-direction: column;
-              height: 80px;
-              justify-content: space-between;
+            .board-link {
+              background-position: 50%;
+              background-size: cover;
+              color: #fff;
+              line-height: 20px;
+              padding: 8px;
               position: relative;
+              text-decoration: none;
+              border-radius: 3px;
+              display: block;
+              background-color: #519839;
+
+              .link-block {
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                display: block;
+              }
+
+              .board-card-details {
+                display: flex;
+                flex-direction: column;
+                height: 80px;
+                justify-content: space-between;
+                position: relative;
+
+                .card-header-name {
+                  font-weight: 700;
+                  font-size: 16px;
+                }
+
+                .card-star {
+                  display: flex;
+                  justify-content: flex-end;
+
+                  .card-star-container {
+                    position: relative;
+                    right: -4px;
+
+                    .star {
+                      @include icon;
+                      color: #f2d600;
+                      margin-right: 6px;
+                      opacity: 1;
+                      width: 18px;
+
+                      &::before {
+                        content: "\e967";
+                      }
+
+                      &:hover{
+                        font-size: 18px;
+                        &::before {
+                          content: "\e966";
+                        }
+
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

@@ -2,6 +2,7 @@
   <section class="app-container">
     <main-header />
     <router-view />
+    <component :is="currDropDown" />
   </section>
 </template>
 
@@ -17,7 +18,9 @@ export default {
   created() {
   },
   data() {
-    return {}
+    return {
+      currDropDown: null
+    }
   },
   methods: {},
   computed: {},
