@@ -96,7 +96,8 @@ export const boardStore = {
       commit({ type: 'editGroup', groupToEdit, boardId });
     },
     async changeBoardBgc({ commit }, { bgc, boardId }) {
-      console.log('store', bgc, boardId);
+      // const board =
+      // boardService.
     },
   },
 };

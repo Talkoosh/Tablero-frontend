@@ -217,6 +217,11 @@ async function _makeBoard() {
           color: '#F2D600',
         },
         {
+          _id: 'l106',
+          title: 'GHI',
+          color: '#FF9F1A',
+        },
+        {
           _id: 'l103',
           title: 'IT',
           color: '#EB5A46',
@@ -230,11 +235,6 @@ async function _makeBoard() {
           _id: 'l105',
           title: 'DEF',
           color: '#0079BF',
-        },
-        {
-          _id: 'l106',
-          title: 'GHI',
-          color: '#00C2E0',
         },
       ],
       members: [

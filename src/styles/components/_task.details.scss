@@ -66,7 +66,7 @@
       justify-content: center;
       border-radius: 50%;
     }
-    .task-close-btn{
+    .task-close-btn {
       &::before {
         content: "\e91c";
       }
@@ -104,12 +104,30 @@
       font-weight: 600;
       margin-bottom: 4px;
     }
+
+    .task-details-labels-container{
+      display: flex;
+    }
+
     .task-details-label {
       margin-inline-end: 4px;
       display: inline-block;
       height: 32px;
       min-width: 40px;
+      padding: 0 12px;
+      text-align: center;
       border-radius: 3px;
+      &:hover{
+        cursor: pointer;
+      }
+      .task-details-label-title {
+        color: white;
+        text-align: center;
+        margin: auto 0;
+        line-height: 32px;
+        font-size: 12px;
+        font-weight: 600;
+      }
     }
     .add-btn {
       @include button-default;
@@ -119,7 +137,7 @@
       position: relative;
       .add-icon {
         @include icon;
-        position:absolute;
+        position: absolute;
         left: 0;
         color: $task-icon-clr;
         &::before {
