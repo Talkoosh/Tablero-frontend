@@ -15,7 +15,6 @@ export default {
     mainHeader
   },
   created() {
-    // this.$store.
   },
   data() {
     return {}

@@ -186,6 +186,7 @@ function _createTask(title) {
     description: '',
     _id: utilService.makeId(),
     createdAt: Date.now(),
+    labelIds: []
   };
 }
 

@@ -26,6 +26,13 @@ textarea {
   outline: none;
 }
 
+input {
+  height: 32px;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 32px;
+}
+
 #app {
   height: 100%;
   .app-container {

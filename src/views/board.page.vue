@@ -5,6 +5,7 @@
         </header>
         <div class="groups-container">
             <board-group
+                @group-title-changed="updateGroup"
                 @task-added="addTask"
                 v-for="group in board.groups"
                 :key="group._id"
@@ -41,7 +42,7 @@ export default {
     // props: [''],
     components: {
         boardHeader,
-        boardGroup
+        boardGroup,
     },
     async created() {
         this.$store.dispatch('loadBoards')
@@ -74,7 +75,9 @@ export default {
         },
         async addTask(task) {
             await this.$store.dispatch({ type: 'addTask', task, boardId: this.board._id })
-            return 'zibi'
+        },
+        updateGroup(groupToEdit) {
+            this.$store.dispatch({ type: 'editGroup', groupToEdit, boardId: this.board._id })
         }
     },
     computed: {

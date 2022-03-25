@@ -7,10 +7,23 @@
                     <h1>{{ task.title }}</h1>
                     <p>in list ...</p>
                 </div>
-                <span class="icon" @click="closeTaskDetails.stop"></span>
+                <span class="icon task-close-btn" @click="closeTaskDetails.stop"></span>
             </div>
             <div class="details-main">
                 <div class="content">
+                    <div v-if="task.labelIds?.length" class="task-labels module">
+                        <h4>Labels</h4>
+                        <div>
+                            <span v-for="label in labels" :key="label._id">
+                                <span
+                                    v-if="task.labelIds.includes(label._id)"
+                                    class="task-details-label"
+                                    :style="{ backgroundColor: label.color}"
+                                ></span>
+                            </span>
+                            <span class="task-details-label add-btn"><span class="add-icon"></span></span>
+                        </div>
+                    </div>
                     <div class="description module">
                         <div class="text">
                             <span class="icon desc-icon"></span>
@@ -36,14 +49,21 @@
                 </div>
                 <div class="actions-menu">
                     <h3>Add to card</h3>
-                    <component v-clickoutside="closeAction" :labels="labels" :is="currAction"></component>
+                    <component
+                        :task="task"
+                        @close-action="closeAction"
+                        @label-set="onSetLabel"
+                        v-clickoutside="closeAction"
+                        :labels="labels"
+                        :is="currAction"
+                    ></component>
                     <button>
                         <span class="icon members-icon"></span>
                         <span>Members</span>
                     </button>
-                    <button>
+                    <button @click.stop="setCurrAction('labelMenu')">
                         <span class="icon labels-icon"></span>
-                        <span @click.stop="onSetLabels">Labels</span>
+                        <span>Labels</span>
                     </button>
                     <button>
                         <span class="icon cover-icon"></span>
@@ -86,22 +106,28 @@ export default {
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
         closeTaskDetails() {
+            if (this.currAction) return;
             const boardId = this.$route.params.boardId;
             this.$router.push('/board/' + boardId)
         },
-        onSetLabels(){
-            this.currAction = 'labelMenu'
+        setCurrAction(action) {
+            this.currAction = action;
         },
-        closeAction(ev){
-            console.log(ev);
+        closeAction(ev) {
+            ev.stopPropagation();
             this.currAction = null;
+        },
+        onSetLabel(labelIds) {
+            this.task.labelIds = labelIds;
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         }
     },
     computed: {
         task() {
             return this.$store.getters.currTask;
         },
-        labels(){
+        labels() {
             return this.$store.getters.boardLabels;
         }
     },

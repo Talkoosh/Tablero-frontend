@@ -65,6 +65,8 @@
       display: flex;
       justify-content: center;
       border-radius: 50%;
+    }
+    .task-close-btn{
       &::before {
         content: "\e91c";
       }
@@ -89,6 +91,40 @@
       p {
         color: $clr5;
         font-weight: 400;
+      }
+    }
+  }
+
+  .task-labels {
+    width: 100%;
+    margin-top: -15px;
+    h4 {
+      color: $clr5;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .task-details-label {
+      margin-inline-end: 4px;
+      display: inline-block;
+      height: 32px;
+      min-width: 40px;
+      border-radius: 3px;
+    }
+    .add-btn {
+      @include button-default;
+      background-color: $task-btn-clr;
+      min-width: unset;
+      width: 32px;
+      position: relative;
+      .add-icon {
+        @include icon;
+        position:absolute;
+        left: 0;
+        color: $task-icon-clr;
+        &::before {
+          content: "\e901";
+        }
       }
     }
   }

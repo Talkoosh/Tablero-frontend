@@ -58,7 +58,7 @@ export default {
   methods: {},
   computed: {
     boards() {
-      return this.$store.getters.boards;
+      return this.$store.getters.boards || [];
     },
   },
   unmounted() {},
