@@ -1,7 +1,7 @@
 <template>
-    <div v-if="board" class="main-board">
+    <div v-if="board" class="main-board" :style="boardBg">
         <header>
-            <board-header :board="board" />
+            <board-header @change-board-bgc="changeBoardBgc" :board="board" />
         </header>
         <div class="groups-container">
             <board-group
@@ -78,6 +78,9 @@ export default {
         },
         updateGroup(groupToEdit) {
             this.$store.dispatch({ type: 'editGroup', groupToEdit, boardId: this.board._id })
+        },
+        changeBoardBgc(bgc) {
+            this.$store.dispatch({ type: 'changeBoardBgc', bgc, boardId: this.board._id })
         }
     },
     computed: {
@@ -87,6 +90,11 @@ export default {
         addGroupCondition() {
             return this.isAddGroup ? 'add-group-active' : ''
         },
+        boardBg() {
+            if (!this.board.style.backgroundColor && !this.board.style.photo) return
+            if (this.board.style.backgroundColor) return `background-color: ${this.board.style.backgroundColor}`
+            else return `background: url('${this.board.style.photo}')`
+        }
     },
     unmounted() { },
 }

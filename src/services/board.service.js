@@ -186,7 +186,7 @@ function _createTask(title) {
     description: '',
     _id: utilService.makeId(),
     createdAt: Date.now(),
-    labelIds: []
+    labelIds: [],
   };
 }
 
@@ -201,7 +201,10 @@ async function _makeBoard() {
         imgUrl:
           'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
       },
-      style: {},
+      style: {
+        backgroundColor: '#d19034',
+        // photo:'https://unsplash.com/@priscilladupreez?utm_source=trello&utm_medium=referral&utm_campaign=api-credit',
+      },
       labels: [
         {
           _id: 'l101',
