@@ -8,18 +8,68 @@
   top: 0;
   width: 100%;
   z-index: 20;
+  display: flex;
+  justify-content: center;
+}
+
+.task-total-container {
+  width: 768px;
+}
+
+.task-details-cover {
+  height: 116px;
+  width: 100%;
+  position: relative;
+  .task-close-btn{
+    @include icon;
+    background-color: #00000014;
+    font-size: 24px;
+    position: absolute;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    top: 3px;
+    right: 3px;
+    cursor: pointer;
+    &::before{
+      content: "\e91c";
+    }
+    &:hover{
+      background-color: #00000029;
+    }
+  }
+  .btn-container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    button {
+      @include button-default;
+      background-color: #00000014;
+      right: 0;
+      padding-inline-start: 33px;
+      margin-top: 8px;
+      text-align: start;
+      position: relative;
+      .icon {
+        @include icon;
+        position: absolute;
+        left: 0;
+        top: 0;
+        &::before {
+          content: "\e914";
+        }
+      }
+      &:hover {
+        background-color: #00000029;
+      }
+    }
+  }
 }
 
 .task-details-main {
-  top: 50px;
-  left: 50px;
-  width: 768px;
   min-height: 600px;
-  border-radius: 3px;
   overflow: auto;
   padding: 25px 17px 0 55px;
-  margin: auto;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   background-color: $task-bcg;
@@ -105,7 +155,7 @@
       margin-bottom: 4px;
     }
 
-    .task-details-labels-container{
+    .task-details-labels-container {
       display: flex;
     }
 
@@ -117,7 +167,7 @@
       padding: 0 12px;
       text-align: center;
       border-radius: 3px;
-      &:hover{
+      &:hover {
         cursor: pointer;
       }
       .task-details-label-title {

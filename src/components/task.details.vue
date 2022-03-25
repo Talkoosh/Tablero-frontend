@@ -1,85 +1,110 @@
 <template >
     <div class="task-details-overlay">
-        <section v-clickoutside="closeTaskDetails" v-if="task" class="task-details-main">
-            <div class="head">
-                <div class="text">
-                    <span class="icon"></span>
-                    <h1>{{ task.title }}</h1>
-                    <p>in list ...</p>
-                </div>
-                <span class="icon task-close-btn" @click="closeTaskDetails.stop"></span>
-            </div>
-            <div class="details-main">
-                <div class="content">
-                    <div v-if="task.labelIds?.length" class="task-labels module">
-                        <h4>Labels</h4>
-                        <div class="task-details-labels-container">
-                            <span v-for="label in labels" :key="label._id">
-                                <span
-                                    v-if="task.labelIds.includes(label._id)"
-                                    class="task-details-label"
-                                    :style="{ backgroundColor: label.color }"
-                                >
-                                    <span class="task-details-label-title">{{label.title}}</span>
-                                </span>
-                            </span>
-                            <span class="task-details-label add-btn">
-                                <span class="add-icon"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="description module">
-                        <div class="text">
-                            <span class="icon desc-icon"></span>
-                            <h2>Description</h2>
-                            <pre v-if="!isEditingDesc" @click.stop="isEditingDesc = !isEditingDesc">{{ task.description }}</pre>
-                            <div v-else class="desc-edit">
-                                <textarea
-                                    placeholder="Add a more detailed description..."
-                                    class="desc-edit-txt"
-                                    v-model="task.description"
-                                ></textarea>
-                                <div class="edit-btns">
-                                    <button @click.stop="isEditingDesc = false; setDescTxt()">Save</button>
-                                    <button
-                                        @click.stop="isEditingDesc = false; task.description = currDescTxt"
-                                    >X</button>
-                                </div>
-                            </div>
-                        </div>
-                        <button v-if="!isEditingDesc" @click.stop="isEditingDesc = true">Edit</button>
-                    </div>
-                    <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
-                </div>
-                <div class="actions-menu">
-                    <h3>Add to card</h3>
-                    <component
-                        :task="task"
-                        @close-action="closeAction"
-                        @label-set="onSetLabel"
-                        @color-set="onSetColor"
-                        v-clickoutside="closeAction"
-                        :labels="labels"
-                        :is="currAction"
-                    ></component>
-                    <button>
-                        <span class="icon members-icon"></span>
-                        <span>Members</span>
-                    </button>
-                    <button @click.stop="setCurrAction('labelMenu')">
-                        <span class="icon labels-icon"></span>
-                        <span>Labels</span>
-                    </button>
+        <section v-clickoutside="closeTaskDetails" class="task-total-container">
+            <div
+                class="task-details-cover"
+                v-if="task?.style.color"
+                :style="{ backgroundColor: task.style.color }"
+            >
+                <span class="icon task-close-btn" @click.stop="closeTaskDetails"></span>
+                <div class="btn-container">
                     <button @click.stop="setCurrAction('coverMenu')">
                         <span class="icon cover-icon"></span>
                         <span>Cover</span>
                     </button>
-                    <button>
-                        <span class="icon checklist-icon"></span>
-                        <span>Checklist</span>
-                    </button>
                 </div>
             </div>
+            <section v-if="task" class="task-details-main">
+                <div class="head">
+                    <div class="text">
+                        <span class="icon"></span>
+                        <h1>{{ task.title }}</h1>
+                        <p>in list ...</p>
+                    </div>
+                    <span
+                        v-if="!task.style.color"
+                        class="icon task-close-btn"
+                        @click.stop="closeTaskDetails"
+                    ></span>
+                </div>
+                <div class="details-main">
+                    <div class="content">
+                        <div v-if="task.labelIds?.length" class="task-labels module">
+                            <h4>Labels</h4>
+                            <div class="task-details-labels-container">
+                                <span v-for="label in labels" :key="label._id">
+                                    <span
+                                        v-if="task.labelIds.includes(label._id)"
+                                        class="task-details-label"
+                                        :style="{ backgroundColor: label.color }"
+                                    >
+                                        <span class="task-details-label-title">{{ label.title }}</span>
+                                    </span>
+                                </span>
+                                <span class="task-details-label add-btn">
+                                    <span class="add-icon"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="description module">
+                            <div class="text">
+                                <span class="icon desc-icon"></span>
+                                <h2>Description</h2>
+                                <pre
+                                    v-if="!isEditingDesc"
+                                    @click.stop="isEditingDesc = !isEditingDesc"
+                                >{{ task.description }}</pre>
+                                <div v-else class="desc-edit">
+                                    <textarea
+                                        placeholder="Add a more detailed description..."
+                                        class="desc-edit-txt"
+                                        v-model="task.description"
+                                    ></textarea>
+                                    <div class="edit-btns">
+                                        <button
+                                            @click.stop="isEditingDesc = false; setDescTxt()"
+                                        >Save</button>
+                                        <button
+                                            @click.stop="isEditingDesc = false; task.description = currDescTxt"
+                                        >X</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button v-if="!isEditingDesc" @click.stop="isEditingDesc = true">Edit</button>
+                        </div>
+                        <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
+                    </div>
+                    <div class="actions-menu">
+                        <h3>Add to card</h3>
+                        <component
+                            :task="task"
+                            @close-action="closeAction"
+                            @label-set="onSetLabel"
+                            @color-set="onSetColor"
+                            @cover-size-set="onSetCoverSize"
+                            v-clickoutside="closeAction"
+                            :labels="labels"
+                            :is="currAction"
+                        ></component>
+                        <button>
+                            <span class="icon members-icon"></span>
+                            <span>Members</span>
+                        </button>
+                        <button @click.stop="setCurrAction('labelMenu')">
+                            <span class="icon labels-icon"></span>
+                            <span>Labels</span>
+                        </button>
+                        <button v-if="!task.style.color" @click.stop="setCurrAction('coverMenu')">
+                            <span class="icon cover-icon"></span>
+                            <span>Cover</span>
+                        </button>
+                        <button>
+                            <span class="icon checklist-icon"></span>
+                            <span>Checklist</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
         </section>
     </div>
 </template>
@@ -128,10 +153,15 @@ export default {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
-        onSetColor(color){
-            this.task.style.color = color; 
+        onSetColor(color) {
+            this.task.style.color = color;
             const boardId = this.$route.params.boardId;
-            this.$store.dispatch({type: 'saveTask', task: this.task, boardId});
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
+        },
+        onSetCoverSize(size) {
+            this.task.style.isBackground = (size === 'full') ? true : false;
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         }
 
     },
