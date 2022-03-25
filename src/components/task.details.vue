@@ -57,6 +57,7 @@
                         :task="task"
                         @close-action="closeAction"
                         @label-set="onSetLabel"
+                        @color-set="onSetColor"
                         v-clickoutside="closeAction"
                         :labels="labels"
                         :is="currAction"
@@ -69,7 +70,7 @@
                         <span class="icon labels-icon"></span>
                         <span>Labels</span>
                     </button>
-                    <button>
+                    <button @click.stop="setCurrAction('coverMenu')">
                         <span class="icon cover-icon"></span>
                         <span>Cover</span>
                     </button>
@@ -86,6 +87,7 @@
 <script>
 import taskActivities from './task.activities.vue'
 import labelMenu from './label.menu.vue'
+import coverMenu from './cover.menu.vue'
 
 export default {
     data() {
@@ -125,7 +127,13 @@ export default {
             this.task.labelIds = labelIds;
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
+        },
+        onSetColor(color){
+            this.task.style.color = color; 
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({type: 'saveTask', task: this.task, boardId});
         }
+
     },
     computed: {
         task() {
@@ -137,7 +145,8 @@ export default {
     },
     components: {
         taskActivities,
-        labelMenu
+        labelMenu,
+        coverMenu
     },
     watch: {
         '$route.params.taskId': {
