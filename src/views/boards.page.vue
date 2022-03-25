@@ -12,7 +12,8 @@
         <div class="starred-boards-list-container">
           <ul class="starred-boards-list">
             <li class="board-card" v-for="board in boards" :key="board._id">
-              <router-link class="board-link" :to="'/board/' + board._id">
+              <router-link class="board-link" :to="'/board/' + board._id" 
+              :style="'background-color:'+board.style.backgroundColor">
                 <span class="link-block"></span>
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
@@ -36,7 +37,8 @@
         <div class="your-boards-list-container">
           <ul class="your-boards-list">
             <li class="board-card" v-for="board in boards" :key="board._id">
-              <router-link class="board-link" :to="'/board/' + board._id">
+              <router-link class="board-link" :to="'/board/' + board._id" 
+              :style="'background-color:'+board.style.backgroundColor">
                 <span class="link-block"></span>
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
