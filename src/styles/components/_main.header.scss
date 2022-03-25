@@ -35,26 +35,10 @@
         // height: 100%;
         position: relative;
 
-        // .workspace-btn{
-        //     width:117px;
-        // }
-
         .recent-btn,
         .starred-btn {
             width: 87px;
         }
-
-        // .workspace-drop-content{
-        //     position: fixed;
-        //     width: 304px;
-        //     will-change: top, left;
-        //     top: 48px;
-        //     left: 122px;
-
-        //     .drop-padding{
-        //         padding: 0 12px;;
-        //     }
-        // }
 
         .recent-drop-content {
             position: fixed;
@@ -63,8 +47,16 @@
             top: 48px;
             left: 107px;
 
-            .drop-padding {
-                padding: 0 12px;
+            .drop-header {
+                @include dropdwonn-header;
+
+                .header-text {
+                    @include dropdown-header-text;
+                }
+
+                .close-header {
+                    @include close-dropdwon-btn;
+                }
             }
         }
 
@@ -75,8 +67,17 @@
             top: 48px;
             left: 195px;
 
-            .drop-padding {
-                padding: 0 12px;
+            .drop-header {
+                @include dropdwonn-header;
+
+                .header-text {
+                    @include dropdown-header-text;
+
+                }
+
+                .close-header {
+                    @include close-dropdwon-btn;
+                }
             }
         }
         .create-board {
@@ -112,42 +113,14 @@
                 overflow: hidden;
 
                 .modal-header {
-                    margin-bottom: 8px;
-                    padding: 0 12px;
-                    position: relative;
-                    text-align: center;
-                    display: grid;
-                    grid-template-columns: 1fr 12px;
+                    @include dropdwonn-header;
 
                     .modal-title {
-                        font-weight: 400;
-                        border-bottom: 1px solid rgba(9, 30, 66, 0.13);
-                        color: #5e6c84;
-                        height: 40px;
-                        display: block;
-                        line-height: 40px;
-                        margin: 0;
-                        overflow: hidden;
-                        padding: 0 32px;
-                        position: relative;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        grid-row: 1;
+                        @include dropdown-header-text;
                     }
 
                     .close-create-modal-btn {
-                        background: transparent;
-                        border: none;
-                        color: #6b778c;
-                        cursor: pointer;
-                        margin: 0;
-                        padding: 0;
-                        z-index: 2;
-                        outline: none;
-
-                        &:hover {
-                            color: black;
-                        }
+                        @include close-dropdwon-btn;
                     }
                 }
                 .modal-content {
@@ -169,6 +142,43 @@
 
                         .background-options {
                             line-height: 20px;
+
+                            .background-colors-options {
+                                display: flex;
+                                justify-content: space-between;
+                                list-style: none;
+                                padding: 14px;
+
+                                .color-card {
+                                    width: 40px;
+                                    height: 32px;
+
+                                    .color1{
+                                        @include color-choose-btn;
+                                        background-color: rgb(0, 121, 191);
+                                    }
+
+                                    .color2{
+                                        @include color-choose-btn;
+                                        background-color: rgb(210, 144, 52);
+                                    }
+
+                                    .color3{
+                                        @include color-choose-btn;
+                                        background-color: rgb(81, 152, 57);
+                                    }
+
+                                    .color4{
+                                        @include color-choose-btn;
+                                        background-color: rgb(176, 70, 50);
+                                    }
+
+                                    .color5{
+                                        @include color-choose-btn;
+                                        background-color: rgb(137, 96, 158);
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -209,7 +219,6 @@
                     }
 
                     .submit-create-btn {
-                        // background-color: rgba(9, 30, 66, 0.04);
                         box-shadow: none;
                         border: none;
                         width: 100%;
@@ -229,22 +238,9 @@
         }
     }
 
-    .workspace-drop-content {
-        position: fixed;
-        width: 304px;
-        will-change: top, left;
-        top: 48px;
-        left: 127px;
-
-        .drop-padding {
-            padding: 0 12px;
-        }
-    }
-
     .recent-drop-content {
         position: fixed;
         width: 304px;
-        will-change: top, left;
         top: 48px;
         left: 244px;
 
@@ -256,7 +252,6 @@
     .starred-drop-content {
         position: fixed;
         width: 304px;
-        will-change: top, left;
         top: 48px;
         left: 331px;
 
@@ -338,24 +333,6 @@
         }
     }
 
-    // .right-nav-btn {
-    //     border-radius: 3px;
-    //     box-shadow: none;
-    //     box-sizing: border-box;
-    //     color: rgba(255, 255, 255, 0.5);
-    //     float: left;
-    //     font-size: 14px;
-    //     height: 32px;
-    //     line-height: 19px;
-    //     margin-left: 4px;
-    //     margin-right: 4px;
-    //     outline: none;
-    //     padding-left: 30px;
-    //     padding-right: 8px;
-    //     transition: width 150ms;
-    //     width: 250px;
-    // }
-
     .right-nav-btn {
         border-radius: 3px;
         border: 0;
@@ -372,7 +349,6 @@
         white-space: nowrap;
         color: #ffffff;
         cursor: pointer;
-        //   width: 32px;
 
         span {
             display: flex;
@@ -441,34 +417,6 @@
     overflow: hidden;
 }
 
-.drop-header {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 400;
-    border-bottom: 1px solid rgba(9, 30, 66, 0.13);
-    color: #5e6c84;
-    height: 40px;
-    display: flex;
-    line-height: 40px;
-    margin: 0;
-    overflow: hidden;
-    padding: 0 32px;
-    position: relative;
-    text-overflow: ellipsis;
-
-    .close-header {
-        width: 10px;
-        cursor: pointer;
-        margin-left: 160px;
-    }
-
-    .close-header:hover {
-        color: black;
-    }
-}
-
 .board-details {
     display: flex;
     font-weight: 700;
@@ -522,19 +470,18 @@
     display: none;
 }
 
-.submit-possible{
+.submit-possible {
     cursor: pointer;
     background-color: #0079bf;
     box-shadow: none;
     color: #ffffff;
 
-    &:hover{
+    &:hover {
         background-color: #026aa7;
     }
 }
 
-.submit-unpossible{
+.submit-unpossible {
     cursor: not-allowed;
     color: #a5adba;
-
 }

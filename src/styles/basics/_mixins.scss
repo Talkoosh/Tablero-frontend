@@ -31,3 +31,62 @@
   width: 32px;
   font-size: 24px;
 }
+
+@mixin color-choose-btn{
+  background-size: cover;
+  border-radius: 3px;
+  box-shadow: none;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  min-height: 0;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  line-height: 0;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+}
+
+@mixin dropdwonn-header{
+  margin-bottom: 8px;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 12px;
+}
+
+
+@mixin dropdown-header-text {
+  font-weight: 400;
+  border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+  color: #5e6c84;
+  height: 40px;
+  display: block;
+  line-height: 40px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 32px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  grid-row: 1;
+}
+
+@mixin close-dropdwon-btn {
+  background: transparent;
+  border: none;
+  color: #6b778c;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  outline: none;
+
+  &:hover {
+      color: black;
+  }
+}

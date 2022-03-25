@@ -10,45 +10,112 @@
     height: 500px;
     margin: 40px 0 0;
     padding: 0 16px;
-  
   }
 
   .all-boards {
-
     display: flex;
-    flex-direction: row;
-  
+    flex-direction: column;
 
     .starred-boards-container {
       padding: 0 0 20px;
 
-      .starred-boards-title{
-
+      .starred-boards-title {
         display: flex;
         margin: 0 0 0 40px;
         padding: 0 0 11px;
         position: relative;
 
-        .icon {
+        .member-icon {
+          @include icon;
+          @include icon-lg;
+          transform: translateY(-8px);
           left: -40px;
           position: absolute;
           top: 0;
           &::before {
-            content: '\e946';
+            content: "\e946";
           }
         }
-
       }
 
+      .starred-boards-list-container{
+        .starred-boards-list{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          background-color: #519839;
+          list-style: none;
+          border-radius: 3px;
 
+          .board-card {
+            margin: 0 2% 2% 0;
+            padding: 0;
+            transform: translate(0);
+            width: 23.5%;
+
+            .board-card-details {
+              display: flex;
+              flex-direction: column;
+              height: 80px;
+              justify-content: space-between;
+              position: relative;
+            }
+          }
+
+
+        }
+      }
     }
-    
-    
 
-      .starred-header {
-      
+    .your-boards-container {
+      .your-boards-title {
+        display: flex;
+        margin: 0 0 0 40px;
+        padding: 0 0 11px;
+        position: relative;
+
+        .member-icon {
+          @include icon;
+          @include icon-lg;
+          transform: translateY(-8px);
+          left: -40px;
+          position: absolute;
+          top: 0;
+          &::before {
+            content: "\e946";
+          }
+        }
       }
-  
+
+      .your-boards-list-container {
+        .your-boards-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          background-color: #519839;
+          list-style: none;
+          border-radius: 3px;
+
+          .board-card {
+            margin: 0 2% 2% 0;
+            padding: 0;
+            transform: translate(0);
+            width: 23.5%;
+
+            .board-card-details {
+              display: flex;
+              flex-direction: column;
+              height: 80px;
+              justify-content: space-between;
+              position: relative;
+            }
+          }
+        }
+      }
+    }
+
+    .starred-header {
+    }
   }
 
   .starred-boards-list-container {

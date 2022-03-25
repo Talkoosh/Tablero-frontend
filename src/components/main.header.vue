@@ -9,13 +9,13 @@
           </button>
           <div
             class="recent-drop-content dropdown"
-            :class="toggleRecentDropdown"
+            v-if="isRecentDropOpen"
+            v-clickoutside="toggleRecentDrop"
+            
           >
-            <header class="drop-padding">
-              <div class="drop-header">
+            <header class="drop-header">
                 <div class="header-text">Recent boards</div>
-                <span class="close-header" @click="toggleRecentDrop">X</span>
-              </div>
+                <button class="close-header" @click="toggleRecentDrop">X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
@@ -37,20 +37,19 @@
           </button>
           <div
             class="starred-drop-content dropdown"
-            :class="toggleStarredDropdown"
+            v-if="isStarredDropOpen"
+            v-clickoutside="toggleStarredDrop"
           >
-            <header class="drop-padding">
-              <div class="drop-header">
+            <header class="drop-header">
                 <div class="header-text">Starred boards</div>
-                <span @click="toggleStarredDrop" class="close-header">X</span>
-              </div>
+                <button @click="toggleStarredDrop" class="close-header">X</button>
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <div class="board-details">
                 <div class="board-img-container">
                   <!-- <img src="" alt="" /> -->
                 </div>
-                <div class="corad-text">
+                <div class="borad-text">
                   <div>{{ board.title }}</div>
                   <div>{{ board.createdBy.fullname }} workspace</div>
                 </div>
@@ -69,7 +68,7 @@
           Create
         </button>
         </div>
-        <div class="create-board-modal" :class="toggleCreateBoardModal">
+        <div v-clickoutside="toggleCreateBoard" v-if="isCreateBoardOpen" class="create-board-modal" :class="toggleCreateBoardModal">
           <header class="modal-header">
             <div class="modal-title">Create board</div>
             <button class="close-create-modal-btn" @click="toggleCreateBoard">X</button>
@@ -84,8 +83,22 @@
                   <li></li>
                 </ul>
                 <ul class="background-colors-options">
-                  <li></li>
-                  <li></li>
+                  <li class="color-card">
+                    <button class="color1"></button>
+                  </li>
+                  <li class="color-card">
+                    <button class="color2"></button>
+                  </li>
+                  <li class="color-card">
+                    <button class="color3"></button>
+                  </li>
+                  <li class="color-card">
+                    <button class="color4"></button>
+                  </li>
+                   <li class="color-card">
+                    <button class="color5"></button>
+                  </li>
+                  
                 </ul>
               </div>
             </div>
@@ -128,7 +141,7 @@ export default {
   created() {},
   data() {
     return {
-      boardToAdd : {title:''},
+      boardToAdd : {title:'', style:{}},
       isRecentDropOpen: false,
       isStarredDropOpen: false,
       isCreateBoardOpen: false,
@@ -155,23 +168,6 @@ export default {
       return this.boardToAdd.title ? "submit-possible" : "submit-unpossible"
     },
    
-    toggleCreateBoardModal(){
-       this.isRecentDropOpen = false;
-      this.isStarredDropOpen = false;
-      return this.isCreateBoardOpen ? "open-drop" : "close-drop"
-
-    },
-    
-    toggleStarredDropdown() {
-      this.isRecentDropOpen = false;
-      this.isCreateBoardOpen = false;
-      return this.isStarredDropOpen ? "open-drop" : "close-drop";
-    },
-    toggleRecentDropdown() {
-      this.isStarredDropOpen = false;
-      this.isCreateBoardOpen = false;
-      return this.isRecentDropOpen ? "open-drop" : "close-drop";
-    },
   },
 };
 </script>
