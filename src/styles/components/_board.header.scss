@@ -6,7 +6,8 @@
     justify-content: space-between;
     height: 32px;
     a,
-    .title {
+    .title,
+    .menu-btn {
       color: white;
       @include button-default;
       margin: 0 4px 4px 0;
@@ -16,19 +17,36 @@
         max-width: fit-content;
       }
     }
-    img {
-      width: 25px;
-      height: 25px;
-      border-radius: 25em;
-      object-fit: cover;
-    }
     .board-members {
       height: 32px;
+      display: flex;
+      align-items: center;
       padding: 5px 0;
       margin: 0 12px;
       max-width: 40vw;
       > * {
         position: absolute;
+      }
+      img {
+        width: 28px;
+        height: 28px;
+        border-radius: 25em;
+        object-fit: cover;
+      }
+      button {
+        display: flex;
+        gap: 3px;
+        height: 30px;
+        align-items: center;
+        transform: translateX(10%);
+        .invite-icon {
+          @include icon;
+          padding: 0;
+          width: fit-content;
+          &::before {
+            content: '\e902';
+          }
+        }
       }
     }
     .board-header-btn {
@@ -60,6 +78,9 @@
     }
     .board-header-right {
       .board-menu {
+        button {
+          background: none;
+        }
         position: absolute;
         right: 8px;
         .menu-icon {

@@ -30,14 +30,15 @@
 
                     <a href style="right:20px">
                         <button>
-                            <span class="invite-icon">I</span>Invite
+                            <span class="invite-icon"></span>
+                            <span>Invite</span>
                         </button>
                     </a>
                 </div>
             </div>
             <div class="board-header-right">
                 <div class="board-header-btn board-menu">
-                    <button @click="openMenu">
+                    <button @click="openMenu" class="menu-btn">
                         <span class="menu-icon"></span>
                         <span>Show menu</span>
                     </button>

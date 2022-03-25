@@ -7,9 +7,18 @@
             <div class="close-menu">
                 <span @click="closeMenu" class="close-icon"></span>
             </div>
+            <div @click="currNav = 'Menu'" class="back-menu">
+                <span class="back-icon"></span>
+            </div>
             <hr class="menu-header-divider" />
         </header>
         <div class="main-menu">
+            <div v-if="currNav === 'Menu'" class="menu-home">
+                <div @click="currNav = 'Colors'" class="change-bg">
+                    <span class="bg-display" :style="bgColor"></span>
+                    <h4>Change background</h4>
+                </div>
+            </div>
             <div v-if="currNav === 'Change background'" class="change-bg">
                 <div @click="setCurrNav('Photos')" class="photos-card-container">
                     <div class="photos-card"></div>
@@ -44,7 +53,7 @@ export default {
     created() { },
     data() {
         return {
-            currNav: 'Change background'
+            currNav: 'Menu'
         }
     },
     methods: {
@@ -58,7 +67,12 @@ export default {
             this.$emit('close-menu')
         }
     },
-    computed: {},
+    computed: {
+        bgColor() {
+            if (!this.board) return
+            return `background-color: ${this.board.style.backgroundColor}`
+        }
+    },
     unmounted() { },
 }
 </script>

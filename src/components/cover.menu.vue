@@ -9,33 +9,68 @@
             <h4>Size</h4>
             <div class="cover-size-container">
                 <div class="imgs-container">
-                    <div class="half-cover">
-                        <div class="head" :style="{backgroundColor: coverColor}"></div>
+                    <div
+                        ref="halfCover"
+                        class="half-cover"
+                        @click="setCoverSize('half')"
+                        :style="{ pointerEvents: task.style.color ? 'auto' : 'none', boxShadow: !task.style.isBackground ? (isCoverActive ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : '') : '' }"
+                    >
+                        <div class="head" :style="{ backgroundColor: coverColor }"></div>
                         <div class="cover-content">
-                            <div class="row-lg" :style="{backgroundColor: task.style.color? '#6B778C' : '#cfd3db'}"></div>
-                            <div class="row-sml" :style="{backgroundColor: task.style.color? '#6B778C' : '#cfd3db'}"></div>
+                            <div
+                                class="row-lg"
+                                :style="{ backgroundColor: task.style.color ? '#6B778C' : '#cfd3db' }"
+                            ></div>
+                            <div
+                                class="row-sml"
+                                :style="{ backgroundColor: task.style.color ? '#6B778C' : '#cfd3db' }"
+                            ></div>
                             <div class="cover-show-bottom">
                                 <div class="cover-show-btns">
-                                    <div class="cover-show-btn" :style="{backgroundColor: task.style.color? '#6B778C' : '#cfd3db'}"></div>
-                                    <div class="cover-show-btn" :style="{backgroundColor: task.style.color? '#6B778C' : '#cfd3db'}"></div>
+                                    <div
+                                        class="cover-show-btn"
+                                        :style="{ backgroundColor: task.style.color ? '#6B778C' : '#cfd3db' }"
+                                    ></div>
+                                    <div
+                                        class="cover-show-btn"
+                                        :style="{ backgroundColor: task.style.color ? '#6B778C' : '#cfd3db' }"
+                                    ></div>
                                 </div>
-                                <div class="cover-show-member" :style="{backgroundColor: task.style.color? '#6B778C' : '#cfd3db'}"></div>
+                                <div
+                                    class="cover-show-member"
+                                    :style="{ backgroundColor: task.style.color ? '#6B778C' : '#cfd3db' }"
+                                ></div>
                             </div>
                         </div>
                     </div>
-                    <div class="full-cover" :style="{backgroundColor: coverColor}">
+                    <div
+                        ref="fullCover"
+                        class="full-cover"
+                        @click="setCoverSize('full')"
+                        :style="{ backgroundColor: coverColor, pointerEvents: task.style.color ? 'auto' : 'none', boxShadow: task.style.isBackground ? (isCoverActive ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : '') : '' }"
+                    >
                         <div class="cover-content">
-                            <div class="row-lg" :style="{backgroundColor: task.style.color? '#6B778C' : '#FFF'}"></div>
-                            <div class="row-sml" :style="{backgroundColor: task.style.color? '#6B778C' : '#FFF'}"></div>
+                            <div
+                                class="row-lg"
+                                :style="{ backgroundColor: task.style.color ? '#6B778C' : '#FFF' }"
+                            ></div>
+                            <div
+                                class="row-sml"
+                                :style="{ backgroundColor: task.style.color ? '#6B778C' : '#FFF' }"
+                            ></div>
                         </div>
                     </div>
                 </div>
-                <button>Remove cover</button>
+                <button v-if="task.style.color" @click="setTaskColor('')">Remove cover</button>
             </div>
             <h4>Colors</h4>
             <div class="colors-container">
                 <div v-for="color in colors" :key="color">
-                    <span class="color" @click="setTaskColor(color)" :style="{ backgroundColor: color }"></span>
+                    <span
+                        class="color"
+                        @click="setTaskColor(color)"
+                        :style="{ backgroundColor: color, boxShadow: task.style.color === color ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : '' }"
+                    ></span>
                 </div>
             </div>
         </div>
@@ -59,7 +94,7 @@ export default {
                 '#29CCE5',
                 '#6DECA9',
                 '#FF8ED4',
-                '#172B4D']
+                '#172B4D'],
         }
     },
     created() {
@@ -67,14 +102,21 @@ export default {
             this.task.style = {};
         }
     },
-    methods:{
-        setTaskColor(color){
+    methods: {
+        setTaskColor(color) {
+            this.isCoverActive = color ? true : false;
             this.$emit('color-set', color)
+        },
+        setCoverSize(size) {
+            this.$emit('cover-size-set', size)
         }
     },
     computed: {
         coverColor() {
             return this.task.style.color ? this.task.style.color : '#cfd3db'
+        },
+        isCoverActive(){
+            return this.task.style.color ? true : false;
         }
     }
 }

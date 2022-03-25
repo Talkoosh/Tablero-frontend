@@ -2,11 +2,8 @@
 @import 'basics/variables';
 @import 'basics/mixins';
 @import 'basics/typography';
-
-// BASICS
-// @import 'basics/helpers';
 @import 'basics/base';
-// @import 'basics/layout';
+@import 'basics/scrollbar';
 
 // COMPONENTS
 @import 'components/main.header';

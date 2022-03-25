@@ -31,7 +31,12 @@
             </div>
         </div>
     </div>
-    <board-menu v-if="isMenuOpen" @change-board-bgc="changeBoardBgc" @close-menu="closeMenu" />
+    <board-menu
+        @change-board-bgc="changeBoardBgc"
+        @close-menu="closeMenu"
+        :class="menuStatus"
+        :board="board"
+    />
     <router-view></router-view>
 </template>
 
@@ -46,12 +51,12 @@ export default {
     components: {
         boardHeader,
         boardGroup,
-        boardMenu
+        boardMenu,
     },
     async created() {
         this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
-        this.$store.commit({ type: 'setCurrBoardId', boardId: id })
+        await this.$store.commit({ type: 'setCurrBoardId', boardId: id })
     },
     data() {
         return {
@@ -105,6 +110,9 @@ export default {
             if (!this.board.style.backgroundColor && !this.board.style.photo) return
             if (this.board.style.backgroundColor) return `background-color: ${this.board.style.backgroundColor}`
             else return `background: url('${this.board.style.photo}')`
+        },
+        menuStatus() {
+            return this.isMenuOpen ? 'menu-open' : 'menu-close'
         }
     },
     unmounted() { },

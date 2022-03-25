@@ -287,6 +287,10 @@ async function _makeBoard() {
             {
               _id: 'c103',
               title: 'Do that',
+              style: {
+                color: '#af4632',
+                isBackground: false,
+              },
             },
             {
               _id: 'c104',
@@ -339,7 +343,10 @@ async function _makeBoard() {
                   'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
               },
               style: {
-                bgColor: '#26de81',
+                // color: '#4abf6a',
+                photo:
+                  'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                isBackground: false,
               },
             },
           ],
