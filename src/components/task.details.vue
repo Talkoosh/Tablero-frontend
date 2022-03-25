@@ -22,7 +22,7 @@
                         <p>in list ...</p>
                     </div>
                     <span
-                        v-if="!task.style.color"
+                        v-if="!task?.style.color"
                         class="icon task-close-btn"
                         @click.stop="closeTaskDetails"
                     ></span>
