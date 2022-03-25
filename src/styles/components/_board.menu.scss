@@ -27,6 +27,14 @@
       padding: 0 10px;
       width: 100%;
     }
+    .close-menu {
+      .close-icon {
+        @include icon;
+        &::before {
+          content: '\e91c';
+        }
+      }
+    }
   }
   .main-menu {
     padding: 12px 6px 12px 12px;
