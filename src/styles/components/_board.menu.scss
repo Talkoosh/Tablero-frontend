@@ -1,0 +1,100 @@
+.board-nav {
+  width: 339px;
+  height: 100vh;
+  box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
+  position: absolute;
+  background-color: #f4f5f7;
+  right: 0;
+  top: 0;
+
+  header {
+    padding: 0 6px 0 12px;
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      height: 48px;
+      h3 {
+        font-size: 16px;
+      }
+    }
+    .menu-header-divider {
+      background-color: #091e4221;
+      border: 0;
+      height: 1px;
+      //   margin: 16px 0;
+      padding: 0 10px;
+      width: 100%;
+    }
+  }
+  .main-menu {
+    padding: 12px 6px 12px 12px;
+    .change-bg {
+      display: flex;
+      text-align: center;
+      .photos-card-container {
+        width: 50%;
+        padding: 0 4px;
+
+        .photos-card {
+          @include nav-card;
+          background-image: url('@/assets/img/photos-card.jpeg');
+          background-size: cover;
+        }
+        .title {
+          margin-top: 8px;
+        }
+      }
+      .colors-card-container {
+        width: 50%;
+        padding: 0 4px;
+
+        .colors-card {
+          @include nav-card;
+          background-image: url('@/assets/img/colors-card.jpg');
+          background-size: cover;
+        }
+        .title {
+          margin-top: 8px;
+        }
+      }
+    }
+    .bg-colors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      .color-card {
+        @include nav-card;
+        flex-basis: 48%;
+      }
+      .blue-card {
+        background-color: #0079bf;
+      }
+      .orange-card {
+        background-color: #d29034;
+      }
+      .green-card {
+        background-color: #529739;
+      }
+      .red-card {
+        background-color: #af4632;
+      }
+      .purple-card {
+        background-color: #89609e;
+      }
+      .pink-card {
+        background-color: #cd5a91;
+      }
+      .lightgreen-card {
+        background-color: #4abf6a;
+      }
+      .lightblue-card {
+        background-color: #04adcb;
+      }
+      .gray-card {
+        background-color: #838c90;
+      }
+    }
+  }
+}

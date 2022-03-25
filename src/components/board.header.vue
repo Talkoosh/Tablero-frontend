@@ -44,15 +44,20 @@
                 </div>
             </div>
         </nav>
+        <board-menu @change-board-bgc="changeBoardBgc" />
     </section>
 </template>
 
 <script>
+import boardMenu from "./board.menu.vue"
 export default {
     props: {
         board: Object,
     },
-    components: {},
+    components: {
+        boardMenu
+
+    },
     created() { },
     data() {
         return {
@@ -72,6 +77,9 @@ export default {
         saveBoardTitle() {
             this.isEditTitle = !this.isEditTitle
             console.log('a')
+        },
+        changeBoardBgc(bgc) {
+            this.$emit('change-board-bgc', bgc)
         }
     },
     computed: {

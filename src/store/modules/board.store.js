@@ -22,10 +22,9 @@ export const boardStore = {
     boardLabels(state) {
       if (!state.currBoardId || !state.boards.length) return;
       const board = state.boards.find((b) => b._id === state.currBoardId);
-      if(!board.labels || !board.labels.length) return;
+      if (!board.labels || !board.labels.length) return;
       return JSON.parse(JSON.stringify(board.labels));
-    }
-
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -95,6 +94,9 @@ export const boardStore = {
     async editGroup({ commit }, { groupToEdit, boardId }) {
       boardService.saveGroup(boardId, groupToEdit);
       commit({ type: 'editGroup', groupToEdit, boardId });
+    },
+    async changeBoardBgc({ commit }, { bgc, boardId }) {
+      console.log('store', bgc, boardId);
     },
   },
 };
