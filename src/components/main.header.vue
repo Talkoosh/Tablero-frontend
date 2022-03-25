@@ -24,8 +24,8 @@
               <router-link class="board-details" :to="'/board/' + board._id">
                   <div v-if="board" class="board-cover-container" :style="'background-color:'+board.style.backgroundColor"></div>
                   <div class="board-text">
-                    <div>{{ board.title }}</div>
-                    <div>{{ board.createdBy.fullname }} workspace</div>
+                    <div class="board-title">{{ board.title }}</div>
+                    <div class="board-user">{{ board.createdBy.fullname }} workspace</div>
                   </div>
                 </router-link>
             </div>
@@ -51,14 +51,14 @@
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <router-link class="board-details" :to="'/board/' + board._id">
-                <div class="board-cover-container" :style="'background-color:'+board.style.backgroundColor">
-                </div>
-                <div class="borad-text">
-                  <div>{{ board.title }}</div>
-                  <div>{{ board.createdBy.fullname }} workspace</div>
+                <div class="board-cover-container" 
+                :style="'background-color:'+board.style.backgroundColor"></div>
+                <div class="board-text">
+                  <div class="board-title">{{ board.title }}</div>
+                  <div class="board-user">{{ board.createdBy.fullname }} workspace</div>
                 </div>
                 <div class="star-container">
-                  <span>🎁</span>
+                  <span class="star"></span>
                 </div>
               </router-link>
             </div>
