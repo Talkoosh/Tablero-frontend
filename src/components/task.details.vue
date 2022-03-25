@@ -13,15 +13,19 @@
                 <div class="content">
                     <div v-if="task.labelIds?.length" class="task-labels module">
                         <h4>Labels</h4>
-                        <div>
+                        <div class="task-details-labels-container">
                             <span v-for="label in labels" :key="label._id">
                                 <span
                                     v-if="task.labelIds.includes(label._id)"
                                     class="task-details-label"
-                                    :style="{ backgroundColor: label.color}"
-                                ></span>
+                                    :style="{ backgroundColor: label.color }"
+                                >
+                                    <span class="task-details-label-title">{{label.title}}</span>
+                                </span>
                             </span>
-                            <span class="task-details-label add-btn"><span class="add-icon"></span></span>
+                            <span class="task-details-label add-btn">
+                                <span class="add-icon"></span>
+                            </span>
                         </div>
                     </div>
                     <div class="description module">

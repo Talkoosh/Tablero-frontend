@@ -1,6 +1,5 @@
 .label-menu {
     @include action-menu;
-    left: 762px;
     top: 44px;
 
     .label-menu-header {
@@ -58,7 +57,21 @@
         cursor: pointer;
         transition: box-shadow 85ms;
         &:hover {
-            box-shadow: -6px 0;
+            box-shadow: -7px 0;
+            .label-title{
+                left: 16px;
+            }
+        }
+
+        .label-title{
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translate(0, -50%);
+            transition: left 85ms;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
         }
     }
 

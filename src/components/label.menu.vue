@@ -12,9 +12,10 @@
                 <div class="label-container" v-for="label in labels" :key="label._id">
                     <span
                         @click="toggleLabel(label._id)"
-                        :style="{ backgroundColor: label.color, color: label.color}"
+                        :style="{ backgroundColor: label.color, color: labelShadowColor(label.color)}"
                         class="label"
                     >
+                        <span class="label-title">{{label.title}}</span>
                         <span class="check-icon" v-if="labelIds.includes(label._id)"></span>
                     </span>
                     <span class="label-edit-icon"></span>
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import {utilService} from '../services/util.service.js'
 
 export default {
     props: {
@@ -57,6 +59,25 @@ export default {
     computed: {
         labelIds() {
             return this.task.labelIds
+        },
+        labelShadowColor(){
+            return shadowColor => {
+                shadowColor = shadowColor.toUpperCase();
+                switch(shadowColor){
+                    case '#61BD4F':
+                        return '#529739'
+                    case '#F2D600':
+                        return '#D9B41C'
+                    case '#FF9F1A':
+                        return '#CD8313'
+                    case '#EB5A46':
+                        return '#AF4632'
+                    case '#C377E0':
+                        return '#89609E'
+                    case '#0079BF':
+                        return '#055A8C'
+                }
+            }
         }
     },
     components: {
