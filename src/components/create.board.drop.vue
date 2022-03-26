@@ -4,34 +4,53 @@
     <div class="create-board-modal" :class="toggleCreateBoardModal">
       <header class="modal-header">
         <div class="modal-title">Create board</div>
-        <button class="close-create-modal-btn" @click="closeDropdown('createBoardDrop')">X</button>
+        <button
+          class="close-create-modal-btn"
+          @click="closeDropdown"
+        >
+          X
+        </button>
       </header>
       <div class="modal-content">
         <div class="background-display">
-          <div class="img-container">
-              <img class="cover-img" src="@/assets/img/create-board-display.svg" alt="">
+          <div class="img-container" :style="coverBG">
+            <img
+              class="cover-img"
+              src="@/assets/img/create-board-display.svg"
+              alt=""
+            />
           </div>
         </div>
 
-
         <div class="background-picker-container">
-          <label class="covers-title" for="background-picker-title">Background</label>
+          <label class="covers-title" for="background-picker-title"
+            >Background</label
+          >
           <div class="background-options">
             <ul class="background-imgs-options">
-              <li></li>
-              <li></li>
+              <li  class="background-img" v-for="img in imgs" :key="img" @click="changeBGP(img)"> 
+                <img :src="img" alt="" />
+              </li>
             </ul>
             <ul class="background-colors-options">
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#0079bf'" class="color1">
+                <button
+                  @click="changeBGC('#0079bf')"
+                  class="color1"
+                >
                   <span class="check-container">
-                    <span class="checked-color"></span>
+                    <span class="checked-color">
+                       <span class="check-icon"></span>
+                    </span>
                   </span>
                 </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#d29034'" class="color2">
-                 <span class="check-container">
+                <button
+                  @click="changeBGC('#d29034')"
+                  class="color2"
+                >
+                  <span class="check-container">
                     <span class="checked-color">
                       <span class="check-icon"></span>
                     </span>
@@ -39,22 +58,31 @@
                 </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#519839'" class="color3">
+                <button
+                  @click="changeBGC('#519839')"
+                  class="color3"
+                >
                   <span class="check-container">
                     <span class="checked-color"></span>
                   </span>
                 </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#b04632'" class="color4">
-                   <span class="check-container">
+                <button
+                  @click="changeBGC('#b04632')"
+                  class="color4"
+                >
+                  <span class="check-container">
                     <span class="checked-color"></span>
                   </span>
                 </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#89609e'" class="color5">
-                   <span class="check-container">
+                <button
+                  @click="changeBGC('#89609e')"
+                  class="color5"
+                >
+                  <span class="check-container">
                     <span class="checked-color"></span>
                   </span>
                 </button>
@@ -65,45 +93,73 @@
 
         <div class="create-board-input-container">
           <div class="input-title">Board title</div>
-          <input type="text" class="create-board-input" v-model="boardToAdd.title" />
+          <input
+            type="text"
+            class="create-board-input"
+            v-model="boardToAdd.title"
+          />
         </div>
 
-        <button class="submit-create-btn" :class="submitStatus" @click="addBoard">Create</button>
+        <button
+          class="submit-create-btn"
+          :class="submitStatus"
+          @click="addBoard"
+        >
+          Create
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import '' from ''
+import {photoService} from '../services/photo.service.js'
 export default {
   name: "",
   components: {},
-  created() { },
+  async created() {
+    let photos = await photoService.loadDefaultPhotos();
+    this.imgs = photos.slice(0, 4);
+  },
   data() {
     return {
       boardToAdd: {
-        title: '',
+        title: "",
         style: {
-          backgroundColor: null
-        }
+          backgroundColor: null,
+        },
       },
+      imgs: [],
     };
   },
   methods: {
-    async addBoard(boardToAdd) {
+    async addBoard() {
       if (!this.boardToAdd.title) return;
-      console.log(this.boardToAdd);
-      await this.$store.dispatch({ type: "addBoard", boardToAdd: this.boardToAdd });
+      this.$emit("close-drop");
+      await this.$store.dispatch({
+        type: "addBoard",
+        boardToAdd: this.boardToAdd, 
+      });
     },
 
-    setBoardColor(color) {
+    //  async starBoard(boardToUpdate) {
+    //   await this.$store.dispatch({
+    //     type: "starBoard",
+    //     boardToUpdate: boardToUpdate, 
+    //   });
+    // },
 
+    closeDropdown() {
+      this.$emit("close-drop");
     },
-
-    closeDropdown(cmpName) {
-      this.$emit("close-drop", cmpName);
+    changeBGC(color){
+      delete this.boardToAdd.style.photo
+      this.boardToAdd.style.backgroundColor = color
     },
+    changeBGP(url){
+      delete this.boardToAdd.style.backgroundColor
+      this.boardToAdd.style.photo = url
+    }
   },
   computed: {
     boards() {
@@ -112,6 +168,13 @@ export default {
 
     submitStatus() {
       return this.boardToAdd.title ? "submit-possible" : "submit-unpossible";
+    },
+
+    coverBG() {
+      if(this.boardToAdd.style.photo) return `background-image: url(${this.boardToAdd.style.photo})`
+      return this.boardToAdd.style.backgroundColor
+        ? `background-color : ${this.boardToAdd.style.backgroundColor}`
+        : "background-color : #ffff";
     },
   },
 };

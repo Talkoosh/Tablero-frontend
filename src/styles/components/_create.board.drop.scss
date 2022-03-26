@@ -73,19 +73,42 @@
                 .background-options {
                     line-height: 20px;
 
+                    .background-imgs-options {
+                        display: flex;
+                        justify-content: space-between;
+                        list-style: none;
+                        .background-img {
+                            img {
+                                cursor: pointer;
+                                border: 1px solid transparent;
+                                display: block;
+                                border-radius: 4px;
+                                width: 64px;
+                                height: 40px;
+                                object-fit: cover;
+                                &:hover {
+                                    filter: saturate(85%) brightness(85%);
+                                }
+                            }
+                        }
+                    }
+
                     .background-colors-options {
                         display: flex;
                         justify-content: space-between;
                         list-style: none;
-                        padding: 14px;
+                        padding: 14px 0;
 
                         .color-card {
                             width: 40px;
                             height: 32px;
+                            &:hover {
+                                filter: saturate(85%) brightness(85%);
+                            }
 
                             .color1 {
                                 @include color-choose-btn;
-                                background-color: rgb(0, 121, 191);
+                                background-color: #0079bf;
 
                                 .check-container {
                                     position: relative;
@@ -102,7 +125,13 @@
                                         flex-shrink: 0;
                                         line-height: 1;
 
-                                        
+                                        .check-icon {
+                                            @include icon;
+                                            color: white;
+                                            &::before {
+                                                content: "\e916";
+                                            }
+                                        }
                                     }
                                 }
                             }

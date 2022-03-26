@@ -94,9 +94,9 @@
         <input class="main-input" type="text" placeholder="Search" />
         <!-- </form> -->
       </div>
-      <button class="right-nav-btn">
+      <!-- <button class="right-nav-btn">
         <span>💡</span>
-      </button>
+      </button> -->
       <div class="main-header-icon">
         <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" />
       </div>

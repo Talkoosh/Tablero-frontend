@@ -15,8 +15,9 @@
               <router-link
                 class="board-link"
                 :to="'/board/' + board._id"
-                :style="'background-color:' + board.style.backgroundColor"
+                :style="cardBG(board.style)"
               >
+             
                 <span class="link-block"></span>
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
@@ -43,7 +44,7 @@
               <router-link
                 class="board-link"
                 :to="'/board/' + board._id"
-                :style="'background-color:' + board.style.backgroundColor"
+                  :style="cardBG(board.style)"
               >
                 <span class="link-block"></span>
                 <div class="board-card-details">
@@ -98,6 +99,14 @@ export default {
     boards() {
       return this.$store.getters.boards || [];
     },
+    cardBG(){
+      return style => {
+         if(style.photo) return `background-image: url(${style.photo})`
+         else if (style.backgroundColor) return `background-color: ${style.backgroundColor}`
+         else return 'background-color: #0079bf'
+         }
+    },
+ 
   },
   unmounted() { },
 };
