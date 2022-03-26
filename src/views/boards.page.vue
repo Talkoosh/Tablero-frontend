@@ -1,7 +1,7 @@
 <template>
   <section class="boards-page">
     <!-- <div class="boards-page-nav"></div> -->
-    <hompage-nav/>
+    <hompage-nav />
 
     <div class="all-boards">
       <div v-if="boards.length" class="starred-boards-container">
@@ -12,8 +12,11 @@
         <div class="starred-boards-list-container">
           <ul class="starred-boards-list">
             <li class="board-card" v-for="board in boards" :key="board._id">
-              <router-link class="board-link" :to="'/board/' + board._id" 
-              :style="'background-color:'+board.style.backgroundColor">
+              <router-link
+                class="board-link"
+                :to="'/board/' + board._id"
+                :style="'background-color:' + board.style.backgroundColor"
+              >
                 <span class="link-block"></span>
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
@@ -37,8 +40,11 @@
         <div class="your-boards-list-container">
           <ul class="your-boards-list">
             <li class="board-card" v-for="board in boards" :key="board._id">
-              <router-link class="board-link" :to="'/board/' + board._id" 
-              :style="'background-color:'+board.style.backgroundColor">
+              <router-link
+                class="board-link"
+                :to="'/board/' + board._id"
+                :style="'background-color:' + board.style.backgroundColor"
+              >
                 <span class="link-block"></span>
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
@@ -61,9 +67,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <router-link v-for="board in boards" :to="'/board/' + board._id"
-      >BOARD</router-link > -->
   </section>
 </template>
 
@@ -74,18 +77,19 @@ import hompageNav from "../components/homepage.nav.vue"
 export default {
   // props: [''],
   components: {
-       boardPreview,
-       hompageNav 
-       },
+    boardPreview,
+    hompageNav
+  },
   created() {
     this.$store.dispatch("loadBoards");
+    this.$store.commit({ type: 'changeHeaderBgc', bgc: '#026aa7' })
   },
   data() {
     return {};
   },
   methods: {
-    openDropdown(cmpName){
-      this.$emit('open-drop',cmpName)
+    openDropdown(cmpName) {
+      this.$emit('open-drop', cmpName)
     }
 
 
@@ -95,6 +99,6 @@ export default {
       return this.$store.getters.boards || [];
     },
   },
-  unmounted() {},
+  unmounted() { },
 };
 </script>

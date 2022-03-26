@@ -4,6 +4,7 @@ export const boardStore = {
     boards: [],
     currBoardId: null,
     currTask: null,
+    mainHeaderBgc: '#026aa7',
   },
   getters: {
     boards(state) {
@@ -24,6 +25,9 @@ export const boardStore = {
       const board = state.boards.find((b) => b._id === state.currBoardId);
       if (!board.labels || !board.labels.length) return;
       return JSON.parse(JSON.stringify(board.labels));
+    },
+    mainHeaderBgc(state) {
+      return state.mainHeaderBgc;
     },
   },
   mutations: {
@@ -71,6 +75,9 @@ export const boardStore = {
       console.log(savedBoard);
       state.boards.unshift(savedBoard);
     },
+    changeHeaderBgc(state, { bgc }) {
+      state.mainHeaderBgc = bgc;
+    },
   },
   actions: {
     async loadBoards({ commit, state }) {
@@ -95,9 +102,12 @@ export const boardStore = {
       }
     },
 
-    async addBoard({ commit }, {boardToAdd}) {
+    async addBoard({ commit }, { boardToAdd }) {
       try {
-        const savedBoard = await boardService.addBoard(boardToAdd.title,boardToAdd.style);
+        const savedBoard = await boardService.addBoard(
+          boardToAdd.title,
+          boardToAdd.style
+        );
         commit({ type: 'addBoard', savedBoard });
       } catch (err) {
         throw err;
