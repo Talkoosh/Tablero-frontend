@@ -6,12 +6,13 @@
         <div class="recent-drop">
           <button
             class="drop-btn recent-btn"
-            @click="toggleRecentDrop"
+            @click="openDropdown('recentBoardsDrop')"
             :class="toggleRecentDropBGC"
           >
             Recent
           </button>
-          <div
+        </div>
+        <!-- <div
             class="recent-drop-content dropdown"
             v-if="isRecentDropOpen"
             v-clickoutside="toggleRecentDrop"
@@ -22,25 +23,31 @@
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <router-link class="board-details" :to="'/board/' + board._id">
-                  <div v-if="board" class="board-cover-container" :style="'background-color:'+board.style.backgroundColor"></div>
-                  <div class="board-text">
-                    <div class="board-title">{{ board.title }}</div>
-                    <div class="board-user">{{ board.createdBy.fullname }} workspace</div>
+                <div
+                  v-if="board"
+                  class="board-cover-container"
+                  :style="'background-color:' + board.style.backgroundColor"
+                ></div>
+                <div class="board-text">
+                  <div class="board-title">{{ board.title }}</div>
+                  <div class="board-user">
+                    {{ board.createdBy.fullname }} workspace
                   </div>
-                </router-link>
+                </div>
+              </router-link>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="starred-drop">
           <button
             class="drop-btn starred-btn"
-            @click="toggleStarredDrop"
+            @click="openDropdown('starredBoardsDrop')"
             :class="toggleStarredDropBGC"
           >
             Starred
           </button>
-          <div
+          <!-- <div
             class="starred-drop-content dropdown"
             v-if="isStarredDropOpen"
             v-clickoutside="toggleStarredDrop"
@@ -51,79 +58,50 @@
             </header>
             <div class="boards-list" v-for="board in boards" :key="board._id">
               <router-link class="board-details" :to="'/board/' + board._id">
-                <div class="board-cover-container" 
-                :style="'background-color:'+board.style.backgroundColor"></div>
+                <div
+                  class="board-cover-container"
+                  :style="'background-color:' + board.style.backgroundColor"
+                ></div>
                 <div class="board-text">
                   <div class="board-title">{{ board.title }}</div>
-                  <div class="board-user">{{ board.createdBy.fullname }} workspace</div>
+                  <div class="board-user">
+                    {{ board.createdBy.fullname }} workspace
+                  </div>
                 </div>
                 <div class="star-container">
                   <span class="star"></span>
                 </div>
               </router-link>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
-      <!-- <div class="create-board">
+      <div class="create-board">
         <div class="create-board-btn-container">
-        <button class="create-board-btn drop-btn" @click="toggleCreateBoard" :class="toggleCreateBtnBGC">
-          Create
-        </button>
+          <button
+            class="create-board-btn drop-btn"
+            @click="openDropdown('createBoardDrop')"
+            :class="toggleCreateBtnBGC"
+          >
+            Create
+          </button>
         </div>
-        <div v-clickoutside="toggleCreateBoard" v-if="isCreateBoardOpen" class="create-board-modal" :class="toggleCreateBoardModal">
-          <header class="modal-header">
-            <div class="modal-title">Create board</div>
-            <button class="close-create-modal-btn" @click="toggleCreateBoard">X</button>
-          </header>
-          <div class="modal-content">
+        <div
+          v-clickoutside="toggleCreateBoard"
+          v-if="isCreateBoardOpen"
+          class="create-board-modal"
+          :class="toggleCreateBoardModal"
+        ></div>
+      </div>
 
-            <div class="background-picker-container">
-              <label for="background-picker-title">Background</label>
-              <div class="background-options">
-                <ul class="background-imgs-options">
-                  <li></li>
-                  <li></li>
-                </ul>
-                <ul class="background-colors-options">
-                  <li class="color-card">
-                    <button class="color1"></button>
-                  </li>
-                  <li class="color-card">
-                    <button class="color2"></button>
-                  </li>
-                  <li class="color-card">
-                    <button class="color3"></button>
-                  </li>
-                  <li class="color-card">
-                    <button class="color4"></button>
-                  </li>
-                   <li class="color-card">
-                    <button class="color5"></button>
-                  </li>
-                  
-                </ul>
-              </div>
-            </div>
-
-            <div class="create-board-input-container">
-              <div class="input-title">Board title</div>
-              <input type="text" class="create-board-input" 
-              v-model="boardToAdd.title">
-            </div>
-
-            <button class="submit-create-btn" :class="submitStatus">Create</button>
-
-
-          </div>
-        </div>
-      </div> -->
       <div class="seperator"></div>
     </div>
     <div class="right-navbar">
       <div class="board-search">
-        <!-- <form class="search-container" action=""> -->
+        <!-- <span>
+          <img src="@/assets/img/bell.png" alt="" />
+        </span> -->
         <input class="main-input" type="text" placeholder="Search" />
         <!-- </form> -->
       </div>
@@ -139,19 +117,20 @@
 
 <script>
 import createBoardDrop from "./create.board.drop.vue";
+import recentBoardsDrop from "./recent.boards.drop.vue"
+import starredBoardsDrop from "./starred.boards.drop.vue"
 export default {
   name: "",
   components: {
     createBoardDrop,
+    recentBoardsDrop,
+    starredBoardsDrop
   },
   created() {},
   data() {
     return {
-      // boardToAdd : {title:'', style:{}},
       isRecentDropOpen: false,
       isStarredDropOpen: false,
-      // isCreateBoardOpen: false,
-      // isTypingBoardName : false,
     };
   },
   methods: {
@@ -161,13 +140,12 @@ export default {
     toggleStarredDrop() {
       this.isStarredDropOpen = !this.isStarredDropOpen;
     },
-    // toggleCreateBoard(){
-    //   this.isCreateBoardOpen = !this.isCreateBoardOpen;
-    // },
+    openDropdown(cmpName) {
+      // console.log(cmpName);
+      this.$emit("open-drop", cmpName);
+    },
   },
   computed: {
-
-
     boards() {
       return this.$store.getters.boards;
     },
@@ -179,14 +157,6 @@ export default {
     toggleStarredDropBGC() {
       return this.isStarredDropOpen ? "open-drop" : "";
     },
-
-    //   toggleCreateBtnBGC(){
-    //   return this.isCreateBoardOpen ? 'open-drop' : '';
-    // },
-
-    // submitStatus(){
-    //   return this.boardToAdd.title ? "submit-possible" : "submit-unpossible"
-    // },
   },
 };
 </script>

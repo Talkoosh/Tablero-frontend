@@ -17,6 +17,9 @@
 @import 'components/board.group';
 @import 'components/board.menu';
 @import 'components/homepage.nav';
+@import 'components/create.board.drop';
+@import 'components/recent.boards.drop';
+@import 'components/starred.boards.drop.scss';
 
 // VIEWS
 @import 'views/home';

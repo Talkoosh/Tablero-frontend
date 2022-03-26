@@ -1,24 +1,17 @@
  
  <template>
   <div class="create-board">
-    <div class="create-board-btn-container">
-      <button
-        class="create-board-btn drop-btn"
-        @click="toggleCreateBoard"
-        :class="toggleCreateBtnBGC"
-      >
-        Create
-      </button>
-    </div>
     <div
       v-clickoutside="toggleCreateBoard"
-      v-if="isCreateBoardOpen"
       class="create-board-modal"
       :class="toggleCreateBoardModal"
     >
       <header class="modal-header">
         <div class="modal-title">Create board</div>
-        <button class="close-create-modal-btn" @click="toggleCreateBoard">
+        <button
+          class="close-create-modal-btn"
+          @click="closeDropdown('createBoardDrop')"
+        >
           X
         </button>
       </header>
@@ -59,7 +52,13 @@
           />
         </div>
 
-        <button class="submit-create-btn" :class="submitStatus">Create</button>
+        <button
+          class="submit-create-btn"
+          :class="submitStatus"
+          @click="addBoard"
+        >
+          Create
+        </button>
       </div>
     </div>
   </div>
@@ -73,29 +72,32 @@ export default {
   created() {},
   data() {
     return {
-      boardToAdd : {title:'', style:{}},
-      isCreateBoardOpen: false,
-      isTypingBoardName : false,
-      
+      boardToAdd: { title: '', style: {} },
     };
   },
   methods: {
-    toggleCreateBoard(){
-      this.isCreateBoardOpen = !this.isCreateBoardOpen;
+    async addBoard(boardToAdd) {
+      if (!this.boardToAdd.title) return;
+      console.log(boardToAdd);
+      await this.$store.dispatch({ type: "addBoard", boardToAdd });
+    },
+
+    setBoardColor(color){
+     
+    },
+
+    closeDropdown(cmpName) {
+      this.$emit("close-drop", cmpName);
     },
   },
   computed: {
     boards() {
       return this.$store.getters.boards;
     },
-      toggleCreateBtnBGC(){
-      return this.isCreateBoardOpen ? 'open-drop' : '';
-    },
 
-    submitStatus(){
-      return this.boardToAdd.title ? "submit-possible" : "submit-unpossible"
+    submitStatus() {
+      return this.boardToAdd.title ? "submit-possible" : "submit-unpossible";
     },
-   
   },
 };
 </script>

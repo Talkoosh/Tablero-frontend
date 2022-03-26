@@ -50,7 +50,7 @@
                 </div>
               </router-link>
             </li>
-            <li class="create-new-board-card">
+            <li class="create-new-board-card" @click="openDropdown('createBoardDrop')">
               <div class="new-board-card">
                 <p>
                   <span>Create new board</span>
@@ -83,7 +83,13 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    openDropdown(cmpName){
+      this.$emit('open-drop',cmpName)
+    }
+
+
+  },
   computed: {
     boards() {
       return this.$store.getters.boards || [];

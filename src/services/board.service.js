@@ -43,10 +43,12 @@ async function getBoardById(boardId) {
   }
 }
 
-async function addBoard(title) {
+async function addBoard(title,style) {
   const boardToSave = _getEmptyBoard();
   boardToSave.createdAt = Date.now();
   boardToSave.title = title;
+  boardToSave.style = style || {};
+  boardToSave._id = utilService.makeId();
 
   try {
     return await storageService.post(KEY, boardToSave);

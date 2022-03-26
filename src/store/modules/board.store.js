@@ -63,6 +63,10 @@ export const boardStore = {
       const boardIdx = state.boards.findIndex((b) => b._id === board._id);
       state.boards[boardIdx] = board;
     },
+    addBoard(state, { savedBoard }) {
+      console.log(savedBoard);
+      state.boards.unshift(savedBoard);
+    },
   },
   actions: {
     async loadBoards({ commit, state }) {
@@ -78,6 +82,15 @@ export const boardStore = {
       try {
         const savedGroup = await boardService.saveGroup(boardId, groupToAdd);
         commit({ type: 'addGroup', savedGroup });
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async addBoard({ commit }, {boardToAdd}) {
+      try {
+        const savedBoard = await boardService.addBoard(boardToAdd.title,boardToAdd.style);
+        commit({ type: 'addBoard', savedBoard });
       } catch (err) {
         throw err;
       }
