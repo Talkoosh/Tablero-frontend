@@ -7,8 +7,15 @@
         <button class="close-create-modal-btn" @click="closeDropdown('createBoardDrop')">X</button>
       </header>
       <div class="modal-content">
+        <div class="background-display">
+          <div class="img-container">
+              <img class="cover-img" src="@/assets/img/create-board-display.svg" alt="">
+          </div>
+        </div>
+
+
         <div class="background-picker-container">
-          <label for="background-picker-title">Background</label>
+          <label class="covers-title" for="background-picker-title">Background</label>
           <div class="background-options">
             <ul class="background-imgs-options">
               <li></li>
@@ -16,19 +23,41 @@
             </ul>
             <ul class="background-colors-options">
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#0079bf'" class="color1"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#0079bf'" class="color1">
+                  <span class="check-container">
+                    <span class="checked-color"></span>
+                  </span>
+                </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#d29034'" class="color2"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#d29034'" class="color2">
+                 <span class="check-container">
+                    <span class="checked-color">
+                      <span class="check-icon"></span>
+                    </span>
+                  </span>
+                </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#519839'" class="color3"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#519839'" class="color3">
+                  <span class="check-container">
+                    <span class="checked-color"></span>
+                  </span>
+                </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#b04632'" class="color4"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#b04632'" class="color4">
+                   <span class="check-container">
+                    <span class="checked-color"></span>
+                  </span>
+                </button>
               </li>
               <li class="color-card">
-                <button @click="this.boardToAdd.style.backgroundColor = '#89609e'" class="color5"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#89609e'" class="color5">
+                   <span class="check-container">
+                    <span class="checked-color"></span>
+                  </span>
+                </button>
               </li>
             </ul>
           </div>

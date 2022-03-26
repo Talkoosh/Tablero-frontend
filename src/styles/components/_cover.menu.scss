@@ -35,6 +35,7 @@
                     height: 65px;
                     border-radius: 3px;
                     border: 1px solid rgba(9, 30, 66, 0.08);
+                    background-size: cover;
                     &:hover {
                         cursor: pointer;
                         filter: saturate(85%) brightness(85%);
@@ -43,7 +44,7 @@
                         margin: 0;
                         min-height: unset;
                         height: 28px;
-                        background-color: yellow;
+                        background-size: cover;
                     }
                     .cover-content {
                         padding: 6px 4px 4px 6px;
@@ -109,14 +110,37 @@
             row-gap: 8px;
             padding: 4px;
             overflow-x: hidden;
+            margin: 0 -4px;
             margin-bottom: 15px;
             .color {
                 cursor: pointer;
                 border: 1px solid transparent;
                 display: block;
                 border-radius: 3px;
-                width: 50px;
+                width: 48px;
                 height: 32px;
+                &:hover {
+                    filter: saturate(85%) brightness(85%);
+                }
+            }
+        }
+        .photos-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 6px;
+            row-gap: 6px;
+            padding: 4px;
+            overflow-x: hidden;
+
+            margin-bottom: 15px;
+            img {
+                cursor: pointer;
+                border: 1px solid transparent;
+                display: block;
+                border-radius: 4px;
+                width: 88px;
+                height: 48px;
+                object-fit: cover;
                 &:hover {
                     filter: saturate(85%) brightness(85%);
                 }
