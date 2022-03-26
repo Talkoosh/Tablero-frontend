@@ -1,5 +1,5 @@
 <template>
-  <section class="main-header">
+  <section class="main-header" :style="'background-color:' + bgc + '; opacity: .9'">
     <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
@@ -108,6 +108,7 @@
 import createBoardDrop from "./create.board.drop.vue";
 import recentBoardsDrop from "./recent.boards.drop.vue"
 import starredBoardsDrop from "./starred.boards.drop.vue"
+import { utilService } from "../services/util.service.js";
 export default {
   name: "",
   components: {
@@ -115,7 +116,9 @@ export default {
     recentBoardsDrop,
     starredBoardsDrop
   },
-  created() { },
+  created() {
+    // eventBus.on('change-color', this.changeColor)
+  },
   data() {
     return {
       isRecentDropOpen: false,
@@ -146,12 +149,15 @@ export default {
     toggleStarredDropBGC() {
       return this.isStarredDropOpen ? "open-drop" : "";
     },
-    // toggleCreateBtnBGC() {
-    //   return
-    // },
-    // isCreateBoardOpen() {
-    //   return
-    // }
+    toggleCreateBtnBGC() {
+      return
+    },
+    isCreateBoardOpen() {
+      return
+    },
+    bgc() {
+      return this.$store.getters.mainHeaderBgc
+    }
   },
 };
 </script>

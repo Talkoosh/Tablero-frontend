@@ -1,0 +1,295 @@
+[33mcommit 4e69d29dbe8b938f536368805cab9754ac9e7bd1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Sat Mar 26 16:30:53 2022 +0300
+
+    .
+
+[33mcommit 592527a62825fe7d925939cd3d6e716904bcb7fd[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Sat Mar 26 16:01:32 2022 +0300
+
+    minor fix
+
+[33mcommit f521be546241b239438527a77bd3ad2f9909f090[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Sat Mar 26 15:41:30 2022 +0300
+
+    fixed buges
+
+[33mcommit 1aec994846188d3bcc1c19588ae72e0f9d1ff7b2[m
+Merge: c231f0c 21c1008
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Sat Mar 26 15:29:22 2022 +0300
+
+    Merge branch 'main' of https://github.com/BenIsayev/Tablero-frontend
+
+[33mcommit c231f0c21b0f1aaeaa3676c2fcf89101a32eed78[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Sat Mar 26 15:29:16 2022 +0300
+
+    addBoard and dynamic components
+
+[33mcommit 21c100897c2d03af5e94f68ced824e69caa6267d[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Sat Mar 26 15:28:16 2022 +0300
+
+    drag and drop almost complete
+
+[33mcommit 2e04f07eec38778b1f8f610ee4ca8cb73fb5fc48[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 22:14:24 2022 +0300
+
+    merge
+
+[33mcommit 159d7507edddfd039df1add6c3c9c241d71c96e4[m
+Merge: d6baa7e 924f971
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 22:04:38 2022 +0200
+
+    merge
+
+[33mcommit d6baa7e1d43d5541586342d332149a6d7cf214d7[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 22:03:58 2022 +0200
+
+    task title editable
+
+[33mcommit 924f971c67d65b77d5b84ba72137418261dfdd1b[m
+Merge: 216d44c 72c9810
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 21:49:16 2022 +0300
+
+    Merge branch 'main' of https://github.com/BenIsayev/Tablero-frontend
+
+[33mcommit 216d44cff52c664c1d711acbcec1d41e51e48d79[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 21:49:10 2022 +0300
+
+    dropdowns css
+
+[33mcommit 72c9810a18302a2759feeb03686c6167563a429a[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 21:48:20 2022 +0300
+
+    showing the cover of task previews and minor modifications
+
+[33mcommit fbd7a2b31751bf98569bac140497fb9b1e1884a2[m
+Merge: 42d8408 d274c7a
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 18:39:11 2022 +0300
+
+    Merge branch 'main' of https://github.com/BenIsayev/Tablero-frontend
+
+[33mcommit 42d8408818d6c28a23e16bdeb7e0a93644e39ad2[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 18:39:07 2022 +0300
+
+    fixed bugs
+
+[33mcommit d274c7a384965f1d20faa132099daeea3c02cc96[m
+Merge: 749f2b4 ff0a548
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 18:38:38 2022 +0300
+
+    merge
+
+[33mcommit 749f2b468472fca12e947bda8b8d82e04aa68c0e[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 18:38:23 2022 +0300
+
+    ..
+
+[33mcommit ff0a548737da37f8cb1e0e0fc11c8b70160664a2[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 17:37:44 2022 +0200
+
+    fixed bugs
+
+[33mcommit 53609132a63f6d4640d707ad31022207552a7e91[m
+Merge: f060c02 77c60d2
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 18:22:04 2022 +0300
+
+    Merge branch 'main' of https://github.com/BenIsayev/Tablero-frontend
+
+[33mcommit f060c028c1cd31454b1e876655e74a266cdf857c[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 18:21:50 2022 +0300
+
+    homepage nav
+
+[33mcommit 77c60d27532d8e2a7d97e674348182aaf0f39012[m
+Merge: 16d3a42 f9c9aec
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 18:21:15 2022 +0300
+
+    merge
+
+[33mcommit 16d3a4212b8c8542e8b77f5593067d33fd19141a[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 18:18:24 2022 +0300
+
+    board nav changing colors and started work on cover display on task preview
+
+[33mcommit f9c9aec944e325add2ca7ed8e4d2c950a9716dd8[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 17:17:44 2022 +0200
+
+    task cover color working
+
+[33mcommit d51b8a87923d27f83ff8e2116ad6e62649d97e46[m
+Merge: 46c7eab 53c7e5c
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 14:54:23 2022 +0300
+
+    Merge branch 'main' of https://github.com/BenIsayev/Tablero-frontend
+
+[33mcommit 46c7eab82d882836b7984bd8cd014b3f74633395[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 14:54:18 2022 +0300
+
+    main header css and links
+
+[33mcommit 53c7e5c9046cca57f655d4185ddd9158be01d8db[m
+Merge: 011207a 2d61151
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 14:52:54 2022 +0300
+
+    merge
+
+[33mcommit 011207a7b47bbac5ae5a52ff9aa6f2d4fdbb0f18[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 14:52:22 2022 +0300
+
+    board bgc customizable
+
+[33mcommit 2d6115185ada49e71359c767fd874acd3c1fc67f[m
+Merge: 5b53924 6d507ca
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 13:52:14 2022 +0200
+
+    merge
+
+[33mcommit 5b539242dd9e9c1819dbb5477ef02f7496034087[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 13:51:06 2022 +0200
+
+    design and functionality for cover menu
+
+[33mcommit 6d507caa7bb6fe27cc183f335314868250964434[m
+Merge: ec7e6d7 cce1a95
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 12:33:52 2022 +0300
+
+    merge
+
+[33mcommit cce1a951feb550b9c83142d67a55d6820e783aab[m
+Merge: a8948a8 8c2aabb
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 11:30:54 2022 +0200
+
+    basic task details labels
+
+[33mcommit ec7e6d7b00a22452e76dc90333434023bbfe96f4[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Fri Mar 25 12:30:38 2022 +0300
+
+    started work on board bgc updating
+
+[33mcommit a8948a81219a8181c8aac27df5ad62e709e7ef80[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 11:30:23 2022 +0200
+
+    basic task details labels
+
+[33mcommit 8c2aabb824149c3399b9cc606463e849b3df7213[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 12:29:01 2022 +0300
+
+    new-board-card
+
+[33mcommit 5030c3dd95829173348eda90e196b41155706977[m
+Merge: 2c66225 f48d023
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 10:18:03 2022 +0300
+
+    merge
+
+[33mcommit 2c66225fc7d31b86b3e2e35af7127864d5e9cd33[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Fri Mar 25 10:08:47 2022 +0300
+
+    board-cards
+
+[33mcommit f48d023931b87a2fcf12cf05042dc3ca6dab9b85[m
+Merge: ed60257 4d1d805
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 09:08:03 2022 +0200
+
+    merge
+
+[33mcommit ed60257f2dcf0bc8b04761670fa7fc927d44c1cf[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Fri Mar 25 09:06:41 2022 +0200
+
+    working on labels
+
+[33mcommit 4d1d8057bd5b986124ae0b0ebed6a52a0ca23eb2[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Thu Mar 24 23:39:10 2022 +0200
+
+    added group title editing with good UI
+
+[33mcommit 753115962abe2cf0e191f05fe119bf85f7e7b85c[m
+Merge: e79c6d3 95b2560
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Thu Mar 24 22:04:05 2022 +0200
+
+    merge
+
+[33mcommit e79c6d35122e226f322834c8ec0f30f7222d55b6[m
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Thu Mar 24 22:03:37 2022 +0200
+
+    added label menu
+
+[33mcommit 95b25600396d66908a22e97982d36b666fba0559[m
+Merge: eb44a65 1cbd205
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Thu Mar 24 22:03:02 2022 +0200
+
+    merge
+
+[33mcommit eb44a656de247bc59a9e51a49637e338fbc3c684[m
+Author: BenIsayev <benisayev@gmail.com>
+Date:   Thu Mar 24 22:02:43 2022 +0200
+
+    board header modifications,started work label preview in task preview
+
+[33mcommit 1cbd2059d4ae7a41e2309ee154798a7b2782a1bc[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Thu Mar 24 22:01:37 2022 +0200
+
+    cretae board modal
+
+[33mcommit 672a1734d0cea8d801420417b6cb1724d57ab1da[m
+Merge: 3ec4e79 1a02775
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Thu Mar 24 19:30:19 2022 +0200
+
+    Merge branch 'main' of https://github.com/BenIsayev/Tablero-frontend
+
+[33mcommit 3ec4e796dec7a5e1fb0b92e776873a298ce9d413[m
+Author: Tomer <tomermalkiman8@gmail.com>
+Date:   Thu Mar 24 19:30:13 2022 +0200
+
+    merge
+
+[33mcommit 1a0277539240593a30ece6eda5ab626f1ce80a30[m
+Merge: 214a968 6481722
+Author: Tal Koosh <artishok.tal@gmail.com>
+Date:   Thu Mar 24 19:28:43 2022 +0200
+
+    merge
+
+[33mcom

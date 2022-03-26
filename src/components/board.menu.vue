@@ -62,6 +62,7 @@ export default {
         },
         changeBoardBgc(bgc) {
             this.$emit('change-board-bgc', bgc)
+            this.$store.commit({ type: 'changeHeaderBgc', bgc })
         },
         closeMenu() {
             this.$emit('close-menu')
