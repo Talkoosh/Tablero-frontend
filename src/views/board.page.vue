@@ -4,7 +4,12 @@
             <board-header @open-menu="openMenu" @change-board-bgc="changeBoardBgc" :board="board" />
         </header>
         <div class="groups-container">
-            <Container orientation="horizontal" @drop="onDrop" class="drag-container">
+            <Container
+                v-if="board.groups.length"
+                orientation="horizontal"
+                @drop="onDrop"
+                class="drag-container"
+            >
                 <Draggable v-for="group in board.groups" :key="group._id">
                     <board-group
                         @group-title-changed="updateGroup"
@@ -59,12 +64,10 @@ export default {
         Container,
         Draggable,
     },
-    async created() {
+    created() {
         this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
-        await this.$store.commit({ type: 'setCurrBoardId', boardId: id })
-        this.$store.commit({ type: 'changeHeaderBgc', bgc: this.board.style.backgroundColor })
-
+        this.$store.commit({ type: 'setCurrBoardId', boardId: id })
     },
     data() {
         return {
@@ -140,6 +143,13 @@ export default {
         },
         menuStatus() {
             return this.isMenuOpen ? 'menu-open' : 'menu-close'
+        }
+    },
+    watch: {
+        'board': {
+            handler() {
+                this.$store.commit({ type: 'changeHeaderBgc', bgc: this.board.style.backgroundColor })
+            }
         }
     },
     unmounted() { },

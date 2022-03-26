@@ -33,19 +33,18 @@
         border-radius: 25em;
         object-fit: cover;
       }
-      button {
-        display: flex;
-        gap: 3px;
-        height: 30px;
-        align-items: center;
-        transform: translateX(10%);
-        .invite-icon {
-          @include icon;
-          padding: 0;
-          width: fit-content;
-          &::before {
-            content: '\e902';
-          }
+    }
+    button {
+      display: flex;
+      gap: 3px;
+      height: 30px;
+      align-items: center;
+      .invite-icon {
+        @include icon;
+        padding: 0;
+        width: fit-content;
+        &::before {
+          content: '\e902';
         }
       }
     }

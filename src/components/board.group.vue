@@ -112,8 +112,6 @@ export default {
         },
         async onDrop(dropResult) {
             if (dropResult.addedIndex === null && dropResult.removedIndex === null) return
-            console.log(dropResult)
-            // if (dropResult.payload._id !==) return
             this.group.tasks = this.applyDrag(this.group.tasks, dropResult);
             dropResult.payload._id
             await this.$store.dispatch({ type: 'editGroup', groupToEdit: this.group, boardId: this.boardId })

@@ -19,22 +19,21 @@
                         <span class="star-icon"></span>
                     </a>
                 </div>
-                <div class="board-members" :style="'width: ' + board.members.length * 75 + 'px'">
+                <div class="board-members" :style="'width: ' + board.members.length * 32 + 'px'">
                     <span
                         v-for="(member, idx) in board.members"
                         href
-                        :style="'left:' + idx * 18 + 'px'"
+                        :style="'left:' + idx * 25 + 'px'"
                     >
                         <img :src="member.imgUrl" alt="member img" />
                     </span>
-
-                    <a href style="right:20px">
-                        <button>
-                            <span class="invite-icon"></span>
-                            <span>Invite</span>
-                        </button>
-                    </a>
                 </div>
+                <a href style="right:20px;">
+                    <button>
+                        <span class="invite-icon"></span>
+                        <span>Invite</span>
+                    </button>
+                </a>
             </div>
             <div class="board-header-right">
                 <div class="board-header-btn board-menu">
