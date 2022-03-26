@@ -4,8 +4,9 @@
             <div
                 class="task-details-cover"
                 v-if="task?.style.color || task?.style.photo"
-                :style="{ backgroundColor: task.style.color ? task.style.color : '' }"
+                :style="{ backgroundColor: task.style.color ? task.style.color : '', backgroundImage:`url(${task.style.photo})` }"
             >
+                <!-- <img :src="task.style.photo" alt=""> -->
                 <span class="icon task-close-btn" @click.stop="closeTaskDetails"></span>
                 <div class="btn-container">
                     <button @click.stop="setCurrAction('coverMenu')">
@@ -182,13 +183,13 @@ export default {
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
         onSetColor(color) {
-            this.task.style.photo = null;
+            this.task.style.photo = '';
             this.task.style.color = color;
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
         },
         onSetPhoto(photo) {
-            this.task.style.color = null;
+            this.task.style.color = '';
             this.task.style.photo = photo;
             console.log(this.task.style);
             const boardId = this.$route.params.boardId;
