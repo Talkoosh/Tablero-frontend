@@ -158,5 +158,16 @@
         background-color: #838c90;
       }
     }
+    .bg-photos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      .photo-card {
+        @include nav-card;
+        flex-basis: 48%;
+        background-size: cover;
+        background-position: center;
+      }
+    }
   }
 }

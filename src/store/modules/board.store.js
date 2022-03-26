@@ -5,6 +5,7 @@ export const boardStore = {
     currBoardId: null,
     currTask: null,
     mainHeaderBgc: '#026aa7',
+    isLabelTitleShown: false,
   },
   getters: {
     boards(state) {
@@ -28,6 +29,9 @@ export const boardStore = {
     },
     mainHeaderBgc(state) {
       return state.mainHeaderBgc;
+    },
+    isLabelTitleShown(state) {
+      return state.isLabelTitleShown;
     },
   },
   mutations: {
@@ -77,6 +81,10 @@ export const boardStore = {
     },
     changeHeaderBgc(state, { bgc }) {
       state.mainHeaderBgc = bgc;
+    },
+    toggleLabelTitle(state) {
+      console.log('hi');
+      state.isLabelTitleShown = !state.isLabelTitleShown;
     },
   },
   actions: {
@@ -148,10 +156,19 @@ export const boardStore = {
       const board = JSON.parse(
         JSON.stringify(await boardService.getBoardById(boardId))
       );
-      console.log(board);
       delete board.style.backgroundColor;
       delete board.style.photo;
       board.style.backgroundColor = bgc;
+      await boardService.updateBoard(board);
+      commit({ type: 'updateBoard', board });
+    },
+    async changeBoardBgp({ commit }, { url, boardId }) {
+      const board = JSON.parse(
+        JSON.stringify(await boardService.getBoardById(boardId))
+      );
+      delete board.style.backgroundColor;
+      delete board.style.photo;
+      board.style.photo = url;
       await boardService.updateBoard(board);
       commit({ type: 'updateBoard', board });
     },

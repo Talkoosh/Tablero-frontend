@@ -16,7 +16,7 @@ export default {
     },
     data() {
         return {
-            isTitleShown: false,
+            // isTitleShown: false,
             startAnimation: false,
         }
     },
@@ -28,18 +28,8 @@ export default {
             return label
         },
         showTitle() {
-            if (!this.isTitleShown) {
-                this.startAnimation = true
-                setTimeout(() => {
-                    this.isTitleShown = true
-                }, 300)
-
-            } else {
-                this.startAnimation = false
-                setTimeout(() => {
-                    this.isTitleShown = false
-                }, 300)
-            }
+            this.startAnimation = !this.startAnimation
+            this.$store.commit({ type: 'toggleLabelTitle' })
         }
     },
     computed: {
@@ -52,7 +42,11 @@ export default {
             return label.title
         },
         isLabelOpen() {
-            return this.startAnimation ? 'label-open' : 'label-closing';
+            return this.isTitleShown ? 'label-open' : 'label-closing';
+        },
+        isTitleShown() {
+            console.log(this.$store.getters.isLabelTitleShown)
+            return this.$store.getters.isLabelTitleShown
         }
     },
     unmounted() { },

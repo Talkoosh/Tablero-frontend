@@ -76,6 +76,7 @@ import hompageNav from "../components/homepage.nav.vue"
 
 export default {
   // props: [''],
+  emits: ['open-drop'],
   components: {
     boardPreview,
     hompageNav
