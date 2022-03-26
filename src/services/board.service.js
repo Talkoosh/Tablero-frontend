@@ -88,7 +88,7 @@ async function saveGroup(boardId, group) {
     if (group._id) {
       const idx = board.groups.findIndex((g) => g._id === group._id);
       board.groups[idx] = group;
-      await updateBoard(board);
+      const savedBoard = await updateBoard(board);
       return group;
     } else {
       const groupToAdd = {

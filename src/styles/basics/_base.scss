@@ -61,3 +61,10 @@ a {
   color: $clr3;
 }
 
+.smooth-dnd-ghost {
+  transform: rotate(5deg);
+}
+
+.smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper {
+  height: fit-content;
+}

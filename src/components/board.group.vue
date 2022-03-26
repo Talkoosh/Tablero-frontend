@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="group-container">
+        <div class="group-container" @mouseover="showDragSlot">
             <div class="group">
                 <div class="group-header">
                     <h2
@@ -20,13 +20,19 @@
                         <div>...</div>
                     </div>
                 </div>
+                <!-- v-if="group.tasks.length" -->
                 <div class="group-tasks">
-                    <task-preview
-                        v-for="task in group.tasks"
-                        :key="task._id"
-                        :task="task"
-                        :boardId="boardId"
-                    />
+                    <Container
+                        group-name="1"
+                        :get-child-payload="getChildPayload"
+                        orientation="vertical"
+                        @drop="onDrop"
+                        class="drag-task-container"
+                    >
+                        <Draggable v-for="task in group.tasks" :key="task._id">
+                            <task-preview :task="task" :boardId="boardId" />
+                        </Draggable>
+                    </Container>
                 </div>
                 <div class="add-task" :class="addTaskCondition">
                     <div @click="toggleAddTask" v-if="!isAddTask" class="add-task-unactive">
@@ -56,6 +62,8 @@
 
 <script>
 import taskPreview from "./task.preview.vue"
+import { Container, Draggable } from "vue3-smooth-dnd";
+
 export default {
     props: {
         group: Object,
@@ -63,8 +71,11 @@ export default {
     },
     components: {
         taskPreview,
+        Container,
+        Draggable,
     },
-    created() { },
+    created() {
+    },
     data() {
         return {
             isAddTask: false,
@@ -82,7 +93,6 @@ export default {
         async addTask() {
             if (!this.taskToAdd.title) return
             const a = await this.$emit('task-added', this.taskToAdd)
-            console.log(a)
             this.taskToAdd = {
                 title: '',
                 groupId: this.group._id
@@ -100,6 +110,31 @@ export default {
             this.$emit('group-title-changed', this.groupToEdit)
             this.isEditGroupTitle = !this.isEditGroupTitle;
         },
+        async onDrop(dropResult) {
+            if (dropResult.addedIndex === null && dropResult.removedIndex === null) return
+            this.group.tasks = this.applyDrag(this.group.tasks, dropResult);
+            dropResult.payload._id
+            await this.$store.dispatch({ type: 'editGroup', groupToEdit: this.group, boardId: this.boardId })
+            this.$store.dispatch({ type: 'saveBoard', board: this.$store.getters.currBoard })
+        },
+        applyDrag(arr, dragResult) {
+            const { removedIndex, addedIndex, payload } = dragResult;
+
+            if (removedIndex === null && addedIndex === null) return arr;
+            const result = [...arr];
+            let itemToAdd = payload;
+
+            if (removedIndex !== null) {
+                itemToAdd = result.splice(removedIndex, 1)[0];
+            }
+            if (addedIndex !== null) {
+                result.splice(addedIndex, 0, itemToAdd);
+            }
+            return result;
+        },
+        getChildPayload(idx) {
+            return this.group.tasks[idx]
+        },
     },
     computed: {
         addTaskCondition() {
@@ -109,6 +144,6 @@ export default {
             const group = { ...this.group }
             return group
         }
-    }
+    },
 }
 </script>

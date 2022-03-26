@@ -4,14 +4,16 @@
             <board-header @open-menu="openMenu" @change-board-bgc="changeBoardBgc" :board="board" />
         </header>
         <div class="groups-container">
-            <board-group
-                @group-title-changed="updateGroup"
-                @task-added="addTask"
-                v-for="group in board.groups"
-                :key="group._id"
-                :group="group"
-                :boardId="board._id"
-            />
+            <Container orientation="horizontal" @drop="onDrop" class="drag-container">
+                <Draggable v-for="group in board.groups" :key="group._id">
+                    <board-group
+                        @group-title-changed="updateGroup"
+                        @task-added="addTask"
+                        :group="group"
+                        :boardId="board._id"
+                    />
+                </Draggable>
+            </Container>
             <div class="add-group" :class="addGroupCondition">
                 <span v-if="!isAddGroup" @click="toggleAddGroup">+ Add another list</span>
                 <div v-else>
@@ -46,7 +48,7 @@
 import boardHeader from "../components/board.header.vue"
 import boardGroup from "../components/board.group.vue"
 import boardMenu from "../components/board.menu.vue"
-
+import { Container, Draggable } from "vue3-smooth-dnd";
 
 export default {
     // props: [''],
@@ -54,6 +56,8 @@ export default {
         boardHeader,
         boardGroup,
         boardMenu,
+        Container,
+        Draggable,
     },
     async created() {
         this.$store.dispatch('loadBoards')
@@ -99,7 +103,26 @@ export default {
         },
         closeMenu() {
             this.isMenuOpen = false
-        }
+        },
+        onDrop(dropResult) {
+            this.board.groups = this.applyDrag(this.board.groups, dropResult);
+            this.$store.dispatch({ type: 'saveBoard', board: this.board })
+        },
+        applyDrag(arr, dragResult) {
+            const { removedIndex, addedIndex, payload } = dragResult;
+
+            if (removedIndex === null && addedIndex === null) return arr;
+            const result = [...arr];
+            let itemToAdd = payload;
+
+            if (removedIndex !== null) {
+                itemToAdd = result.splice(removedIndex, 1)[0];
+            }
+            if (addedIndex !== null) {
+                result.splice(addedIndex, 0, itemToAdd);
+            }
+            return result;
+        },
     },
     computed: {
         board() {
