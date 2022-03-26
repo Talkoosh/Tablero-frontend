@@ -63,6 +63,8 @@ export default {
         this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
         await this.$store.commit({ type: 'setCurrBoardId', boardId: id })
+        this.$store.commit({ type: 'changeHeaderBgc', bgc: this.board.style.backgroundColor })
+
     },
     data() {
         return {

@@ -16,19 +16,19 @@
             </ul>
             <ul class="background-colors-options">
               <li class="color-card">
-                <button class="color1"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#0079bf'" class="color1"></button>
               </li>
               <li class="color-card">
-                <button class="color2"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#d29034'" class="color2"></button>
               </li>
               <li class="color-card">
-                <button class="color3"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#519839'" class="color3"></button>
               </li>
               <li class="color-card">
-                <button class="color4"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#b04632'" class="color4"></button>
               </li>
               <li class="color-card">
-                <button class="color5"></button>
+                <button @click="this.boardToAdd.style.backgroundColor = '#89609e'" class="color5"></button>
               </li>
             </ul>
           </div>
@@ -53,14 +53,19 @@ export default {
   created() { },
   data() {
     return {
-      boardToAdd: { title: '', style: {} },
+      boardToAdd: {
+        title: '',
+        style: {
+          backgroundColor: null
+        }
+      },
     };
   },
   methods: {
     async addBoard(boardToAdd) {
       if (!this.boardToAdd.title) return;
-      console.log(boardToAdd);
-      await this.$store.dispatch({ type: "addBoard", boardToAdd });
+      console.log(this.boardToAdd);
+      await this.$store.dispatch({ type: "addBoard", boardToAdd: this.boardToAdd });
     },
 
     setBoardColor(color) {

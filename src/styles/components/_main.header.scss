@@ -8,6 +8,7 @@
   padding: 6px 4px;
   top: 0;
   width: 100%;
+  transition: background-color 0.3s;
 
   .main-logo {
     padding: 0 6px;
@@ -273,7 +274,6 @@
   padding: 6px 12px;
   text-decoration: none;
   white-space: normal;
-  background-color: #026aa7;
   box-shadow: none;
   border: none;
   transition-property: background-color, border-color, box-shadow;
