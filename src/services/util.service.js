@@ -1,6 +1,6 @@
 export const utilService = {
   makeId,
-  lightenDarkenColor
+  lightenDarkenColor,
 };
 
 function makeId(length = 5) {
@@ -16,7 +16,7 @@ function makeId(length = 5) {
 function lightenDarkenColor(colorCode, amount) {
   var usePound = false;
 
-  if (colorCode[0] == "#") {
+  if (colorCode[0] == '#') {
     colorCode = colorCode.slice(1);
     usePound = true;
   }
@@ -31,7 +31,7 @@ function lightenDarkenColor(colorCode, amount) {
     r = 0;
   }
 
-  var b = ((num >> 8) & 0x00FF) + amount;
+  var b = ((num >> 8) & 0x00ff) + amount;
 
   if (b > 255) {
     b = 255;
@@ -39,7 +39,7 @@ function lightenDarkenColor(colorCode, amount) {
     b = 0;
   }
 
-  var g = (num & 0x0000FF) + amount;
+  var g = (num & 0x0000ff) + amount;
 
   if (g > 255) {
     g = 255;
@@ -47,5 +47,5 @@ function lightenDarkenColor(colorCode, amount) {
     g = 0;
   }
 
-  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 }

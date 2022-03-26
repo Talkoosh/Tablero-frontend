@@ -4,11 +4,7 @@
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="recent-drop">
-          <button
-            class="drop-btn recent-btn"
-            @click="openDropdown('recentBoardsDrop')"
-            :class="toggleRecentDropBGC"
-          >Recent</button>
+          <button class="drop-btn recent-btn" @click="openDropdown('recentBoardsDrop')">Recent</button>
         </div>
         <!-- <div
             class="recent-drop-content dropdown"
@@ -38,11 +34,7 @@
         </div>-->
 
         <div class="starred-drop">
-          <button
-            class="drop-btn starred-btn"
-            @click="openDropdown('starredBoardsDrop')"
-            :class="toggleStarredDropBGC"
-          >Starred</button>
+          <button class="drop-btn starred-btn" @click="openDropdown('starredBoardsDrop')">Starred</button>
           <!-- <div
             class="starred-drop-content dropdown"
             v-if="isStarredDropOpen"
@@ -110,7 +102,7 @@ import recentBoardsDrop from "./recent.boards.drop.vue"
 import starredBoardsDrop from "./starred.boards.drop.vue"
 import { utilService } from "../services/util.service.js";
 export default {
-  name: "",
+  emits: ['open-drop'],
   components: {
     createBoardDrop,
     recentBoardsDrop,
@@ -140,14 +132,6 @@ export default {
   computed: {
     boards() {
       return this.$store.getters.boards;
-    },
-
-    toggleRecentDropBGC() {
-      return this.isRecentDropOpen ? "open-drop" : "";
-    },
-
-    toggleStarredDropBGC() {
-      return this.isStarredDropOpen ? "open-drop" : "";
     },
     toggleCreateBtnBGC() {
       return

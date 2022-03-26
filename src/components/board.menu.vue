@@ -7,15 +7,15 @@
             <div class="close-menu">
                 <span @click="closeMenu" class="close-icon"></span>
             </div>
-            <div v-if="currNav !== 'Menu'" @click="currNav = 'Menu'" class="back-menu">
+            <div v-if="currNav !== 'Menu'" @click="currNav = prevPage" class="back-menu">
                 <span class="back-icon"></span>
             </div>
             <hr class="menu-header-divider" />
         </header>
         <div class="main-menu">
             <div v-if="currNav === 'Menu'" class="menu-home">
-                <div @click="currNav = 'Colors'" class="change-bg">
-                    <span class="bg-display" :style="bgColor"></span>
+                <div @click="currNav = 'Change background'" class="change-bg">
+                    <span class="bg-display" :style="displayBg"></span>
                     <h4>Change background</h4>
                 </div>
             </div>
@@ -40,17 +40,29 @@
                 <div @click="changeBoardBgc('#04adcb')" class="color-card lightblue-card"></div>
                 <div @click="changeBoardBgc('#838c90')" class="color-card gray-card"></div>
             </div>
+            <div v-if="currNav === 'Photos'" class="bg-photos">
+                <div
+                    class="photo-card"
+                    v-for="photo in photos"
+                    :style="'background-image: url(' + photo + ')'"
+                    @click="changeBoardBgp(photo)"
+                ></div>
+            </div>
         </div>
     </nav>
 </template>
 
-<script>
+<script>import { photoService } from "../services/photo.service.js"
+
 export default {
     props: {
         board: Object,
     },
     components: {},
-    created() { },
+    async created() {
+        const photos = await photoService.loadDefaultPhotos()
+        this.photos = photos
+    },
     data() {
         return {
             currNav: 'Menu'
@@ -66,12 +78,30 @@ export default {
         },
         closeMenu() {
             this.$emit('close-menu')
+        },
+        changeBoardBgp(url) {
+            this.$emit('change-board-bgp', url)
+            this.$store.commit({ type: 'changeHeaderBgc', bgc: '#026aa7' })
         }
     },
     computed: {
-        bgColor() {
+        displayBg() {
             if (!this.board) return
+
+            if (this.board.style.photo) return `background-image: url(${this.board.style.photo})`
             return `background-color: ${this.board.style.backgroundColor}`
+        },
+        prevPage() {
+            switch (this.currNav) {
+                case 'Colors':
+                    return 'Change background'
+                // break
+                case 'Photos':
+                    return 'Change background'
+                // break
+                case 'Change background':
+                    return 'Menu'
+            }
         }
     },
     unmounted() { },

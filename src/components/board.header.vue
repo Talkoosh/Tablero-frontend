@@ -4,13 +4,15 @@
             <div class="board-header-left">
                 <div class="board-header-btn board-name">
                     <div class="title">
-                        <span @click="toggleEditTitle" v-if="!isEditTitle">{{ board.title }}</span>
+                        <h1 @click="toggleEditTitle" v-if="!isEditTitle">{{ board.title }}</h1>
                         <input
                             v-else
                             type="text"
                             v-model="boardToEdit.title"
                             ref="titleEdit"
-                            v-clickoutside="saveBoardTitle"
+                            v-clickoutside="stopEdit"
+                            @input="saveBoardTitle"
+                            :style="'width:' + (boardToEdit.title.length * 10 + 15) + 'px'"
                         />
                     </div>
                 </div>
@@ -19,22 +21,21 @@
                         <span class="star-icon"></span>
                     </a>
                 </div>
-                <div class="board-members" :style="'width: ' + board.members.length * 75 + 'px'">
+                <div class="board-members" :style="'width: ' + board.members.length * 32 + 'px'">
                     <span
                         v-for="(member, idx) in board.members"
                         href
-                        :style="'left:' + idx * 18 + 'px'"
+                        :style="'left:' + idx * 25 + 'px'"
                     >
                         <img :src="member.imgUrl" alt="member img" />
                     </span>
-
-                    <a href style="right:20px">
-                        <button>
-                            <span class="invite-icon"></span>
-                            <span>Invite</span>
-                        </button>
-                    </a>
                 </div>
+                <a href style="right:20px;">
+                    <button>
+                        <span class="invite-icon"></span>
+                        <span>Invite</span>
+                    </button>
+                </a>
             </div>
             <div class="board-header-right">
                 <div class="board-header-btn board-menu">
@@ -55,13 +56,13 @@ export default {
     },
     components: {
     },
-    created() { },
+    created() {
+        this.boardToEdit = JSON.parse(JSON.stringify(this.board))
+    },
     data() {
         return {
             isEditTitle: false,
-            boardToEdit: {
-                title: this.board.title
-            }
+            boardToEdit: null,
         }
     },
     methods: {
@@ -72,8 +73,11 @@ export default {
             }, 100)
         },
         saveBoardTitle() {
+            this.$emit('board-title-changed', this.boardToEdit)
+        },
+        stopEdit() {
             this.isEditTitle = !this.isEditTitle
-            console.log('a')
+
         },
         openMenu() {
             this.$emit('open-menu')

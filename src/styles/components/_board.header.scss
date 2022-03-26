@@ -5,6 +5,7 @@
     width: 100vw;
     justify-content: space-between;
     height: 32px;
+
     a,
     .title,
     .menu-btn {
@@ -13,8 +14,17 @@
       margin: 0 4px 4px 0;
       display: flex;
       align-items: center;
+      h1 {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 32px;
+        padding: 0 12px;
+      }
       input {
-        max-width: fit-content;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 32px;
+        padding: 0 6px;
       }
     }
     .board-members {
@@ -33,25 +43,23 @@
         border-radius: 25em;
         object-fit: cover;
       }
-      button {
-        display: flex;
-        gap: 3px;
-        height: 30px;
-        align-items: center;
-        transform: translateX(10%);
-        .invite-icon {
-          @include icon;
-          padding: 0;
-          width: fit-content;
-          &::before {
-            content: '\e902';
-          }
+    }
+    button {
+      display: flex;
+      gap: 3px;
+      height: 30px;
+      align-items: center;
+      .invite-icon {
+        @include icon;
+        padding: 0;
+        width: fit-content;
+        &::before {
+          content: '\e902';
         }
       }
     }
     .board-header-btn {
       height: 32px;
-      background-color: #ffffff3d;
       border-radius: 3px;
     }
     .board-header-left {
@@ -61,6 +69,7 @@
         position: relative;
       }
       .board-starred {
+        background-color: #ffffff3d;
         width: 32px;
         .star-icon {
           @include icon;
@@ -78,6 +87,7 @@
     }
     .board-header-right {
       .board-menu {
+        background-color: #ffffff3d;
         button {
           background: none;
         }

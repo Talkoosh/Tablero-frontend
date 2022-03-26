@@ -3,10 +3,10 @@
         <section v-clickoutside="closeTaskDetails" class="task-total-container">
             <div
                 class="task-details-cover"
-                v-if="task?.style.color || task?.style.photo"
-                :style="{ backgroundColor: task.style.color ? task.style.color : '', backgroundImage:`url(${task.style.photo})` }"
+                v-if="(task?.style.color || task?.style.photo)"
+                ref="detailsCover"
+                :style="{backgroundColor: coverBcg, backgroundImage: `url(${coverPhoto})`}"
             >
-                <!-- <img :src="task.style.photo" alt=""> -->
                 <span class="icon task-close-btn" @click.stop="closeTaskDetails"></span>
                 <div class="btn-container">
                     <button @click.stop="setCurrAction('coverMenu')">
@@ -24,7 +24,7 @@
                             @blur="closeEditingTitle"
                             :style="{
                                 backgrounColor: isEditingTitle ? '#fff' : '',
-                                boxShadow: isEditingTitle ? 'inset 0 0 0 2px #0079bf' : ''
+                                boxShadow: isEditingTitle ? 'inset 0 0 0 1px #0079bf' : ''
                             }"
                             class="title-txt"
                             v-model="task.title"
@@ -33,7 +33,7 @@
                         <p>in list ...</p>
                     </div>
                     <span
-                        v-if="!task?.style.color"
+                        v-if="(!task?.style.color && !task?.style.photo)"
                         class="icon task-close-btn"
                         @click.stop="closeTaskDetails"
                     ></span>
@@ -117,7 +117,10 @@
                             <span class="icon labels-icon"></span>
                             <span>Labels</span>
                         </button>
-                        <button v-if="!task.style.color" @click.stop="setCurrAction('coverMenu')">
+                        <button
+                            v-if="!task.style.color && !task.style.photo"
+                            @click.stop="setCurrAction('coverMenu')"
+                        >
                             <span class="icon cover-icon"></span>
                             <span>Cover</span>
                         </button>
@@ -136,6 +139,7 @@
 import taskActivities from './task.activities.vue'
 import labelMenu from './label.menu.vue'
 import coverMenu from './cover.menu.vue'
+import FastAverageColor from 'fast-average-color';
 
 export default {
     data() {
@@ -144,6 +148,8 @@ export default {
             isEditingTitle: false,
             currDescTxt: '',
             currAction: '',
+            coverBcg: null,
+            coverPhoto: null
         }
     },
     methods: {
@@ -183,13 +189,13 @@ export default {
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
         onSetColor(color) {
-            this.task.style.photo = '';
+            delete this.task.style.photo
             this.task.style.color = color;
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
         },
         onSetPhoto(photo) {
-            this.task.style.color = '';
+            delete this.task.style.color;
             this.task.style.photo = photo;
             console.log(this.task.style);
             const boardId = this.$route.params.boardId;
@@ -200,6 +206,10 @@ export default {
             this.task.style.isBackground = (size === 'full') ? true : false;
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
+        },
+        setCoverStyle(color, photo){
+            this.coverBcg = color; 
+            this.coverPhoto = photo;
         }
 
     },
@@ -209,7 +219,7 @@ export default {
         },
         labels() {
             return this.$store.getters.boardLabels;
-        }
+        },
     },
     components: {
         taskActivities,
@@ -230,7 +240,24 @@ export default {
             handler() {
                 if (this.isEditingDesc) this.currDescTxt = this.task.description;
             }
-        }
+        },
+        'task.style': {
+            async handler() {
+                if (!this.task) return
+                if (this.task.style.photo) {
+                    console.log(this.task);
+                    const fac = new FastAverageColor();
+                    const color = await fac.getColorAsync(this.task.style.photo);
+                    this.setCoverStyle(color.hexa, this.task.style.photo)
+                    // this.$refs.detailsCover.style.backgroundImage = `url(${this.task.style.photo})`
+                }
+                else if (this.task.style.color) {
+                    this.setCoverStyle(this.task.style.color, null)
+                }
+            },
+            immediate: true,
+            deep: true
+        },
     }
 }
 </script>

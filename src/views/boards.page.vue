@@ -77,12 +77,14 @@ import hompageNav from "../components/homepage.nav.vue"
 
 export default {
   // props: [''],
+  emits: ['open-drop'],
   components: {
     boardPreview,
     hompageNav
   },
   created() {
     this.$store.dispatch("loadBoards");
+    this.$store.commit({ type: 'setCurrBoardId', boardId: null })
     this.$store.commit({ type: 'changeHeaderBgc', bgc: '#026aa7' })
   },
   data() {

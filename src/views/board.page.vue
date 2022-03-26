@@ -1,10 +1,15 @@
 <template>
     <div v-if="board" class="main-board" :style="boardBg">
         <header>
-            <board-header @open-menu="openMenu" @change-board-bgc="changeBoardBgc" :board="board" />
+            <board-header @board-title-changed="saveBoard" @open-menu="openMenu" :board="board" />
         </header>
         <div class="groups-container">
-            <Container orientation="horizontal" @drop="onDrop" class="drag-container">
+            <Container
+                v-if="board.groups.length"
+                orientation="horizontal"
+                @drop="onDrop"
+                class="drag-container"
+            >
                 <Draggable v-for="group in board.groups" :key="group._id">
                     <board-group
                         @group-title-changed="updateGroup"
@@ -37,6 +42,7 @@
     </div>
     <board-menu
         @change-board-bgc="changeBoardBgc"
+        @change-board-bgp="changeBoardBgp"
         @close-menu="closeMenu"
         :class="menuStatus"
         :board="board"
@@ -59,12 +65,10 @@ export default {
         Container,
         Draggable,
     },
-    async created() {
+    created() {
         this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
-        await this.$store.commit({ type: 'setCurrBoardId', boardId: id })
-        this.$store.commit({ type: 'changeHeaderBgc', bgc: this.board.style.backgroundColor })
-
+        this.$store.commit({ type: 'setCurrBoardId', boardId: id })
     },
     data() {
         return {
@@ -74,6 +78,9 @@ export default {
         }
     },
     methods: {
+        saveBoard(boardToSave) {
+            this.$store.dispatch({ type: 'saveBoard', board: boardToSave })
+        },
         addGroup() {
             if (!this.groupToAdd.title) return
             this.$store.dispatch({ type: 'addGroup', boardId: this.board._id, groupToAdd: this.groupToAdd })
@@ -102,6 +109,9 @@ export default {
         },
         changeBoardBgc(bgc) {
             this.$store.dispatch({ type: 'changeBoardBgc', bgc, boardId: this.board._id })
+        },
+        changeBoardBgp(url) {
+            this.$store.dispatch({ type: 'changeBoardBgp', url, boardId: this.board._id })
         },
         closeMenu() {
             this.isMenuOpen = false
@@ -136,10 +146,23 @@ export default {
         boardBg() {
             if (!this.board.style.backgroundColor && !this.board.style.photo) return
             if (this.board.style.backgroundColor) return `background-color: ${this.board.style.backgroundColor}`
-            else return `background: url('${this.board.style.photo}')`
+            else return `background-image: url('${this.board.style.photo}')`
         },
         menuStatus() {
             return this.isMenuOpen ? 'menu-open' : 'menu-close'
+        }
+    },
+    watch: {
+        'board': {
+            handler() {
+                if (this.board.style.photo) {
+                    this.$store.commit({ type: 'changeHeaderBgc', bgc: '#026aa7' })
+                    return
+                } else {
+
+                    this.$store.commit({ type: 'changeHeaderBgc', bgc: this.board.style.backgroundColor })
+                }
+            }
         }
     },
     unmounted() { },
