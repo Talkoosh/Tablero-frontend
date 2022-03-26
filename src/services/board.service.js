@@ -43,7 +43,7 @@ async function getBoardById(boardId) {
   }
 }
 
-async function addBoard(title,style) {
+async function addBoard(title, style) {
   const boardToSave = _getEmptyBoard();
   boardToSave.createdAt = Date.now();
   boardToSave.title = title;
@@ -212,7 +212,7 @@ function _createTask(title) {
 async function _makeBoard() {
   try {
     const board = {
-      title: 'Robot dev proj',
+      title: 'Our Trabelo Project',
       createdAt: 1589983468418,
       createdBy: {
         _id: 'u101',
@@ -221,8 +221,9 @@ async function _makeBoard() {
           'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
       },
       style: {
-        backgroundColor: '#d19034',
-        // photo:'https://unsplash.com/@priscilladupreez?utm_source=trello&utm_medium=referral&utm_campaign=api-credit',
+        // backgroundColor: '#d19034',
+        photo:
+          'https://images.unsplash.com/photo-1647614224159-0f2e7d804be4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjQ3ODU&ixlib=rb-1.2.1&q=80&w=1080',
       },
       labels: [
         {
@@ -279,8 +280,8 @@ async function _makeBoard() {
               _id: 'c101',
               title: 'Replace logo',
               style: {
-                color: '#af4632',
-                isBackground: false,
+                color: '#5ba4cf',
+                isBackground: true,
               },
             },
             {
@@ -288,8 +289,8 @@ async function _makeBoard() {
               title: 'Add Samples',
               style: {
                 photo:
-                  'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                isBackground: false,
+                  'https://images.unsplash.com/photo-1646581946674-c4f7481e6249?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjUwMTE&ixlib=rb-1.2.1&q=80&w=1080',
+                isBackground: true,
               },
             },
           ],
@@ -360,7 +361,122 @@ async function _makeBoard() {
               style: {
                 // color: '#4abf6a',
                 photo:
+                  'https://images.unsplash.com/photo-1646004882332-ffbf15147f08?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjUwMTE&ixlib=rb-1.2.1&q=80&w=1080',
+                isBackground: false,
+              },
+            },
+          ],
+          // "style": {}
+        },
+        {
+          _id: 'g103',
+          title: 'Group 3',
+          tasks: [
+            {
+              _id: 'c107',
+              title: 'Drag some stuff',
+              style: {
+                color: '#ff8ed4',
+                isBackground: true,
+              },
+            },
+            {
+              _id: 'c120',
+              title: 'Hang out',
+              style: {
+                photo:
+                  'https://images.unsplash.com/photo-1647341083163-0a8d788f4a85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjU2OTE&ixlib=rb-1.2.1&q=80&w=1080',
+                isBackground: false,
+              },
+            },
+            {
+              _id: 'c120',
+              title: 'Watch some views',
+              style: {
+                photo:
+                  'https://images.unsplash.com/photo-1646324760621-5a07e65eb747?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjY0ODY&ixlib=rb-1.2.1&q=80&w=1080',
+                isBackground: false,
+              },
+            },
+            {
+              _id: 'c120',
+              title: 'Make adventures',
+              style: {
+                photo:
+                  'https://images.unsplash.com/photo-1646375817588-4ac38a73dc21?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjY0ODY&ixlib=rb-1.2.1&q=80&w=1080',
+                isBackground: false,
+              },
+            },
+          ],
+          // "style": {} style is not editable in trello
+        },
+        {
+          _id: 'g104',
+          title: 'Group 4',
+          tasks: [
+            {
+              _id: 'c394',
+              title: 'Look how nice',
+              style: {
+                color: '#ffaf3f',
+                isBackground: false,
+              },
+              labelIds: ['l104', 'l106', 'l103'],
+            },
+            {
+              _id: 'c999',
+              title: 'Get some sleep',
+              status: 'in-progress',
+              description: 'description',
+              comments: [
+                {
+                  _id: 'ZdPnm',
+                  txt: 'also @yaronb please CR this',
+                  createdAt: 1590999817436.0,
+                  byMember: {
+                    _id: 'u101',
+                    fullname: 'Tal Tarablus',
+                    imgUrl:
+                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  },
+                },
+              ],
+              checklists: [
+                {
+                  _id: 'YEhmF',
+                  title: 'Checklist',
+                  todos: [
+                    {
+                      _id: '212jX',
+                      title: 'To Do 1',
+                      isDone: false,
+                    },
+                  ],
+                },
+              ],
+              members: [
+                {
+                  _id: 'u101',
+                  username: 'Tal',
+                  fullname: 'Tal Tarablus',
+                  imgUrl:
+                    'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                },
+              ],
+              labelIds: ['l101', 'l102', 'l105'],
+              createdAt: 1590999730348,
+              dueDate: 16156215211,
+              byMember: {
+                _id: 'u101',
+                // "username": "Tal", not sure if necessary
+                fullname: 'Tal Tarablus',
+                imgUrl:
                   'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+              },
+              style: {
+                // color: '#4abf6a',
+                photo:
+                  'https://images.unsplash.com/photo-1634072319894-107e61606191?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgzMjU1NjM&ixlib=rb-1.2.1&q=80&w=1080',
                 isBackground: true,
               },
             },
