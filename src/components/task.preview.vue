@@ -53,7 +53,7 @@ export default {
             }
         },
         taskCover() {
-            if (!this.task.style.isBackground) return
+            if (!this.task.style.isBackground || !this.task.style.photo && !this.task.style.color) return ''
             else return 'task-bg-cover'
         },
         taskBg() {

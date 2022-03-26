@@ -33,6 +33,10 @@ export const boardStore = {
     setCurrBoardId(state, { boardId }) {
       state.currBoardId = boardId;
     },
+    saveBoard(state, { board }) {
+      const boardIdx = state.boards.findIndex((b) => b._id === board._id);
+      state.boards[boardIdx] = board;
+    },
     addGroup(state, { savedGroup }) {
       const boardIdx = state.boards.findIndex(
         (b) => b._id === state.currBoardId
@@ -52,12 +56,12 @@ export const boardStore = {
       );
       group.tasks.push(task);
     },
-    editGroup(state, { groupToEdit, boardId }) {
+    editGroup(state, { savedGroup, boardId }) {
       const boardIdx = state.boards.findIndex((b) => b._id === boardId);
       const groupIdx = state.boards[boardIdx].groups.findIndex(
-        (g) => g._id === groupToEdit._id
+        (g) => g._id === savedGroup._id
       );
-      state.boards[boardIdx].groups[groupIdx] = groupToEdit;
+      state.boards[boardIdx].groups[groupIdx] = savedGroup;
     },
     updateBoard(state, { board }) {
       const boardIdx = state.boards.findIndex((b) => b._id === board._id);
@@ -77,6 +81,10 @@ export const boardStore = {
       } catch (err) {
         throw err;
       }
+    },
+    async saveBoard({ commit }, { board }) {
+      const newBoard = await boardService.updateBoard(board);
+      commit({ type: 'saveBoard', board: newBoard });
     },
     async addGroup({ commit }, { boardId, groupToAdd }) {
       try {
@@ -123,8 +131,8 @@ export const boardStore = {
       commit({ type: 'addTask', task: taskToAdd, groupId: task.groupId });
     },
     async editGroup({ commit }, { groupToEdit, boardId }) {
-      boardService.saveGroup(boardId, groupToEdit);
-      commit({ type: 'editGroup', groupToEdit, boardId });
+      const savedGroup = await boardService.saveGroup(boardId, groupToEdit);
+      commit({ type: 'editGroup', savedGroup, boardId });
     },
     async changeBoardBgc({ commit }, { bgc, boardId }) {
       const board = JSON.parse(

@@ -4,11 +4,16 @@
 
   .groups-container {
     display: flex;
-    padding: 8px;
+    padding: 8px 14px;
     gap: 8px;
     overflow-x: auto;
     height: 87%;
 
+    .drag-container {
+      display: flex;
+      gap: 8px;
+      min-width: fit-content;
+    }
     .add-group {
       @include button-default;
       background-color: #ffffff3d;

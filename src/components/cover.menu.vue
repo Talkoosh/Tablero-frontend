@@ -109,6 +109,9 @@ export default {
         },
         setCoverSize(size) {
             this.$emit('cover-size-set', size)
+        },
+        closeAction(ev){
+            this.$emit('close-action', ev);
         }
     },
     computed: {
