@@ -1,7 +1,6 @@
 <template>
   <div
     class="starred-drop-content dropdown"
-    v-if="isStarredDropOpen"
     v-clickoutside="toggleStarredDrop"
   >
     <header class="drop-header">

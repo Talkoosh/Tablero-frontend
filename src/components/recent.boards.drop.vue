@@ -1,7 +1,6 @@
  <template>
   <div
     class="recent-drop-content dropdown"
-    v-if="isRecentDropOpen"
     v-clickoutside="toggleRecentDrop"
   >
     <header class="drop-header">
