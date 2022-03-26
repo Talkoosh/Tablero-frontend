@@ -1,8 +1,13 @@
 <template>
   <section class="app-container">
-    <main-header @open-drop="openDrop"/>
+    <main-header @open-drop="openDrop" />
     <router-view @open-drop="openDrop" />
-    <component :is="currDropDown" @close-drop="closeDrop" v-clickoutside="closeDrop" />
+    <component
+      :is="currDropDown"
+      v-if="currDropDown"
+      @close-drop="closeDrop"
+      v-clickoutside="closeDrop"
+    />
   </section>
 </template>
 
@@ -29,14 +34,14 @@ export default {
     }
   },
   methods: {
-    openDrop(cmp){
+    openDrop(cmp) {
       console.log(cmp)
       this.currDropDown = cmp;
     },
-    closeDrop(){
+    closeDrop() {
       this.currDropDown = null;
     }
-    
+
 
   },
   computed: {
@@ -44,6 +49,6 @@ export default {
   },
   unmounted() {
 
-   },
+  },
 }
 </script>

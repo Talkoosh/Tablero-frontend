@@ -1,13 +1,8 @@
  <template>
-  <div
-    class="recent-drop-content dropdown"
-    v-clickoutside="toggleRecentDrop"
-  >
+  <div class="recent-drop-content dropdown">
     <header class="drop-header">
       <div class="header-text">Recent boards</div>
-      <button class="close-header" @click="closeDropdown('recentBoardsDrop')">
-        X
-      </button>
+      <button class="close-header" @click="closeDropdown('recentBoardsDrop')">X</button>
     </header>
     <div class="boards-list" v-for="board in boards" :key="board._id">
       <router-link class="board-details" :to="'/board/' + board._id">
@@ -30,7 +25,7 @@
 export default {
   name: "",
   components: {},
-  created() {},
+  created() { },
   data() {
     return {};
   },

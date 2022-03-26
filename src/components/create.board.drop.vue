@@ -1,19 +1,10 @@
  
  <template>
   <div class="create-board">
-    <div
-      v-clickoutside="toggleCreateBoard"
-      class="create-board-modal"
-      :class="toggleCreateBoardModal"
-    >
+    <div class="create-board-modal" :class="toggleCreateBoardModal">
       <header class="modal-header">
         <div class="modal-title">Create board</div>
-        <button
-          class="close-create-modal-btn"
-          @click="closeDropdown('createBoardDrop')"
-        >
-          X
-        </button>
+        <button class="close-create-modal-btn" @click="closeDropdown('createBoardDrop')">X</button>
       </header>
       <div class="modal-content">
         <div class="background-picker-container">
@@ -45,20 +36,10 @@
 
         <div class="create-board-input-container">
           <div class="input-title">Board title</div>
-          <input
-            type="text"
-            class="create-board-input"
-            v-model="boardToAdd.title"
-          />
+          <input type="text" class="create-board-input" v-model="boardToAdd.title" />
         </div>
 
-        <button
-          class="submit-create-btn"
-          :class="submitStatus"
-          @click="addBoard"
-        >
-          Create
-        </button>
+        <button class="submit-create-btn" :class="submitStatus" @click="addBoard">Create</button>
       </div>
     </div>
   </div>
@@ -69,7 +50,7 @@
 export default {
   name: "",
   components: {},
-  created() {},
+  created() { },
   data() {
     return {
       boardToAdd: { title: '', style: {} },
@@ -82,8 +63,8 @@ export default {
       await this.$store.dispatch({ type: "addBoard", boardToAdd });
     },
 
-    setBoardColor(color){
-     
+    setBoardColor(color) {
+
     },
 
     closeDropdown(cmpName) {

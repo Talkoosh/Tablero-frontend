@@ -1,6 +1,6 @@
 <template>
   <section class="main-header">
-    <router-link class="main-logo" :to="'/board/'"> Tablero</router-link>
+    <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="recent-drop">
@@ -8,9 +8,7 @@
             class="drop-btn recent-btn"
             @click="openDropdown('recentBoardsDrop')"
             :class="toggleRecentDropBGC"
-          >
-            Recent
-          </button>
+          >Recent</button>
         </div>
         <!-- <div
             class="recent-drop-content dropdown"
@@ -37,16 +35,14 @@
               </router-link>
             </div>
           </div>
-        </div> -->
+        </div>-->
 
         <div class="starred-drop">
           <button
             class="drop-btn starred-btn"
             @click="openDropdown('starredBoardsDrop')"
             :class="toggleStarredDropBGC"
-          >
-            Starred
-          </button>
+          >Starred</button>
           <!-- <div
             class="starred-drop-content dropdown"
             v-if="isStarredDropOpen"
@@ -73,7 +69,7 @@
                 </div>
               </router-link>
             </div>
-          </div> -->
+          </div>-->
         </div>
       </div>
 
@@ -83,16 +79,9 @@
             class="create-board-btn drop-btn"
             @click="openDropdown('createBoardDrop')"
             :class="toggleCreateBtnBGC"
-          >
-            Create
-          </button>
+          >Create</button>
         </div>
-        <div
-          v-clickoutside="toggleCreateBoard"
-          v-if="isCreateBoardOpen"
-          class="create-board-modal"
-          :class="toggleCreateBoardModal"
-        ></div>
+        <div v-if="isCreateBoardOpen" class="create-board-modal" :class="toggleCreateBoardModal"></div>
       </div>
 
       <div class="seperator"></div>
@@ -101,7 +90,7 @@
       <div class="board-search">
         <!-- <span>
           <img src="@/assets/img/bell.png" alt="" />
-        </span> -->
+        </span>-->
         <input class="main-input" type="text" placeholder="Search" />
         <!-- </form> -->
       </div>
@@ -126,7 +115,7 @@ export default {
     recentBoardsDrop,
     starredBoardsDrop
   },
-  created() {},
+  created() { },
   data() {
     return {
       isRecentDropOpen: false,
@@ -157,6 +146,12 @@ export default {
     toggleStarredDropBGC() {
       return this.isStarredDropOpen ? "open-drop" : "";
     },
+    toggleCreateBtnBGC() {
+      return
+    },
+    isCreateBoardOpen() {
+      return
+    }
   },
 };
 </script>
