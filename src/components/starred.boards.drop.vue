@@ -12,7 +12,7 @@
         ></div>
         <div class="board-text">
           <div class="board-title">{{ board.title }}</div>
-          <div class="board-user">{{ board.createdBy.fullname }} workspace</div>
+          <!-- <div class="board-user">{{ board.createdBy.fullname }} workspace</div> -->
         </div>
         <div class="star-container">
           <span class="star"></span>

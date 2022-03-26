@@ -13,7 +13,7 @@
         ></div>
         <div class="board-text">
           <div class="board-title">{{ board.title }}</div>
-          <div class="board-user">{{ board.createdBy.fullname }} workspace</div>
+          <!-- <div class="board-user">{{ board.createdBy.fullname }} workspace</div> -->
         </div>
       </router-link>
     </div>
