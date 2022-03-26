@@ -146,12 +146,12 @@ export default {
     toggleStarredDropBGC() {
       return this.isStarredDropOpen ? "open-drop" : "";
     },
-    toggleCreateBtnBGC() {
-      return
-    },
-    isCreateBoardOpen() {
-      return
-    }
+    // toggleCreateBtnBGC() {
+    //   return
+    // },
+    // isCreateBoardOpen() {
+    //   return
+    // }
   },
 };
 </script>
