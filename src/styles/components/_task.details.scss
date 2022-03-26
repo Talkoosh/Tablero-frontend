@@ -74,6 +74,9 @@
 }
 
 .task-details-main {
+  button{
+    background-color: $task-btn-clr;
+  }
   min-height: 600px;
   overflow: auto;
   padding: 25px 17px 0 55px;
@@ -109,10 +112,12 @@
     .title-txt {
       overflow: hidden;
       overflow-wrap: break-word;
+      white-space: pre-wrap;
       height: 32px;
-      width: 100%;
+      width: 95%;
       background: #0000;
       border-radius: 3px;
+      border-width: 1px;
       box-shadow: none;
       font-size: 20px;
       font-weight: 600;
@@ -124,6 +129,7 @@
       border: none;
       resize: none;
       transition: box-shadow 85ms;
+      color: $clr4;
     }
     .icon {
       @include icon;
@@ -150,7 +156,7 @@
         @include icon;
         @include icon-lg;
         left: -38px;
-        top: -6px;
+        top: -4px;
         position: absolute;
         &::before {
           content: "\e912";
@@ -161,6 +167,7 @@
       p {
         color: $clr5;
         font-weight: 400;
+        margin-top: 3px;
       }
     }
   }
@@ -254,8 +261,10 @@
           }
         }
         pre {
+          max-width: 515px;
           white-space: pre-wrap;
           word-wrap: break-word;
+          font-family: unset;
         }
         button {
           @include button-default;

@@ -15,6 +15,5 @@ async function loadDefaultPhotos() {
     res.data.forEach((p) => photos.push(p.urls.regular));
     localStorage.setItem(KEY, JSON.stringify(photos));
   }
-  console.log('hiioljsas');
   return photos;
 }
