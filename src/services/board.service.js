@@ -184,6 +184,38 @@ function _getEmptyBoard() {
     style: {},
     members: [],
     activities: [],
+    labels: [
+      {
+        _id: utilService.makeId(),
+        title: '',
+        color: '#61BD4F',
+      },
+      {
+        _id: utilService.makeId(),
+        title: '',
+        color: '#F2D600',
+      },
+      {
+        _id: utilService.makeId(),
+        title: '',
+        color: '#FF9F1A',
+      },
+      {
+        _id: utilService.makeId(),
+        title: '',
+        color: '#EB5A46',
+      },
+      {
+        _id: utilService.makeId(),
+        title: '',
+        color: '#C377E0',
+      },
+      {
+        _id: utilService.makeId(),
+        title: '',
+        color: '#0079BF',
+      },
+    ],
   };
 }
 
