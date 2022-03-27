@@ -93,7 +93,7 @@ export default {
     },
     methods: {
         closeAction(ev) {
-            this.$emit('close-action', ev)
+            this.$emit('close-action', ev);
         },
         toggleLabel(labelId) {
             if (this.labelIds.includes(labelId)) {
@@ -109,18 +109,26 @@ export default {
         },
         onAddLabel() {
             if (!this.labelToAdd.title) return;
-            this.$emit('label-add', this.labelToAdd);
-            this.isAdding = false;
+            this.$emit('label-add', {...this.labelToAdd});
+            this.isAdding = false
+            this.labelToAdd = {
+                title: '',
+                color: ''
+            }
         },
         editLabel(label) {
-            this.labelToAdd = { ...label }
+            this.labelToAdd = {...label}
             this.isAdding = true;
         },
-        onDeleteLabel(){
+        onDeleteLabel() {
             this.$emit('label-delete', this.labelToAdd._id);
-            this.isAdding = false; 
+            this.isAdding = false;
+            this.labelToAdd = {
+                title: '',
+                color: ''
+            }
         }
-        
+
 
     },
     computed: {
@@ -143,6 +151,16 @@ export default {
                         return '#89609E'
                     case '#0079BF':
                         return '#055A8C'
+                    case '#00C2E0':
+                        return '#0098B7'
+                    case '#51E898':
+                        return '#4BBF6B'
+                    case '#FF78CB':
+                        return '#C9558F'
+                    case '#344563':
+                        return '#091E42'
+                    case '#B3BAC5':
+                        return '#97a0af'
                 }
             }
         }

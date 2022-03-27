@@ -219,23 +219,23 @@ export const boardStore = {
         const idx = board.labels.findIndex((l) => l._id === label._id);
         board.labels.splice(idx, 1, label);
       }
-
       commit({ type: 'saveBoard', board });
       await boardService.updateBoard(board);
     },
     async deleteLabel({ commit }, { labelId, task, boardId }) {
       try {
-        const board = await boardService.getBoardById(boardId);
+        console.log('STORE', labelId, task, boardId);
+        if (task.labelIds.includes(labelId)) {
+          const labelIdx = task.labelIds.findIndex((id) => id === labelId);
+          task.labelIds.splice(labelIdx, 1);
+          await boardService.saveTask(task, boardId);
+        }
         //delete label from board
+        const board = await boardService.getBoardById(boardId);
         const boardLabelIdx = board.labels.findIndex((l) => l._id === labelId);
         board.labels.splice(boardLabelIdx, 1);
 
-        //delete label Id from task
-        const taskLabelIdx = task.labelIds.findIndex((l) => l._id === labelId);
-        task.labelIds.splice(taskLabelIdx, 1);
         commit({ type: 'saveBoard', board });
-        console.log('TASK:', task);
-        await boardService.saveTask(task, boardId);
         await boardService.updateBoard(board);
       } catch (err) {
         throw err;

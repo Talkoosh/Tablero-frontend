@@ -86,6 +86,9 @@ export default {
     this.$store.dispatch("loadBoards");
     this.$store.commit({ type: "setCurrBoardId", boardId: null });
     this.$store.commit({ type: "changeHeaderBgc", bgc: "#026aa7" });
+
+      console.log(window.location.href);
+
   },
   data() {
     return {};

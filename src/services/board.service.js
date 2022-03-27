@@ -23,7 +23,6 @@ const KEY = 'board';
 async function query() {
   try {
     const boards = await httpService.get(KEY);
-    console.log(boards);
     if (!boards.length) {
       const board = await _makeBoard();
       boards.push(board);
@@ -118,6 +117,7 @@ async function saveTask(task, boardId) {
       const groupId = await getGroupIdByTaskId(task._id, boardId);
       const group = board.groups.find((g) => g._id === groupId);
       const idx = group.tasks.findIndex((t) => t._id === task._id);
+
       group.tasks[idx] = task;
       await updateBoard(board);
       return task;

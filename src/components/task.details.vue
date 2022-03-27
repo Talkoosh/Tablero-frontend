@@ -206,7 +206,7 @@ export default {
         },
         onDeleteLabel(labelId) {
             const boardId = this.$route.params.boardId;
-            this.$store.dispatch({type: 'deleteLabel', labelId, task: this.task ,boardId})
+            this.$store.dispatch({type: 'deleteLabel', labelId, task: {...this.task} ,boardId})
         },
         onSetPhoto(photo) {
             delete this.task.style.color;
