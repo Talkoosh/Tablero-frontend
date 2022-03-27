@@ -58,7 +58,8 @@
                       @click.prevent="starBoard(board._id)"
                       class="card-star-container"
                     >
-                      <span class="star"></span>
+                      <span v-if="board.isStarred" class="star"></span>
+                      <span v-else class="unstar"></span>
                     </span>
                   </div>
                 </div>
