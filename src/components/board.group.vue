@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="group-container" @mouseover="showDragSlot">
+        <div class="group-container">
             <div class="group">
                 <div class="group-header">
                     <h2
@@ -16,10 +16,21 @@
                         type="text"
                         v-model="groupToEdit.title"
                     />
-                    <div class="group-extras">
+                    <div @click="toggleExtrasMenu" class="group-extras">
                         <div>...</div>
                     </div>
                 </div>
+                 <div class="group-extras-menu" v-if="isExtrasOpen" v-clickoutside="toggleExtrasMenu">
+                            <h3 class="menu-title">List actions</h3>
+                            <span class="extras-exit"></span>
+                            <hr>
+                            <div class="extras-btns">
+                                <button class="add-task-btn">Add card...</button>
+                                <button class="copy-group-btn">Copy list...</button>
+                                <button class="sort-by-btn">Sort by...</button>
+                                <button class="archive-group-btn">Archive this list</button>
+                            </div>
+                        </div>
                 <!-- v-if="group.tasks.length" -->
                 <div class="group-tasks">
                     <Container
@@ -84,6 +95,7 @@ export default {
                 title: '',
                 groupId: this.group._id
             },
+            isExtrasOpen: false
         }
     },
     methods: {
@@ -135,6 +147,9 @@ export default {
         getChildPayload(idx) {
             return this.group.tasks[idx]
         },
+        toggleExtrasMenu(){
+            this.isExtrasOpen = !this.isExtrasOpen
+        }
     },
     computed: {
         addTaskCondition() {

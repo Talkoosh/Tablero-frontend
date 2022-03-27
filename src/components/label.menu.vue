@@ -1,5 +1,6 @@
 <template>
-        <section class="label-menu">
+    <section class="label-menu">
+        <div v-if="!isAdding" class="label-main">
             <div class="label-menu-header">
                 <h3 class="menu-title">Labels</h3>
                 <span class="label-menu-exit" @click="closeAction"></span>
@@ -11,21 +12,50 @@
                 <div class="label-container" v-for="label in labels" :key="label._id">
                     <span
                         @click="toggleLabel(label._id)"
-                        :style="{ backgroundColor: label.color, color: labelShadowColor(label.color)}"
+                        :style="{ backgroundColor: label.color, color: labelShadowColor(label.color) }"
                         class="label"
                     >
-                        <span class="label-title">{{label.title}}</span>
+                        <span class="label-title">{{ label.title }}</span>
                         <span class="check-icon" v-if="labelIds.includes(label._id)"></span>
                     </span>
                     <span class="label-edit-icon"></span>
                 </div>
-                <button class="create-btn">Create a new label</button>
+                <button @click.stop="isAdding = true" class="create-btn">Create a new label</button>
             </div>
-        </section>
+        </div>
+        <div v-else class="label-add">
+            <div class="header">
+                <span class="back-icon"></span>
+                <h3 class="menu-title">Create Label</h3>
+                <span class="close-icon"></span>
+            </div>
+            <hr />
+            <div class="main">
+                <h4>Name</h4>
+                <input type="text" v-model="labelToAdd.title"/>
+                <h4>Select a color</h4>
+                <div class="labels-container">
+                    <span
+                    @click="setLabelColor(labelColor)"
+                        class="labelColor"
+                        v-for="labelColor in labelColors"
+                        :key="labelColor"
+                        :style="{ backgroundColor: labelColor }"
+                    >
+                        <span class="check-icon" v-if="labelToAdd.color === labelColor"></span>
+                    </span>
+                    <div class="text">
+                        <p class="txt-no-color">No color.</p>
+                        <p class="txt-lng-no-color">This won't show up on the front of cards.</p>
+                    </div>
+                </div>
+                <button @click="onAddLabel" class="add-btn">Create</button>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script>
-import {utilService} from '../services/util.service.js'
 
 export default {
     props: {
@@ -34,7 +64,24 @@ export default {
     },
     data() {
         return {
-
+            labelToAdd: {
+                title: '',
+                color: '#61BD4F'
+            },
+            labelColors: [
+                '#61BD4F',
+                '#F2D600',
+                '#FF9F1A',
+                '#EB5A46',
+                '#C377E0',
+                '#0079BF',
+                '#00c2e0',
+                '#51e898',
+                '#ff78cb',
+                '#344563',
+                '#b3bac5'
+            ],
+            isAdding: false
         }
     },
     created() {
@@ -52,16 +99,23 @@ export default {
                 this.labelIds.push(labelId)
             }
             this.$emit('label-set', this.labelIds)
+        },
+        setLabelColor(color){
+            this.labelToAdd.color = color;
+        },
+        onAddLabel(){
+            if(!this.labelToAdd.title) return; 
+            this.$emit('label-add', this.labelToAdd);
         }
     },
     computed: {
         labelIds() {
             return this.task.labelIds
         },
-        labelShadowColor(){
+        labelShadowColor() {
             return shadowColor => {
                 shadowColor = shadowColor.toUpperCase();
-                switch(shadowColor){
+                switch (shadowColor) {
                     case '#61BD4F':
                         return '#529739'
                     case '#F2D600':

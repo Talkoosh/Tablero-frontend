@@ -73,7 +73,7 @@ export default {
             }, 100)
         },
         saveBoardTitle() {
-            this.$emit('board-title-changed', this.boardToEdit)
+            this.$emit('board-title-changed', JSON.parse(JSON.stringify(this.boardToEdit)))
         },
         stopEdit() {
             this.isEditTitle = !this.isEditTitle

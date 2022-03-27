@@ -49,12 +49,17 @@
       gap: 3px;
       height: 30px;
       align-items: center;
+      background-color: $clr1;
+      border-radius: 3px;
+      border-color: transparent;
+      color: white;
+      cursor: pointer;
       .invite-icon {
         @include icon;
         padding: 0;
         width: fit-content;
         &::before {
-          content: '\e902';
+          content: "\e902";
         }
       }
     }
@@ -76,7 +81,7 @@
           transform: translatex(-40%);
           font-weight: 400;
           &::before {
-            content: '\e966';
+            content: "\e966";
           }
           &:hover {
             color: gold;
@@ -97,7 +102,7 @@
           @include icon;
           padding: 0 4px 0 0;
           &::before {
-            content: '\e952';
+            content: "\e952";
           }
         }
       }

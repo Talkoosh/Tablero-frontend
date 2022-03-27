@@ -125,13 +125,13 @@
                                         flex-shrink: 0;
                                         line-height: 1;
 
-                                        .check-icon {
-                                            @include icon;
-                                            color: white;
-                                            &::before {
-                                                content: "\e916";
-                                            }
-                                        }
+                                        // .check-icon {
+                                        //     @include icon;
+                                        //     color: white;
+                                        //     &::before {
+                                        //         content: "\e916";
+                                        //     }
+                                        // }
                                     }
                                 }
                             }

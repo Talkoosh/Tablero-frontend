@@ -228,32 +228,32 @@ async function _makeBoard() {
       labels: [
         {
           _id: 'l101',
-          title: 'Done',
+          title: '',
           color: '#61BD4F',
         },
         {
           _id: 'l102',
-          title: 'Progress',
+          title: '',
           color: '#F2D600',
         },
         {
           _id: 'l106',
-          title: 'GHI',
+          title: '',
           color: '#FF9F1A',
         },
         {
           _id: 'l103',
-          title: 'IT',
+          title: '',
           color: '#EB5A46',
         },
         {
           _id: 'l104',
-          title: 'ABC',
+          title: '',
           color: '#C377E0',
         },
         {
           _id: 'l105',
-          title: 'DEF',
+          title: '',
           color: '#0079BF',
         },
       ],
@@ -390,7 +390,7 @@ async function _makeBoard() {
               },
             },
             {
-              _id: 'c120',
+              _id: 'c2837',
               title: 'Watch some views',
               style: {
                 photo:
@@ -399,7 +399,7 @@ async function _makeBoard() {
               },
             },
             {
-              _id: 'c120',
+              _id: 'c42069',
               title: 'Make adventures',
               style: {
                 photo:

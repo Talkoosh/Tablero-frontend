@@ -1,4 +1,5 @@
 import { boardService } from '../../services/board.service.js';
+import { utilService } from '../../services/util.service.js';
 export const boardStore = {
   state: {
     boards: [],
@@ -172,5 +173,15 @@ export const boardStore = {
       await boardService.updateBoard(board);
       commit({ type: 'updateBoard', board });
     },
+    async addLabel({commit}, {label, boardId}){
+      const board = await boardService.getBoardById(boardId);
+
+      label._id = utilService.makeId();
+      const idx = board.labels.findIndex(l => l.color === label.color);
+      board.labels.splice(idx, 0, label);
+
+      const boardToUpdate = await boardService.updateBoard(board);
+      commit({type: 'saveBoard', board: boardToUpdate})
+    }
   },
 };
