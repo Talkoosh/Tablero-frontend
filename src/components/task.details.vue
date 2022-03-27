@@ -101,6 +101,7 @@
                         <component
                             :task="task"
                             @close-action="closeAction"
+                            @label-add="onAddLabel"
                             @label-set="onSetLabel"
                             @color-set="onSetColor"
                             @photo-set="onSetPhoto"
@@ -189,10 +190,14 @@ export default {
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
         onSetColor(color) {
-            delete this.task.style.photo
+            delete this.task.style.photo;
             this.task.style.color = color;
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
+        },
+        onAddLabel(label){    
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({type:'addLabel', label, boardId})   
         },
         onSetPhoto(photo) {
             delete this.task.style.color;
@@ -200,7 +205,6 @@ export default {
             console.log(this.task.style);
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
-
         },
         onSetCoverSize(size) {
             this.task.style.isBackground = (size === 'full') ? true : false;
@@ -210,7 +214,8 @@ export default {
         setCoverStyle(color, photo){
             this.coverBcg = color; 
             this.coverPhoto = photo;
-        }
+        },
+        
 
     },
     computed: {

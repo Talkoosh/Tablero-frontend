@@ -11,6 +11,7 @@
     .menu-btn {
       color: white;
       @include button-default;
+      padding: 0 12px 0 0;
       margin: 0 4px 4px 0;
       display: flex;
       align-items: center;
@@ -18,7 +19,7 @@
         font-size: 18px;
         font-weight: 700;
         line-height: 32px;
-        padding: 0 12px;
+        padding: 0 12px 0 15px;
       }
       input {
         font-size: 18px;
@@ -49,12 +50,17 @@
       gap: 3px;
       height: 30px;
       align-items: center;
+      background-color: $clr1;
+      border-radius: 3px;
+      border-color: transparent;
+      color: white;
+      cursor: pointer;
       .invite-icon {
         @include icon;
         padding: 0;
         width: fit-content;
         &::before {
-          content: '\e902';
+          content: "\e902";
         }
       }
     }
@@ -73,10 +79,10 @@
         width: 32px;
         .star-icon {
           @include icon;
-          transform: translatex(-40%);
+          transform: translatex(-4%);
           font-weight: 400;
           &::before {
-            content: '\e966';
+            content: "\e966";
           }
           &:hover {
             color: gold;
@@ -97,7 +103,7 @@
           @include icon;
           padding: 0 4px 0 0;
           &::before {
-            content: '\e952';
+            content: "\e952";
           }
         }
       }

@@ -43,7 +43,7 @@
       .back-icon {
         @include icon;
         &::before {
-          content: '\e90a';
+          content: "\e90a";
           font-size: 20px;
           opacity: 0.7;
           font-weight: 400;
@@ -59,7 +59,7 @@
       .close-icon {
         @include icon;
         &::before {
-          content: '\e91c';
+          content: "\e91c";
           font-size: 20px;
           opacity: 0.7;
           font-weight: 400;
@@ -101,7 +101,7 @@
 
         .photos-card {
           @include nav-card;
-          background-image: url('@/assets/img/photos-card.jpeg');
+          background-image: url("@/assets/img/photos-card.jpeg");
           background-size: cover;
         }
         .title {
@@ -114,7 +114,7 @@
 
         .colors-card {
           @include nav-card;
-          background-image: url('@/assets/img/colors-card.jpg');
+          background-image: url("@/assets/img/colors-card.jpg");
           background-size: cover;
         }
         .title {
@@ -162,6 +162,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      overflow-y: auto;
+      max-height: 86vh;
       .photo-card {
         @include nav-card;
         flex-basis: 48%;
