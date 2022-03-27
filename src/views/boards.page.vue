@@ -11,11 +11,7 @@
         </div>
         <div class="starred-boards-list-container">
           <ul class="starred-boards-list">
-            <li
-              class="board-card"
-              v-for="board in starredBoards"
-              :key="board._id"
-            >
+            <li class="board-card" v-for="board in starredBoards" :key="board._id">
               <router-link
                 class="board-link"
                 :to="'/board/' + board._id"
@@ -25,8 +21,7 @@
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
                   <div class="card-star">
-                    <span  @click.prevent="starBoard(board._id)"
-                    class="card-star-container">
+                    <span @click.prevent="starBoard(board._id)" class="card-star-container">
                       <span class="star"></span>
                     </span>
                   </div>
@@ -54,10 +49,7 @@
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
                   <div class="card-star">
-                    <span
-                      @click.prevent="starBoard(board._id)"
-                      class="card-star-container"
-                    >
+                    <span @click.prevent="starBoard(board._id)" class="card-star-container">
                       <span v-if="board.isStarred" class="star"></span>
                       <span v-else class="unstar"></span>
                     </span>
@@ -65,10 +57,7 @@
                 </div>
               </router-link>
             </li>
-            <li
-              class="create-new-board-card"
-              @click="openDropdown('createBoardDrop')"
-            >
+            <li class="create-new-board-card" @click="openDropdown('createBoardDrop')">
               <div class="new-board-card">
                 <p>
                   <span>Create new board</span>
@@ -88,7 +77,7 @@ import hompageNav from "../components/homepage.nav.vue";
 
 export default {
   // props: [''],
-  emits: ["open-drop"],
+  emits: ['openDrop', 'open-drop'],
   components: {
     boardPreview,
     hompageNav,
@@ -129,6 +118,6 @@ export default {
       };
     },
   },
-  unmounted() {},
+  unmounted() { },
 };
 </script>

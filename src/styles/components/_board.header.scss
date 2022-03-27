@@ -11,21 +11,20 @@
     .menu-btn {
       color: white;
       @include button-default;
-      padding: 0 12px 0 0;
       margin: 0 4px 4px 0;
       display: flex;
       align-items: center;
+      padding: 0 12px 0 15px;
       h1 {
         font-size: 18px;
         font-weight: 700;
         line-height: 32px;
-        padding: 0 12px 0 15px;
       }
       input {
         font-size: 18px;
         font-weight: 700;
         line-height: 32px;
-        padding: 0 6px;
+        padding: 0 11px 0 0;
       }
     }
     .board-members {
@@ -60,7 +59,7 @@
         padding: 0;
         width: fit-content;
         &::before {
-          content: "\e902";
+          content: '\e902';
         }
       }
     }
@@ -71,18 +70,18 @@
     .board-header-left {
       display: flex;
       > * {
-        margin-right: 4px;
         position: relative;
       }
       .board-starred {
         background-color: #ffffff3d;
         width: 32px;
+        padding: 0;
         .star-icon {
           @include icon;
-          transform: translatex(-4%);
+          transform: translatex(-50%);
           font-weight: 400;
           &::before {
-            content: "\e966";
+            content: '\e966';
           }
           &:hover {
             color: gold;
@@ -103,7 +102,7 @@
           @include icon;
           padding: 0 4px 0 0;
           &::before {
-            content: "\e952";
+            content: '\e952';
           }
         }
       }
