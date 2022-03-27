@@ -83,7 +83,6 @@
                 display: block;
                 background-color: #0000004d;
                 border-radius: 3px;
-
               }
 
               .board-card-details {
@@ -115,7 +114,6 @@
                       width: 18px;
                       transform: translateY(5px);
                       padding: 0px;
-
 
                       &::before {
                         content: '\e967';
@@ -204,11 +202,8 @@
                 background-color: #0000004d;
                 border-radius: 3px;
 
-                &:hover{
-
-                  
+                &:hover {
                 }
-
               }
 
               .board-card-details {
@@ -241,7 +236,6 @@
                       transform: translateY(5px);
                       padding: 0px;
 
-
                       &::before {
                         content: '\e967';
                       }
@@ -262,7 +256,6 @@
                       width: 18px;
                       transform: translateY(5px);
                       padding: 0px;
-
 
                       &::before {
                         content: '\e966';

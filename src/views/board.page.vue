@@ -19,8 +19,13 @@
                     />
                 </Draggable>
             </Container>
-            <div class="add-group" :class="addGroupCondition">
-                <span v-if="!isAddGroup" @click="toggleAddGroup">+ Add another list</span>
+            <div
+                class="add-group"
+                :class="addGroupCondition"
+                @click="toggleAddGroup"
+                :style="isAddGroup ? '' : btnBgc"
+            >
+                <span v-if="!isAddGroup" :style="textColor">+ Add another list</span>
                 <div v-else v-clickoutside="toggleAddGroup">
                     <input
                         ref="addGroup"
@@ -151,7 +156,18 @@ export default {
         },
         menuStatus() {
             return this.isMenuOpen ? 'menu-open' : 'menu-close'
-        }
+        },
+        bgc() {
+            return this.$store.getters.boardBgc
+        },
+        textColor() {
+            if (!this.bgc) return
+            return this.bgc.isLight ? 'color: #172b4d' : 'color: white'
+        },
+        btnBgc() {
+            if (!this.bgc) return
+            return this.bgc.isLight ? 'background-color: #0000001a' : 'background-color: #ffffff3d'
+        },
     },
     watch: {
         'board': {

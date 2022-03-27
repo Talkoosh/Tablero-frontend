@@ -16,7 +16,7 @@
                         <label-preview v-for="label in task.labelIds" :label="label" :key="label" />
                     </div>
                     <span>{{ task.title }}</span>
-                    <div v-if="task.badges" class="task-badges"></div>
+                    <badge-preview :task="task" class="task-badges" />
                     <div v-if="task.members" class="task-members"></div>
                     <span @click.prevent="openQuickEdit" class="task-quick-edit"></span>
                 </div>
@@ -27,6 +27,8 @@
 
 <script>
 import labelPreview from "./label.preview.vue"
+import badgePreview from "./badge.preview.vue"
+
 export default {
     props: {
         task: Object,
@@ -34,6 +36,7 @@ export default {
     },
     components: {
         labelPreview,
+        badgePreview
     },
     created() { },
     data() {

@@ -32,7 +32,7 @@
                         <button class="add-task-btn">Add card...</button>
                         <button class="copy-group-btn">Copy list...</button>
                         <button class="sort-by-btn">Sort by...</button>
-                        <button class="archive-group-btn">Archive this list</button>
+                        <button @click="deleteGroup" class="archive-group-btn">Archive this list</button>
                     </div>
                 </div>
                 <!-- v-if="group.tasks.length" -->
@@ -155,6 +155,9 @@ export default {
         },
         toggleExtrasMenu() {
             this.isExtrasOpen = !this.isExtrasOpen
+        },
+        deleteGroup() {
+            this.$store.dispatch({ type: 'deleteGroup', groupId: this.group._id, boardId: this.boardId })
         }
     },
     computed: {

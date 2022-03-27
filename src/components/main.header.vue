@@ -87,7 +87,7 @@ export default {
       return
     },
     bgc() {
-      return this.$store.getters.mainHeaderBgc
+      return this.$store.getters.boardBgc
     },
     boardBgStyle() {
       if (!this.bgc) return

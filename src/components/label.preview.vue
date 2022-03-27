@@ -45,7 +45,6 @@ export default {
             return this.isTitleShown ? 'label-open' : 'label-closing';
         },
         isTitleShown() {
-            console.log(this.$store.getters.isLabelTitleShown)
             return this.$store.getters.isLabelTitleShown
         }
     },

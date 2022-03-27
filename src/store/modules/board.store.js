@@ -5,7 +5,7 @@ export const boardStore = {
     boards: [],
     currBoardId: null,
     currTask: null,
-    mainHeaderBgc: '#026aa7',
+    boardBgc: null,
     isLabelTitleShown: false,
   },
   getters: {
@@ -33,8 +33,8 @@ export const boardStore = {
       if (!board.labels || !board.labels.length) return;
       return JSON.parse(JSON.stringify(board.labels));
     },
-    mainHeaderBgc(state) {
-      return state.mainHeaderBgc;
+    boardBgc(state) {
+      return state.boardBgc;
     },
     isLabelTitleShown(state) {
       return state.isLabelTitleShown;
@@ -86,7 +86,7 @@ export const boardStore = {
       state.boards.unshift(savedBoard);
     },
     changeHeaderBgc(state, { bgc, isLight }) {
-      state.mainHeaderBgc = { bgc, isLight };
+      state.boardBgc = { bgc, isLight };
     },
     toggleLabelTitle(state) {
       state.isLabelTitleShown = !state.isLabelTitleShown;
@@ -94,6 +94,13 @@ export const boardStore = {
     starBoard(state, { boardId }) {
       const board = state.boards.find((b) => b._id === boardId);
       board.isStarred = !board.isStarred;
+    },
+    deleteGroup(state, { groupId, boardId }) {
+      const boardIdx = state.boards.findIndex((b) => b._id === boardId);
+      const groupIdx = state.boards[boardIdx].groups.findIndex(
+        (g) => g._id === groupId
+      );
+      state.boards[boardIdx].groups.splice(groupIdx, 1);
     },
   },
   actions: {
@@ -151,7 +158,7 @@ export const boardStore = {
       try {
         const task = await boardService.getTask(taskId, boardId);
         commit({ type: 'setCurrTask', task });
-      } catch (err) { }
+      } catch (err) {}
     },
     async saveTask({ commit, state }, { task, boardId }) {
       const board = state.boards.find((b) => b._id === boardId);
@@ -210,7 +217,7 @@ export const boardStore = {
         board.labels.splice(idx, 0, label);
       } else {
         const idx = board.labels.findIndex((l) => l._id === label._id);
-        board.labels.splice(idx, 1, label)
+        board.labels.splice(idx, 1, label);
       }
 
       commit({ type: 'saveBoard', board });
@@ -221,10 +228,10 @@ export const boardStore = {
         const board = await boardService.getBoardById(boardId);
         //delete label from board
         const boardLabelIdx = board.labels.findIndex((l) => l._id === labelId);
-        board.labels.splice(boardLabelIdx, 1)
+        board.labels.splice(boardLabelIdx, 1);
 
         //delete label Id from task
-        const taskLabelIdx = task.labelIds.findIndex(l => l._id === labelId);
+        const taskLabelIdx = task.labelIds.findIndex((l) => l._id === labelId);
         task.labelIds.splice(taskLabelIdx, 1);
         commit({ type: 'saveBoard', board });
         console.log('TASK:', task);
@@ -233,6 +240,14 @@ export const boardStore = {
       } catch (err) {
         throw err;
       }
-    }
+    },
+    async deleteGroup({ commit }, { groupId, boardId }) {
+      try {
+        commit({ type: 'deleteGroup', groupId, boardId });
+        boardService.removeGroup(boardId, groupId);
+      } catch (err) {
+        throw err;
+      }
+    },
   },
 };

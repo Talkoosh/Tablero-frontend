@@ -4,7 +4,11 @@
             <div class="board-header-left">
                 <div class="board-header-btn board-name">
                     <div class="title">
-                        <h1 @click="toggleEditTitle" v-if="!isEditTitle">{{ board.title }}</h1>
+                        <h1
+                            @click="toggleEditTitle"
+                            v-if="!isEditTitle"
+                            :style="textColor"
+                        >{{ board.title }}</h1>
                         <input
                             v-else
                             type="text"
@@ -17,8 +21,8 @@
                         />
                     </div>
                 </div>
-                <div class="board-header-btn board-starred">
-                    <a href>
+                <div class="board-header-btn board-starred" :style="btnBgc">
+                    <a href :style="textColor">
                         <span class="star-icon"></span>
                     </a>
                 </div>
@@ -39,8 +43,8 @@
                 </a>
             </div>
             <div class="board-header-right">
-                <div class="board-header-btn board-menu">
-                    <button @click="openMenu" class="menu-btn">
+                <div class="board-header-btn board-menu" :style="btnBgc">
+                    <button @click="openMenu" class="menu-btn" :style="textColor">
                         <span class="menu-icon"></span>
                         <span>Show menu</span>
                     </button>
@@ -85,6 +89,17 @@ export default {
         }
     },
     computed: {
+        bgc() {
+            return this.$store.getters.boardBgc
+        },
+        textColor() {
+            if (!this.bgc) return
+            return this.bgc.isLight ? 'color: #172b4d' : 'color: white'
+        },
+        btnBgc() {
+            if (!this.bgc) return
+            return this.bgc.isLight ? 'background-color: #0000001a' : 'background-color: #ffffff3d'
+        }
     },
     unmounted() { },
 }
