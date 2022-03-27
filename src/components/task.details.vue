@@ -5,7 +5,7 @@
                 class="task-details-cover"
                 v-if="(task?.style.color || task?.style.photo)"
                 ref="detailsCover"
-                :style="{backgroundColor: coverBcg, backgroundImage: `url(${coverPhoto})`}"
+                :style="{ backgroundColor: coverBcg, backgroundImage: `url(${coverPhoto})` }"
             >
                 <span class="icon task-close-btn" @click.stop="closeTaskDetails"></span>
                 <div class="btn-container">
@@ -103,6 +103,7 @@
                             @close-action="closeAction"
                             @label-add="onAddLabel"
                             @label-set="onSetLabel"
+                            @label-delete="onDeleteLabel"
                             @color-set="onSetColor"
                             @photo-set="onSetPhoto"
                             @cover-size-set="onSetCoverSize"
@@ -184,10 +185,14 @@ export default {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
-        onSetLabel(labelIds) {
-            this.task.labelIds = labelIds;
-            const boardId = this.$route.params.boardId;
-            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
+        async onSetLabel(labelIds) {
+            try {
+                this.task.labelIds = labelIds;
+                const boardId = this.$route.params.boardId;
+                this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
+            } catch (err) {
+                console.log(err);
+            }
         },
         onSetColor(color) {
             delete this.task.style.photo;
@@ -195,9 +200,13 @@ export default {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
         },
-        onAddLabel(label){    
+        onAddLabel(label) {
             const boardId = this.$route.params.boardId;
-            this.$store.dispatch({type:'addLabel', label, boardId})   
+            this.$store.dispatch({ type: 'addLabel', label, boardId })
+        },
+        onDeleteLabel(labelId) {
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({type: 'deleteLabel', labelId, task: this.task ,boardId})
         },
         onSetPhoto(photo) {
             delete this.task.style.color;
@@ -211,11 +220,11 @@ export default {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         },
-        setCoverStyle(color, photo){
-            this.coverBcg = color; 
+        setCoverStyle(color, photo) {
+            this.coverBcg = color;
             this.coverPhoto = photo;
         },
-        
+
 
     },
     computed: {

@@ -172,6 +172,30 @@
                 color: white;
                 text-align: center;
             }
+            .edit-btns {
+                display: flex;
+                justify-content: space-between;
+                button {
+                    width: 80px;
+                    color: white;
+                }
+                .save-btn {
+                    @include button-default;
+                    text-align: center;
+                    background-color: #0079bf;
+                    &:hover {
+                        background-color: #026aa7;
+                    }
+                }
+                .delete-btn {
+                    @include button-default;
+                    text-align: center;
+                    background-color: #b04632;
+                    &:hover {
+                        background-color: #933b27;
+                    }
+                }
+            }
         }
     }
 }
