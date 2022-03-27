@@ -1,9 +1,14 @@
 .badges {
+  display: flex;
+  gap: 4px;
   > div {
-    display: inline-block;
     font-size: 12px;
     color: #5e6c84;
     top: 50%;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    padding: 2px 4px 2px 2px;
   }
   .badge-icon {
     display: inline-block;
