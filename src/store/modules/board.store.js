@@ -92,7 +92,11 @@ export const boardStore = {
       state.isLabelTitleShown = !state.isLabelTitleShown;
     },
     starBoard(state, { boardId }) {
+<<<<<<< HEAD
       const board = state.boards.find((b) => b._id === boardId);
+=======
+      const board = state.boards.find(b => b._id === boardId);
+>>>>>>> b7e469e0699d71e49547799544cb22bf30683a89
       board.isStarred = !board.isStarred;
     },
   },
@@ -138,9 +142,17 @@ export const boardStore = {
     async starBoard({ commit, state }, { boardId }) {
       try {
         console.log(boardId);
+<<<<<<< HEAD
         const board = { ...state.boards.find((b) => b._id === boardId) };
         board.isStarred = !board.isStarred;
         await boardService.updateBoard(board);
+=======
+        const board = { ...state.boards.find(b => b._id === boardId) }
+        board.isStarred = !board.isStarred;
+        await boardService.updateBoard(
+          board
+        );
+>>>>>>> b7e469e0699d71e49547799544cb22bf30683a89
         commit({ type: 'starBoard', boardId });
       } catch (err) {
         throw err;
@@ -151,24 +163,23 @@ export const boardStore = {
       try {
         const task = await boardService.getTask(taskId, boardId);
         commit({ type: 'setCurrTask', task });
-      } catch (err) {}
+      } catch (err) { }
     },
     async saveTask({ commit, state }, { task, boardId }) {
-      const editedTask = await boardService.saveTask(task, boardId);
       const board = state.boards.find((b) => b._id === boardId);
       const boardIdx = state.boards.findIndex((b) => b._id === boardId);
       const groupId = await boardService.getGroupIdByTaskId(task._id, boardId);
-      console.log(groupId);
       const group = board.groups.find((g) => g._id === groupId);
       const groupIdx = board.groups.findIndex((g) => g._id === groupId);
       const taskIdx = group.tasks.findIndex((t) => t._id === task._id);
       commit({
         type: 'setCurrTask',
-        task: editedTask,
+        task: task,
         boardIdx,
         groupIdx,
         taskIdx,
       });
+      const editedTask = await boardService.saveTask(task, boardId);
     },
     async addTask({ commit }, { task, boardId }) {
       const taskToAdd = await boardService.saveTask(task, boardId);
@@ -205,12 +216,35 @@ export const boardStore = {
     async addLabel({ commit }, { label, boardId }) {
       const board = await boardService.getBoardById(boardId);
 
-      label._id = utilService.makeId();
-      const idx = board.labels.findIndex((l) => l.color === label.color);
-      board.labels.splice(idx, 0, label);
+      if (!label._id) {
+        label._id = utilService.makeId();
+        const idx = board.labels.findIndex((l) => l.color === label.color);
+        board.labels.splice(idx, 0, label);
+      } else {
+        const idx = board.labels.findIndex((l) => l._id === label._id);
+        board.labels.splice(idx, 1, label)
+      }
 
-      const boardToUpdate = await boardService.updateBoard(board);
-      commit({ type: 'saveBoard', board: boardToUpdate });
+      commit({ type: 'saveBoard', board });
+      await boardService.updateBoard(board);
     },
+    async deleteLabel({ commit }, { labelId, task, boardId }) {
+      try {
+        const board = await boardService.getBoardById(boardId);
+        //delete label from board
+        const boardLabelIdx = board.labels.findIndex((l) => l._id === labelId);
+        board.labels.splice(boardLabelIdx, 1)
+
+        //delete label Id from task
+        const taskLabelIdx = task.labelIds.findIndex(l => l._id === labelId);
+        task.labelIds.splice(taskLabelIdx, 1);
+        commit({ type: 'saveBoard', board });
+        console.log('TASK:', task);
+        await boardService.saveTask(task, boardId);
+        await boardService.updateBoard(board);
+      } catch (err) {
+        throw err;
+      }
+    }
   },
 };

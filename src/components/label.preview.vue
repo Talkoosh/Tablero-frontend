@@ -35,11 +35,11 @@ export default {
     computed: {
         labelStyle() {
             const label = this.getLabel(this.label)
-            return `background-color: ${label.color}`
+            return `background-color: ${label?.color}`
         },
         labelTitle() {
             const label = this.getLabel(this.label)
-            return label.title
+            return label?.title
         },
         isLabelOpen() {
             return this.isTitleShown ? 'label-open' : 'label-closing';
