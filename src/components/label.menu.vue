@@ -25,9 +25,9 @@
         </div>
         <div v-else class="label-add">
             <div class="header">
-                <span class="back-icon"></span>
+                <span @click.stop="isAdding = false" class="back-icon"></span>
                 <h3 class="menu-title">Create Label</h3>
-                <span class="close-icon"></span>
+                <span @click="closeAction" class="close-icon"></span>
             </div>
             <hr />
             <div class="main">
@@ -49,7 +49,7 @@
                         <p class="txt-lng-no-color">This won't show up on the front of cards.</p>
                     </div>
                 </div>
-                <button @click="onAddLabel" class="add-btn">Create</button>
+                <button @click.stop="onAddLabel" class="add-btn">Create</button>
             </div>
         </div>
     </section>
@@ -106,6 +106,7 @@ export default {
         onAddLabel(){
             if(!this.labelToAdd.title) return; 
             this.$emit('label-add', this.labelToAdd);
+            this.isAdding = false;
         }
     },
     computed: {
