@@ -162,8 +162,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      max-height: 84vh;
       overflow-y: auto;
+      max-height: 86vh;
       .photo-card {
         @include nav-card;
         flex-basis: 48%;

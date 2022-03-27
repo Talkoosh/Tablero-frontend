@@ -12,6 +12,7 @@
                             ref="titleEdit"
                             v-clickoutside="stopEdit"
                             @input="saveBoardTitle"
+                            @keyup.enter="toggleEditTitle"
                             :style="'width:' + (boardToEdit.title.length * 10 + 15) + 'px'"
                         />
                     </div>
