@@ -85,17 +85,16 @@ export const boardStore = {
       console.log(savedBoard);
       state.boards.unshift(savedBoard);
     },
-    changeHeaderBgc(state, { bgc }) {
-      state.mainHeaderBgc = bgc;
+    changeHeaderBgc(state, { bgc, isLight }) {
+      state.mainHeaderBgc = { bgc, isLight };
     },
     toggleLabelTitle(state) {
-      console.log('hi');
       state.isLabelTitleShown = !state.isLabelTitleShown;
     },
     starBoard(state, { boardId }) {
-      const board = state.boards.find(b => b._id === boardId);
+      const board = state.boards.find((b) => b._id === boardId);
       board.isStarred = !board.isStarred;
-    }
+    },
   },
   actions: {
     async loadBoards({ commit, state }) {
@@ -139,11 +138,9 @@ export const boardStore = {
     async starBoard({ commit, state }, { boardId }) {
       try {
         console.log(boardId);
-        const board = { ...state.boards.find(b => b._id === boardId) }
+        const board = { ...state.boards.find((b) => b._id === boardId) };
         board.isStarred = !board.isStarred;
-        await boardService.updateBoard(
-          board
-        );
+        await boardService.updateBoard(board);
         commit({ type: 'starBoard', boardId });
       } catch (err) {
         throw err;

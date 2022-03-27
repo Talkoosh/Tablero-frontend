@@ -21,13 +21,12 @@
             </Container>
             <div class="add-group" :class="addGroupCondition">
                 <span v-if="!isAddGroup" @click="toggleAddGroup">+ Add another list</span>
-                <div v-else>
+                <div v-else v-clickoutside="toggleAddGroup">
                     <input
                         ref="addGroup"
                         type="text"
                         v-model="groupToAdd.title"
                         placeholder="Enter list title..."
-                        @blur="toggleAddGroup"
                         @keyup.enter="addGroup"
                     />
                     <div class="add-group-btns">
@@ -55,6 +54,8 @@ import boardHeader from "../components/board.header.vue"
 import boardGroup from "../components/board.group.vue"
 import boardMenu from "../components/board.menu.vue"
 import { Container, Draggable } from "vue3-smooth-dnd";
+import FastAverageColor from 'fast-average-color';
+
 
 export default {
     // props: [''],
@@ -154,12 +155,13 @@ export default {
     },
     watch: {
         'board': {
-            handler() {
+            async handler() {
                 if (this.board.style.photo) {
-                    this.$store.commit({ type: 'changeHeaderBgc', bgc: '#026aa7' })
+                    const fac = new FastAverageColor();
+                    const color = await fac.getColorAsync(this.board.style.photo);
+                    this.$store.commit({ type: 'changeHeaderBgc', bgc: color.rgb, isLight: color.isLight })
                     return
                 } else {
-
                     this.$store.commit({ type: 'changeHeaderBgc', bgc: this.board.style.backgroundColor })
                 }
             }
