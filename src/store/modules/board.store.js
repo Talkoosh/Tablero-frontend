@@ -92,6 +92,10 @@ export const boardStore = {
       console.log('hi');
       state.isLabelTitleShown = !state.isLabelTitleShown;
     },
+    starBoard(state,{boardId}){
+      const board = state.boards.find(b => b._id === boardId);
+      board.isStarred = !board.isStarred;
+    }
   },
   actions: {
     async loadBoards({ commit, state }) {
@@ -132,10 +136,15 @@ export const boardStore = {
       }
     },
 
-    async starBoard({ commit }, { boardToUpdate }) {
+    async starBoard({ commit, state }, { boardId }) {
       try {
-        const updatedBoard = await boardService.updateBoard(boardToUpdate);
-        commit({ type: 'starBoard', updatedBoard });
+        console.log(boardId);
+        const board = {...state.boards.find(b=> b._id === boardId)}
+        board.isStarred = !board.isStarred;
+         await boardService.updateBoard(
+          board
+        );
+        commit({ type: 'starBoard', boardId });
       } catch (err) {
         throw err;
       }
