@@ -6,62 +6,10 @@
         <div class="recent-drop">
           <button class="drop-btn recent-btn" @click="openDropdown('recentBoardsDrop')">Recent</button>
         </div>
-        <!-- <div
-            class="recent-drop-content dropdown"
-            v-if="isRecentDropOpen"
-            v-clickoutside="toggleRecentDrop"
-          >
-            <header class="drop-header">
-              <div class="header-text">Recent boards</div>
-              <button class="close-header" @click="toggleRecentDrop">X</button>
-            </header>
-            <div class="boards-list" v-for="board in boards" :key="board._id">
-              <router-link class="board-details" :to="'/board/' + board._id">
-                <div
-                  v-if="board"
-                  class="board-cover-container"
-                  :style="'background-color:' + board.style.backgroundColor"
-                ></div>
-                <div class="board-text">
-                  <div class="board-title">{{ board.title }}</div>
-                  <div class="board-user">
-                    {{ board.createdBy.fullname }} workspace
-                  </div>
-                </div>
-              </router-link>
-            </div>
-          </div>
-        </div>-->
 
         <div class="starred-drop">
           <button class="drop-btn starred-btn" @click="openDropdown('starredBoardsDrop')">Starred</button>
-          <!-- <div
-            class="starred-drop-content dropdown"
-            v-if="isStarredDropOpen"
-            v-clickoutside="toggleStarredDrop"
-          >
-            <header class="drop-header">
-              <div class="header-text">Starred boards</div>
-              <button @click="toggleStarredDrop" class="close-header">X</button>
-            </header>
-            <div class="boards-list" v-for="board in boards" :key="board._id">
-              <router-link class="board-details" :to="'/board/' + board._id">
-                <div
-                  class="board-cover-container"
-                  :style="'background-color:' + board.style.backgroundColor"
-                ></div>
-                <div class="board-text">
-                  <div class="board-title">{{ board.title }}</div>
-                  <div class="board-user">
-                    {{ board.createdBy.fullname }} workspace
-                  </div>
-                </div>
-                <div class="star-container">
-                  <span class="star"></span>
-                </div>
-              </router-link>
-            </div>
-          </div>-->
+      
         </div>
       </div>
 
@@ -125,7 +73,6 @@ export default {
       this.isStarredDropOpen = !this.isStarredDropOpen;
     },
     openDropdown(cmpName) {
-      // console.log(cmpName);
       this.$emit("open-drop", cmpName);
     },
   },
