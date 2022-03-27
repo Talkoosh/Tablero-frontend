@@ -1,6 +1,6 @@
 <template>
   <section class="app-container">
-    <main-header @open-drop="openDrop" />
+    <main-header v-if="isHomePage" @open-drop="openDrop" />
     <router-view @open-drop="openDrop" />
     <component
       :is="currDropDown"
@@ -13,10 +13,10 @@
 
 
 <script>
-import mainHeader from './components/main.header.vue'
-import createBoardDrop from './components/create.board.drop.vue'
-import recentBoardsDrop from './components/recent.boards.drop.vue'
-import starredBoardsDrop from './components/starred.boards.drop.vue'
+import mainHeader from "./components/main.header.vue";
+import createBoardDrop from "./components/create.board.drop.vue";
+import recentBoardsDrop from "./components/recent.boards.drop.vue";
+import starredBoardsDrop from "./components/starred.boards.drop.vue";
 
 export default {
   // props: [''],
@@ -24,32 +24,37 @@ export default {
     createBoardDrop,
     recentBoardsDrop,
     starredBoardsDrop,
-    mainHeader
+    mainHeader,
   },
-  emits: ['openDrop', 'open-drop'],
+  emits: ["openDrop", "open-drop"],
   created() {
+    window.addEventListener("popstate", function (event) {
+      // Log the state data to the console
+      console.log(event.state);
+    });
   },
   data() {
     return {
-      currDropDown: null
-    }
+      currDropDown: null,
+      isHomePage : false,
+    };
   },
   methods: {
     openDrop(cmp) {
-      console.log(cmp)
       this.currDropDown = cmp;
     },
     closeDrop() {
       this.currDropDown = null;
-    }
-
-
+    },
   },
   computed: {
-
+   
   },
-  unmounted() {
-
+  unmounted() {},
+  watch: {
+    $route(to, from) {
+       this.isHomePage = (this.$route.path !== '/');
+    },
   },
-}
+};
 </script>

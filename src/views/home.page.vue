@@ -13,25 +13,24 @@
     <section class="home-container">
       <div class="home-page-content">
         <div class="home-page-content-container">
-          <div class="home-page-right">
-            <!-- <img src="" alt=""> -->
-          </div>
           <div class="home-page-left">
-            <h1 class="header"></h1>
+            <h1 class="header">Tablero helps teams move work forward.</h1>
             <p class="home-text">
               Collaborate, manage projects, and reach new productivity peaks.
               From high rises to the home office, the way your team works is
-              unique—accomplish it all with Trello.
+              unique - accomplish it all with Tablero.
             </p>
             <form action="" class="form-container">
-                <div class="input-container">
-                    <input type="email" class="email-input">
-                </div>
-                <div class="start-btn-container">
-                    <button class="start-btn">Try live demo!</button>
-                </div>
-
+              <div class="input-container">
+                <input type="email" class="email-input" placeholder="Email"/>
+              </div>
+              <div class="start-btn-container">
+                <router-link :to="'/board/'" class="start-btn">Try live demo!</router-link>
+              </div>
             </form>
+          </div>
+          <div class="home-page-right">
+            <img src="@/assets/img/home.png" alt="" width="445" height="575" />
           </div>
         </div>
       </div>
