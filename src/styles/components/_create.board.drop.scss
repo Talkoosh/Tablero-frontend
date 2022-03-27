@@ -78,7 +78,25 @@
                         justify-content: space-between;
                         list-style: none;
                         .background-img {
-                            img {
+                            align-items: center;
+                            background-position: center center;
+                            background-size: cover;
+                            border-radius: 3px;
+                            box-shadow: none;
+                            color: rgba(255, 255, 255, 0.4);
+                            display: flex;
+                            height: 100%;
+                            justify-content: center;
+                            margin: 0;
+                            min-height: 0;
+                            outline: 0;
+                            padding: 0;
+                            position: relative;
+                            line-height: 0;
+                            width: 100%;
+                            cursor: pointer;
+
+                            .img {
                                 cursor: pointer;
                                 border: 1px solid transparent;
                                 display: block;
@@ -86,8 +104,37 @@
                                 width: 64px;
                                 height: 40px;
                                 object-fit: cover;
+                                align-items: center;
+                                background-position: center center;
+                                background-size: cover;
                                 &:hover {
                                     filter: saturate(85%) brightness(85%);
+                                }
+
+                                .check-photo-container {
+                                    position: relative;
+                                    z-index: 1;
+                                    flex-basis: 100%;
+                                    font-size: 16px;
+                                    height: 24px;
+                                    line-height: 24px;
+                                    .checked-photo {
+                                        color: rgb(255, 255, 255);
+                                        display: inline-block;
+                                        fill: inherit;
+                                        flex-shrink: 0;
+                                        line-height: 1;
+
+                                        .check-icon {
+                                            @include icon;
+                                            color: white;
+                                            filter: saturate(100%) brightness(100%);
+
+                                            &::before {
+                                                content: "\e916";
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -111,49 +158,44 @@
                                 background-color: #0079bf;
 
                                 .check-container {
-                                    position: relative;
-                                    z-index: 1;
-                                    flex-basis: 100%;
-                                    font-size: 16px;
-                                    height: 24px;
-                                    line-height: 24px;
-
-                                    .checked-color {
-                                        color: rgb(255, 255, 255);
-                                        display: inline-block;
-                                        fill: inherit;
-                                        flex-shrink: 0;
-                                        line-height: 1;
-
-                                        .check-icon {
-                                            @include icon;
-                                            color: white;
-                                            &::before {
-                                                content: "\e916";
-                                            }
-                                        }
-                                    }
+                                    @include new-board-color-choosed;
                                 }
                             }
 
                             .color2 {
                                 @include color-choose-btn;
                                 background-color: rgb(210, 144, 52);
+
+                                .check-container {
+                                    @include new-board-color-choosed;
+                                }
                             }
 
                             .color3 {
                                 @include color-choose-btn;
                                 background-color: rgb(81, 152, 57);
+
+                                .check-container {
+                                    @include new-board-color-choosed;
+                                }
                             }
 
                             .color4 {
                                 @include color-choose-btn;
                                 background-color: rgb(176, 70, 50);
+
+                                .check-container {
+                                    @include new-board-color-choosed;
+                                }
                             }
 
                             .color5 {
                                 @include color-choose-btn;
                                 background-color: rgb(137, 96, 158);
+
+                                .check-container {
+                                    @include new-board-color-choosed;
+                                }
                             }
                         }
                     }

@@ -4,12 +4,7 @@
     <div class="create-board-modal" :class="toggleCreateBoardModal">
       <header class="modal-header">
         <div class="modal-title">Create board</div>
-        <button
-          class="close-create-modal-btn"
-          @click="closeDropdown"
-        >
-          X
-        </button>
+        <button class="close-create-modal-btn" @click="closeDropdown">X</button>
       </header>
       <div class="modal-content">
         <div class="background-display">
@@ -28,29 +23,27 @@
           >
           <div class="background-options">
             <ul class="background-imgs-options">
-              <li  class="background-img" v-for="img in imgs" :key="img" @click="changeBGP(img)"> 
-                <img :src="img" alt="" />
+              <li
+                class="background-img"
+                v-for="img in imgs"
+                :key="img"
+                @click="changeBGP(img)"
+              >
+
+                <button class="img" :style="'background-image: url('+img+')'">
+                  <span v-if="cardBGP(img)" class="check-photo-container">
+                    <span class="checked-photo">
+                      <span class="check-icon"></span>
+                    </span>
+                  </span>
+                </button>
+                <!-- <img :src="img" alt="" /> -->
               </li>
             </ul>
             <ul class="background-colors-options">
               <li class="color-card">
-                <button
-                  @click="changeBGC('#0079bf')"
-                  class="color1"
-                >
-                  <span class="check-container">
-                    <span class="checked-color">
-                       <span class="check-icon"></span>
-                    </span>
-                  </span>
-                </button>
-              </li>
-              <li class="color-card">
-                <button
-                  @click="changeBGC('#d29034')"
-                  class="color2"
-                >
-                  <span class="check-container">
+                <button @click="changeBGC('#0079bf')" class="color1">
+                  <span v-if="cardBGC('#0079bf')" class="check-container">
                     <span class="checked-color">
                       <span class="check-icon"></span>
                     </span>
@@ -58,32 +51,38 @@
                 </button>
               </li>
               <li class="color-card">
-                <button
-                  @click="changeBGC('#519839')"
-                  class="color3"
-                >
-                  <span class="check-container">
-                    <span class="checked-color"></span>
+                <button @click="changeBGC('#d29034')" class="color2">
+                  <span v-if="cardBGC('#d29034')" class="check-container">
+                    <span class="checked-color">
+                      <span class="check-icon"></span>
+                    </span>
                   </span>
                 </button>
               </li>
               <li class="color-card">
-                <button
-                  @click="changeBGC('#b04632')"
-                  class="color4"
-                >
-                  <span class="check-container">
-                    <span class="checked-color"></span>
+                <button @click="changeBGC('#519839')" class="color3">
+                  <span v-if="cardBGC('#519839')" class="check-container">
+                    <span class="checked-color">
+                      <span class="check-icon"></span>
+                    </span>
                   </span>
                 </button>
               </li>
               <li class="color-card">
-                <button
-                  @click="changeBGC('#89609e')"
-                  class="color5"
-                >
-                  <span class="check-container">
-                    <span class="checked-color"></span>
+                <button @click="changeBGC('#b04632')" class="color4">
+                  <span v-if="cardBGC('#b04632')" class="check-container">
+                    <span class="checked-color">
+                      <span class="check-icon"></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+              <li class="color-card">
+                <button @click="changeBGC('#89609e')" class="color5">
+                  <span v-if="cardBGC('#89609e')" class="check-container">
+                    <span class="checked-color">
+                      <span class="check-icon"></span>
+                    </span>
                   </span>
                 </button>
               </li>
@@ -113,7 +112,7 @@
 </template>
 
 <script>
-import {photoService} from '../services/photo.service.js'
+import { photoService } from "../services/photo.service.js";
 export default {
   name: "",
   components: {},
@@ -126,7 +125,7 @@ export default {
       boardToAdd: {
         title: "",
         style: {
-          backgroundColor: null,
+          backgroundColor: "#0079bf",
         },
       },
       imgs: [],
@@ -138,28 +137,23 @@ export default {
       this.$emit("close-drop");
       await this.$store.dispatch({
         type: "addBoard",
-        boardToAdd: this.boardToAdd, 
+        boardToAdd: this.boardToAdd,
       });
     },
 
-    //  async starBoard(boardToUpdate) {
-    //   await this.$store.dispatch({
-    //     type: "starBoard",
-    //     boardToUpdate: boardToUpdate, 
-    //   });
-    // },
+   
 
     closeDropdown() {
       this.$emit("close-drop");
     },
-    changeBGC(color){
-      delete this.boardToAdd.style.photo
-      this.boardToAdd.style.backgroundColor = color
+    changeBGC(color) {
+      delete this.boardToAdd.style.photo;
+      this.boardToAdd.style.backgroundColor = color;
     },
-    changeBGP(url){
-      delete this.boardToAdd.style.backgroundColor
-      this.boardToAdd.style.photo = url
-    }
+    changeBGP(url) {
+      delete this.boardToAdd.style.backgroundColor;
+      this.boardToAdd.style.photo = url;
+    },
   },
   computed: {
     boards() {
@@ -171,10 +165,22 @@ export default {
     },
 
     coverBG() {
-      if(this.boardToAdd.style.photo) return `background-image: url(${this.boardToAdd.style.photo})`
-      return this.boardToAdd.style.backgroundColor
-        ? `background-color : ${this.boardToAdd.style.backgroundColor}`
-        : "background-color : #ffff";
+      if (this.boardToAdd.style.photo)
+        return `background-image: url(${this.boardToAdd.style.photo})`;
+      return `background-color : ${this.boardToAdd.style.backgroundColor}`;
+      // this.boardToAdd.style.backgroundColor
+      //   ? `background-color : ${this.boardToAdd.style.backgroundColor}`
+      //   : "background-color : #0079bf";
+    },
+    cardBGC() {
+      return (color) => {
+        return this.boardToAdd.style.backgroundColor === color;
+      };
+    },
+    cardBGP() {
+      return (photoUrl) => {
+        return this.boardToAdd.style.photo === photoUrl;
+      };
     },
   },
 };

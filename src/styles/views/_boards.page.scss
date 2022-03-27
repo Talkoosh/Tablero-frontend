@@ -81,6 +81,9 @@
                 right: 0;
                 top: 0;
                 display: block;
+                background-color: #0000004d;
+                border-radius: 3px;
+
               }
 
               .board-card-details {
@@ -93,6 +96,7 @@
                 .card-header-name {
                   font-weight: 700;
                   font-size: 16px;
+                  word-wrap: break-word;
                 }
 
                 .card-star {
@@ -109,6 +113,9 @@
                       margin-right: 6px;
                       opacity: 1;
                       width: 18px;
+                      transform: translateY(5px);
+                      padding: 0px;
+
 
                       &::before {
                         content: '\e967';
@@ -194,6 +201,9 @@
                 right: 0;
                 top: 0;
                 display: block;
+                background-color: #0000004d;
+                border-radius: 3px;
+
               }
 
               .board-card-details {
@@ -206,6 +216,7 @@
                 .card-header-name {
                   font-weight: 700;
                   font-size: 16px;
+                  word-wrap: break-word;
                 }
 
                 .card-star {
@@ -222,6 +233,9 @@
                       margin-right: 6px;
                       opacity: 1;
                       width: 18px;
+                      transform: translateY(5px);
+                      padding: 0px;
+
 
                       &::before {
                         content: '\e967';

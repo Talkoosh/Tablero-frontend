@@ -50,7 +50,7 @@
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
                   <div class="card-star">
-                    <span class="card-star-container">
+                    <span @click="starBoard(board)" class="card-star-container">
                       <span class="star"></span>
                     </span>
                   </div>
@@ -93,7 +93,13 @@ export default {
   methods: {
     openDropdown(cmpName) {
       this.$emit('open-drop', cmpName)
-    }
+    },
+      async starBoard(boardToUpdate) {
+      await this.$store.dispatch({
+        type: "starBoard",
+        boardToUpdate: boardToUpdate,
+      });
+    },
 
 
   },

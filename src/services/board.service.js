@@ -188,6 +188,7 @@ async function getGroupIdByTaskId(taskId, boardId) {
 
 function _getEmptyBoard() {
   return {
+    isStarred: false,
     groups: [],
     style: {},
     members: [],

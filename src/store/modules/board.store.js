@@ -12,6 +12,11 @@ export const boardStore = {
       if (!state.boards.length) return;
       return JSON.parse(JSON.stringify(state.boards));
     },
+    starredBoards(state) {
+      if (!state.boards) return;
+      var filtered = state.boards.filter((board) => board.isStarred);
+      return filtered;
+    },
     currBoard(state) {
       if (!state.currBoardId || !state.boards.length) return;
       const board = state.boards.find((b) => b._id === state.currBoardId);
@@ -121,11 +126,23 @@ export const boardStore = {
         throw err;
       }
     },
+
+    async starBoard({ commit }, { boardToUpdate }) {
+      try {
+        const updatedBoard = await boardService.updateBoard(
+          boardToUpdate
+        );
+        commit({ type: 'starBoard', updatedBoard });
+      } catch (err) {
+        throw err;
+      }
+    },
+
     async getTask({ commit }, { taskId, boardId }) {
       try {
         const task = await boardService.getTask(taskId, boardId);
         commit({ type: 'setCurrTask', task });
-      } catch (err) {}
+      } catch (err) { }
     },
     async saveTask({ commit, state }, { task, boardId }) {
       const editedTask = await boardService.saveTask(task, boardId);
