@@ -104,8 +104,12 @@ export const boardStore = {
       }
     },
     async saveBoard({ commit }, { board }) {
-      const newBoard = await boardService.updateBoard(board);
-      commit({ type: 'saveBoard', board: newBoard });
+      commit({ type: 'saveBoard', board: board });
+      try {
+        const newBoard = await boardService.updateBoard(board);
+      } catch (err) {
+        throw err;
+      }
     },
     async addGroup({ commit }, { boardId, groupToAdd }) {
       try {
@@ -130,9 +134,7 @@ export const boardStore = {
 
     async starBoard({ commit }, { boardToUpdate }) {
       try {
-        const updatedBoard = await boardService.updateBoard(
-          boardToUpdate
-        );
+        const updatedBoard = await boardService.updateBoard(boardToUpdate);
         commit({ type: 'starBoard', updatedBoard });
       } catch (err) {
         throw err;
@@ -143,7 +145,7 @@ export const boardStore = {
       try {
         const task = await boardService.getTask(taskId, boardId);
         commit({ type: 'setCurrTask', task });
-      } catch (err) { }
+      } catch (err) {}
     },
     async saveTask({ commit, state }, { task, boardId }) {
       const editedTask = await boardService.saveTask(task, boardId);
@@ -167,8 +169,12 @@ export const boardStore = {
       commit({ type: 'addTask', task: taskToAdd, groupId: task.groupId });
     },
     async editGroup({ commit }, { groupToEdit, boardId }) {
-      const savedGroup = await boardService.saveGroup(boardId, groupToEdit);
-      commit({ type: 'editGroup', savedGroup, boardId });
+      commit({ type: 'editGroup', savedGroup: groupToEdit, boardId });
+      try {
+        const savedGroup = await boardService.saveGroup(boardId, groupToEdit);
+      } catch (err) {
+        throw err;
+      }
     },
     async changeBoardBgc({ commit }, { bgc, boardId }) {
       const board = JSON.parse(
@@ -190,15 +196,15 @@ export const boardStore = {
       await boardService.updateBoard(board);
       commit({ type: 'updateBoard', board });
     },
-    async addLabel({commit}, {label, boardId}){
+    async addLabel({ commit }, { label, boardId }) {
       const board = await boardService.getBoardById(boardId);
 
       label._id = utilService.makeId();
-      const idx = board.labels.findIndex(l => l.color === label.color);
+      const idx = board.labels.findIndex((l) => l.color === label.color);
       board.labels.splice(idx, 0, label);
 
       const boardToUpdate = await boardService.updateBoard(board);
-      commit({type: 'saveBoard', board: boardToUpdate})
-    }
+      commit({ type: 'saveBoard', board: boardToUpdate });
+    },
   },
 };

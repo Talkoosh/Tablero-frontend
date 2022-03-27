@@ -1,11 +1,12 @@
 import { utilService } from './util.service.js';
 import { storageService } from './async-storage-service.js';
+import { httpService } from './http.service.js';
+
 export const boardService = {
   query,
   getBoardById,
   addBoard,
   updateBoard,
-  getBoard,
   removeBoard,
   saveGroup,
   removeGroup,
@@ -21,7 +22,8 @@ const KEY = 'board';
 
 async function query() {
   try {
-    const boards = await storageService.query(KEY);
+    const boards = await httpService.get(KEY);
+    console.log(boards);
     if (!boards.length) {
       const board = await _makeBoard();
       boards.push(board);
@@ -34,9 +36,8 @@ async function query() {
 
 async function getBoardById(boardId) {
   try {
-    const boards = await query();
-    const board = boards.find((b) => b._id === boardId);
-    console.log(board);
+    // const boards = await query();
+    const board = httpService.get(KEY + '/' + boardId);
     return board;
   } catch (err) {
     throw err;
@@ -48,10 +49,9 @@ async function addBoard(title, style) {
   boardToSave.createdAt = Date.now();
   boardToSave.title = title;
   boardToSave.style = style || {};
-  boardToSave._id = utilService.makeId();
 
   try {
-    return await storageService.post(KEY, boardToSave);
+    return await httpService.post(KEY, boardToSave);
   } catch (err) {
     throw err;
   }
@@ -59,16 +59,7 @@ async function addBoard(title, style) {
 
 async function updateBoard(board) {
   try {
-    return await storageService.put(KEY, board);
-  } catch (err) {
-    throw err;
-  }
-}
-
-async function getBoard(boardId) {
-  try {
-    const board = await storageService.get(KEY, boardId);
-    return board;
+    return await httpService.put(KEY + '/' + board._id, board);
   } catch (err) {
     throw err;
   }
@@ -76,7 +67,7 @@ async function getBoard(boardId) {
 
 async function removeBoard(boardId) {
   try {
-    return await storageService.remove(KEY, boardId);
+    return await httpService.remove(KEY + '/' + boardId);
   } catch (err) {
     throw err;
   }
@@ -86,11 +77,11 @@ async function removeBoard(boardId) {
 
 async function saveGroup(boardId, group) {
   try {
-    const board = await getBoard(boardId);
+    const board = await getBoardById(boardId);
     if (group._id) {
       const idx = board.groups.findIndex((g) => g._id === group._id);
       board.groups[idx] = group;
-      const savedBoard = await updateBoard(board);
+      await updateBoard(board);
       return group;
     } else {
       const groupToAdd = {
@@ -109,7 +100,7 @@ async function saveGroup(boardId, group) {
 
 async function removeGroup(boardId, groupId) {
   try {
-    const board = await getBoard(boardId);
+    const board = await getBoardById(boardId);
     const idx = board.groups.findIndex((g) => g._id === groupId);
     board.groups.splice(idx, 1);
     return await updateBoard(board);
@@ -122,7 +113,7 @@ async function removeGroup(boardId, groupId) {
 
 async function saveTask(task, boardId) {
   try {
-    const board = await getBoard(boardId);
+    const board = await getBoardById(boardId);
     if (task._id) {
       const groupId = await getGroupIdByTaskId(task._id, boardId);
       const group = board.groups.find((g) => g._id === groupId);
@@ -143,7 +134,7 @@ async function saveTask(task, boardId) {
 }
 
 async function getTask(taskId, boardId) {
-  const board = await getBoard(boardId);
+  const board = await getBoardById(boardId);
   try {
     const group = board.groups.find((g) => {
       const t = g.tasks.find((t) => t._id === taskId);
@@ -159,7 +150,7 @@ async function getTask(taskId, boardId) {
 
 async function removeTask(taskId, boardId) {
   try {
-    const board = await getBoard(boardId);
+    const board = await getBoardById(boardId);
     const group = board.groups.find((g) => {
       const t = g.tasks.find((t) => t._id === taskId);
       if (t) return true;
@@ -175,7 +166,7 @@ async function removeTask(taskId, boardId) {
 
 async function getGroupIdByTaskId(taskId, boardId) {
   try {
-    const board = await getBoard(boardId);
+    const board = await getBoardById(boardId);
     const group = board.groups.find((g) => {
       const task = g.tasks.find((t) => t._id === taskId);
       if (task) return true;
@@ -507,7 +498,7 @@ async function _makeBoard() {
         },
       ],
     };
-    const savedBoard = await storageService.post(KEY, board);
+    const savedBoard = await httpService.post(KEY, board);
     return savedBoard;
   } catch (err) {
     throw err;
