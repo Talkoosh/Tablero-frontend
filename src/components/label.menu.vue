@@ -18,25 +18,25 @@
                         <span class="label-title">{{ label.title }}</span>
                         <span class="check-icon" v-if="labelIds.includes(label._id)"></span>
                     </span>
-                    <span class="label-edit-icon"></span>
+                    <span class="label-edit-icon" @click.stop="editLabel(label)"></span>
                 </div>
                 <button @click.stop="isAdding = true" class="create-btn">Create a new label</button>
             </div>
         </div>
         <div v-else class="label-add">
             <div class="header">
-                <span class="back-icon"></span>
+                <span @click.stop="isAdding = false" class="back-icon"></span>
                 <h3 class="menu-title">Create Label</h3>
-                <span class="close-icon"></span>
+                <span @click="closeAction" class="close-icon"></span>
             </div>
             <hr />
             <div class="main">
                 <h4>Name</h4>
-                <input type="text" v-model="labelToAdd.title"/>
+                <input type="text" v-model="labelToAdd.title" autofocus />
                 <h4>Select a color</h4>
                 <div class="labels-container">
                     <span
-                    @click="setLabelColor(labelColor)"
+                        @click="setLabelColor(labelColor)"
                         class="labelColor"
                         v-for="labelColor in labelColors"
                         :key="labelColor"
@@ -49,7 +49,11 @@
                         <p class="txt-lng-no-color">This won't show up on the front of cards.</p>
                     </div>
                 </div>
-                <button @click="onAddLabel" class="add-btn">Create</button>
+                <button @click.stop="onAddLabel" v-if="!labelToAdd._id" class="add-btn">Create</button>
+                <div class="edit-btns" v-else>
+                    <button @click.stop="onAddLabel" class="save-btn">Save</button>
+                    <button @click.stop="onDeleteLabel" class="delete-btn">Delete</button>
+                </div>
             </div>
         </div>
     </section>
@@ -100,13 +104,24 @@ export default {
             }
             this.$emit('label-set', this.labelIds)
         },
-        setLabelColor(color){
+        setLabelColor(color) {
             this.labelToAdd.color = color;
         },
-        onAddLabel(){
-            if(!this.labelToAdd.title) return; 
+        onAddLabel() {
+            if (!this.labelToAdd.title) return;
             this.$emit('label-add', this.labelToAdd);
+            this.isAdding = false;
+        },
+        editLabel(label) {
+            this.labelToAdd = { ...label }
+            this.isAdding = true;
+        },
+        onDeleteLabel(){
+            this.$emit('label-delete', this.labelToAdd._id);
+            this.isAdding = false; 
         }
+        
+
     },
     computed: {
         labelIds() {

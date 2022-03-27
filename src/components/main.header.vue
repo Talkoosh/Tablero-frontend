@@ -1,15 +1,21 @@
 <template>
-  <section class="main-header" :style="'background-color:' + bgc + '; opacity: .9'">
-    <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
+  <section class="main-header" :style="boardBgStyle">
+    <router-link :style="textColor" class="main-logo" :to="'/board/'">Tablero</router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="recent-drop">
-          <button class="drop-btn recent-btn" @click="openDropdown('recentBoardsDrop')">Recent</button>
+          <button
+            :style="textColor"
+            class="drop-btn recent-btn"
+            @click="openDropdown('recentBoardsDrop')"
+          >Recent</button>
         </div>
-
         <div class="starred-drop">
-          <button class="drop-btn starred-btn" @click="openDropdown('starredBoardsDrop')">Starred</button>
-      
+          <button
+            :style="textColor"
+            class="drop-btn starred-btn"
+            @click="openDropdown('starredBoardsDrop')"
+          >Starred</button>
         </div>
       </div>
 
@@ -19,6 +25,7 @@
             class="create-board-btn drop-btn"
             @click="openDropdown('createBoardDrop')"
             :class="toggleCreateBtnBGC"
+            :style="textColor"
           >Create</button>
         </div>
         <div v-if="isCreateBoardOpen" class="create-board-modal" :class="toggleCreateBoardModal"></div>
@@ -28,15 +35,9 @@
     </div>
     <div class="right-navbar">
       <div class="board-search">
-        <!-- <span>
-          <img src="@/assets/img/bell.png" alt="" />
-        </span>-->
-        <input class="main-input" type="text" placeholder="Search" />
-        <!-- </form> -->
+        <input class="main-input" :style="textColor" type="text" placeholder="Search" />
       </div>
-      <!-- <button class="right-nav-btn">
-        <span>💡</span>
-      </button> -->
+
       <div class="main-header-icon">
         <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" />
       </div>
@@ -50,14 +51,13 @@ import recentBoardsDrop from "./recent.boards.drop.vue"
 import starredBoardsDrop from "./starred.boards.drop.vue"
 import { utilService } from "../services/util.service.js";
 export default {
-  emits: ['open-drop'],
+  emits: ['openDrop', 'open-drop'],
   components: {
     createBoardDrop,
     recentBoardsDrop,
     starredBoardsDrop
   },
   created() {
-    // eventBus.on('change-color', this.changeColor)
   },
   data() {
     return {
@@ -88,6 +88,18 @@ export default {
     },
     bgc() {
       return this.$store.getters.mainHeaderBgc
+    },
+    boardBgStyle() {
+      if (!this.bgc) return
+      console.log(this.bgc)
+      return this.bgc.isLight ?
+        'background-color:' + this.bgc.bgc + '; opacity: .9;'
+        : 'background-color:' + this.bgc.bgc + '; opacity: .9;'
+    },
+    textColor() {
+      if (!this.bgc) return
+      return this.bgc.isLight ? 'color: #172b4d' : 'color: white'
+
     }
   },
 };

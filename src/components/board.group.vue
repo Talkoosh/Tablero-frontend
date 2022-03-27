@@ -20,17 +20,21 @@
                         <div>...</div>
                     </div>
                 </div>
-                 <div class="group-extras-menu" v-if="isExtrasOpen" v-clickoutside="toggleExtrasMenu">
-                            <h3 class="menu-title">List actions</h3>
-                            <span class="extras-exit"></span>
-                            <hr>
-                            <div class="extras-btns">
-                                <button class="add-task-btn">Add card...</button>
-                                <button class="copy-group-btn">Copy list...</button>
-                                <button class="sort-by-btn">Sort by...</button>
-                                <button class="archive-group-btn">Archive this list</button>
-                            </div>
-                        </div>
+                <div
+                    class="group-extras-menu"
+                    v-if="isExtrasOpen"
+                    v-clickoutside="toggleExtrasMenu"
+                >
+                    <h3 class="menu-title">List actions</h3>
+                    <span class="extras-exit"></span>
+                    <hr />
+                    <div class="extras-btns">
+                        <button class="add-task-btn">Add card...</button>
+                        <button class="copy-group-btn">Copy list...</button>
+                        <button class="sort-by-btn">Sort by...</button>
+                        <button class="archive-group-btn">Archive this list</button>
+                    </div>
+                </div>
                 <!-- v-if="group.tasks.length" -->
                 <div class="group-tasks">
                     <Container
@@ -74,6 +78,8 @@
 <script>
 import taskPreview from "./task.preview.vue"
 import { Container, Draggable } from "vue3-smooth-dnd";
+import FastAverageColor from 'fast-average-color';
+
 
 export default {
     props: {
@@ -147,7 +153,7 @@ export default {
         getChildPayload(idx) {
             return this.group.tasks[idx]
         },
-        toggleExtrasMenu(){
+        toggleExtrasMenu() {
             this.isExtrasOpen = !this.isExtrasOpen
         }
     },

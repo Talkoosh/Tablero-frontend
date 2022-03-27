@@ -26,6 +26,7 @@ export default {
     starredBoardsDrop,
     mainHeader
   },
+  emits: ['openDrop', 'open-drop'],
   created() {
   },
   data() {
