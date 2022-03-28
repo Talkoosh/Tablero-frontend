@@ -18,6 +18,8 @@
           <div class="login-password-container">
             <div class="email-password">
               <div class="inputs-container">
+                    <input v-if="this.isSignUpPageOpen"  type="text" v-model="userPassword"
+                 class="login-input" placeholder="Enter username"  />
                 <input type="email" class="login-input" placeholder="Enter email "
                 v-model="userMail" ref="mailInput" autofocus />
                 <input  type="text" v-model="userPassword"
