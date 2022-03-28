@@ -37,6 +37,7 @@ export default {
     return {
       currDropDown: null,
       isHomePage: false,
+      // isLoginPage:false,
       overflow: 'hidden',
     };
   },
@@ -51,12 +52,16 @@ export default {
   computed: {
     bodyOverflow() {
       return `overflow: ${this.overflow}`
-    }
+    },
+    // bodyBGC(){
+    //   return  (this.isLoginPage) ? 'background-color:#f9fafc;' : '';
+    // }
   },
   unmounted() { },
   watch: {
     $route(to, from) {
       this.isHomePage = (this.$route.path !== '/' && this.$route.path !== '/login');
+      // this.isLoginPage = (this.$route.path === '/login');
 
       this.overflow = (this.$route.path === '/login') ? 'auto' : 'hidden'
     },
