@@ -3,7 +3,7 @@
         <header>
             <board-header @board-title-changed="saveBoard" @open-menu="openMenu" :board="board" />
         </header>
-        <div class="groups-container">
+        <div class="groups-container" :style="linear">
             <Container
                 v-if="board.groups.length"
                 orientation="horizontal"
@@ -169,6 +169,11 @@ export default {
             if (!this.bgc) return
             return this.bgc.isLight ? 'background-color: #0000001a' : 'background-color: #ffffff3d'
         },
+        linear() {
+            if (!this.board.style.backgroundColor && !this.board.style.photo) return
+            if (this.board.style.backgroundColor) return ``
+            else return `background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);`
+        }
     },
     watch: {
         'board': {

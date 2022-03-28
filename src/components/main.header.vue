@@ -1,6 +1,7 @@
 <template>
   <section class="main-header" :style="boardBgStyle">
-    <router-link :style="textColor" class="main-logo" :to="'/board/'">Tablero</router-link>
+    <router-link :style="textColor" class="main-logo" :to="'/board/'" >Tablero
+   </router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="recent-drop">

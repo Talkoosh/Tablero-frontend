@@ -21,8 +21,7 @@
         .logo-img {
             height: 43px;
             width: 43px;
-            background-image: url('@/assets/img/headerIcon.png');
-            // background-image: url('@/assets/img/search.png');
+            // background-image: url('@/assets/img/our-logo.png');
         }
 
         .logo-text {
@@ -52,6 +51,7 @@
 
                 font-weight: 300;
                 line-height: 1.44em;
+                min-width: 370px;
 
                 .header {
                     text-align: center;
@@ -72,7 +72,7 @@
 
                     .email-password {
                         .inputs-container {
-                            .email-input {
+                            .login-input {
                                 font-size: 14px;
                                 background-color: #fafbfc;
                                 border: 2px solid #dfe1e6;
@@ -99,32 +99,6 @@
                                 }
                             }
 
-                            .password-input {
-                                font-size: 14px;
-                                background-color: #fafbfc;
-                                border: 2px solid #dfe1e6;
-                                -moz-box-sizing: border-box;
-                                box-sizing: border-box;
-                                border-radius: 3px;
-                                height: 44px;
-                                background: #edeff0;
-                                padding: 0.5em;
-                                max-width: 400px;
-                                width: 100%;
-                                margin: 0 0 1.2em;
-                                background-color: #fafbfc;
-                                font: inherit;
-
-                                &:focus {
-                                    background-color: white;
-                                    border: 2px solid #4c9aff;
-                                    box-shadow: 0 0 0;
-                                }
-
-                                &:focus-visible {
-                                    outline: none;
-                                }
-                            }
                         }
 
                         .login-submit {
@@ -159,14 +133,10 @@
                             margin-top: 16px;
                             margin-bottom: 16px;
 
-                            // color: #4d4d4d;
-                            // font-size: 16px;
-                            // font-weight: 300;
-                            // line-height: 1.44em;
                         }
 
                         .login-methods {
-                            .google-btn {
+                            .method-btn {
                                 background: #fff;
                                 color: rgba(0, 0, 0, 0.54);
                                 box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
@@ -184,16 +154,16 @@
                                 }
 
                                 .google-icon {
-                                    display: inline-block;
-                                    border-radius: 1px;
-                                    width: 18px;
-                                    height: 18px;
-                                    vertical-align: middle;
-                                    transform: translateY(2px);
+                                    @include login-icon;
                                     background: url("@/assets/img/sign-in-with-google.svg");
                                 }
 
-                                .google-text {
+                                .facebook-icon {
+                                    @include login-icon;
+                                    background-image: url("@/assets/img/facebook-sign-up.png");
+                                }
+
+                                .text {
                                     display: inline-block;
                                     vertical-align: middle;
                                     font-size: 14px;
@@ -207,54 +177,10 @@
                                     padding-left: 6px;
                                 }
                             }
-
-                            .facebook-btn {
-                                background: #fff;
-                                color: rgba(0, 0, 0, 0.54);
-                                box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
-                                border-color: transparent;
-                                text-align: center;
-                                border-radius: 3px;
-                                width: 99%;
-                                height: 39px;
-                                padding-top: 0;
-                                margin-bottom: 12px;
-
-                                &:hover {
-                                    cursor: pointer;
-                                    background-color: #f9fafc;
-                                }
-
-                                .facebook-icon {
-                                    display: inline-block;
-                                    border-radius: 1px;
-                                    width: 18px;
-                                    height: 18px;
-                                    vertical-align: middle;
-                                    background-image: url("@/assets/img/facebook.png");
-                                }
-
-                                .facebook-text {
-                                    display: inline-block;
-                                    vertical-align: middle;
-                                    font-size: 14px;
-                                    font-family: inherit;
-                                    font-weight: bold;
-                                    color: #505f79;
-                                    padding: 3px;
-                                    height: 32px;
-                                    line-height: 32px;
-                                    text-align: center;
-                                }
-                            }
                         }
                     }
                 }
 
-                // display: block;
-                // max-width: 585px;
-                // margin: 0 auto;
-                // position: relative;
 
                 hr {
                     margin-top: 25px;
@@ -286,6 +212,7 @@
                             &:hover {
                                 color: #0052cc;
                                 text-decoration: underline;
+                                cursor: pointer;
                             }
                         }
                     }
@@ -310,7 +237,7 @@
             left: 0;
             z-index: -999;
             max-width: 30%;
-            background: url("@/assets/img/tabelro-left.svg");
+            // background: url("@/assets/img/tabelro-left.svg");
         }
 
         .right-img {
@@ -320,7 +247,23 @@
             right: 0;
             z-index: -999;
             max-width: 30%;
-            background: url("@/assets/img/tabelro-right.svg");
+            // background: url("@/assets/img/tabelro-right.svg");
         }
     }
+}
+
+.unvalid-mail{
+    position: relative;
+    text-decoration: none;
+    border: 0px;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 0.3em;
+    width: 100%;
+    -webkit-appearance: button;
+    background: #E2E4E6;
+    box-shadow: none;
+    color: hsl(0,0%,55%);
+    cursor: default;
+    
 }

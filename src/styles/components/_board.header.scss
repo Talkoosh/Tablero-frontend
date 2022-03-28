@@ -8,7 +8,8 @@
 
     a,
     .title,
-    .menu-btn {
+    .menu-btn,
+    .star-board {
       color: white;
       @include button-default;
       margin: 0 4px 4px 0;
@@ -76,7 +77,16 @@
         background-color: #ffffff3d;
         width: 32px;
         padding: 0;
-        .star-icon {
+        .starred {
+          @include icon;
+          transform: translatex(-50%);
+          font-weight: 400;
+          &::before {
+            color: gold;
+            content: '\e967';
+          }
+        }
+        .not-starred {
           @include icon;
           transform: translatex(-50%);
           font-weight: 400;
@@ -85,9 +95,8 @@
           }
           &:hover {
             color: gold;
-            font-size: 1.4em;
           }
-        }
+          }
       }
     }
     .board-header-right {
