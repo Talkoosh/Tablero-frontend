@@ -3,7 +3,6 @@
     <!-- <div class="boards-page-nav"></div> -->
     <hompage-nav />
 
-
     <div class="all-boards">
       <div v-if="starredBoards.length" class="starred-boards-container">
         <div class="starred-boards-title">
@@ -75,9 +74,9 @@
 <script>
 import boardPreview from "../components/board.preview.vue";
 import hompageNav from "../components/homepage.nav.vue";
+import { userService } from "../services/user.service.js";
 
 export default {
-  // props: [''],
   emits: ['openDrop', 'open-drop'],
   components: {
     boardPreview,
@@ -87,7 +86,8 @@ export default {
     this.$store.dispatch("loadBoards");
     this.$store.commit({ type: "setCurrBoardId", boardId: null });
     this.$store.commit({ type: "changeHeaderBgc", bgc: "#026aa7" });
-
+    const users = userService.getUsers()
+    console.log(users)
 
   },
   data() {

@@ -1,4 +1,6 @@
 .board-nav {
+  overflow: hidden;
+
   margin-top: 44px;
   width: 339px;
   height: 100vh;
@@ -40,6 +42,7 @@
       cursor: pointer;
       left: 12px;
       top: 12px;
+      transition: transform .2s;
       .back-icon {
         @include icon;
         &::before {
@@ -75,6 +78,7 @@
         cursor: pointer;
         border-radius: 3px;
         padding: 6px 6px 6px 40px;
+        
         h4 {
           font-weight: 650;
         }
@@ -93,6 +97,7 @@
       }
     }
     .change-bg {
+      transition: transform 0.2s;
       display: flex;
       text-align: center;
       .photos-card-container {
@@ -126,6 +131,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      transition: transform 0.2s;
+
       .color-card {
         @include nav-card;
         flex-basis: 48%;
@@ -162,8 +169,9 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      transition: transform 0.2s;
       overflow-y: auto;
-      max-height: 86vh;
+      max-height: 83vh;
       .photo-card {
         @include nav-card;
         flex-basis: 48%;

@@ -63,6 +63,7 @@
                         Add a card
                     </div>
                     <div v-clickoutside="toggleAddTask" class="add-task-active" v-else>
+                        <!-- <div class="add-task-area-container"> -->
                         <div class="textarea-container">
                             <textarea
                                 v-model="taskToAdd.title"
@@ -76,6 +77,7 @@
                                 <span class="x-icon"></span>
                             </button>
                         </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>

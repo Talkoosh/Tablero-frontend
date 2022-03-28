@@ -1,5 +1,5 @@
 <template>
-    <section class="board-header">
+    <section class="board-header" :style="bgDarkness">
         <nav class="board-header-nav">
             <div class="board-header-left">
                 <div class="board-header-btn board-name">
@@ -22,8 +22,9 @@
                     </div>
                 </div>
                 <div class="board-header-btn board-starred" :style="btnBgc">
-                    <a href :style="textColor">
-                        <span class="star-icon"></span>
+                    <a @click.prevent="starBoard" :style="textColor" class="star-board">
+                        <!-- <span class="star-icon"></span> -->
+                        <span :class="isStarred"></span>
                     </a>
                 </div>
                 <div class="board-members" :style="'width: ' + board.members.length * 32 + 'px'">
@@ -86,7 +87,13 @@ export default {
         },
         openMenu() {
             this.$emit('open-menu')
-        }
+        },
+        async starBoard() {
+            await this.$store.dispatch({
+                type: "starBoard",
+                boardId: this.board._id,
+            });
+        },
     },
     computed: {
         bgc() {
@@ -99,6 +106,13 @@ export default {
         btnBgc() {
             if (!this.bgc) return
             return this.bgc.isLight ? 'background-color: #0000001a' : 'background-color: #ffffff3d'
+        },
+        bgDarkness() {
+            if (this.board.style.backgroundColor) return ``
+            else return `background: #0000003d;`
+        },
+        isStarred() {
+            return this.board.isStarred ? 'starred' : 'not-starred'
         }
     },
     unmounted() { },
