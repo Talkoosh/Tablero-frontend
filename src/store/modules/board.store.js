@@ -102,6 +102,17 @@ export const boardStore = {
       );
       state.boards[boardIdx].groups.splice(groupIdx, 1);
     },
+    deleteTask(state, {taskId, groupId, boardId}){
+
+      const boardIdx = state.boards.findIndex((b) => b._id === boardId);
+
+      const groupIdx = state.boards[boardIdx].groups.findIndex(g => g._id === groupId); 
+
+      const taskIdx = state.boards[boardIdx].groups[groupIdx].tasks.findIndex(t => t._id === taskId);
+
+      state.boards[boardIdx].groups[groupIdx].tasks.splice(taskIdx, 1);
+      state.currTask = null;
+    }
   },
   actions: {
     async loadBoards({ commit, state }) {
@@ -224,7 +235,6 @@ export const boardStore = {
     },
     async deleteLabel({ commit }, { labelId, task, boardId }) {
       try {
-        console.log('STORE', labelId, task, boardId);
         if (task.labelIds.includes(labelId)) {
           const labelIdx = task.labelIds.findIndex((id) => id === labelId);
           task.labelIds.splice(labelIdx, 1);
@@ -249,5 +259,14 @@ export const boardStore = {
         throw err;
       }
     },
+    async deleteTask({commit}, {taskId, boardId}){
+      try{
+        const groupId = await boardService.getGroupIdByTaskId(taskId, boardId);
+        commit({type:'deleteTask', taskId, groupId, boardId})
+         await boardService.removeTask(taskId, boardId);
+      } catch(err){
+        throw err
+      }
+    }
   },
 };
