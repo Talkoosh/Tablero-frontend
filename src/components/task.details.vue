@@ -130,6 +130,18 @@
                             <span class="icon checklist-icon"></span>
                             <span>Checklist</span>
                         </button>
+
+                        <h3>Actions</h3>
+                        <button @click.stop="isArchiving = true">
+                            <span class="icon archive-icon"></span>
+                            <span>Archive</span>
+                        </button>
+                        <div class="archive-btns" v-if="isArchiving" @click.stop="archive">
+                            <button @click.stop="archive">
+                                <span class="icon delete-icon"></span>
+                                <span>Delete</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -151,7 +163,8 @@ export default {
             currDescTxt: '',
             currAction: '',
             coverBcg: null,
-            coverPhoto: null
+            coverPhoto: null,
+            isArchiving: false
         }
     },
     methods: {
@@ -206,7 +219,7 @@ export default {
         },
         onDeleteLabel(labelId) {
             const boardId = this.$route.params.boardId;
-            this.$store.dispatch({type: 'deleteLabel', labelId, task: {...this.task} ,boardId})
+            this.$store.dispatch({ type: 'deleteLabel', labelId, task: { ...this.task }, boardId })
         },
         onSetPhoto(photo) {
             delete this.task.style.color;
@@ -224,6 +237,12 @@ export default {
             this.coverBcg = color;
             this.coverPhoto = photo;
         },
+        async archive() {
+            this.isArchiving = false;
+            const boardId = this.$route.params.boardId;
+            await this.$store.dispatch({ type: 'deleteTask', taskId: this.task._id, boardId });
+            this.$router.push(`/board/${boardId}`)
+        }
 
 
     },

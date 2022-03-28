@@ -1,5 +1,5 @@
 <template>
-  <section class="app-container">
+  <section :style="bodyOverflow" class="app-container">
     <main-header v-if="isHomePage" @open-drop="openDrop" />
     <router-view />
     <component
@@ -37,6 +37,7 @@ export default {
     return {
       currDropDown: null,
       isHomePage: false,
+      overflow: 'hidden',
     };
   },
   methods: {
@@ -48,12 +49,16 @@ export default {
     },
   },
   computed: {
-
+    bodyOverflow() {
+      return `overflow: ${this.overflow}`
+    }
   },
   unmounted() { },
   watch: {
     $route(to, from) {
-      this.isHomePage = (this.$route.path !== '/');
+      this.isHomePage = (this.$route.path !== '/' && this.$route.path !== '/login');
+
+      this.overflow = (this.$route.path === '/login') ? 'auto' : 'hidden'
     },
   },
 };

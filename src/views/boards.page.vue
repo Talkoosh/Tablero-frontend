@@ -3,6 +3,7 @@
     <!-- <div class="boards-page-nav"></div> -->
     <hompage-nav />
 
+
     <div class="all-boards">
       <div v-if="starredBoards.length" class="starred-boards-container">
         <div class="starred-boards-title">
@@ -87,7 +88,6 @@ export default {
     this.$store.commit({ type: "setCurrBoardId", boardId: null });
     this.$store.commit({ type: "changeHeaderBgc", bgc: "#026aa7" });
 
-      console.log(window.location.href);
 
   },
   data() {

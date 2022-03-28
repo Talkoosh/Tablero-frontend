@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { store } from './store/index.js';
+import debounce from './services/debouncer.js'
 import './styles/style.scss';
 
 const app = createApp(App);
@@ -25,6 +26,9 @@ app.directive('clickoutside', {
     event.stopPropagation();
   },
 });
+
+app.directive('debounce', (el,binding) => debounce(el,binding))
+
 
 app.use(store);
 app.use(router);
