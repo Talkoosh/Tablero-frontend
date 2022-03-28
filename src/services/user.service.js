@@ -1,7 +1,6 @@
 import { httpService } from './http.service.js'
 // import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service.js'
-const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
-var gWatchedUser = null;
+// var gWatchedUser = null;
 
 export const userService = {
     login,
@@ -12,11 +11,10 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
 }
 
 // Debug technique
-// window.userService = userService
+window.userService = userService
 
 
 async function getUsers() {
@@ -35,41 +33,40 @@ function remove(userId) {
 async function update(user) {
     user = await httpService.put(`user/${user._id}`, user)
     // Handle case in which admin updates other user's details
-    if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
     return user;
 }
 
 async function login(userCred) {
     const user = await httpService.post('auth/login', userCred)
     // socketService.emit('set-user-socket', user._id);
-    if (user) return _saveLocalUser(user)
 }
 async function signup(userCred) {
     const user = await httpService.post('auth/signup', userCred)
     // socketService.emit('set-user-socket', user._id);
-    return _saveLocalUser(user)
 }
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
     // socketService.emit('unset-user-socket');
     return await httpService.post('auth/logout')
 }
 
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
+// async function changeScore(by) {
+//     const user = getLoggedinUser()
+//     if (!user) throw new Error('Not loggedin')
+//     await update(user)
+//     return user.score
+// }
+
+
+
+async function getLoggedinUser() {
+    try {
+        const user = await httpService.get('auth/loggedinUser');
+        return user;
+    } catch (err) {
+        throw err;
+    }
 }
-
-
-
-function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
-}
-
-// This IIFE functions for Dev purposes 
+// This IIFE functions for Dev purposes
 // It allows testing of real time updates (such as sockets) by listening to storage events
 // (async () => {
 //     var user = getLoggedinUser()
