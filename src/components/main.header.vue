@@ -39,7 +39,7 @@
         <input class="main-input" :style="textColor" type="text" placeholder="Search" />
       </div>
 
-      <div class="main-header-icon">
+      <div @click="openDropdown('acountDrop')" class="main-header-icon" >
         <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" />
       </div>
     </div>

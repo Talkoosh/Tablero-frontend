@@ -2,7 +2,7 @@
   <div class="recent-drop-content dropdown">
     <header class="drop-header">
       <div class="header-text">Recent boards</div>
-      <button class="close-header" @click="closeDropdown('recentBoardsDrop')">
+      <button class="close-header" @click="closeDropdown()">
         X
       </button>
     </header>
