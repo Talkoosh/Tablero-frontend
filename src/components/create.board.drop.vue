@@ -9,28 +9,16 @@
       <div class="modal-content">
         <div class="background-display">
           <div class="img-container" :style="coverBG">
-            <img
-              class="cover-img"
-              src="@/assets/img/create-board-display.svg"
-              alt=""
-            />
+            <img class="cover-img" src="@/assets/img/create-board-display.svg" alt />
           </div>
         </div>
 
         <div class="background-picker-container">
-          <label class="covers-title" for="background-picker-title"
-            >Background</label
-          >
+          <label class="covers-title" for="background-picker-title">Background</label>
           <div class="background-options">
             <ul class="background-imgs-options">
-              <li
-                class="background-img"
-                v-for="img in imgs"
-                :key="img"
-                @click="changeBGP(img)"
-              >
-
-                <button class="img" :style="'background-image: url('+img+')'">
+              <li class="background-img" v-for="img in imgs" :key="img" @click="changeBGP(img)">
+                <button class="img" :style="'background-image: url(' + img + ')'">
                   <span v-if="cardBGP(img)" class="check-photo-container">
                     <span class="checked-photo">
                       <span class="check-icon"></span>
@@ -92,20 +80,10 @@
 
         <div class="create-board-input-container">
           <div class="input-title">Board title</div>
-          <input
-            type="text"
-            class="create-board-input"
-            v-model="boardToAdd.title"
-          />
+          <input type="text" class="create-board-input" v-model="boardToAdd.title" />
         </div>
 
-        <button
-          class="submit-create-btn"
-          :class="submitStatus"
-          @click="addBoard"
-        >
-          Create
-        </button>
+        <button class="submit-create-btn" :class="submitStatus" @click="addBoard">Create</button>
       </div>
     </div>
   </div>
@@ -114,7 +92,7 @@
 <script>
 import { photoService } from "../services/photo.service.js";
 export default {
-  name: "",
+  emits: ['open-drop', 'close-drop'],
   components: {},
   async created() {
     let photos = await photoService.loadDefaultPhotos();
@@ -141,7 +119,7 @@ export default {
       });
     },
 
-   
+
 
     closeDropdown() {
       this.$emit("close-drop");

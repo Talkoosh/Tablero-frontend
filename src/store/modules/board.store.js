@@ -7,6 +7,11 @@ export const boardStore = {
     currTask: null,
     boardBgc: null,
     isLabelTitleShown: false,
+    isStartAnimation: false,
+    labelSize: {
+      height: '8px',
+      width: '40px',
+    }
   },
   getters: {
     boards(state) {
@@ -39,6 +44,12 @@ export const boardStore = {
     isLabelTitleShown(state) {
       return state.isLabelTitleShown;
     },
+    isStartAnimation(state) {
+      return state.isStartAnimation;
+    },
+    labelSize(state) {
+      return state.labelSize
+    }
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -88,9 +99,6 @@ export const boardStore = {
     changeHeaderBgc(state, { bgc, isLight }) {
       state.boardBgc = { bgc, isLight };
     },
-    toggleLabelTitle(state) {
-      state.isLabelTitleShown = !state.isLabelTitleShown;
-    },
     starBoard(state, { boardId }) {
       const board = state.boards.find((b) => b._id === boardId);
       board.isStarred = !board.isStarred;
@@ -102,6 +110,24 @@ export const boardStore = {
       );
       state.boards[boardIdx].groups.splice(groupIdx, 1);
     },
+    toggleLabel(state) {
+      state.isLabelTitleShown = !state.isLabelTitleShown
+    },
+    toggleLabelText(state) {
+      state.isStartAnimation = !state.isStartAnimation
+      if (state.isStartAnimation) {
+        state.labelSize = {
+          width: '55px',
+          height: '16px'
+        }
+      } else {
+        state.labelSize = {
+          width: '40px',
+          height: '8px'
+        }
+
+      }
+    }
   },
   actions: {
     async loadBoards({ commit, state }) {
@@ -158,7 +184,7 @@ export const boardStore = {
       try {
         const task = await boardService.getTask(taskId, boardId);
         commit({ type: 'setCurrTask', task });
-      } catch (err) {}
+      } catch (err) { }
     },
     async saveTask({ commit, state }, { task, boardId }) {
       const board = state.boards.find((b) => b._id === boardId);
@@ -248,6 +274,12 @@ export const boardStore = {
       } catch (err) {
         throw err;
       }
+    },
+    toggleLabelTitle({ commit }) {
+      commit({ type: 'toggleLabel' })
+      setTimeout(() => {
+        commit({ type: 'toggleLabelText' })
+      }, 100)
     },
   },
 };

@@ -17,7 +17,6 @@
                     </div>
                     <span>{{ task.title }}</span>
                     <badge-preview :task="task" class="task-badges" />
-                    <div v-if="task.members" class="task-members"></div>
                     <span @click.prevent="openQuickEdit" class="task-quick-edit"></span>
                 </div>
             </router-link>
@@ -62,7 +61,7 @@ export default {
         taskBg() {
             if (!this.task.style.isBackground) return
             if (this.task.style.photo) return `background-image: url('${this.task.style.photo}'); height: 260px;display:flex;`
-            else return `background-color: ${this.task.style.color}; min-height: 56px;display:flex;`
+            else if (this.task.style.color) return `background-color: ${this.task.style.color}; min-height: 56px;display:flex;`
         }
     },
     unmounted() { },

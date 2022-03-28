@@ -54,7 +54,7 @@
           max-width: 100%;
         }
       }
-
+      
       .task-labels {
         width: 100%;
         display: flex;
@@ -66,29 +66,25 @@
           font-size: 12px;
           text-shadow: none;
           display: block;
-          min-width: 40px;
-          min-height: 8px;
           padding: 0 8px;
           border-radius: 4px;
           margin-right: 4px;
           margin-bottom: 4px;
-
+          position: relative;
+          min-width: 40px;
+          transition: min-width .2s;
+          
           &.label-open {
             animation: label-text-appear 0.2s ease-in;
+            min-width: 55px;
           }
           &.label-closing {
             animation: label-text-disappear 0.2s ease-in;
           }
           .label-text {
-            &.label-open {
-              animation: label-text-appear-title 0.4s ease-in;
-              position: relative;
-            }
-            &.label-closing {
-              animation: label-text-disappear-title 0.4s ease-in;
-              opacity: 0;
-              position: absolute;
-            }
+            position: absolute;
+            opacity: 0;
+            transition: opacity .2s;
           }
         }
       }
@@ -97,92 +93,58 @@
 }
 
 @keyframes label-text-appear {
-  20% {
-    width: 60px;
+  17% {
+    width: 45px;
     height: 8px;
   }
-  40% {
-    width: 70px;
+  34% {
+    width: 50px;
     height: 8px;
   }
-  60% {
-    width: 80px;
-    height: 10px;
+  51% {
+    width: fit-content;
+    min-width: 55px;
+    height: 8px;
   }
-  80% {
-    width: 80px;
-    height: 14px;
+  68% {
+    width: fit-content;
+    min-width: 55px;
+    height: 12px;
+  }
+  85% {
+    width: fit-content;
+    min-width: 55px;
+    height: 16px;
   }
   100% {
-    height: 20px;
     width: fit-content;
+    min-width: 55px;
+    height: 20px;
   }
 }
 @keyframes label-text-disappear {
-  20% {
-    height: 18px;
+  17% {
+    width: 55px;
+    height: 20px;
+    }
+  34% {
+    width: 55px;
+    height: 16px;
   }
-  40% {
-    height: 14px;
+  51% {
+    width: 55px;
+    height: 12px;
   }
-  60% {
-    width: 80px;
-    height: 11px;
-  }
-  80% {
-    width: 70px;
-  }
-  100% {
-    width: 60px;
+  68% {
+    width: 55px;
     height: 8px;
   }
-}
-
-@keyframes label-text-appear-title {
-  25% {
-    opacity: 0;
+  85% {
+    width: 50px;
+    height: 8px;
   }
-  50% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-
-  // 20% {
-  //   opacity: 0;
-  // }
-  // 40% {
-  //   opacity: 0.0;
-  // }
-  // 60% {
-  //   opacity: 0.4;
-  // }
-  // 80% {
-  //   opacity: 0.6;
-  // }
-  // 100% {
-  //   opacity: 0.8;
-  // }
-}
-
-@keyframes label-text-disappear-title {
-  20% {
-    opacity: 0.8;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 0;
+  100%{
+    width: 45px;
+    height: 8px;
   }
 }

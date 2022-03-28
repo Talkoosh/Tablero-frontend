@@ -91,7 +91,6 @@ export default {
     },
     boardBgStyle() {
       if (!this.bgc) return
-      console.log(this.bgc)
       return this.bgc.isLight ?
         'background-color:' + this.bgc.bgc + '; opacity: .9;'
         : 'background-color:' + this.bgc.bgc + '; opacity: .9;'

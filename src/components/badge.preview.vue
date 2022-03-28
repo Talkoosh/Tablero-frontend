@@ -1,12 +1,17 @@
 <template>
     <section
-        v-if="task.members?.length || task.dueDate || task.attachments?.length || task.checklists?.length && !task.style.isBackground"
+        v-if="(task.members?.length || task.dueDate || task.attachments?.length || task.checklists?.length) && !task.style.isBackground"
     >
         <div class="badges">
             <div v-if="task.watching" class="watch">
                 <span class="watch-icon badge-icon"></span>
             </div>
-            <div @click.prevent="toggleDateDone" class="date" v-if="task.dueDate">
+            <div
+                @click.prevent="toggleDateDone"
+                class="date"
+                v-if="task.dueDate"
+                :style="dateBadgeBg"
+            >
                 <span class="date-icon badge-icon"></span>
                 <span class="badge-text">{{ date }}</span>
             </div>
@@ -24,6 +29,11 @@
             <div class="checklist" v-if="task.checklists?.length">
                 <span class="checklist-icon badge-icon"></span>
                 <span class="badge-text">{{ checklistDisplay }}</span>
+            </div>
+        </div>
+        <div class="task-members" v-if="task.members?.length">
+            <div class="member-img" v-for="member in task.members">
+                <img :src="member.imgUrl" :title="member.fullname" />
             </div>
         </div>
     </section>
@@ -80,6 +90,14 @@ export default {
                 })
             })
             return `${doneAmount}/${totalAmount}`
+        },
+        dateBadgeBg() {
+            const today = new Date(Date.now()).getDate()
+            const dueDay = new Date(this.task.dueDate).getDate()
+            const diff = this.task.dueDate - Date.now()
+            if (diff > 86400000) return
+            if (dueDay - today === 1) return 'background-color: #f2d600; color: white;'
+            // diff = this.
         }
     },
     unmounted() { },

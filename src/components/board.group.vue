@@ -29,10 +29,18 @@
                     <span class="extras-exit"></span>
                     <hr />
                     <div class="extras-btns">
-                        <button class="add-task-btn">Add card...</button>
-                        <button class="copy-group-btn">Copy list...</button>
-                        <button class="sort-by-btn">Sort by...</button>
-                        <button @click="deleteGroup" class="archive-group-btn">Archive this list</button>
+                        <button class="add-task-btn">
+                            <span>Add card...</span>
+                        </button>
+                        <button class="copy-group-btn">
+                            <span>Copy list...</span>
+                        </button>
+                        <button class="sort-by-btn">
+                            <span>Sort by...</span>
+                        </button>
+                        <button @click="deleteGroup" class="archive-group-btn">
+                            <span>Archive this list</span>
+                        </button>
                     </div>
                 </div>
                 <!-- v-if="group.tasks.length" -->

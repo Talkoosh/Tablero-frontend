@@ -1,7 +1,7 @@
 <template>
   <section class="app-container">
     <main-header v-if="isHomePage" @open-drop="openDrop" />
-    <router-view @open-drop="openDrop" />
+    <router-view />
     <component
       :is="currDropDown"
       v-if="currDropDown"
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       currDropDown: null,
-      isHomePage : false,
+      isHomePage: false,
     };
   },
   methods: {
@@ -48,12 +48,12 @@ export default {
     },
   },
   computed: {
-   
+
   },
-  unmounted() {},
+  unmounted() { },
   watch: {
     $route(to, from) {
-       this.isHomePage = (this.$route.path !== '/');
+      this.isHomePage = (this.$route.path !== '/');
     },
   },
 };

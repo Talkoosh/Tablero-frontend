@@ -33,10 +33,11 @@
                         v-model="groupToAdd.title"
                         placeholder="Enter list title..."
                         @keyup.enter="addGroup"
+                        @click="toggleAddGroup"
                     />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>
-                        <button @click="isAddGroup = false" class="cancel-add-group-btn">
+                        <button @click="toggleAddGroup" class="cancel-add-group-btn">
                             <span class="x-icon"></span>
                         </button>
                     </div>

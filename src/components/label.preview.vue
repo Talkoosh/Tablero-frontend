@@ -1,6 +1,6 @@
 <template>
     <span @click.prevent="showTitle" class="label" :style="labelStyle" :class="isLabelOpen">
-        <span class="label-text" :class="isLabelOpen">{{ labelTitle }}</span>
+        <span class="label-text" :style="textAnimationBehavior">{{ labelTitle }}</span>
     </span>
 </template>
 
@@ -16,8 +16,6 @@ export default {
     },
     data() {
         return {
-            // isTitleShown: false,
-            startAnimation: false,
         }
     },
     methods: {
@@ -28,14 +26,20 @@ export default {
             return label
         },
         showTitle() {
-            this.startAnimation = !this.startAnimation
-            this.$store.commit({ type: 'toggleLabelTitle' })
+            this.$store.dispatch({ type: 'toggleLabelTitle' })
         }
     },
     computed: {
+        isTitleShown() {
+            return this.$store.getters.isLabelTitleShown
+        },
+        isStartAnimation() {
+            return this.$store.getters.isStartAnimation
+        },
         labelStyle() {
             const label = this.getLabel(this.label)
-            return `background-color: ${label?.color}`
+            const width = this.isStartAnimation ? 'fit-content' : '40px'
+            return `background-color: ${label?.color};height: ${this.labelSize.height}; width: ${this.labelSize.width}; min-width: ${width}`
         },
         labelTitle() {
             const label = this.getLabel(this.label)
@@ -44,8 +48,11 @@ export default {
         isLabelOpen() {
             return this.isTitleShown ? 'label-open' : 'label-closing';
         },
-        isTitleShown() {
-            return this.$store.getters.isLabelTitleShown
+        textAnimationBehavior() {
+            return this.isStartAnimation ? 'opacity: 1; position: relative' : 'opacity: 0; position: absolute'
+        },
+        labelSize() {
+            return this.$store.getters.labelSize
         }
     },
     unmounted() { },
