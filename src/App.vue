@@ -51,16 +51,12 @@ export default {
     bodyOverflow() {
       return `overflow: ${this.overflow}`
     },
-<<<<<<< HEAD
     // bodyBGC(){
     //   return  (this.isLoginPage) ? 'background-color:#f9fafc;' : '';
     // }
     loggedinUser() {
       return this.$store.getters.loggedinUser
     }
-=======
-  
->>>>>>> 1156b9ba79c8c26c780f412cbfc4fb145f9dae4d
   },
   unmounted() { },
   watch: {
