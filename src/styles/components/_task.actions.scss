@@ -59,6 +59,11 @@
         content: "\e907";
       }
     }
+    &.attachment-icon{
+      &::before{
+        content: "\e908";
+      } 
+    }
     &.revert-icon {
       &::before {
         content: "\e95b";

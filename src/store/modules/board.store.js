@@ -299,6 +299,14 @@ export const boardStore = {
       } catch (err) {
         throw err
       }
+    },
+    async attachFile({state, commit}, {file, task}){
+      if(!task.attachments || !task.attachments.length){
+        task.attachments = [];
+      }
+      task.attachments.push(file);
+      const updatedTask = await boardService.saveTask(task, state.currBoardId); 
+      commit({type:'setCurrTask', task: updatedTask})
     }
   },
 }

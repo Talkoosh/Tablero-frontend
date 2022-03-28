@@ -121,6 +121,7 @@ async function saveTask(task, boardId) {
       group.tasks[idx] = task;
       await updateBoard(board);
       return task;
+      
     } else {
       const group = board.groups.find((g) => g._id === task.groupId);
       const taskToAdd = _createTask(task.title);

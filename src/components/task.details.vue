@@ -107,6 +107,7 @@
                             @color-set="onSetColor"
                             @photo-set="onSetPhoto"
                             @cover-size-set="onSetCoverSize"
+                            @attach-file="onAttachFile"
                             v-clickoutside="closeAction"
                             :labels="labels"
                             :is="currAction"
@@ -130,9 +131,13 @@
                             <span class="icon checklist-icon"></span>
                             <span>Checklist</span>
                         </button>
+                        <button @click.stop="setCurrAction('attachmentMenu')">
+                            <span class="icon attachment-icon"></span>
+                            <span>Attachment</span>
+                        </button>
 
                         <h3>Actions</h3>
-                        <button @click.stop="isArchiving = true">
+                        <button @click.stop="isArchiving = !isArchiving">
                             <span class="icon archive-icon"></span>
                             <span>Archive</span>
                         </button>
@@ -153,7 +158,8 @@
 import taskActivities from './task.activities.vue'
 import labelMenu from './label.menu.vue'
 import coverMenu from './cover.menu.vue'
-import FastAverageColor from 'fast-average-color';
+import attachmentMenu from './attachment.menu.vue'
+import FastAverageColor from 'fast-average-color'
 
 export default {
     data() {
@@ -237,6 +243,9 @@ export default {
             this.coverBcg = color;
             this.coverPhoto = photo;
         },
+        onAttachFile(file){
+            this.$store.dispatch('attachFile', {file, task: this.task})
+        },
         async archive() {
             this.isArchiving = false;
             const boardId = this.$route.params.boardId;
@@ -257,7 +266,8 @@ export default {
     components: {
         taskActivities,
         labelMenu,
-        coverMenu
+        coverMenu,
+        attachmentMenu
     },
     watch: {
         '$route.params.taskId': {

@@ -84,7 +84,10 @@
                     <h4>Photos from Unsplash</h4>
                     <div class="photos-container">
                         <div @click="setTaskPhoto(img)" v-for="img in defaultImgs" :key="img">
-                            <img :src="img" :style="{boxShadow: currPhoto === img ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : ''}" />
+                            <img
+                                :src="img"
+                                :style="{ boxShadow: currPhoto === img ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : '' }"
+                            />
                         </div>
                     </div>
                     <button @click.stop="isSearch = true" class="more-photos-btn">Search for photos</button>
@@ -98,7 +101,12 @@
                 <span class="close-btn"></span>
             </div>
             <hr />
-            <input type="text" placeholder="Search Unsplash for photos" v-model.lazy="searchKey" v-debounce="400"/>
+            <input
+                type="text"
+                placeholder="Search Unsplash for photos"
+                v-model.lazy="searchKey"
+                v-debounce="400"
+            />
             <h4>Suggested searches</h4>
             <button
                 class="keyword"
@@ -107,8 +115,16 @@
                 @click="searchKey = keyword"
             >{{ keyword }}</button>
             <h4>Top photos</h4>
-            <div class="search-photos-container" :style="{gridTemplateColumns: searchKey ? '1fr 1fr' : '1fr 1fr 1fr'}">
-                <img v-for="img in searchPhotos" :key="img" :src="img" @click.stop="setTaskPhoto(img)" />
+            <div
+                class="search-photos-container"
+                :style="{ gridTemplateColumns: searchKey ? '1fr 1fr' : '1fr 1fr 1fr' }"
+            >
+                <img
+                    v-for="img in searchPhotos"
+                    :key="img"
+                    :src="img"
+                    @click.stop="setTaskPhoto(img)"
+                />
             </div>
         </section>
     </section>
@@ -149,24 +165,30 @@ export default {
             searchKey: ''
         }
     },
-    async created() {
+     created() {
         if (!this.task.style) {
             this.task.style = {};
         }
-        const photos = await photoService.loadDefaultPhotos()
-        this.defaultImgs = photos.slice(0, 6)
+        this.loadDefaultPhotos();
+
     },
     methods: {
+        async loadDefaultPhotos() {
+            const photos = await photoService.loadDefaultPhotos()
+            this.defaultImgs = photos.slice(0, 6)
+        },
         setTaskColor(color) {
             this.isCoverActive = color ? true : false;
             this.$emit('color-set', color)
         },
-        setTaskPhoto(photo) {
-            if(this.isSearch){
-                this.defaultImgs.pop();
-                this.defaultImgs.unshift(photo);
-                photoService.savePhotosToStorage(this.defaultImgs);
-                this.isSearch = false; 
+        async setTaskPhoto(photo) {
+            if (this.isSearch) {
+                const storagePhotos = await photoService.loadDefaultPhotos();
+                storagePhotos.pop();
+                storagePhotos.unshift(photo);
+                photoService.savePhotosToStorage(storagePhotos);
+                this.loadDefaultPhotos();
+                this.isSearch = false;
                 this.searchKey = '';
             }
             this.isCoverActive = photo ? true : false;
@@ -210,13 +232,13 @@ export default {
     },
     watch: {
         searchKey: {
-            async handler(){
-                if(!this.searchKey) this.searchKey = 'nature'
+            async handler() {
+                if (!this.searchKey) this.searchKey = 'nature'
                 this.getPhotosBySearch();
             },
             immediate: true
         },
-        
+
     }
 }
 </script>
