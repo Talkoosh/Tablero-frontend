@@ -94,6 +94,28 @@
                                 @click.stop="isEditingDesc = true"
                             >Edit</button>
                         </div>
+                        <div class="task-details-attachments" v-if="task.attachments?.length">
+                            <span class="icon attachments-icon"></span>
+                            <h2>Attachments</h2>
+                            <div class="attachment" v-for="attachment in task.attachments">
+                                <div class="attachment-pic">
+                                    <img
+                                        :src="attachment.url"
+                                        v-if="attachment.resource_type === 'image'"
+                                    />
+                                </div>
+
+                                <div class="attachment-main">
+                                    <h4>{{ attachment.original_filename }}.{{ attachment.format }}</h4>
+                                    <p>
+                                        Added ... ago -
+                                        <button>comment</button> -
+                                        <button>delete</button> -
+                                        <button>edit</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
                     </div>
                     <div class="actions-menu">
@@ -243,8 +265,8 @@ export default {
             this.coverBcg = color;
             this.coverPhoto = photo;
         },
-        onAttachFile(file){
-            this.$store.dispatch('attachFile', {file, task: this.task})
+        async onAttachFile(file) {
+            this.$store.dispatch('attachFile', { file, task: this.task })
         },
         async archive() {
             this.isArchiving = false;
@@ -252,7 +274,6 @@ export default {
             await this.$store.dispatch({ type: 'deleteTask', taskId: this.task._id, boardId });
             this.$router.push(`/board/${boardId}`)
         }
-
 
     },
     computed: {

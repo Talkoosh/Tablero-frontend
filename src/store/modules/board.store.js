@@ -1,5 +1,6 @@
 import { boardService } from '../../services/board.service.js';
 import { utilService } from '../../services/util.service.js';
+import { photoService } from '../../services/photo.service.js';
 export const boardStore = {
   state: {
     boards: [],
@@ -300,13 +301,14 @@ export const boardStore = {
         throw err
       }
     },
-    async attachFile({state, commit}, {file, task}){
+    async attachFile({state, dispatch}, {file, task}){
       if(!task.attachments || !task.attachments.length){
         task.attachments = [];
       }
-      task.attachments.push(file);
+      const fileToAdd = await photoService.uploadPhoto(file)
+      task.attachments.push(fileToAdd)
       const updatedTask = await boardService.saveTask(task, state.currBoardId); 
-      commit({type:'setCurrTask', task: updatedTask})
+      dispatch({type:'saveTask', task: updatedTask, boardId: state.currBoardId});
     }
   },
 }

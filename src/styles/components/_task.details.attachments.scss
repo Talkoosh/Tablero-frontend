@@ -1,0 +1,29 @@
+.task-details-attachments{
+    position: relative;
+
+    .attachment{
+        display: flex;
+        .attachment-pic{
+            width: 110px;
+            height: 80px;
+            margin-right: 15px;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit:contain;
+            }
+        }
+    }
+    .icon{
+        @include icon;
+        @include icon-lg; 
+        position: absolute;
+        left: -40px;
+        top: -7px;
+        &.attachments-icon{
+            &::before{
+                content: "\e908";
+            }
+        }
+    }
+}
