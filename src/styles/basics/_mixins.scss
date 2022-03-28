@@ -58,6 +58,8 @@
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 12px;
+
+
 }
 
 @mixin dropdown-header-text {
@@ -74,6 +76,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   grid-row: 1;
+
 }
 
 @mixin close-dropdwon-btn {

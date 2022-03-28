@@ -17,6 +17,7 @@ import mainHeader from "./components/main.header.vue";
 import createBoardDrop from "./components/create.board.drop.vue";
 import recentBoardsDrop from "./components/recent.boards.drop.vue";
 import starredBoardsDrop from "./components/starred.boards.drop.vue";
+import acountDrop from './components/acount.drop.vue'
 
 export default {
   // props: [''],
@@ -25,6 +26,7 @@ export default {
     recentBoardsDrop,
     starredBoardsDrop,
     mainHeader,
+    acountDrop
   },
   emits: ["openDrop", "open-drop"],
   created() {
@@ -37,7 +39,6 @@ export default {
     return {
       currDropDown: null,
       isHomePage: false,
-      // isLoginPage:false,
       overflow: 'hidden',
     };
   },
@@ -53,15 +54,12 @@ export default {
     bodyOverflow() {
       return `overflow: ${this.overflow}`
     },
-    // bodyBGC(){
-    //   return  (this.isLoginPage) ? 'background-color:#f9fafc;' : '';
-    // }
+  
   },
   unmounted() { },
   watch: {
     $route(to, from) {
       this.isHomePage = (this.$route.path !== '/' && this.$route.path !== '/login');
-      // this.isLoginPage = (this.$route.path === '/login');
 
       this.overflow = (this.$route.path === '/login') ? 'auto' : 'hidden'
     },
