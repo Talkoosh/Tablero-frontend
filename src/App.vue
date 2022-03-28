@@ -30,10 +30,7 @@ export default {
   },
   emits: ["openDrop", "open-drop"],
   created() {
-    window.addEventListener("popstate", function (event) {
-      // Log the state data to the console
-      console.log(event.state);
-    });
+    this.$store.dispatch({ type: 'getLoggedinUser' })
   },
   data() {
     return {
@@ -54,7 +51,12 @@ export default {
     bodyOverflow() {
       return `overflow: ${this.overflow}`
     },
-  
+    // bodyBGC(){
+    //   return  (this.isLoginPage) ? 'background-color:#f9fafc;' : '';
+    // }
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
+    }
   },
   unmounted() { },
   watch: {
@@ -62,6 +64,7 @@ export default {
       this.isHomePage = (this.$route.path !== '/' && this.$route.path !== '/login');
 
       this.overflow = (this.$route.path === '/login') ? 'auto' : 'hidden'
+      if (this.$route.path === '/login' || this.$route.path === '/' && this.loggedinUser) this.$router.push('/board')
     },
   },
 };

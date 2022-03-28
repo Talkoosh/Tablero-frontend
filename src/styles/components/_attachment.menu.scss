@@ -20,12 +20,24 @@
             cursor: pointer;
         }
     }
+    hr{
+        margin: 8px 0;
+    }
+    .link-title {
+        margin: 12px 0 4px 0;
+    }
+    button{
+        padding: 6px 12px;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
     .icon {
         @include icon;
         &.attachment-exit {
             left: unset;
             right: 0;
-            &:hover{
+            &:hover {
                 cursor: pointer;
                 opacity: 1;
             }

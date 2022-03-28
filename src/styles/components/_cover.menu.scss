@@ -133,7 +133,7 @@
                 margin-bottom: 10px;
             }
 
-            .photos-container {
+            .photos-container{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 column-gap: 6px;
@@ -156,7 +156,30 @@
             }
         }
     }
-
+    .attachments{
+        .attachments-container{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 6px;
+            row-gap: 6px;
+            padding: 4px;
+            margin: 0 -4px;
+            overflow-x: hidden;
+            img {
+                cursor: pointer;
+                border: 1px solid transparent;
+                display: block;
+                border-radius: 4px;
+                width: 88px;
+                height: 48px;
+                object-fit: cover;
+                &:hover {
+                    filter: saturate(85%) brightness(85%);
+                }
+            }
+        }
+    }
+    
     .cover-menu-second {
         button {
             margin: 0 4px 4px 0;

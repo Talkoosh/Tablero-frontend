@@ -39,10 +39,12 @@ async function update(user) {
 async function login(userCred) {
     const user = await httpService.post('auth/login', userCred)
     // socketService.emit('set-user-socket', user._id);
+    return user;
 }
 async function signup(userCred) {
     const user = await httpService.post('auth/signup', userCred)
     // socketService.emit('set-user-socket', user._id);
+    return user;
 }
 async function logout() {
     // socketService.emit('unset-user-socket');
