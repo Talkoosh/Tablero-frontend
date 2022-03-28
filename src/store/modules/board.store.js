@@ -309,6 +309,12 @@ export const boardStore = {
       task.attachments.push(fileToAdd)
       const updatedTask = await boardService.saveTask(task, state.currBoardId); 
       dispatch({type:'saveTask', task: updatedTask, boardId: state.currBoardId});
+    },
+    async deleteAttachment({state, dispatch}, {id, task}){
+      const idx = task.attachments.findIndex(a => a.asset_id === id);
+      task.attachments.splice(idx, 1); 
+      const updatedTask = await boardService.saveTask(task, state.currBoardId); 
+      dispatch({type:'saveTask', task: updatedTask, boardId: state.currBoardId});
     }
-  },
+  }
 }

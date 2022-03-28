@@ -80,6 +80,17 @@
                         ></span>
                     </div>
                 </div>
+                <div class="attachments">
+                    <h4>Attachments</h4>
+                     <div class="attachments-container">
+                        <div @click="setTaskPhoto(attachment.url)" v-for="attachment in attachments" :key="attachment.asset_id">
+                            <img
+                                :src="attachment.url"
+                                :style="{ boxShadow: currPhoto === attachment.url ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : '' }"
+                            />
+                        </div>
+                    </div>
+                </div>
                 <div class="photos-main">
                     <h4>Photos from Unsplash</h4>
                     <div class="photos-container">
@@ -137,6 +148,7 @@ import { photoService } from '../services/photo.service.js'
 export default {
     props: {
         task: Object,
+        attachments: Array
     },
     data() {
         return {
