@@ -2,7 +2,7 @@
   <div class="starred-drop-content dropdown">
     <header class="drop-header">
       <div class="header-text">Starred boards</div>
-      <button class="close-header" @click="closeDropdown('recentBoardsDrop')">
+      <button class="close-header" @click="closeDropdown()">
         X
       </button>
     </header>
