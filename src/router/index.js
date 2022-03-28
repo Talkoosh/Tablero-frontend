@@ -3,6 +3,7 @@ import homePage from '../views/home.page.vue';
 import boardsPage from '../views/boards.page.vue';
 import boardPage from '../views/board.page.vue';
 import taskDetails from '../components/task.details.vue';
+import loginPage from '../views/login.page.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/board',
       name: 'boards',
       component: boardsPage,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: loginPage,
     },
     {
       path: '/board/:boardId',

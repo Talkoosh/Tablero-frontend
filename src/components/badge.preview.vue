@@ -6,24 +6,24 @@
             <div v-if="task.watching" class="watch">
                 <span class="watch-icon badge-icon"></span>
             </div>
-            <div class="date" v-if="task.dueDate">
+            <div @click.prevent="toggleDateDone" class="date" v-if="task.dueDate">
                 <span class="date-icon badge-icon"></span>
-                {{ date }}
+                <span class="badge-text">{{ date }}</span>
             </div>
             <div class="description" v-if="task.description">
                 <span class="description-icon badge-icon"></span>
             </div>
             <div class="comments" v-if="task.comments">
                 <span class="comments-icon badge-icon"></span>
-                {{ commentCount }}
+                <span class="badge-text">{{ commentCount }}</span>
             </div>
             <div class="attachments" v-if="task.attachments?.length">
                 <span class="attachments-icon badge-icon"></span>
-                {{ attachmentsCount }}
+                <span class="badge-text">{{ attachmentsCount }}</span>
             </div>
             <div class="checklist" v-if="task.checklists?.length">
                 <span class="checklist-icon badge-icon"></span>
-                {{ checklistDisplay }}
+                <span class="badge-text">{{ checklistDisplay }}</span>
             </div>
         </div>
     </section>
@@ -41,7 +41,11 @@ export default {
     data() {
         return {}
     },
-    methods: {},
+    methods: {
+        toggleDateDone() {
+            console.log('toggling')
+        }
+    },
     computed: {
         date() {
             const time = new Date(this.task.dueDate)
@@ -52,7 +56,6 @@ export default {
             const day = time.getDate()
             const year = time.getFullYear()
             const now = new Date(Date.now())
-            console.log(now)
             const currYear = now.getFullYear()
 
             if (year !== currYear) {
@@ -65,10 +68,18 @@ export default {
             return this.task.comments.length
         },
         attachmentsCount() {
-            return
+            return this.task.attachments?.count
         },
         checklistDisplay() {
-            return
+            var totalAmount = 0
+            var doneAmount = 0
+            this.task.checklists.forEach(c => {
+                c.todos.forEach(t => {
+                    totalAmount++
+                    if (t.isDone) doneAmount++
+                })
+            })
+            return `${doneAmount}/${totalAmount}`
         }
     },
     unmounted() { },
