@@ -73,11 +73,11 @@ export default {
         Draggable,
     },
     created() {
-        this.$store.dispatch('loadBoards')              
+        this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
         this.$store.commit({ type: 'setCurrBoardId', boardId: id })
         socketService.emit('board-entered', id);
-        socketService.on('update-board', this.$store.dispatch('loadBoard'));
+        socketService.on('update-board', this.loadBoards());
     },
     data() {
         return {
@@ -87,6 +87,9 @@ export default {
         }
     },
     methods: {
+        loadBoards() {
+            this.$store.dispatch('loadBoards')
+        },
         saveBoard(boardToSave) {
             this.$store.dispatch({ type: 'saveBoard', board: boardToSave })
         },
