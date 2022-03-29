@@ -1,13 +1,14 @@
 .group-container {
   background-color: $group-bgc;
-  padding: 8px;
+  padding: 7px 4px 8px 8px;
   width: 272px;
+  max-height: 100%;
   border-radius: 3px;
   .group {
     position: relative;
     display: flex;
     flex-direction: column;
-    max-height: 84.5vh;
+    max-height: 81.5vh;
 
     .group-title {
       margin-bottom: 8px;
@@ -33,18 +34,21 @@
     }
     .group-tasks {
       overflow-y: auto;
+      padding-right: 4px;
     }
 
     .group-header {
       h2 {
         font-size: 14px;
         font-weight: 550;
-        line-height: 32px;
+        line-height: 24px;
+        max-width: 90%;
       }
       input {
         padding: 8px;
         margin-bottom: 8px;
         width: 87%;
+        height: 28px;
       }
     }
     .add-task {
@@ -60,40 +64,40 @@
       }
       .add-task-active {
         // .add-task-area-container{
-          // padding-top: 4px;
-          .textarea-container {
-            padding: 6px 8px 2px;
-            background-color: #fff;
-            border-radius: 3px;
-            box-shadow: 0 1px 0 #091e4240;
-            margin: 4px 0;
-            textarea {
-              width: 100%;
-              max-height: 162px;
-              min-height: 54px;
-              border: none;
-            }
-          }
-          .add-task-btn {
-            @include button-default;
-            color: white;
-            background-color: #0079bf;
-            font-weight: 540;
-          }
-          .cancel-add-task-btn {
-            @include button-default;
-            font-size: 1.3rem;
-            transform: translateY(18%);
-            background: none;
+        // padding-top: 4px;
+        .textarea-container {
+          padding: 6px 8px 2px;
+          background-color: #fff;
+          border-radius: 3px;
+          box-shadow: 0 1px 0 #091e4240;
+          margin: 4px 0;
+          textarea {
+            width: 100%;
+            max-height: 162px;
+            min-height: 54px;
             border: none;
-            .x-icon {
-              @include icon;
-              font-size: 24px;
-              &::before {
-                content: '\e91c';
-              }
+          }
+        }
+        .add-task-btn {
+          @include button-default;
+          color: white;
+          background-color: #0079bf;
+          font-weight: 540;
+        }
+        .cancel-add-task-btn {
+          @include button-default;
+          font-size: 1.3rem;
+          transform: translateY(18%);
+          background: none;
+          border: none;
+          .x-icon {
+            @include icon;
+            font-size: 24px;
+            &::before {
+              content: "\e91c";
             }
           }
+        }
         // }
       }
     }

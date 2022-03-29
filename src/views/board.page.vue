@@ -45,6 +45,8 @@
             </div>
         </div>
     </div>
+
+
     <board-menu
         @change-board-bgc="changeBoardBgc"
         @change-board-bgp="changeBoardBgp"
@@ -61,6 +63,8 @@ import boardGroup from "../components/board.group.vue"
 import boardMenu from "../components/board.menu.vue"
 import { Container, Draggable } from "vue3-smooth-dnd";
 import FastAverageColor from 'fast-average-color';
+import quickEdit from '../components/quick.edit.vue'
+
 import { socketService } from "../services/socket.service";
 
 export default {
@@ -71,6 +75,7 @@ export default {
         boardMenu,
         Container,
         Draggable,
+        quickEdit
     },
     created() {
         this.$store.dispatch('loadBoards')
@@ -147,6 +152,7 @@ export default {
             }
             return result;
         },
+      
     },
     computed: {
         board() {

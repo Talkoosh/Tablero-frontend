@@ -26,7 +26,7 @@
   }
   .date {
     border-radius: 3px;
-    .date-icon {
+    .date-complete-icon {
       font-family: trellicons;
       &::before {
         content: '\e91b';
@@ -35,10 +35,24 @@
     &:hover {
       background-color: #ebecf0;
     }
-    &:hover .date-icon::before {
+    &:hover .date-complete-icon::before {
+      content: '\e918';
+    }
+    .date-incomplete-icon {
+      font-family: trellicons;
+      &::before {
+        content: '\e91b';
+      }
+    }
+    &:hover {
+      background-color: #ebecf0;
+    }
+    &:hover .date-incomplete-icon::before {
       content: '\e919';
     }
   }
+
+
   .description {
     .description-icon {
       font-family: trellicons;
@@ -73,15 +87,19 @@
   }
 }
 
-.task-members{
-  display: flex;
-  justify-content: flex-end;
-  gap: 5px;
-  height: 26px;
-  img{
-    width: 28px;
-    height: 28px;
-    border-radius: 25rem;
-    object-fit: cover;
+
+.task-badges{
+
+  .task-members{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    height: 26px;
+    img{
+      width: 28px;
+      height: 28px;
+      border-radius: 25rem;
+      object-fit: cover;
+    }
   }
 }

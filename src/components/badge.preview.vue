@@ -12,7 +12,8 @@
                 v-if="task.dueDate?.dueDate"
                 :style="dateBadgeBg"
             >
-                <span class="date-icon badge-icon"></span>
+                <span v-if="this.task.dueDate.isComplete" class="date-complete-icon badge-icon"></span>
+                <span v-else class="date-incomplete-icon badge-icon"></span>
                 <span class="badge-text">{{ date }}</span>
             </div>
             <div class="description" v-if="task.description">
@@ -47,18 +48,23 @@ export default {
     },
     components: {},
     created() {
+        this.taskToEdit = { ...this.task }
     },
     data() {
-        return {}
+        return {
+            taskToEdit: null
+        }
     },
     methods: {
         toggleDateDone() {
-            console.log('toggling')
+            this.taskToEdit.dueDate.isComplete = !this.taskToEdit.dueDate.isComplete
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: JSON.parse(JSON.stringify(this.taskToEdit)), boardId })
         }
     },
     computed: {
         date() {
-            const time = new Date(this.task.dueDate)
+            const time = new Date(this.task.dueDate.dueDate)
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
             ];
@@ -92,11 +98,12 @@ export default {
             return `${doneAmount}/${totalAmount}`
         },
         dateBadgeBg() {
+            if (this.task.dueDate.isComplete) return 'background-color: #61bd4f; color: #fff'
             const today = new Date(Date.now()).getDate()
             const dueDay = new Date(this.task.dueDate).getDate()
             const diff = this.task.dueDate - Date.now()
             if (diff > 86400000) return
-            if (dueDay - today === 1) return 'background-color: #f2d600; color: white;'
+            if (dueDay - today === 1) return 'background-color: #f2d600; color: #fff;'
         }
     },
     unmounted() { },

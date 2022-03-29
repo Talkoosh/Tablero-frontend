@@ -55,10 +55,6 @@
                 line-height: 1.44em;
                 min-width: 370px;
 
-                
-
-                
-
                 .header {
                     text-align: center;
                     color: #5e6c84;
@@ -104,7 +100,6 @@
                                     outline: none;
                                 }
                             }
-
                         }
 
                         .login-submit {
@@ -138,7 +133,6 @@
                             font-size: 12px;
                             margin-top: 16px;
                             margin-bottom: 16px;
-
                         }
 
                         .login-methods {
@@ -187,7 +181,6 @@
                     }
                 }
 
-
                 hr {
                     margin-top: 25px;
                     display: block;
@@ -228,13 +221,14 @@
     }
 
     .background {
-        z-index: -900;
+        // z-index: -900;
         height: 100%;
         width: 100%;
         position: fixed;
         top: 0;
         left: 0;
         overflow: hidden;
+        pointer-events: none;
 
         .left-img {
             position: absolute;
@@ -243,6 +237,10 @@
             left: 0;
             z-index: -999;
             max-width: 30%;
+            .left {
+                width: 30vw;
+                height: 45vh;
+            }
             // background: url("@/assets/img/tabelro-left.svg");
         }
 
@@ -253,12 +251,18 @@
             right: 0;
             z-index: -999;
             max-width: 30%;
+            z-index: 10;
+
+            .right {
+                width: 30vw;
+                height: 45vh;
+            }
             // background: url("@/assets/img/tabelro-right.svg");
         }
     }
 }
 
-.unvalid-mail{
+.unvalid-mail {
     position: relative;
     text-decoration: none;
     border: 0px;
@@ -267,9 +271,8 @@
     border-radius: 0.3em;
     width: 100%;
     -webkit-appearance: button;
-    background: #E2E4E6;
+    background: #e2e4e6;
     box-shadow: none;
-    color: hsl(0,0%,55%);
+    color: hsl(0, 0%, 55%);
     cursor: default;
-    
 }

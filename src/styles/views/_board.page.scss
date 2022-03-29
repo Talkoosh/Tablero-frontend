@@ -1,18 +1,23 @@
 .main-board {
-  height: 100%;
   background-size: cover;
   background-position: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   .groups-container {
     display: flex;
-    padding: 8px 14px;
+    padding: 0 14px;
     gap: 8px;
+    height: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    height: 89.5%;
+    flex: 1;
 
+    margin-bottom: 10px;
     .drag-container {
       display: flex;
       gap: 8px;
+      height: 100%;
       min-width: fit-content;
     }
     .add-group {
