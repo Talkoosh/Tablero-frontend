@@ -211,7 +211,7 @@ export const boardStore = {
         groupIdx,
         taskIdx,
       });
-      const editedTask = await boardService.saveTask(task, boardId);
+      boardService.saveTask(task, boardId);
     },
     async addTask({ commit }, { task, boardId }) {
       const taskToAdd = await boardService.saveTask(task, boardId);
@@ -306,19 +306,28 @@ export const boardStore = {
       }
       const fileToAdd = await photoService.uploadPhoto(file)
       task.attachments.push(fileToAdd)
-      const updatedTask = await boardService.saveTask(task, state.currBoardId);
-      dispatch({ type: 'saveTask', task: updatedTask, boardId: state.currBoardId });
+      // const updatedTask = await boardService.saveTask(task, state.currBoardId);
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId });
     },
     async deleteAttachment({ state, dispatch }, { id, task }) {
       const idx = task.attachments.findIndex(a => a.asset_id === id);
       task.attachments.splice(idx, 1);
-      const updatedTask = await boardService.saveTask(task, state.currBoardId);
-      dispatch({ type: 'saveTask', task: updatedTask, boardId: state.currBoardId });
+      // const updatedTask = await boardService.saveTask(task, state.currBoardId);
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId });
     },
     async setDate({state, dispatch}, {task, dueDate}){
       task.dueDate = {...dueDate}; 
-      const taskToSave = await boardService.saveTask(task, state.currBoardId);
-      dispatch({type:'saveTask', task: taskToSave, boardId: state.currBoardId})
+      // const taskToSave = await boardService.saveTask(task, state.currBoardId);
+      dispatch({type:'saveTask', task, boardId: state.currBoardId})
+    },
+    async saveChecklist({state, dispatch}, {title, task}){
+      if(!task.checklists) task.checklists = [];
+      task.checklists.push({
+        title,
+        _id: utilService.makeId(),
+        todos: []
+      })
+      dispatch({type:'saveTask', task, boardId: state.currBoardId})
     }
   }
 }

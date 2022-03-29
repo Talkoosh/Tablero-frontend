@@ -77,7 +77,7 @@ export default {
         const id = this.$route.params.boardId
         this.$store.commit({ type: 'setCurrBoardId', boardId: id })
         socketService.emit('board-entered', id);
-        socketService.on('update-board', this.$store.dispatch('loadBoard'));
+        socketService.on('update-board', this.updateBoard);
     },
     data() {
         return {
@@ -87,6 +87,9 @@ export default {
         }
     },
     methods: {
+        updateBoard(){
+            this.$store.dispatch('loadBoards');
+        },
         saveBoard(boardToSave) {
             this.$store.dispatch({ type: 'saveBoard', board: boardToSave })
         },

@@ -113,53 +113,16 @@
                                 @click.stop="isEditingDesc = true"
                             >Edit</button>
                         </div>
-                        <div class="task-details-attachments" v-if="task.attachments?.length">
-                            <span class="icon attachments-icon"></span>
-                            <h2>Attachments</h2>
-                            <div class="attachment" v-for="attachment in task.attachments">
-                                <div class="attachment-pic">
-                                    <img
-                                        :src="attachment.url"
-                                        v-if="attachment.resource_type === 'image'"
-                                    />
-                                </div>
-
-                                <div class="attachment-main">
-                                    <div class="header">
-                                        <h4>
-                                            {{ attachment.original_filename }}.{{ attachment.format }}
-                                            <span
-                                                class="icon arrow-icon"
-                                            ></span>
-                                        </h4>
-                                    </div>
-                                    <p>
-                                        Added ... ago -
-                                        <button>Comment</button> -
-                                        <button
-                                            @click="onDeleteAttachment(attachment.asset_id)"
-                                        >Delete</button> -
-                                        <button>Edit</button>
-                                    </p>
-                                    <button
-                                        v-if="coverPhoto !== attachment.url"
-                                        class="make-cover-btn"
-                                        @click.stop="onSetPhoto(attachment.url)"
-                                    >
-                                        <span class="icon cover-icon"></span>
-                                        <span>Make cover</span>
-                                    </button>
-                                    <button
-                                        v-if="coverPhoto === attachment.url"
-                                        class="make-cover-btn"
-                                        @click.stop="onSetPhoto('')"
-                                    >
-                                        <span class="icon cover-icon"></span>
-                                        <span>Remove cover</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <task-attachments
+                            v-if="task.attachments?.length"
+                            :attachments="task.attachments"
+                            :coverPhoto="coverPhoto"
+                            @delete-attachment="onDeleteAttachment"
+                            @set-photo="onSetPhoto"
+                        ></task-attachments>
+                        <task-checklists
+                        :checklists="task.checklists"
+                        ></task-checklists>
                         <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
                     </div>
                     <div class="actions-menu">
@@ -175,6 +138,7 @@
                             @cover-size-set="onSetCoverSize"
                             @attach-file="onAttachFile"
                             @date-set="setDate"
+                            @checklist-title-set="setChecklistTitle"
                             v-clickoutside="closeAction"
                             :labels="labels"
                             :is="currAction"
@@ -188,11 +152,11 @@
                             <span class="icon labels-icon"></span>
                             <span>Labels</span>
                         </button>
-                        <button>
+                        <button @click.stop="setCurrAction('checklistMenu')">
                             <span class="icon checklist-icon"></span>
                             <span>Checklist</span>
                         </button>
-                        <button @click="setCurrAction('datesMenu')">
+                        <button @click.stop="setCurrAction('datesMenu')">
                             <span class="icon dates-icon"></span>
                             <span>Dates</span>
                         </button>
@@ -231,7 +195,10 @@ import taskActivities from './task.activities.vue'
 import labelMenu from './label.menu.vue'
 import coverMenu from './cover.menu.vue'
 import attachmentMenu from './attachment.menu.vue'
+import taskAttachments from './task.attachments.vue'
+import taskChecklists from './task.checklists.vue'
 import datesMenu from './dates.menu.vue'
+import checklistMenu from './checklist.menu.vue'
 import FastAverageColor from 'fast-average-color'
 
 export default {
@@ -338,6 +305,10 @@ export default {
         updateTask() {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
+        },
+        setChecklistTitle(title) {
+            this.$store.dispatch({ type: 'saveChecklist', title, task: this.task })
+
         }
 
     },
@@ -361,7 +332,10 @@ export default {
         labelMenu,
         coverMenu,
         attachmentMenu,
-        datesMenu
+        datesMenu,
+        checklistMenu,
+        taskAttachments,
+        taskChecklists
     },
     watch: {
         '$route.params.taskId': {
