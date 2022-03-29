@@ -82,8 +82,12 @@
                 </div>
                 <div class="attachments">
                     <h4>Attachments</h4>
-                     <div class="attachments-container">
-                        <div @click="setTaskPhoto(attachment.url)" v-for="attachment in attachments" :key="attachment.asset_id">
+                    <div class="attachments-container">
+                        <div
+                            @click="setTaskPhoto(attachment.url)"
+                            v-for="attachment in attachments"
+                            :key="attachment.asset_id"
+                        >
                             <img
                                 :src="attachment.url"
                                 :style="{ boxShadow: currPhoto === attachment.url ? '0 0 0 2px #ffffff, 0 0 0 4px #0079bf' : '' }"
@@ -107,7 +111,7 @@
         </section>
         <section v-if="isSearch" class="cover-menu-second">
             <div class="header">
-                <span @click.stop="isSearch=false" class="back-btn"></span>
+                <span @click.stop="isSearch = false" class="back-btn"></span>
                 <h3 class="menu-title">Photo search</h3>
                 <span @click="closeAction" class="close-btn"></span>
             </div>
@@ -177,7 +181,7 @@ export default {
             searchKey: ''
         }
     },
-     created() {
+    created() {
         if (!this.task.style) {
             this.task.style = {};
         }
@@ -191,6 +195,7 @@ export default {
         },
         setTaskColor(color) {
             this.isCoverActive = color ? true : false;
+            if (!color) this.setCoverSize('half')
             this.$emit('color-set', color)
         },
         async setTaskPhoto(photo) {
@@ -200,14 +205,14 @@ export default {
                 storagePhotos.pop();
                 storagePhotos.unshift(photo);
                 photoService.savePhotosToStorage(storagePhotos);
-                
+
                 this.loadDefaultPhotos();
                 this.isSearch = false;
                 this.searchKey = '';
             }
             this.isCoverActive = photo ? true : false;
+            if (!photo) this.setCoverSize('half')
             this.$emit('photo-set', photo)
-            console.log(this.task.style);
         },
         setCoverSize(size) {
             this.$emit('cover-size-set', size)

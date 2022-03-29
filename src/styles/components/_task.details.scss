@@ -11,6 +11,13 @@
   justify-content: center;
 }
 
+.dates-icon {
+  @include icon;
+  &::before {
+    content: "\e91b";
+  }
+}
+
 .task-total-container {
   width: 768px;
   margin: auto;
@@ -27,7 +34,7 @@
   background-position: center;
   background-repeat: no-repeat;
 
-    .task-close-btn {
+  .task-close-btn {
     @include icon;
     background-color: #00000014;
     font-size: 24px;
@@ -74,7 +81,7 @@
 }
 
 .task-details-main {
-  button{
+  button {
     background-color: $task-btn-clr;
   }
   min-height: 600px;
@@ -172,8 +179,46 @@
     }
   }
 
+  .task-dates {
+    h4 {
+      color: $clr5;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    input{
+      margin: 0;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    .main {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      button {
+        @include button-default;
+        &:hover {
+          background-color: $task-btn-hvr;
+        }
+        .date-complete-label {
+          display: inline-block;
+          width: 60;
+          height: 16;
+          font-size: 12px;
+          line-height: 16px;
+          padding: 0 4px;
+          border-radius: 2px;
+          margin: auto 0 auto 8px;
+          color: #ffffff;
+          background-color: #61bd4f;
+        }
+      }
+    }
+  }
+
   .task-labels {
-    width: 100%;
+    width: fit-content;
     margin-top: -15px;
     h4 {
       color: $clr5;
@@ -227,6 +272,14 @@
   .details-main {
     display: flex;
     justify-content: space-between;
+
+    .task-top-actions{
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      height: fit-content;
+    }
+
 
     .content {
       width: 515px;
