@@ -107,9 +107,9 @@
         </section>
         <section v-if="isSearch" class="cover-menu-second">
             <div class="header">
-                <span class="back-btn"></span>
+                <span @click.stop="isSearch=false" class="back-btn"></span>
                 <h3 class="menu-title">Photo search</h3>
-                <span class="close-btn"></span>
+                <span @click="closeAction" class="close-btn"></span>
             </div>
             <hr />
             <input
@@ -196,9 +196,11 @@ export default {
         async setTaskPhoto(photo) {
             if (this.isSearch) {
                 const storagePhotos = await photoService.loadDefaultPhotos();
+
                 storagePhotos.pop();
                 storagePhotos.unshift(photo);
                 photoService.savePhotosToStorage(storagePhotos);
+                
                 this.loadDefaultPhotos();
                 this.isSearch = false;
                 this.searchKey = '';

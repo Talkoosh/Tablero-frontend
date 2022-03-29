@@ -2,7 +2,7 @@
     <section class="attachment-menu">
         <div class="attachment-header">
             <h3 class="menu-title">Attach from...</h3>
-            <span class="icon attachment-exit" @click="closeAction"></span>
+            <span @click="closeAction" class="icon attachment-exit"></span>
         </div>
         <hr />
         <label>
@@ -13,8 +13,8 @@
         </label>
         <hr />
         <h3 class="link-title">Attach a link</h3>
-        <input type="text" placeholder="Paste a photo link here...">
-        <button>Attach</button>
+        <input type="text" placeholder="Paste a photo link here..." v-model="photoLink">
+        <button @click="attachFile(photoLink)">Attach</button>
     </section>
 </template>
 
@@ -23,14 +23,21 @@
     export default {
             data() {
                 return {
+                    photoLink: null
                 }
             },
             created() {
                 
             },
             methods: {
-              attachFile(ev){
-                  this.$emit('attach-file', ev.path[0].files[0]);
+              attachFile(photo){
+                  let photoToSend = photo; 
+                  if(typeof photo !== 'string') photoToSend = photoToSend.path[0].files[0]; 
+                  this.$emit('attach-file', photoToSend);
+
+              },
+              closeAction(ev){
+                  this.$emit('close-action', ev)
               }
             },
             computed: {

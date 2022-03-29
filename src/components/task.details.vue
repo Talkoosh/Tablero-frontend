@@ -109,7 +109,9 @@
                                     <div class="header">
                                         <h4>
                                             {{ attachment.original_filename }}.{{ attachment.format }}
-                                            <span class="icon arrow-icon"></span>
+                                            <span
+                                                class="icon arrow-icon"
+                                            ></span>
                                         </h4>
                                     </div>
                                     <p>
@@ -120,7 +122,22 @@
                                         >Delete</button> -
                                         <button>Edit</button>
                                     </p>
-                                    <button class="make-cover-btn" @click.stop="onSetPhoto(attachment.url)"><span class="icon cover-icon"></span> Make cover</button>
+                                    <button
+                                        v-if="coverPhoto !== attachment.url"
+                                        class="make-cover-btn"
+                                        @click.stop="onSetPhoto(attachment.url)"
+                                    >
+                                        <span class="icon cover-icon"></span>
+                                        <span>Make cover</span>
+                                    </button>
+                                    <button
+                                        v-if="coverPhoto === attachment.url"
+                                        class="make-cover-btn"
+                                        @click.stop="onSetPhoto('')"
+                                    >
+                                        <span class="icon cover-icon"></span>
+                                        <span>Remove cover</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -258,12 +275,12 @@ export default {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'deleteLabel', labelId, task: { ...this.task }, boardId })
         },
-        onSetPhoto(photo) {
+        async onSetPhoto(photo) {
             delete this.task.style.color;
             this.task.style.photo = photo;
-            console.log(this.task.style);
             const boardId = this.$route.params.boardId;
-            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
+            await this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
+            this.coverPhoto = photo;
         },
         onSetCoverSize(size) {
             this.task.style.isBackground = (size === 'full') ? true : false;
