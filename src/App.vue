@@ -1,6 +1,6 @@
 <template>
   <section :style="bodyOverflow" class="app-container">
-    <main-header v-if="isHomePage" @open-drop="openDrop" />
+    <main-header v-if="!isHomePage" @open-drop="openDrop" />
     <router-view />
     <component
       :is="currDropDown"
@@ -61,11 +61,19 @@ export default {
   unmounted() { },
   watch: {
     $route(to, from) {
-      this.isHomePage = (this.$route.path !== '/' && this.$route.path !== '/login');
-
-      this.overflow = (this.$route.path === '/login') ? 'auto' : 'hidden'
-      if (this.$route.path === '/login' || this.$route.path === '/' && this.loggedinUser) this.$router.push('/board')
+      if (this.$route.name === 'home' || this.$route.name === 'login') {
+        this.isHomePage = true
+      } else {
+        this.isHomePage = false
+      }
+      if ((this.$route.name === 'login' || this.$route.name === 'home') && this.loggedinUser) this.$router.push('/board')
     },
+    'loggedinUser': {
+      handler() {
+        if (this.loggedinUser) this.$router.push('/board')
+        else this.$router.push('/')
+      }
+    }
   },
 };
 </script>

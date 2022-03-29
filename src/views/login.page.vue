@@ -52,7 +52,7 @@
               <div class="login-methods">
                 <div class="method-btn">
                   <span class="google-icon"></span>
-                  <span class="text">Continue with Google</span>
+                  <span @click="log" class="text">Continue with Google</span>
                 </div>
 
                 <div class="method-btn">
@@ -109,6 +109,9 @@ export default {
     };
   },
   methods: {
+    log(e) {
+      console.log(e)
+    },
     toggleLoginPage() {
       this.isSignUpPageOpen = !this.isSignUpPageOpen;
       this.$refs.mailInput.focus();
@@ -128,12 +131,11 @@ export default {
     async login() {
       try {
 
-        if (!this.user.email || !this.user.password) {
+        if (!this.testMail(this.user.email) || !this.user.password) {
           this.$refs.mailInput.focus();
           return
         } else {
           await this.$store.dispatch({ type: 'login', user: this.user })
-          this.$router.push('/board')
         }
       } catch (err) {
         throw err
@@ -141,16 +143,21 @@ export default {
     },
     async signup() {
       try {
-        if (!this.user.email || !this.user.password || !this.user.username) {
+        if (!this.testMail(this.user.email) || !this.user.password || !this.user.username) {
           this.$refs.mailInput.focus();
           return
         } else {
           await this.$store.dispatch({ type: 'signup', user: this.user })
-          this.$router.push('/board')
         }
       } catch (err) {
         throw err
       }
+    },
+    testMail(mail) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+        return (true)
+      }
+      return (false)
     }
   },
   computed: {

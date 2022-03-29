@@ -4,8 +4,8 @@
       <nav class="homepage-nav">
         <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
         <div class="login-container">
-          <router-link class="login" :to="'/board/'">Log in</router-link>
-          <router-link class="logout" :to="'/board/'">Sign up</router-link>
+          <router-link class="login" :to="'/login/'">Log in</router-link>
+          <router-link class="logout" :to="'/login/'">Sign up</router-link>
         </div>
       </nav>
     </header>
@@ -20,9 +20,9 @@
               From high rises to the home office, the way your team works is
               unique - accomplish it all with Tablero.
             </p>
-            <form action="" class="form-container">
+            <form action class="form-container">
               <div class="input-container">
-                <input type="email" class="email-input" placeholder="Email"/>
+                <input type="email" class="email-input" placeholder="Email" />
               </div>
               <div class="start-btn-container">
                 <router-link :to="'/board/'" class="start-btn">Try live demo!</router-link>
@@ -30,7 +30,7 @@
             </form>
           </div>
           <div class="home-page-right">
-            <img src="@/assets/img/home.png" alt="" width="445" height="575" />
+            <img src="@/assets/img/home.png" alt width="445" height="575" />
           </div>
         </div>
       </div>
@@ -42,12 +42,12 @@
 export default {
   // props: [''],
   components: {},
-  created() {},
+  created() { },
   data() {
     return {};
   },
   methods: {},
   computed: {},
-  unmounted() {},
+  unmounted() { },
 };
 </script>

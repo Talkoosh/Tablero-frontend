@@ -11,6 +11,10 @@
             </div>
             <input type="file" @change="attachFile" hidden />
         </label>
+        <hr />
+        <h3 class="link-title">Attach a link</h3>
+        <input type="text" placeholder="Paste a photo link here...">
+        <button>Attach</button>
     </section>
 </template>
 

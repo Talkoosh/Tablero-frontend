@@ -182,7 +182,6 @@ export const boardStore = {
 
     async starBoard({ commit, state }, { boardId }) {
       try {
-        console.log(boardId);
         const board = { ...state.boards.find((b) => b._id === boardId) };
         board.isStarred = !board.isStarred;
         await boardService.updateBoard(board);
@@ -301,14 +300,20 @@ export const boardStore = {
         throw err
       }
     },
-    async attachFile({state, dispatch}, {file, task}){
-      if(!task.attachments || !task.attachments.length){
+    async attachFile({ state, dispatch }, { file, task }) {
+      if (!task.attachments || !task.attachments.length) {
         task.attachments = [];
       }
       const fileToAdd = await photoService.uploadPhoto(file)
       task.attachments.push(fileToAdd)
-      const updatedTask = await boardService.saveTask(task, state.currBoardId); 
-      dispatch({type:'saveTask', task: updatedTask, boardId: state.currBoardId});
+      const updatedTask = await boardService.saveTask(task, state.currBoardId);
+      dispatch({ type: 'saveTask', task: updatedTask, boardId: state.currBoardId });
+    },
+    async deleteAttachment({ state, dispatch }, { id, task }) {
+      const idx = task.attachments.findIndex(a => a.asset_id === id);
+      task.attachments.splice(idx, 1);
+      const updatedTask = await boardService.saveTask(task, state.currBoardId);
+      dispatch({ type: 'saveTask', task: updatedTask, boardId: state.currBoardId });
     }
-  },
+  }
 }

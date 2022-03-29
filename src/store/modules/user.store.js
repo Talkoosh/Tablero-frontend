@@ -28,7 +28,7 @@ export const userStore = {
         },
         async login({ commit }, { user }) {
             try {
-                const returnedUser = userService.login(user)
+                const returnedUser = await userService.login(user)
                 commit({ type: 'login', user: returnedUser })
             } catch (err) {
                 throw err
@@ -36,13 +36,14 @@ export const userStore = {
         },
         async signup({ commit }, { user }) {
             try {
-                const returnedUser = userService.signup(user)
+                const returnedUser = await userService.signup(user)
                 commit({ type: 'login', user: returnedUser })
             } catch (err) {
                 throw err
             }
         },
         async logout({ commit }) {
+            console.log('login out')
             try {
                 await userService.logout()
                 commit({ type: 'logout' })
