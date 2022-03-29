@@ -21,7 +21,7 @@
   .watch {
     font-family: trellicons;
     .watch-icon {
-      content: '\e969';
+      content: "\e969";
     }
   }
   .date {
@@ -29,35 +29,34 @@
     .date-complete-icon {
       font-family: trellicons;
       &::before {
-        content: '\e91b';
+        content: "\e91b";
       }
     }
     &:hover {
       background-color: #ebecf0;
     }
     &:hover .date-complete-icon::before {
-      content: '\e918';
+      content: "\e918";
     }
     .date-incomplete-icon {
       font-family: trellicons;
       &::before {
-        content: '\e91b';
+        content: "\e91b";
       }
     }
     &:hover {
       background-color: #ebecf0;
     }
     &:hover .date-incomplete-icon::before {
-      content: '\e919';
+      content: "\e919";
     }
   }
-
 
   .description {
     .description-icon {
       font-family: trellicons;
       &::before {
-        content: '\e922';
+        content: "\e922";
       }
     }
   }
@@ -65,7 +64,7 @@
     .comments-icon {
       font-family: trellicons;
       &::before {
-        content: '\e91e';
+        content: "\e91e";
       }
     }
   }
@@ -73,7 +72,7 @@
     .attachments-icon {
       font-family: trellicons;
       &::before {
-        content: '\e908';
+        content: "\e908";
       }
     }
   }
@@ -81,21 +80,19 @@
     .checklist-icon {
       font-family: trellicons;
       &::before {
-        content: '\e91a';
+        content: "\e91a";
       }
     }
   }
 }
 
-
-.task-badges{
-
-  .task-members{
+.task-badges {
+  .task-members {
     display: flex;
     justify-content: flex-end;
     gap: 5px;
     height: 26px;
-    img{
+    img {
       width: 28px;
       height: 28px;
       border-radius: 25rem;
