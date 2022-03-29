@@ -2,6 +2,7 @@ import { utilService } from './util.service.js';
 // import { storageService } from './async-storage-service.js';
 import { httpService } from './http.service.js';
 import { userService } from './user.service.js';
+import { socketService } from './socket.service.js';
 
 export const boardService = {
   query,
@@ -67,7 +68,9 @@ async function addBoard(title, style) {
 
 async function updateBoard(board) {
   try {
-    return await httpService.put(KEY + '/' + board._id, board);
+    
+    const newBoard = await httpService.put(KEY + '/' + board._id, board);
+    socketService.emit('board-updated')
   } catch (err) {
     throw err;
   }
