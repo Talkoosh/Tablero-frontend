@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section style="height:100%">
         <div class="group-container">
             <div class="group">
                 <div class="group-header">
@@ -168,7 +168,7 @@ export default {
         },
         deleteGroup() {
             this.$store.dispatch({ type: 'deleteGroup', groupId: this.group._id, boardId: this.boardId })
-        }
+        },
     },
     computed: {
         addTaskCondition() {

@@ -36,9 +36,11 @@ input {
 }
 
 #app {
-  height: 100%;
+  height: 100vh;
   .app-container {
-    height: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -69,6 +71,10 @@ a {
 
 .smooth-dnd-ghost {
   transform: rotate(5deg);
+}
+
+.smooth-dnd-container{
+  min-height: 10px;
 }
 
 .smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper {

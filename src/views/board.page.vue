@@ -45,6 +45,8 @@
             </div>
         </div>
     </div>
+
+
     <board-menu
         @change-board-bgc="changeBoardBgc"
         @change-board-bgp="changeBoardBgp"
@@ -61,6 +63,8 @@ import boardGroup from "../components/board.group.vue"
 import boardMenu from "../components/board.menu.vue"
 import { Container, Draggable } from "vue3-smooth-dnd";
 import FastAverageColor from 'fast-average-color';
+import quickEdit from '../components/quick.edit.vue'
+
 import { socketService } from "../services/socket.service";
 
 export default {
@@ -71,13 +75,18 @@ export default {
         boardMenu,
         Container,
         Draggable,
+        quickEdit
     },
     created() {
-        this.$store.dispatch('loadBoards')              
+        this.$store.dispatch('loadBoards')
         const id = this.$route.params.boardId
         this.$store.commit({ type: 'setCurrBoardId', boardId: id })
         socketService.emit('board-entered', id);
+<<<<<<< HEAD
         socketService.on('update-board', this.updateBoard);
+=======
+        socketService.on('update-board', this.loadBoards());
+>>>>>>> 6bcb125cb817c671f9246204fb73104b4551b11d
     },
     data() {
         return {
@@ -87,8 +96,13 @@ export default {
         }
     },
     methods: {
+<<<<<<< HEAD
         updateBoard(){
             this.$store.dispatch('loadBoards');
+=======
+        loadBoards() {
+            this.$store.dispatch('loadBoards')
+>>>>>>> 6bcb125cb817c671f9246204fb73104b4551b11d
         },
         saveBoard(boardToSave) {
             this.$store.dispatch({ type: 'saveBoard', board: boardToSave })
@@ -147,6 +161,7 @@ export default {
             }
             return result;
         },
+      
     },
     computed: {
         board() {
