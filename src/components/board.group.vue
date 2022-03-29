@@ -168,7 +168,7 @@ export default {
         },
         deleteGroup() {
             this.$store.dispatch({ type: 'deleteGroup', groupId: this.group._id, boardId: this.boardId })
-        }
+        },
     },
     computed: {
         addTaskCondition() {

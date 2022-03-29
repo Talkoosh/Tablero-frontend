@@ -1,69 +1,108 @@
 <template>
-    <section>
-        <div class="main-task-container">
-            <router-link
-                class="task-preview-container"
-                :to="'/board/' + boardId + '/card/' + task._id"
-            >
-                <div
-                    v-if="task.style.color && !task.style.isBackground || task.style.photo && !task.style.isBackground"
-                    class="task-cover"
-                    :style="cover"
-                ></div>
-                <!-- <div v-if="task.style.photo" class="task-photo"></div> -->
-                <div class="task-preview" :class="taskCover" :style="taskBg">
-                    <div class="task-labels" v-if="!task.style.isBackground">
-                        <label-preview v-for="label in task.labelIds" :label="label" :key="label" />
-                    </div>
-                    <span>{{ task.title }}</span>
-                    <badge-preview :task="task" class="task-badges" />
-                    <span @click.prevent="openQuickEdit" class="task-quick-edit"></span>
-                </div>
-            </router-link>
+  <section>
+    <div class="main-task-container">
+      <router-link
+        class="task-preview-container"
+        :to="'/board/' + boardId + '/card/' + task._id"
+      >
+        <div
+          v-if="
+            (task.style.color && !task.style.isBackground) ||
+            (task.style.photo && !task.style.isBackground)
+          "
+          class="task-cover"
+          :style="cover"
+        ></div>
+        <!-- <div v-if="task.style.photo" class="task-photo"></div> -->
+        <div class="task-preview" :class="taskCover" :style="taskBg">
+          <div class="task-labels" v-if="!task.style.isBackground">
+            <label-preview
+              v-for="label in task.labelIds"
+              :label="label"
+              :key="label"
+            />
+          </div>
+          <span>{{ task.title }}</span>
+          <badge-preview :task="task" class="task-badges" />
+          <span
+            @click.prevent="openQuickEdit"
+            class="task-quick-edit"
+            ref="quickEditBtn"
+          ></span>
         </div>
-    </section>
+      </router-link>
+      <quickEdit
+        :task="task"
+        :pos="quickEditPos"
+        v-if="isQuickEditOpen"
+        @open-quick-edit="openQuickEdit"
+        @close-quick-edit="closeQuickEdit"
+      />
+    </div>
+  </section>
 </template>
 
 <script>
-import labelPreview from "./label.preview.vue"
-import badgePreview from "./badge.preview.vue"
-
+import labelPreview from "./label.preview.vue";
+import badgePreview from "./badge.preview.vue";
+import quickEdit from "./quick.edit.vue"
 export default {
-    props: {
-        task: Object,
-        boardId: String,
+  props: {
+    task: Object,
+    boardId: String,
+  },
+  components: {
+    labelPreview,
+    badgePreview,
+    quickEdit,
+  },
+  created() {},
+  data() {
+    return {
+      isQuickEditOpen: false,
+      quickEditPos: null,
+    };
+  },
+  methods: {
+    openQuickEdit() {
+        // console.log(event.clientY);
+      const y = this.$refs.quickEditBtn.getBoundingClientRect().top;
+      const x = this.$refs.quickEditBtn.getBoundingClientRect().right -256;
+      this.quickEditPos = {x,y};
+      this.isQuickEditOpen = true;
     },
-    components: {
-        labelPreview,
-        badgePreview
+    closeQuickEdit() {
+      this.isQuickEditOpen = false;
     },
-    created() { },
-    data() {
-        return {}
+  },
+  computed: {
+    labelStyle(label) {
+      console.log(label);
     },
-    methods: {},
-    computed: {
-        labelStyle(label) {
-            console.log(label)
-        },
-        cover() {
-            if (this.task.style.color) {
-                return `background-color: ${this.task.style.color}; height: 34px`
-            }
-            if (this.task.style.photo) {
-                return `background-image: url('${this.task.style.photo}'); min-height: 260px; background-size: cover`
-            }
-        },
-        taskCover() {
-            if (!this.task.style.isBackground || !this.task.style.photo && !this.task.style.color) return ''
-            else return 'task-bg-cover'
-        },
-        taskBg() {
-            if (!this.task.style.isBackground) return
-            if (this.task.style.photo) return `background-image: url('${this.task.style.photo}'); height: 260px;display:flex;`
-            else if (this.task.style.color) return `background-color: ${this.task.style.color}; min-height: 56px;display:flex;`
-        }
+    cover() {
+      if (this.task.style.color) {
+        return `background-color: ${this.task.style.color}; height: 34px`;
+      }
+      if (this.task.style.photo) {
+        return `background-image: url('${this.task.style.photo}'); min-height: 260px; background-size: cover`;
+      }
     },
-    unmounted() { },
-}
+    taskCover() {
+      if (
+        !this.task.style.isBackground ||
+        (!this.task.style.photo && !this.task.style.color)
+      )
+        return "";
+      else return "task-bg-cover";
+    },
+    taskBg() {
+      if (!this.task.style.isBackground) return;
+      if (this.task.style.photo)
+        return `background-image: url('${this.task.style.photo}'); height: 260px;display:flex;`;
+      else if (this.task.style.color)
+        return `background-color: ${this.task.style.color}; min-height: 56px;display:flex;`;
+    },
+  },
+  unmounted() {},
+};
 </script>

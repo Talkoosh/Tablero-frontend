@@ -1,5 +1,6 @@
 <template>
-  <section class="main-header" :style="boardBgStyle">
+  <section class="main-header" :style="boardBgStyle"  
+  >
     <router-link :style="textColor" class="main-logo" :to="'/board/'" >Tablero
    </router-link>
     <div class="left-navbar">
@@ -76,6 +77,7 @@ export default {
     openDropdown(cmpName) {
       this.$emit("open-drop", cmpName);
     },
+
   },
   computed: {
     boards() {

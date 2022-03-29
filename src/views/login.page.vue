@@ -84,14 +84,14 @@
       </div>
     </section>
 
-    <!-- <div class="background">
+    <div class="background">
       <div class="left-img">
-        <svg src="@assets/img/tabelro-left.svg" alt class="left" />
+        <img src="@/assets/img/tablero-left.svg" alt class="left" />
       </div>
       <div class="right-img">
-        <svg src="@assets/img/tabelro-right.svg" alt class="right" />
+        <img src="@/assets/img/tablero-right.svg" alt class="right" />
       </div>
-    </div>-->
+    </div>
   </section>
 </template>
 
