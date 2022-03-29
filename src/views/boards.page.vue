@@ -83,11 +83,10 @@ export default {
     hompageNav,
   },
   created() {
-    this.$store.dispatch({ type: 'getLoggedinUser' })
-    this.$store.dispatch("loadBoards");
+    this.$store.dispatch({ type: 'getLoggedinUser' });
+    this.$store.dispatch({ type: "loadBoards" });
     this.$store.commit({ type: "setCurrBoardId", boardId: null });
     this.$store.commit({ type: "changeHeaderBgc", bgc: "#026aa7" });
-    console.log('a')
   },
   data() {
     return {};
@@ -119,7 +118,17 @@ export default {
         else return "background-color: #0079bf";
       };
     },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
+    }
   },
   unmounted() { },
+  watch: {
+    'loggedinUser': {
+      handler() {
+        this.$store.dispatch({ type: "loadBoards" });
+      }
+    }
+  }
 };
 </script>
