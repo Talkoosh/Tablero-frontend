@@ -130,7 +130,6 @@ export default {
     },
     async login() {
       try {
-
         if (!this.testMail(this.user.email) || !this.user.password) {
           this.$refs.mailInput.focus();
           return

@@ -43,6 +43,7 @@ async function login(userCred) {
 }
 async function signup(userCred) {
     const user = await httpService.post('auth/signup', userCred)
+    console.log('user from backend', user)
     // socketService.emit('set-user-socket', user._id);
     return user;
 }
@@ -51,18 +52,10 @@ async function logout() {
     return await httpService.post('auth/logout')
 }
 
-// async function changeScore(by) {
-//     const user = getLoggedinUser()
-//     if (!user) throw new Error('Not loggedin')
-//     await update(user)
-//     return user.score
-// }
-
-
 
 async function getLoggedinUser() {
     try {
-        const user = await httpService.get('auth/loggedinUser');
+        var user = await httpService.get('auth/loggedinUser');
         return user;
     } catch (err) {
         throw err;

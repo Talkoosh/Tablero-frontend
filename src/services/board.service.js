@@ -1,6 +1,7 @@
 import { utilService } from './util.service.js';
-import { storageService } from './async-storage-service.js';
+// import { storageService } from './async-storage-service.js';
 import { httpService } from './http.service.js';
+import { userService } from './user.service.js';
 
 export const boardService = {
   query,
@@ -22,7 +23,8 @@ const KEY = 'board';
 
 async function query() {
   try {
-    const boards = await httpService.get(KEY);
+    const user = await userService.getLoggedinUser();
+    const boards = await httpService.get(KEY, user);
     if (!boards.length) {
       const board = await _makeBoard();
       boards.push(board);
@@ -44,7 +46,14 @@ async function getBoardById(boardId) {
 }
 
 async function addBoard(title, style) {
+  var user = await userService.getLoggedinUser();
+  // user.imgUrl = 'https://icon-library.com/images/member-icon/member-icon-19.jpg';
   const boardToSave = _getEmptyBoard();
+  if (user) {
+    boardToSave.members.push(user)
+  } else {
+    boardToSave.members.push({ _id: "u123", username: 'Guest' })
+  }
   boardToSave.createdAt = Date.now();
   boardToSave.title = title;
   boardToSave.style = style || {};
@@ -121,7 +130,7 @@ async function saveTask(task, boardId) {
       group.tasks[idx] = task;
       await updateBoard(board);
       return task;
-      
+
     } else {
       const group = board.groups.find((g) => g._id === task.groupId);
       const taskToAdd = _createTask(task.title);
@@ -240,8 +249,8 @@ async function _makeBoard() {
       title: 'Our Trabelo Project',
       createdAt: 1589983468418,
       createdBy: {
-        _id: 'u101',
-        fullname: 'Abi Abambi',
+        _id: 'u123',
+        fullname: 'Guest',
         imgUrl:
           'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
       },
@@ -284,8 +293,8 @@ async function _makeBoard() {
       ],
       members: [
         {
-          _id: 'u101',
-          fullname: 'Tal Tarablus',
+          _id: 'u123',
+          fullname: 'Guest',
           imgUrl:
             'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
         },

@@ -18,6 +18,7 @@ import createBoardDrop from "./components/create.board.drop.vue";
 import recentBoardsDrop from "./components/recent.boards.drop.vue";
 import starredBoardsDrop from "./components/starred.boards.drop.vue";
 import acountDrop from './components/acount.drop.vue'
+import { socketService } from "./services/socket.service.js";
 
 export default {
   // props: [''],
@@ -51,9 +52,6 @@ export default {
     bodyOverflow() {
       return `overflow: ${this.overflow}`
     },
-    // bodyBGC(){
-    //   return  (this.isLoginPage) ? 'background-color:#f9fafc;' : '';
-    // }
     loggedinUser() {
       return this.$store.getters.loggedinUser
     }
@@ -69,8 +67,11 @@ export default {
       if ((this.$route.name === 'login' || this.$route.name === 'home') && this.loggedinUser) this.$router.push('/board')
     },
     'loggedinUser': {
-      handler() {
-        if (this.loggedinUser) this.$router.push('/board')
+      async handler() {
+        console.log('logged user', this.loggedinUser)
+        if (this.loggedinUser) {
+          this.$router.push('/board')
+        }
         else this.$router.push('/')
       }
     }

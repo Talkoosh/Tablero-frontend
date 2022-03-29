@@ -9,7 +9,7 @@
             <div
                 @click.prevent="toggleDateDone"
                 class="date"
-                v-if="task.dueDate"
+                v-if="task.dueDate?.dueDate"
                 :style="dateBadgeBg"
             >
                 <span class="date-icon badge-icon"></span>
@@ -97,7 +97,6 @@ export default {
             const diff = this.task.dueDate - Date.now()
             if (diff > 86400000) return
             if (dueDay - today === 1) return 'background-color: #f2d600; color: white;'
-            // diff = this.
         }
     },
     unmounted() { },
