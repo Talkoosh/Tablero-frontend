@@ -65,6 +65,7 @@ import { Container, Draggable } from "vue3-smooth-dnd";
 import FastAverageColor from 'fast-average-color';
 import quickEdit from '../components/quick.edit.vue'
 
+import { socketService } from "../services/socket.service";
 
 export default {
     // props: [''],
@@ -77,9 +78,11 @@ export default {
         quickEdit
     },
     created() {
-        this.$store.dispatch('loadBoards')
+        this.$store.dispatch('loadBoards')              
         const id = this.$route.params.boardId
         this.$store.commit({ type: 'setCurrBoardId', boardId: id })
+        socketService.emit('board-entered', id);
+        socketService.on('update-board', this.$store.dispatch('loadBoard'));
     },
     data() {
         return {

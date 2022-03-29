@@ -40,21 +40,40 @@
                 </div>
                 <div class="details-main">
                     <div class="content">
-                        <div v-if="task.labelIds?.length" class="task-labels module">
-                            <h4>Labels</h4>
-                            <div class="task-details-labels-container">
-                                <span v-for="label in labels" :key="label._id">
-                                    <span
-                                        v-if="task.labelIds.includes(label._id)"
-                                        class="task-details-label"
-                                        :style="{ backgroundColor: label.color }"
-                                    >
-                                        <span class="task-details-label-title">{{ label.title }}</span>
+                        <div class="task-top-actions module">
+                            <div v-if="task.labelIds?.length" class="task-labels">
+                                <h4>Labels</h4>
+                                <div class="task-details-labels-container">
+                                    <span v-for="label in labels" :key="label._id">
+                                        <span
+                                            v-if="task.labelIds.includes(label._id)"
+                                            class="task-details-label"
+                                            :style="{ backgroundColor: label.color }"
+                                        >
+                                            <span class="task-details-label-title">{{ label.title }}</span>
+                                        </span>
                                     </span>
-                                </span>
-                                <span class="task-details-label add-btn">
-                                    <span class="add-icon"></span>
-                                </span>
+                                    <span class="task-details-label add-btn">
+                                        <span class="add-icon"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div v-if="task?.dueDate?.dueDate" class="task-dates">
+                                <h4>Dates</h4>
+                                <div class="main">
+                                    <input
+                                        type="checkbox"
+                                        v-model="task.dueDate.isComplete"
+                                        @change="updateTask"
+                                    />
+                                    <button class>
+                                        {{ dueDate }}
+                                        <span
+                                            class="date-complete-label"
+                                            v-if="task.dueDate.isComplete"
+                                        >complete</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="description module">
@@ -155,6 +174,7 @@
                             @photo-set="onSetPhoto"
                             @cover-size-set="onSetCoverSize"
                             @attach-file="onAttachFile"
+                            @date-set="setDate"
                             v-clickoutside="closeAction"
                             :labels="labels"
                             :is="currAction"
@@ -168,20 +188,24 @@
                             <span class="icon labels-icon"></span>
                             <span>Labels</span>
                         </button>
+                        <button>
+                            <span class="icon checklist-icon"></span>
+                            <span>Checklist</span>
+                        </button>
+                        <button @click="setCurrAction('datesMenu')">
+                            <span class="icon dates-icon"></span>
+                            <span>Dates</span>
+                        </button>
+                        <button @click.stop="setCurrAction('attachmentMenu')">
+                            <span class="icon attachment-icon"></span>
+                            <span>Attachment</span>
+                        </button>
                         <button
                             v-if="!task.style.color && !task.style.photo"
                             @click.stop="setCurrAction('coverMenu')"
                         >
                             <span class="icon cover-icon"></span>
                             <span>Cover</span>
-                        </button>
-                        <button>
-                            <span class="icon checklist-icon"></span>
-                            <span>Checklist</span>
-                        </button>
-                        <button @click.stop="setCurrAction('attachmentMenu')">
-                            <span class="icon attachment-icon"></span>
-                            <span>Attachment</span>
                         </button>
 
                         <h3>Actions</h3>
@@ -207,6 +231,7 @@ import taskActivities from './task.activities.vue'
 import labelMenu from './label.menu.vue'
 import coverMenu from './cover.menu.vue'
 import attachmentMenu from './attachment.menu.vue'
+import datesMenu from './dates.menu.vue'
 import FastAverageColor from 'fast-average-color'
 
 export default {
@@ -218,7 +243,7 @@ export default {
             currAction: '',
             coverBcg: null,
             coverPhoto: null,
-            isArchiving: false
+            isArchiving: false,
         }
     },
     methods: {
@@ -278,6 +303,9 @@ export default {
         async onSetPhoto(photo) {
             delete this.task.style.color;
             this.task.style.photo = photo;
+
+            if (!photo) await this.onSetCoverSize('half');
+
             const boardId = this.$route.params.boardId;
             await this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
             this.coverPhoto = photo;
@@ -302,6 +330,14 @@ export default {
             const boardId = this.$route.params.boardId;
             await this.$store.dispatch({ type: 'deleteTask', taskId: this.task._id, boardId });
             this.$router.push(`/board/${boardId}`)
+        },
+        setDate(dueDate) {
+            dueDate.dueDate = Date.parse(dueDate.dueDate.toString())
+            this.$store.dispatch({ type: 'setDate', task: this.task, dueDate })
+        },
+        updateTask() {
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
         }
 
     },
@@ -312,12 +348,20 @@ export default {
         labels() {
             return this.$store.getters.boardLabels;
         },
+        dueDate() {
+            if (!this.$store.getters.currTask.dueDate.dueDate) return;
+            let date = new Date(this.$store.getters.currTask.dueDate.dueDate)
+            const options = { month: 'short' };
+            date = `${new Intl.DateTimeFormat('en-US', options).format(date)} ${date.getDate()}, ${date.getFullYear()}`
+            return date;
+        }
     },
     components: {
         taskActivities,
         labelMenu,
         coverMenu,
-        attachmentMenu
+        attachmentMenu,
+        datesMenu
     },
     watch: {
         '$route.params.taskId': {

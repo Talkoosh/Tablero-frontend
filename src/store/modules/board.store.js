@@ -144,7 +144,7 @@ export const boardStore = {
   actions: {
     async loadBoards({ commit, state }) {
       try {
-        if (state.boards.length) return;
+        // if (state.boards.length) return;
         const boards = await boardService.query();
         commit({ type: 'loadBoards', boards });
       } catch (err) {
@@ -314,6 +314,11 @@ export const boardStore = {
       task.attachments.splice(idx, 1);
       const updatedTask = await boardService.saveTask(task, state.currBoardId);
       dispatch({ type: 'saveTask', task: updatedTask, boardId: state.currBoardId });
+    },
+    async setDate({state, dispatch}, {task, dueDate}){
+      task.dueDate = {...dueDate}; 
+      const taskToSave = await boardService.saveTask(task, state.currBoardId);
+      dispatch({type:'saveTask', task: taskToSave, boardId: state.currBoardId})
     }
   }
 }
