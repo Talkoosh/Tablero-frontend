@@ -41,8 +41,7 @@
     }
 
     .quick-edit-card-container {
-        // top: 168px;
-        // left: 316px;
+      
         width: 256px;
         position: absolute;
 
@@ -89,7 +88,6 @@
                         width: auto;
                         border-radius: 4px;
 
-                        // background-color: #61bd4f;
 
                         &:hover {
                             cursor: default;
@@ -221,9 +219,7 @@
                         height: 28px;
                         margin: 0 0 4px 4px !important;
                         width: 28px;
-                        // transform: translateX(4px);
-
-                        // background-color: #dfe1e6;
+                   
                         border-radius: 25em;
                         color: #172b4d;
                         cursor: pointer;
@@ -237,19 +233,12 @@
                         -webkit-user-select: none;
                         user-select: none;
                         width: 32px;
-                        // z-index: 0;
 
                         .member-img {
                             height: 28px;
                             width: 28px;
 
                             transform: translateY(1px);
-
-                            // border-radius: 25em;
-                            // height: 32px;
-                            // object-fit: cover;
-                            // width: 32px;
-                            // border: 0;
                         }
                     }
                 }
@@ -281,6 +270,8 @@
             position: absolute;
             transition: opacity 85ms ease-in, transform 85ms ease-in;
             width: 240px;
+
+        
 
             .label-menu {
                 button {
@@ -317,15 +308,13 @@
             }
 
             .edit-option {
-                // float: right;
-                // float: left; //position change
+             
                 margin: 0 8px 4px 0;
                 background: #0009;
                 border-radius: 3px;
                 clear: both;
                 color: #e6e6e6;
                 display: flex;
-                // float: left;
                 margin: 0 0 4px 8px;
                 padding: 1px 12px 1px 8px;
                 text-decoration: none;
@@ -336,9 +325,7 @@
                 &:hover {
                     background: #000c;
                     color: #fff;
-                    // transform: translateX(5px);
                     cursor: pointer;
-                    // transform: translateX(-5px); //position change
                 }
 
                 .icon {
@@ -410,4 +397,14 @@
             }
         }
     }
+}
+
+
+
+.modal-right{
+    margin-left: 8px
+}
+
+.modal-left{
+    right: 0.4%;
 }

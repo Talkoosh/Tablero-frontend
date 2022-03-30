@@ -66,6 +66,8 @@ export default {
   methods: {
     openQuickEdit() {
         // console.log(event.clientY);
+        // this.$refs.quickEditBtn.getBoundingClientRect().x = 0;
+        // console.log(this.$refs.quickEditBtn.getBoundingClientRect().x);
       const y = this.$refs.quickEditBtn.getBoundingClientRect().top;
       const x = this.$refs.quickEditBtn.getBoundingClientRect().right -256;
       this.quickEditPos = {x,y};

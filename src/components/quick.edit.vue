@@ -52,7 +52,12 @@
         </div>
       </div>
 
-      <input class="save-btn" type="submit" value="Save" />
+      <input
+        class="save-btn"
+        type="submit"
+        value="Save"
+        @click="saveTaskTitle"
+      />
 
       <div class="quick-edit-options" :style="[menuPosY, menuPosX]">
         <router-link
@@ -129,9 +134,17 @@
           <span class="edit-option-text">Edit dates</span>
         </div>
 
-        <dates-menu @date-set="setDate" v-if="isDatesMenuOpen"></dates-menu>
+        <dates-menu
+          @date-set="setDate"
+          v-if="isDatesMenuOpen"
+          :style="modalDirection"
+        ></dates-menu>
 
-        <div @click="archive" class="edit-option archive" :class="menuOptionPos">
+        <div
+          @click="archive"
+          class="edit-option archive"
+          :class="menuOptionPos"
+        >
           <span class="archive-icon icon"></span>
           <span class="edit-option-text">Archive</span>
         </div>
@@ -161,10 +174,11 @@ export default {
     return {
       taskToEdit: null,
       taskDistFromBottom: window.screen.height - this.pos.y - 382,
-      menuDivSize: 400,
+      menuDivSize: 550,
       isLabelMenuOpen: false,
       isCoverMenuOpen: false,
       isDatesMenuOpen: false,
+      isMenuChangeDirection: false,
     };
   },
   methods: {
@@ -255,10 +269,22 @@ export default {
         boardId,
       });
     },
+    async saveTaskTitle() {
+      const boardId = this.$route.params.boardId;
+      this.taskToEdit.title = this.taskToEdit.title.trim();
+      this.$store.dispatch({
+        type: "saveTask",
+        task: JSON.parse(JSON.stringify(this.taskToEdit)),
+        boardId,
+      });
+      this.$emit("close-quick-edit");
+    },
   },
   computed: {
     menuStyle() {
-      return "transform: translateY(-40%);overflow-y: auto;max-height: 500px;";
+      return this.isMenuChangeDirection
+        ? "transform: translateY(-40%);overflow-y: auto;max-height: 400px;right: 0.4%;"
+        : "transform: translateY(-40%);overflow-y: auto;max-height: 400px;margin-left:8px;";
     },
     labels() {
       return this.$store.getters.boardLabels;
@@ -335,7 +361,14 @@ export default {
 
     menuOptionPos() {
       let diff = document.body.clientWidth - this.pos.x - this.menuDivSize; //340 is the menu div size
+      this.isMenuChangeDirection = diff < 0 ? true : false;
       return diff < 0 ? "left-menu" : "right-menu";
+    },
+    modalDirection() {
+      console.log(this.isMenuChangeDirection);
+      return this.isMenuChangeDirection
+        ? "right: 0.4%;transform: translateY(-25%);"
+        : " margin-left:8px;transform: translateY(-25%);";
     },
   },
 };

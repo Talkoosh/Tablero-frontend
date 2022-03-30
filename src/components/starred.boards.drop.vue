@@ -6,7 +6,7 @@
         X
       </button>
     </header>
-    <div class="boards-list" v-for="board in boards" :key="board._id">
+    <div class="boards-list" v-for="board in starredBoards" :key="board._id">
       <router-link class="board-details" :to="'/board/' + board._id">
         <div
           class="board-cover-container"
@@ -39,8 +39,8 @@ export default {
     },
   },
   computed: {
-    boards() {
-      return this.$store.getters.boards;
+    starredBoards() {
+      return this.$store.getters.starredBoards || [];
     },
     cardBG() {
       return (style) => {
