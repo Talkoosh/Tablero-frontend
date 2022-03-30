@@ -46,7 +46,6 @@
         </div>
     </div>
 
-
     <board-menu
         @change-board-bgc="changeBoardBgc"
         @change-board-bgp="changeBoardBgp"
@@ -92,7 +91,7 @@ export default {
         }
     },
     methods: {
-        updateBoard(){
+        updateBoard() {
             this.$store.dispatch('loadBoards');
         },
         saveBoard(boardToSave) {
@@ -152,7 +151,7 @@ export default {
             }
             return result;
         },
-      
+
     },
     computed: {
         board() {
