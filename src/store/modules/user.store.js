@@ -60,8 +60,7 @@ export const userStore = {
         },
         async searchForUsers({ commit }, { searchInput }) {
             const users = await userService.getUsers(searchInput)
-            console.log(users)
             commit({ type: 'updateSearchedUsers', users })
-        }
+        },
     },
 };

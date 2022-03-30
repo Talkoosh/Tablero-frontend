@@ -6,7 +6,6 @@
 @import "basics/scrollbar";
 
 // COMPONENTS
-<<<<<<< HEAD
 @import "components/main.header";
 @import "components/task.details";
 @import "components/task.activities";
@@ -30,31 +29,7 @@
 @import "components/badge.preview";
 @import "components/quick.edit";
 @import "components/invite.members";
-=======
-@import 'components/main.header';
-@import 'components/task.details';
-@import 'components/task.activities';
-@import 'components/task.actions';
-@import 'components/label.menu';
-@import 'components/cover.menu';
-@import 'components/attachment.menu';
-@import 'components/dates.menu';
-@import 'components/checklist.menu';
-@import 'components/task.details.attachments';
-@import 'components/board.header';
-@import 'components/task.preview';
-@import 'components/board.group';
-@import 'components/board.menu';
-@import 'components/checklists';
-@import 'components/homepage.nav';
-@import 'components/create.board.drop';
-@import 'components/recent.boards.drop';
-@import 'components/starred.boards.drop.scss';
-@import 'components/group.extras.menu';
-@import 'components/acount.drop';
-@import 'components/badge.preview';
-@import 'components/quick.edit';
->>>>>>> ff06acca82375d636d07e319cb2f8b9201676abe
+@import "components/checklists";
 
 // VIEWS
 @import "views/home";

@@ -43,7 +43,7 @@ async function login(userCred) {
 }
 async function signup(userCred) {
     const user = await httpService.post('auth/signup', userCred)
-    console.log('user from backend', user)
+
     // socketService.emit('set-user-socket', user._id);
     return user;
 }

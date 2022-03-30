@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <invite-members v-if="isAddMemberOpen" :clickPos="invitePos" />
+    <invite-members v-if="isAddMemberOpen" :clickPos="invitePos" @close-invite="toggleInvite" />
 
     <board-menu
         @change-board-bgc="changeBoardBgc"

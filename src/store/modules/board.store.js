@@ -60,6 +60,7 @@ export const boardStore = {
       state.currBoardId = boardId;
     },
     saveBoard(state, { board }) {
+      console.log(board)
       const boardIdx = state.boards.findIndex((b) => b._id === board._id);
       state.boards[boardIdx] = board;
     },
@@ -314,19 +315,23 @@ export const boardStore = {
       // const updatedTask = await boardService.saveTask(task, state.currBoardId);
       dispatch({ type: 'saveTask', task, boardId: state.currBoardId });
     },
-    async setDate({state, dispatch}, {task, dueDate}){
-      task.dueDate = {...dueDate}; 
+    async setDate({ state, dispatch }, { task, dueDate }) {
+      task.dueDate = { ...dueDate };
       // const taskToSave = await boardService.saveTask(task, state.currBoardId);
-      dispatch({type:'saveTask', task, boardId: state.currBoardId})
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
     },
-    async saveChecklist({state, dispatch}, {title, task}){
-      if(!task.checklists) task.checklists = [];
+    async saveChecklist({ state, dispatch }, { title, task }) {
+      if (!task.checklists) task.checklists = [];
       task.checklists.push({
         title,
         _id: utilService.makeId(),
         todos: []
       })
-      dispatch({type:'saveTask', task, boardId: state.currBoardId})
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
+    },
+    async addCheckedUsers({ state, commit }, { users }) {
+      const board = await boardService.addMembersToBoard(users, state.currBoardId)
+      commit({ type: 'saveBoard', board: board })
     }
   }
 }
