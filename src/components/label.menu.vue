@@ -20,7 +20,7 @@
                     </span>
                     <span class="label-edit-icon" @click.stop="editLabel(label)"></span>
                 </div>
-                <button @click.stop="isAdding = true" class="create-btn">Create a new label</button>
+                <button @click.stop="toggleIsAdding" class="create-btn">Create a new label</button>
             </div>
         </div>
         <div v-else class="label-add">
@@ -92,6 +92,9 @@ export default {
         if (!this.task.labelIds) this.task.labelIds = [];
     },
     methods: {
+        toggleIsAdding(){
+            this.isAdding = true;
+        },
         closeAction(ev) {
             this.$emit('close-action', ev);
         },

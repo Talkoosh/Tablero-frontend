@@ -64,6 +64,15 @@
             position: relative;
             text-decoration: none;
 
+            .task-cover-img{
+                background-size: cover;
+                height: 150px;
+            }
+
+            .task-cover-color{
+                height: 32px;
+            }
+
             .task-details-container {
                 overflow: hidden;
                 padding: 6px 8px 2px;

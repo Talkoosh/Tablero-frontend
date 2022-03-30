@@ -8,13 +8,18 @@
       v-clickoutside="closeQuickEdit"
     >
       <div class="quick-edit-task">
+        <div
+          v-if="taskToEdit.style.photo"
+          class="task-cover-img"
+          :style="coverPhoto"
+        ></div>
+        <div
+          v-if="taskToEdit.style.color"
+          class="task-cover-color"
+          :style="coverColor"
+        ></div>
         <div class="task-details-container">
           <div class="task-labels">
-            <!-- <label-preview
-              v-for="label in task.labelIds"
-              :label="label"
-              :key="label"
-            /> -->
             <span
               class="label"
               v-for="label in taskToEdit.labelIds"
@@ -255,6 +260,7 @@ export default {
     },
     setDate(dueDate) {
       dueDate.dueDate = Date.parse(dueDate.dueDate.toString());
+      this.taskToEdit.dueDate.dueDate = dueDate.dueDate;
       this.$store.dispatch({
         type: "setDate",
         task: JSON.parse(JSON.stringify(this.taskToEdit)),
@@ -281,6 +287,12 @@ export default {
     },
   },
   computed: {
+    coverColor() {
+      return `background-color: ${this.taskToEdit.style.color}`;
+    },
+    coverPhoto() {
+      return `background-image: url(${this.taskToEdit.style.photo});`;
+    },
     menuStyle() {
       return this.isMenuChangeDirection
         ? "transform: translateY(-40%);overflow-y: auto;max-height: 400px;right: 0.4%;"
@@ -343,13 +355,20 @@ export default {
     },
     taskPos() {
       var top = this.pos.y + this.taskDistFromBottom;
+      if (this.task.style.photo) top -= 150;
+      else if (this.taskToEdit.style.color) top -= 32;
 
       return this.taskDistFromBottom > 0
         ? `left:${this.pos.x}px;top:${this.pos.y}px`
         : `left:${this.pos.x}px;top:${top}px`;
     },
     menuPosY() {
-      let diff = window.screen.height - this.pos.y - 430;
+      let taskHeight = 430;
+      if (this.taskToEdit.style.color) taskHeight -= 32;
+      //32 is cover color preview height
+      else if (this.taskToEdit.style.photo) taskHeight -= 150; //150 is photo preview height
+
+      let diff = window.screen.height - this.pos.y - taskHeight;
       if (this.taskDistFromBottom < 0) diff -= this.taskDistFromBottom;
       return diff < 0 ? `top:${diff}px` : "top:0px";
     },
