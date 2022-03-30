@@ -89,6 +89,13 @@
             color: gold;
             content: "\e967";
           }
+
+          &:hover {
+            &::before {
+              content: "\e966";
+            }
+          }
+         
         }
         .not-starred {
           @include icon;

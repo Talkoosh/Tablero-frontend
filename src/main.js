@@ -4,6 +4,8 @@ import router from './router';
 import { store } from './store/index.js';
 import debounce from './services/debouncer.js'
 import './styles/style.scss';
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 
 const app = createApp(App);
 app.directive('clickoutside', {
@@ -26,6 +28,8 @@ app.directive('clickoutside', {
     event.stopPropagation();
   },
 });
+
+app.use(ElementPlus)
 
 app.directive('debounce', (el, binding) => debounce(el, binding))
 

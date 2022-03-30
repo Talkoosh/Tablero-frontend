@@ -122,6 +122,7 @@
                         ></task-attachments>
                         <task-checklists
                         :checklists="task.checklists"
+                        @checklists-update="updateTask"
                         ></task-checklists>
                         <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
                     </div>
@@ -308,8 +309,7 @@ export default {
         },
         setChecklistTitle(title) {
             this.$store.dispatch({ type: 'saveChecklist', title, task: this.task })
-
-        }
+        },
 
     },
     computed: {
