@@ -15,6 +15,7 @@
 @import "components/attachment.menu";
 @import "components/dates.menu";
 @import "components/checklist.menu";
+@import "components/checklists";
 @import "components/task.details.attachments";
 @import "components/board.header";
 @import "components/task.preview";
@@ -29,8 +30,7 @@
 @import "components/badge.preview";
 @import "components/quick.edit";
 @import "components/invite.members";
-@import 'components/checklists';
-
+@import "components/checklists";
 
 // VIEWS
 @import "views/home";
