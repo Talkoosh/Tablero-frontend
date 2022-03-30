@@ -9,7 +9,7 @@
                     @click.stop="deleteChecklist(checklist._id)"
                 >Delete</button>
             </div>
-            <checklist-todos @checklist-updated="updateChecklist" :checklist="checklist"></checklist-todos>
+            <checklist-todos @convert-todo="convertToCard" @checklist-updated="updateChecklist" :checklist="checklist"></checklist-todos>
         </div>
     </section>
 </template>
@@ -38,6 +38,9 @@ export default {
             const idx = this.checklists.findIndex(c => c._id === checklistId);
             this.checklists.splice(idx, 1);
             this.$emit('checklists-update', this.checklists)
+        },
+        convertToCard(txt){
+            this.$emit('convert-todo', txt)
         }
     },
     computed: {
