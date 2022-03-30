@@ -16,6 +16,14 @@
             }
         }
 
+        .progress-bar{
+                margin-bottom: 15px;
+                width: 100%;
+                .el-progress__text{
+                    text-align: center;
+                }
+        }
+
         ul {
             list-style: none;
             .todo {

@@ -1,8 +1,14 @@
 <template>
     <section>
+        <el-progress :percentage="todoPercentage" :status="progressColor" class="progress-bar"></el-progress>
         <ul>
             <li class="todo" v-for="todo in checklist.todos" :key="todo._id">
-                <input class="is-done-btn" type="checkbox" @change="updateChecklist" v-model="todo.isDone" />
+                <input
+                    class="is-done-btn"
+                    type="checkbox"
+                    @change="updateChecklist"
+                    v-model="todo.isDone"
+                />
                 <p>{{ todo.txt }}</p>
                 <span class="icon delete-icon" @click="removeTodo(todo._id)"></span>
             </li>
@@ -43,14 +49,24 @@ export default {
         updateChecklist() {
             this.$emit('checklistUpdated', this.checklist);
         },
-        removeTodo(todoId){
+        removeTodo(todoId) {
             const idx = this.checklist.todos.findIndex(t => t._id === todoId);
             this.checklist.todos.splice(idx, 1);
             this.updateChecklist();
         }
     },
     computed: {
-
+        todoPercentage() {
+            if(!this.checklist.todos?.length) return 0;
+            let doneTodos = this.checklist.todos.reduce((acc, t) => {
+                if (t.isDone) acc++;
+                return acc;
+            }, 0)
+            return (Math.floor(doneTodos / this.checklist.todos.length * 100))
+        },
+        progressColor(){
+            return (this.todoPercentage === 100) ? 'success': ''
+        }
     }
 }
 </script>
