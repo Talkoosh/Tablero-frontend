@@ -144,7 +144,6 @@ export const boardStore = {
   actions: {
     async loadBoards({ commit, state }) {
       try {
-        // if (state.boards.length) return;
         const boards = await boardService.query();
         commit({ type: 'loadBoards', boards });
       } catch (err) {

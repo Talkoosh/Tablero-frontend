@@ -1,15 +1,16 @@
 <template>
-    <section>
+    <section class="task-checklists">
         <div class="checklist" v-for="checklist in checklists" :key="checklist._id">
-            <h2>{{ checklist.title }}</h2>
-            <checklist-todos :todos="checklist.todos"></checklist-todos>
-        </div>
-            <button class="add-item-button" v-if="!isAdding" @click.stop="isAdding = true">Add an item</button>
-            <div class="add-item-container" v-else>
-                <textarea class="todo-text"></textarea>
-                <button @click="addTodo(checklist._id)" class>Add</button>
-                <span class="icon stop-adding-icon"></span>
+            <div class="checklist-header">
+                <span class="icon checklist-icon"></span>
+                <h2>{{ checklist.title }}</h2>
+                <button
+                    class="delete-checklist-btn"
+                    @click.stop="deleteChecklist(checklist._id)"
+                >Delete</button>
             </div>
+            <checklist-todos @checklist-updated="updateChecklist" :checklist="checklist"></checklist-todos>
+        </div>
     </section>
 </template>
 
@@ -28,12 +29,21 @@ export default {
 
     },
     methods: {
-        
+        updateChecklist(checklist) {
+            const idx = this.checklists.findIndex(c => c._id === checklist._id);
+            this.checklists.splice(idx, 1, checklist);
+            this.$emit('checklists-update', this.checklists)
+        },
+        deleteChecklist(checklistId) {
+            const idx = this.checklists.findIndex(c => c._id === checklistId);
+            this.checklists.splice(idx, 1);
+            this.$emit('checklists-update', this.checklists)
+        }
     },
     computed: {
 
     },
-    components:{
+    components: {
         checklistTodos
     }
 }
