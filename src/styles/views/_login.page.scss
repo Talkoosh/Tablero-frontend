@@ -20,16 +20,17 @@
         margin-bottom: 40px;
         justify-content: center;
 
-        .logo-img {
+        .logo-icon {
             height: 43px;
             width: 43px;
-            // background-image: url('@/assets/img/our-logo.png');
+            transform: translateY(7px);
         }
 
         .logo-text {
             font-size: 44px;
             font-family: Paytone;
             letter-spacing: 0.1rem;
+            margin-left: -10px;
         }
     }
 

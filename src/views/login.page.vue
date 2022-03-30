@@ -1,15 +1,26 @@
 <template>
   <section class="login-page">
     <div class="logo-container">
-      <div class="logo-img"></div>
-      <div class="logo-text">Tablero</div>
+      <!-- <div class="logo-img"></div> -->
+      <!-- <div class="logo-text"> -->
+      <img src="@/assets/assets/t-icon.png" class="logo-icon" />
+      <span class="logo-text">ablero</span>
+      <!-- </div> -->
     </div>
 
     <section class="login-content-container">
       <div class="content-wrapper">
         <div class="login-content">
-          <h1 v-if="!this.isSignUpPageOpen" class="header" @click="toggleLoginPage">Login to Tablero</h1>
-          <h1 v-else class="header" @click="toggleLoginPage">Sign up for your acount</h1>
+          <h1
+            v-if="!this.isSignUpPageOpen"
+            class="header"
+            @click="toggleLoginPage"
+          >
+            Login to Tablero
+          </h1>
+          <h1 v-else class="header" @click="toggleLoginPage">
+            Sign up for your acount
+          </h1>
 
           <div class="login-password-container">
             <div class="email-password">
@@ -43,7 +54,13 @@
                 value="Log in"
                 @click="login"
               />
-              <input v-else type="submit" value="Sign Up" :class="isValidMail" @click="signup" />
+              <input
+                v-else
+                type="submit"
+                value="Sign Up"
+                :class="isValidMail"
+                @click="signup"
+              />
             </div>
 
             <div :style="checkTypingSignUp" class="login-methods-container">
@@ -71,13 +88,17 @@
                 v-if="!this.isSignUpPageOpen"
                 class="sign-up"
                 @click="toggleLoginPage"
-              >Sign up for an acount</div>
+              >
+                Sign up for an acount
+              </div>
               <div
                 v-else
                 :to="'/login/'"
                 class="sign-up"
                 @click="toggleLoginPage"
-              >Already have an acount? Log in</div>
+              >
+                Already have an acount? Log in
+              </div>
             </li>
           </ul>
         </div>
@@ -98,80 +119,84 @@
 <script>
 export default {
   components: {},
-  created() { },
+  created() {},
   data() {
     return {
       isSignUpPageOpen: false,
       user: {
-        email: '',
-        password: '',
-      }
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
     log(e) {
-      console.log(e)
+      console.log(e);
     },
     toggleLoginPage() {
       this.isSignUpPageOpen = !this.isSignUpPageOpen;
       this.$refs.mailInput.focus();
       if (this.isSignUpPageOpen) {
         this.user = {
-          email: '',
-          username: '',
-          password: '',
-        }
+          email: "",
+          username: "",
+          password: "",
+        };
       } else {
         this.user = {
-          email: '',
-          password: '',
-        }
+          email: "",
+          password: "",
+        };
       }
     },
     async login() {
       try {
         if (!this.testMail(this.user.email) || !this.user.password) {
           this.$refs.mailInput.focus();
-          return
+          return;
         } else {
-          await this.$store.dispatch({ type: 'login', user: this.user })
+          await this.$store.dispatch({ type: "login", user: this.user });
         }
       } catch (err) {
-        throw err
+        throw err;
       }
     },
     async signup() {
       try {
-        if (!this.testMail(this.user.email) || !this.user.password || !this.user.username) {
+        if (
+          !this.testMail(this.user.email) ||
+          !this.user.password ||
+          !this.user.username
+        ) {
           this.$refs.mailInput.focus();
-          return
+          return;
         } else {
-          await this.$store.dispatch({ type: 'signup', user: this.user })
+          await this.$store.dispatch({ type: "signup", user: this.user });
         }
       } catch (err) {
-        throw err
+        throw err;
       }
     },
     testMail(mail) {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-        return (true)
+        return true;
       }
-      return (false)
-    }
+      return false;
+    },
   },
   computed: {
     checkPage() {
-      return (this.isSignUpPageOpen) ? 'display : none' : '';
+      return this.isSignUpPageOpen ? "display : none" : "";
     },
     checkTypingSignUp() {
-      return ((this.user.email || this.user.password) && this.isSignUpPageOpen)
-        ? 'display : none' : '';
+      return (this.user.email || this.user.password) && this.isSignUpPageOpen
+        ? "display : none"
+        : "";
     },
     isValidMail() {
-      return (this.user.email.includes('@')) ? 'login-submit' : 'unvalid-mail';
-    }
-
+      return this.user.email.includes("@") ? "login-submit" : "unvalid-mail";
+    },
   },
-  unmounted() { },
+  unmounted() {},
 };
 </script>

@@ -2,7 +2,11 @@
   <section class="home-page">
     <header class="home-header">
       <nav class="homepage-nav">
-        <router-link class="main-logo" :to="'/board/'">Tablero</router-link>
+        <!-- <router-link class="main-logo" :to="'/board/'">Tablero</router-link> -->
+        <router-link :style="textColor" class="main-logo" :to="'/board/'">
+          <img :src="iconColor" class="logo-icon" />
+          <span class="logo-text">ablero</span>
+        </router-link>
         <div class="login-container">
           <router-link class="login" :to="'/login/'">Log in</router-link>
           <router-link class="logout" :to="'/login/'">Sign up</router-link>
@@ -25,7 +29,9 @@
                 <input type="email" class="email-input" placeholder="Email" />
               </div>
               <div class="start-btn-container">
-                <router-link :to="'/board/'" class="start-btn">Try live demo!</router-link>
+                <router-link :to="'/board/'" class="start-btn"
+                  >Try live demo!</router-link
+                >
               </div>
             </form>
           </div>
@@ -42,12 +48,12 @@
 export default {
   // props: [''],
   components: {},
-  created() { },
+  created() {},
   data() {
     return {};
   },
   methods: {},
   computed: {},
-  unmounted() { },
+  unmounted() {},
 };
 </script>
