@@ -215,6 +215,7 @@ export const boardStore = {
     },
     async addTask({ commit }, { task, boardId }) {
       const taskToAdd = await boardService.saveTask(task, boardId);
+      console.log(taskToAdd);
       commit({ type: 'addTask', task: taskToAdd, groupId: task.groupId });
     },
     async editGroup({ commit }, { groupToEdit, boardId }) {
@@ -332,6 +333,16 @@ export const boardStore = {
     async addCheckedUsers({ state, commit }, { users }) {
       const board = await boardService.addMembersToBoard(users, state.currBoardId)
       commit({ type: 'saveBoard', board: board })
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
+    },
+
+    async convertTodoToTask({ dispatch, state }, { txt, currTask }) {
+      const groupId = await boardService.getGroupIdByTaskId(currTask._id, state.currBoardId);
+      const task = {
+        groupId,
+        title: txt
+      };
+      dispatch({ type: 'addTask', task, boardId: state.currBoardId })
     }
   }
 }

@@ -92,6 +92,8 @@
 
     .label-add {
         @include action-menu;
+        position: static !important;
+        transform: translateX(-4%);
         .header {
             height: 40px;
             width: 100%;
