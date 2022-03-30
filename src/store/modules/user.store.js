@@ -3,11 +3,15 @@ import { userService } from '../../services/user.service.js';
 export const userStore = {
     state: {
         loggedinUser: null,
+        searchedUsers: null,
     },
     getters: {
         loggedinUser(state) {
             return state.loggedinUser;
         },
+        searchedUsers(state) {
+            return state.searchedUsers
+        }
     },
     mutations: {
         login(state, { user }) {
@@ -15,6 +19,9 @@ export const userStore = {
         },
         logout(state) {
             state.loggedinUser = null;
+        },
+        updateSearchedUsers(state, { users }) {
+            state.searchedUsers = users
         }
     },
     actions: {
@@ -50,6 +57,11 @@ export const userStore = {
             } catch (err) {
                 throw err
             }
+        },
+        async searchForUsers({ commit }, { searchInput }) {
+            const users = await userService.getUsers(searchInput)
+            console.log(users)
+            commit({ type: 'updateSearchedUsers', users })
         }
     },
 };

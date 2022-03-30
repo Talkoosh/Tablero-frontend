@@ -52,7 +52,8 @@
     </nav>
 </template>
 
-<script>import { photoService } from "../services/photo.service.js"
+<script>
+import { photoService } from "../services/photo.service.js"
 
 export default {
     props: {

@@ -8,8 +8,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    max-height: 81.5vh;
-
+    max-height: calc(100vh - 140px);
     .group-title {
       margin-bottom: 8px;
       cursor: pointer;

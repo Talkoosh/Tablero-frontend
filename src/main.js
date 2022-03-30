@@ -27,7 +27,7 @@ app.directive('clickoutside', {
   },
 });
 
-app.directive('debounce', (el,binding) => debounce(el,binding))
+app.directive('debounce', (el, binding) => debounce(el, binding))
 
 
 app.use(store);

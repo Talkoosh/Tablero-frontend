@@ -36,12 +36,17 @@
                         <img :src="member.imgUrl" alt="member img" />
                     </span>
                 </div>
-                <a href style="right:20px;">
+                <button
+                    class="invite-btn"
+                    style="right:20px;"
+                    ref="inviteMembersBtn"
+                    @click="openInviteMembers"
+                >
                     <button>
                         <span class="invite-icon"></span>
                         <span>Invite</span>
                     </button>
-                </a>
+                </button>
             </div>
             <div class="board-header-right">
                 <div class="board-header-btn board-menu" :style="btnBgc">
@@ -94,6 +99,12 @@ export default {
                 boardId: this.board._id,
             });
         },
+        openInviteMembers() {
+            const y = this.$refs.inviteMembersBtn.getBoundingClientRect().top;
+            const x = this.$refs.inviteMembersBtn.getBoundingClientRect().right;
+            const pos = { x, y }
+            this.$emit('open-invite', pos)
+        }
     },
     computed: {
         bgc() {

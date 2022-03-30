@@ -1,8 +1,9 @@
 <template>
-  <section class="main-header" :style="boardBgStyle"  
-  >
-    <router-link :style="textColor" class="main-logo" :to="'/board/'" >Tablero
-   </router-link>
+  <section class="main-header" :style="boardBgStyle">
+    <router-link :style="textColor" class="main-logo" :to="'/board/'">
+      <img :src="iconColor" class="logo-icon" />
+      <span class="logo-text">ablero</span>
+    </router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="recent-drop">
@@ -40,7 +41,7 @@
         <input class="main-input" :style="textColor" type="text" placeholder="Search" />
       </div>
 
-      <div @click="openDropdown('acountDrop')" class="main-header-icon" >
+      <div @click="openDropdown('acountDrop')" class="main-header-icon">
         <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" />
       </div>
     </div>
@@ -102,6 +103,10 @@ export default {
       if (!this.bgc) return
       return this.bgc.isLight ? 'color: #172b4d' : 'color: white'
 
+    },
+    iconColor() {
+      if (!this.bgc) return 'src/assets/t-icon.png'
+      return this.bgc.isLight ? 'src/assets/t-icon.png' : 'src/assets/t-icon-white.png'
     }
   },
 };

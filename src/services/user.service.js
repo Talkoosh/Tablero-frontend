@@ -17,8 +17,8 @@ export const userService = {
 window.userService = userService
 
 
-async function getUsers() {
-    return httpService.get(`user`)
+async function getUsers(searchName) {
+    return httpService.get(`user`, searchName)
 }
 
 async function getById(userId) {

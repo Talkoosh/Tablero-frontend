@@ -1,8 +1,14 @@
 <template>
     <div v-if="board" class="main-board" :style="boardBg">
         <header>
-            <board-header @board-title-changed="saveBoard" @open-menu="openMenu" :board="board" />
+            <board-header
+                @board-title-changed="saveBoard"
+                @open-menu="openMenu"
+                :board="board"
+                @open-invite="toggleInvite"
+            />
         </header>
+
         <div class="groups-container" :style="linear">
             <Container
                 v-if="board.groups.length"
@@ -46,6 +52,8 @@
         </div>
     </div>
 
+    <invite-members v-if="isAddMemberOpen" :clickPos="invitePos" />
+
     <board-menu
         @change-board-bgc="changeBoardBgc"
         @change-board-bgp="changeBoardBgp"
@@ -63,6 +71,7 @@ import boardMenu from "../components/board.menu.vue"
 import { Container, Draggable } from "vue3-smooth-dnd";
 import FastAverageColor from 'fast-average-color';
 import quickEdit from '../components/quick.edit.vue'
+import inviteMembers from '../components/invite.members.vue'
 
 import { socketService } from "../services/socket.service";
 
@@ -74,7 +83,8 @@ export default {
         boardMenu,
         Container,
         Draggable,
-        quickEdit
+        quickEdit,
+        inviteMembers
     },
     created() {
         this.$store.dispatch('loadBoards')
@@ -88,6 +98,8 @@ export default {
             isAddGroup: false,
             groupToAdd: { title: '' },
             isMenuOpen: false,
+            isAddMemberOpen: false,
+            invitePos: null,
         }
     },
     methods: {
@@ -151,7 +163,10 @@ export default {
             }
             return result;
         },
-
+        toggleInvite(clickPos) {
+            this.invitePos = clickPos
+            this.isAddMemberOpen = !this.isAddMemberOpen
+        }
     },
     computed: {
         board() {

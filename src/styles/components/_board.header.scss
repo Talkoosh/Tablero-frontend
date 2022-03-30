@@ -46,6 +46,9 @@
         transform: translateY(3px);
       }
     }
+    .invite-btn {
+      padding: 0;
+    }
     button {
       display: flex;
       gap: 3px;
@@ -61,7 +64,7 @@
         padding: 0;
         width: fit-content;
         &::before {
-          content: '\e902';
+          content: "\e902";
         }
       }
     }
@@ -84,7 +87,7 @@
           font-weight: 400;
           &::before {
             color: gold;
-            content: '\e967';
+            content: "\e967";
           }
         }
         .not-starred {
@@ -92,12 +95,12 @@
           transform: translatex(-50%);
           font-weight: 400;
           &::before {
-            content: '\e966';
+            content: "\e966";
           }
           &:hover {
             color: gold;
           }
-          }
+        }
       }
     }
     .board-header-right {
@@ -112,7 +115,7 @@
           @include icon;
           padding: 0 4px 0 0;
           &::before {
-            content: '\e952';
+            content: "\e952";
           }
         }
       }
