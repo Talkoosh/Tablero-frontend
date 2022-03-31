@@ -6,6 +6,7 @@
       :is="currDropDown"
       v-if="currDropDown"
       @close-drop="closeDrop"
+      @open-drop="openDrop"
       v-clickoutside="closeDrop"
     />
   </section>
