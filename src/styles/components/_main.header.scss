@@ -74,7 +74,7 @@
     flex-shrink: 0;
     margin: 0 4px;
 
-    .more-drop{
+    .more-drop {
       display: none;
     }
   }
@@ -162,7 +162,6 @@
     background-color: rgba(255, 255, 255, 0.3);
     filter: saturate(100%) grayscale(100%) invert(100%) brightness(1000%);
     display: none;
-  
 
     span {
       display: flex;
@@ -170,7 +169,7 @@
       justify-content: center;
       align-items: center;
       margin: 0;
-      &:hover{
+      &:hover {
         background-color: rgba(0, 0, 0, 0.2);
       }
     }
@@ -267,4 +266,10 @@
 .submit-unpossible {
   cursor: not-allowed;
   color: #a5adba;
+}
+
+.btn-search {
+  .little-search {
+    height: 32px;
+  }
 }

@@ -11,6 +11,14 @@
         }
     }
 
+    .create-new-board-card {
+        flex-basis: auto !important;
+        width: 267px !important;
+        .new-board-card {
+            width: 267px !important ;
+        }
+    }
+
     .main-header {
         .right-nav-btn {
             display: inline !important;
@@ -42,6 +50,14 @@
             margin-right: 18% !important;
             margin-bottom: 15px !important;
         }
+
+        .create-new-board-card {
+            width: 217px !important;
+
+            .new-board-card {
+                width: 217px !important;
+            }
+        }
     }
 }
 
@@ -52,13 +68,21 @@
         }
 
         .board-link {
-            width: calc(100% + 30px);
+            width: calc(100% + 110px) !important;
             padding: 14px;
         }
 
         .board-card {
             margin-right: 10% !important;
             margin-bottom: 10px !important;
+        }
+
+          .create-new-board-card {
+            width: 247px !important;
+
+            .new-board-card {
+                width: 247px !important;
+            }
         }
     }
 }
@@ -102,11 +126,10 @@
         }
     }
 
-    .recent-drop-content{
+    .recent-drop-content {
         left: 100px !important;
     }
-    .starred-drop-content{
+    .starred-drop-content {
         left: 100px !important;
     }
 }
-
