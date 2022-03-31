@@ -30,12 +30,16 @@
         text-decoration: none;
         background-color: transparent;
 
-        .logo-icon{
-
+        .logo-icon {
+          width: 20px;
+          height: 20px;
+          transform: translateY(4px);
         }
 
-        .logo-text{
-          
+        .logo-text {
+          display: inline-block;
+          transform: translateX(-5px);
+          color: #222236;
         }
       }
 
@@ -57,7 +61,7 @@
           font-weight: 400;
           background-color: transparent;
 
-          &:hover{
+          &:hover {
             text-decoration: underline;
           }
         }
@@ -77,7 +81,7 @@
           display: inline-block;
           border: 1px solid transparent;
 
-          &:hover{
+          &:hover {
             background-color: #0051cc !important;
           }
         }
@@ -192,13 +196,12 @@
                 overflow: visible;
                 font-family: inherit;
 
-                &::placeholder{
+                &::placeholder {
                   color: #495057;
                   font-family: Ubuntu-light;
                   font-weight: 600;
                   font-size: 18px;
                   opacity: 0.8;
-
                 }
               }
             }

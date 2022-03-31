@@ -4,7 +4,7 @@
       <nav class="homepage-nav">
         <!-- <router-link class="main-logo" :to="'/board/'">Tablero</router-link> -->
         <router-link :style="textColor" class="main-logo" :to="'/board/'">
-          <img :src="iconColor" class="logo-icon" />
+          <img src="@/assets/t-icon.png" class="logo-icon" />
           <span class="logo-text">ablero</span>
         </router-link>
         <div class="login-container">
