@@ -14,7 +14,7 @@
                 :enableTimePicker="false"
             />
             <button class="save-btn" @click="setDate">Save</button>
-            <button class="remove-btn">Remove</button>
+            <button class="remove-btn" @click="removeDate">Remove</button>
         </div>
         {{ dueDate.date }}
     </section>
@@ -39,6 +39,9 @@ export default {
     methods: {
         setDate(){
             this.$emit('date-set', {...this.dueDate})
+        },
+        removeDate(){
+            this.$emit('remove-date')
         }
     },
     computed: {

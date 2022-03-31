@@ -30,7 +30,7 @@
                             v-model="task.title"
                             type="text"
                         />
-                        <p>in list ...</p>
+                        <p>in list {{ currGroup.title }}</p>
                     </div>
                     <span
                         v-if="(!task?.style.color && !task?.style.photo)"
@@ -41,7 +41,11 @@
                 <div class="details-main">
                     <div class="content">
                         <div class="task-top-actions module">
-                            <task-members @open-menu="setCurrAction('membersMenu')" :members="taskMembers"></task-members>
+                            <task-members
+                                v-if="task.memberIds?.length"
+                                @open-menu="setCurrAction('membersMenu')"
+                                :members="taskMembers"
+                            ></task-members>
                             <div v-if="task.labelIds?.length" class="task-labels">
                                 <h4>Labels</h4>
                                 <div class="task-details-labels-container">
@@ -145,6 +149,7 @@
                             @cover-size-set="onSetCoverSize"
                             @attach-file="onAttachFile"
                             @date-set="setDate"
+                            @remove-date="removeDate"
                             @checklist-title-set="setChecklistTitle"
                             @add-member="addMemberToTask"
                             v-clickoutside="closeAction"
@@ -212,6 +217,7 @@ import checklistMenu from './checklist.menu.vue'
 import membersMenu from './members.menu.vue'
 import taskMembers from './task.members.vue'
 import FastAverageColor from 'fast-average-color'
+import boardHeaderVue from './board.header.vue'
 
 export default {
     data() {
@@ -314,6 +320,12 @@ export default {
             dueDate.dueDate = Date.parse(dueDate.dueDate.toString())
             this.$store.dispatch({ type: 'setDate', task: this.task, dueDate })
         },
+        removeDate() {
+            this.task.dueDate = {};
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
+
+        },
         updateTask() {
             const boardId = this.$route.params.boardId;
             this.$store.dispatch({ type: 'saveTask', task: this.task, boardId })
@@ -360,14 +372,23 @@ export default {
         boardMembers() {
             return this.$store.getters.boardMembers;
         },
-        taskMembers(){
-            const members = []; 
-            this.task.memberIds.forEach(memberId=> {
-                this.boardMembers.forEach(member=>{
-                    if(member._id === memberId) members.push(member)
+        taskMembers() {
+            const members = [];
+            this.task.memberIds?.forEach(memberId => {
+                this.boardMembers.forEach(member => {
+                    if (member._id === memberId) members.push(member)
                 })
             })
             return members
+        },
+        currGroup() {
+            const board = this.$store.getters.currBoard;
+            let currGroup;
+            board.groups.forEach(g => {
+                const group = g.tasks.find(t => t._id === this.task._id)
+                if (group) currGroup = group;
+            })
+            return currGroup
         }
     },
     components: {

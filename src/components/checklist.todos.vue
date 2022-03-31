@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="progress-bar-basic">
-            <div class="todo-perc">{{ todoPercentage}}%</div>
+            <div class="todo-perc">{{ todoPercentage }}</div>
             <div
                 :style="{ width: todoPercentage + '%', background: progressColor }"
                 class="progress-bar-actual"
@@ -39,7 +39,7 @@
                     <hr />
                     <div class="more-main">
                         <p @click="convertToCard(todo)">Convert to card</p>
-                        <p @click="removeTodo">Delete</p>
+                        <p @click="removeTodo(todo._id)">Delete</p>
                     </div>
                 </div>
             </li>
@@ -82,6 +82,13 @@ export default {
         },
         updateChecklist() {
             this.$emit('checklistUpdated', this.checklist);
+        },
+        removeTodo(todoId) {
+            const idx = this.checklist.todos.findIndex(t => {
+                return t._id === todoId
+            })
+            this.checklist.todos.splice(idx ,1);
+            this.updateChecklist();
         },
         closeMoreMenus() {
             this.currOpenMore = '';
