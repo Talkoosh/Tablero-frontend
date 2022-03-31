@@ -58,7 +58,6 @@
           .board-card {
             margin: 0 8px 8px 0;
             padding: 0;
-            transform: translate(0);
             margin-right: 2%;
             width: 23.5%;
             flex-basis: 23%;
@@ -204,34 +203,14 @@
                 .board-card-details {
                   .card-star {
                     .card-star-container {
-
+                      transform: translateX(2px);
                       .star {
                         @include icon;
-                        // bottom: 0;
-                        // color: #fff;
-                        // font-size: 14px;
-                        // height: 18px;
-                        // line-height: 18px;
-                        // opacity: 0;
-                        // right: 0;
-                        // top: 0;
                         opacity: 1;
-
-                        // -webkit-transform: translateZ(0);
-                        // transition-duration: 0.15s;
-                        // transition-property: color, background, opacity, transform, width, margin;
-                        // width: 0;
 
                         &::before {
                           content: "\e966";
                         }
-
-                        // &:hover{
-                        //   &::before {
-                        //     content: "\e966";
-                        //     font-size: 18px;
-                        //   }
-                        // }
                       }
                     }
                   }
@@ -247,9 +226,6 @@
                 display: block;
                 background-color: #0000004d;
                 border-radius: 3px;
-
-                &:hover {
-                }
               }
 
               .board-card-details {
@@ -273,37 +249,23 @@
                     position: relative;
                     right: -9px;
                     top: 4px;
+                    transform: translateX(35px);
+                    transition: transform 0.2s;
 
                     .star {
                       @include icon;
                       // color: #fff;
-                      bottom: 0;
-                      transform: translateY(7px);
-                      display: initial !important;
-                      opacity: 0;
-                      right: 0;
-                      width: 0;
 
-                      // margin-right: 6px;
-                      // opacity: 1;
-                      // width: 18px;
-                      // transform: translateY(5px);
-                      // padding: 0px;
-                      -webkit-transform: translateZ(0);
-                      transition-duration: 0.15s;
-                      transition-property: color, background, opacity, transform, width, margin;
+                      display: initial !important;
 
                       &::before {
                         content: "\e966";
-                        font-size: 16px;
+                        font-size: 14px;
                       }
 
-                      // &:hover {
-                      //   font-size: 18px;
-                      //   &::before {
-                      //     content: "\e966";
-                      //   }
-                      // }
+                      &:hover::before {
+                        font-size: 18px;
+                      }
                     }
 
                     .unstar {
