@@ -1,6 +1,12 @@
 <template>
     <section>
-        <el-progress :percentage="todoPercentage" :status="progressColor" class="progress-bar"></el-progress>
+        <div class="progress-bar-basic">
+            <div class="todo-perc">{{ todoPercentage}}%</div>
+            <div
+                :style="{ width: todoPercentage + '%', background: progressColor }"
+                class="progress-bar-actual"
+            ></div>
+        </div>
         <ul>
             <li
                 @mouseover="showMore(todo._id)"
@@ -10,12 +16,15 @@
                 :key="todo._id"
             >
                 <div class="todo-text-container">
-                    <input
-                        class="is-done-btn"
-                        type="checkbox"
-                        @change="updateChecklist"
-                        v-model="todo.isDone"
-                    />
+                    <label class="checkbox-container">
+                        <input
+                            class="is-done-btn"
+                            type="checkbox"
+                            @change="updateChecklist"
+                            v-model="todo.isDone"
+                        />
+                        <span class="custom-checkbox"></span>
+                    </label>
                     <p :style="todo.isDone ? 'text-decoration: line-through' : ''">{{ todo.txt }}</p>
                 </div>
                 <span :ref="todo._id" class="todo-more" @click="currOpenMore = todo._id">...</span>
@@ -34,9 +43,10 @@
                     </div>
                 </div>
             </li>
+            <button v-if="!isAdding" @click.stop="openAdding" class="add-item-btn">Add an item</button>
         </ul>
-        <div class="add-item-container">
-            <input type="text" class="todo-text" v-model="txt" />
+        <div v-show="isAdding" v-clickoutside="closeAdding" class="add-item-container">
+            <textarea ref="text" type="text" class="todo-text" v-model="txt"></textarea>
             <button @click="addTodo()" class>Add</button>
             <span class="icon stop-adding-icon"></span>
         </div>
@@ -44,7 +54,6 @@
 </template>
 
 <script>
-import { reduce } from "lodash";
 import { utilService } from "../services/util.service"
 
 export default {
@@ -55,6 +64,7 @@ export default {
         return {
             txt: '',
             currOpenMore: '',
+            isAdding: false
         }
     },
     created() {
@@ -79,11 +89,20 @@ export default {
         convertToCard(todo) {
             this.$emit('convert-todo', { ...todo }, JSON.parse(JSON.stringify(this.checklist)));
         },
-        showMore(todoId){
-           for(let ref in this.$refs){
-               if(ref === todoId) this.$refs[ref][0].style.visibility = 'visible'
-               else this.$refs[ref][0].style.visibility = 'hidden'
-           } 
+        showMore(todoId) {
+            for (let ref in this.$refs) {
+                if (ref === todoId) this.$refs[ref][0].style.visibility = 'visible'
+                else if (ref !== todoId && this.$refs[ref][0]) this.$refs[ref][0].style.visibility = 'hidden'
+            }
+        },
+        openAdding() {
+            this.isAdding = true;
+            setTimeout(() => {
+                this.$refs.text.focus();
+            }, 50)
+        },
+        closeAdding() {
+            this.isAdding = false
         }
     },
     computed: {
@@ -96,7 +115,7 @@ export default {
             return (Math.floor(doneTodos / this.checklist.todos.length * 100))
         },
         progressColor() {
-            return (this.todoPercentage === 100) ? 'success' : ''
+            return (this.todoPercentage === 100) ? '#61bd4f' : '#5ba4cf'
         }
     }
 }

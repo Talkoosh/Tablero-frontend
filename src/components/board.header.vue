@@ -17,9 +17,11 @@
                             v-clickoutside="stopEdit"
                             @input="saveBoardTitle"
                             @keyup.enter="toggleEditTitle"
-                            :style="'width:' + (board.title.length * 10 + 15) + 'px'"
+                            :style="'width:' + ((board.title.length * 1) * 10) + 'px'"
                         />
                     </div>
+                    <!-- :style="'width:' + (board.title.length * 10 + 15) + 'px'" -->
+                    <!-- @keypress="this.style.width = ((this.value.length + 1) * 8) + 'px';" -->
                 </div>
                 <div class="board-header-btn board-starred" :style="btnBgc">
                     <a @click.prevent="starBoard" :style="textColor" class="star-board">
@@ -27,20 +29,41 @@
                         <span :class="isStarred"></span>
                     </a>
                 </div>
-                <div class="board-members" :style="'width: ' + board.members.length * 32 + 'px'">
+                <div class="board-members" :style="'width: ' + board.members.length * 20 + 'px'">
                     <span
                         v-for="(member, idx) in board.members"
                         href
-                        :style="'left:' + idx * 25 + 'px'"
+                        :style="'left:' + idx * 20 + 'px;'"
                     >
-                        <img :src="member.imgUrl" alt="member img" />
+                        <img
+                            :src="member.imgUrl"
+                            alt="member img"
+                            @click="openMemberDetails = member._id"
+                            :title="member.email"
+                        />
+                        <div
+                            v-if="openMemberDetails === member._id"
+                            class="member-details"
+                            v-clickoutside="closeMemberDetails"
+                        >
+                            <div class="member-details-header">
+                                <img :src="member.imgUrl" alt="member-img" />
+                                <span>{{ member.username }}</span>
+                            </div>
+                            <div class="member-details-body">
+                                <hr />
+                                <button @click="removeMember(member._id)">
+                                    <span>Remove from board...</span>
+                                </button>
+                            </div>
+                        </div>
                     </span>
                 </div>
                 <button
                     class="invite-btn"
-                    style="right:20px;"
                     ref="inviteMembersBtn"
                     @click="openInviteMembers"
+                    :disabled="loggedinUser ? false : true"
                 >
                     <button>
                         <span class="invite-icon"></span>
@@ -63,7 +86,6 @@
 <script>
 export default {
     props: {
-        // board: Object,
     },
     components: {
     },
@@ -72,22 +94,22 @@ export default {
     data() {
         return {
             isEditTitle: false,
-            board: this.$store.getters.currBoard
+            openMemberDetails: null,
         }
     },
     methods: {
         toggleEditTitle() {
             this.isEditTitle = !this.isEditTitle
-            setTimeout(() => {
-                this.$refs.titleEdit.focus()
-            }, 100)
+            if (this.isEditTitle)
+                setTimeout(() => {
+                    this.$refs.titleEdit.focus()
+                }, 100)
         },
         saveBoardTitle() {
             this.$emit('board-title-changed', JSON.parse(JSON.stringify(this.board)))
         },
         stopEdit() {
             this.isEditTitle = !this.isEditTitle
-
         },
         openMenu() {
             this.$emit('open-menu')
@@ -103,7 +125,14 @@ export default {
             const x = this.$refs.inviteMembersBtn.getBoundingClientRect().right;
             const pos = { x, y }
             this.$emit('open-invite', pos)
-        }
+        },
+        closeMemberDetails() {
+            this.openMemberDetails = null;
+        },
+        async removeMember(memberId) {
+            if (this.loggedinUser._id !== this.board.createdBy._id || this.board.createdBy._id === memberId || !this.loggedinUser) return
+            await this.$store.dispatch({ type: 'removeUserFromBoard', memberId, boardId: this.board._id })
+        },
     },
     computed: {
         board() {
@@ -126,6 +155,9 @@ export default {
         },
         isStarred() {
             return this.board.isStarred ? 'starred' : 'not-starred'
+        },
+        loggedinUser() {
+            return this.$store.getters.loggedinUser
         }
     },
 }

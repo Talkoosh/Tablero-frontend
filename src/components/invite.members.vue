@@ -96,8 +96,10 @@ export default {
         }
     },
     computed: {
+        board() {
+            return this.$store.getters.currBoard
+        },
         clickedPos() {
-            console.log(this.clickPos)
             return `left:${this.clickPos.x - this.btnWidth}px;top:${this.clickPos.y + this.btnHeight}px`
         },
         isMembersArr() {

@@ -44,6 +44,55 @@
         border-radius: 25em;
         object-fit: cover;
         transform: translateY(3px);
+        position: relative;
+        cursor: pointer;
+        border: 0.5px solid rgba(255, 255, 255, 0.509);
+      }
+      .member-details {
+        z-index: 10;
+        position: absolute;
+        width: 304px;
+        background-color: #fff;
+
+        .member-details-header {
+          background: rgb(0, 121, 191);
+          background: linear-gradient(180deg, rgba(0, 121, 191, 1) 62%, rgba(255, 255, 255, 1) 54%);
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            width: 85px;
+            height: 85px;
+            border: 1px solid rgba(255, 255, 255, 0.605);
+          }
+          span {
+            width: 50%;
+            padding: 0 0 30px 10px;
+            color: white;
+            font-size: 18px;
+          }
+        }
+        .member-details-body {
+          hr {
+            margin: 0 10px;
+            border: 0.5px solid rgba(211, 211, 211, 0.434);
+            border-radius: 2px;
+            margin-bottom: 5px;
+          }
+          background-color: #fff;
+          padding: 0 0 5px 0;
+          button {
+            background: none;
+            color: $clr3;
+            padding: 10px;
+
+            width: 100%;
+            &:hover {
+              background-color: #091e420a;
+            }
+          }
+        }
       }
     }
     .invite-btn {
@@ -95,7 +144,6 @@
               content: "\e966";
             }
           }
-         
         }
         .not-starred {
           @include icon;

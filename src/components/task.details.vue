@@ -41,6 +41,7 @@
                 <div class="details-main">
                     <div class="content">
                         <div class="task-top-actions module">
+                            <task-members @open-menu="setCurrAction('membersMenu')" :members="taskMembers"></task-members>
                             <div v-if="task.labelIds?.length" class="task-labels">
                                 <h4>Labels</h4>
                                 <div class="task-details-labels-container">
@@ -54,7 +55,10 @@
                                             <span class="task-details-label-title">{{ label.title }}</span>
                                         </span>
                                     </span>
-                                    <span @click="setCurrAction('labelMenu')" class="task-details-label add-btn">
+                                    <span
+                                        @click="setCurrAction('labelMenu')"
+                                        class="task-details-label add-btn"
+                                    >
                                         <span class="add-icon"></span>
                                     </span>
                                 </div>
@@ -142,12 +146,15 @@
                             @attach-file="onAttachFile"
                             @date-set="setDate"
                             @checklist-title-set="setChecklistTitle"
+                            @add-member="addMemberToTask"
                             v-clickoutside="closeAction"
+                            :members="boardMembers"
+                            :taskMembers="task.memberIds"
                             :labels="labels"
                             :is="currAction"
                             :attachments="task.attachments"
                         ></component>
-                        <button>
+                        <button @click="setCurrAction('membersMenu')">
                             <span class="icon members-icon"></span>
                             <span>Members</span>
                         </button>
@@ -202,6 +209,8 @@ import taskAttachments from './task.attachments.vue'
 import taskChecklists from './task.checklists.vue'
 import datesMenu from './dates.menu.vue'
 import checklistMenu from './checklist.menu.vue'
+import membersMenu from './members.menu.vue'
+import taskMembers from './task.members.vue'
 import FastAverageColor from 'fast-average-color'
 
 export default {
@@ -314,13 +323,23 @@ export default {
         },
         async convertToCard(todo, checklist) {
             await this.$store.dispatch({ type: 'convertTodoToTask', txt: todo.txt, currTask: this.task })
-            
+
             const idx = checklist.todos.findIndex(t => t._id === todo._id);
             checklist.todos.splice(idx, 1);
 
             const checklistIdx = this.task.checklists.findIndex(c => c._id === checklist._id);
             this.task.checklists.splice(checklistIdx, 1, checklist);
             this.updateTask();
+        },
+        addMemberToTask(memberId) {
+            if (!this.task.memberIds) this.task.memberIds = [];
+            if (!this.task.memberIds.includes(memberId)) this.task.memberIds.push(memberId);
+            else {
+                const idx = this.task.memberIds.findIndex(id => id === memberId);
+                this.task.memberIds.splice(idx, 1)
+            }
+            const boardId = this.$route.params.boardId;
+            this.$store.dispatch({ type: 'saveTask', task: this.task, boardId });
         }
 
     },
@@ -337,6 +356,18 @@ export default {
             const options = { month: 'short' };
             date = `${new Intl.DateTimeFormat('en-US', options).format(date)} ${date.getDate()}, ${date.getFullYear()}`
             return date;
+        },
+        boardMembers() {
+            return this.$store.getters.boardMembers;
+        },
+        taskMembers(){
+            const members = []; 
+            this.task.memberIds.forEach(memberId=> {
+                this.boardMembers.forEach(member=>{
+                    if(member._id === memberId) members.push(member)
+                })
+            })
+            return members
         }
     },
     components: {
@@ -347,7 +378,9 @@ export default {
         datesMenu,
         checklistMenu,
         taskAttachments,
-        taskChecklists
+        taskChecklists,
+        membersMenu,
+        taskMembers
     },
     watch: {
         '$route.params.taskId': {

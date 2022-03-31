@@ -70,7 +70,6 @@ export default {
     },
     'loggedinUser': {
       async handler() {
-        console.log('logged user', this.loggedinUser)
         if (this.loggedinUser) {
           this.$router.push('/board')
         }
