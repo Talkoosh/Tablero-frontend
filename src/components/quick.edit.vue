@@ -383,12 +383,20 @@ export default {
       return diff < 0 ? `top:${diff}px` : "top:0px";
     },
     menuPosX() {
-      //   console.log(this.taskToEdit);
+      if (document.body.clientWidth < 600) {
+        return this.pos.x > document.body.clientWidth / 2 ? "left: -250px" : "left: 100%";
+      }
+
       let diff = document.body.clientWidth - this.pos.x - this.menuDivSize; //340 is the menu div size
       return diff < 0 ? "left: -250px" : "left: 100%";
     },
 
     menuOptionPos() {
+      if (document.body.clientWidth < 600) {
+        return this.pos.x > document.body.clientWidth / 2
+          ? "left-menu"
+          : "right-menu";
+      }
       let diff = document.body.clientWidth - this.pos.x - this.menuDivSize; //340 is the menu div size
       this.isMenuChangeDirection = diff < 0 ? true : false;
       return diff < 0 ? "left-menu" : "right-menu";

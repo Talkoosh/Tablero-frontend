@@ -4,6 +4,7 @@
 @import "basics/typography";
 @import "basics/base";
 @import "basics/scrollbar";
+@import "basics/media.queries";
 
 // COMPONENTS
 @import "components/avatar.profile";
@@ -33,6 +34,7 @@
 @import "components/badge.preview";
 @import "components/quick.edit";
 @import "components/invite.members";
+@import "components/more.drop";
 
 // VIEWS
 @import "views/home";
