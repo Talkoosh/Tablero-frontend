@@ -180,16 +180,17 @@
   }
 
   .task-dates {
-    transform: translateY(-5px);
+    transform: translateY(-8%);
+
     h4 {
       color: $clr5;
       font-size: 12px;
       font-weight: 600;
       margin-bottom: 4px;
     }
-    input{
+    input {
       margin: 0;
-      &:hover{
+      &:hover {
         cursor: pointer;
       }
     }
@@ -274,13 +275,12 @@
     display: flex;
     justify-content: space-between;
 
-    .task-top-actions{
+    .task-top-actions {
       display: flex;
       gap: 20px;
       align-items: flex-end;
       height: fit-content;
     }
-
 
     .content {
       width: 515px;

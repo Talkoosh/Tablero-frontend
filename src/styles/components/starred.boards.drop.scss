@@ -5,6 +5,12 @@
     top: 48px;
     left: 200px;
 
+    .no-starred-boards{
+        text-align: center;
+        color: #5E6C84;
+        margin-top: 12px;
+    }
+
     .drop-header {
         @include dropdwonn-header;
 

@@ -8,7 +8,7 @@
             </div>
             <div class="comment-box">
                 <textarea placeholder="Write a comment..." v-model="txt"></textarea>
-                <button @click="saveComment">Save</button>
+                <button @click="saveComment" class="save-comment">Save</button>
             </div>
             <ul class="comments-list">
                 <li v-for="comment in comments" :key="comment.id">

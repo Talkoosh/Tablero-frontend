@@ -4,7 +4,7 @@
         <h2>Attachments</h2>
         <div class="attachment" v-for="attachment in attachments">
             <div class="attachment-pic">
-                <img :src="attachment.url" v-if="attachment.resource_type === 'image'" />
+                <img :src="attachment.url" v-if="attachment?.resource_type === 'image'" />
             </div>
 
             <div class="attachment-main">
@@ -51,22 +51,22 @@ export default {
     },
     data() {
         return {
-          
+
         }
     },
     created() {
-        
+
     },
     methods: {
-      onDeleteAttachment(id){
-          this.$emit('delete-attachment', id)
-      },
-      onSetPhoto(photo){
-          this.$emit('set-photo', photo)
-      }
+        onDeleteAttachment(id) {
+            this.$emit('delete-attachment', id)
+        },
+        onSetPhoto(photo) {
+            this.$emit('set-photo', photo)
+        }
     },
     computed: {
-      
+
     }
 }
 </script>

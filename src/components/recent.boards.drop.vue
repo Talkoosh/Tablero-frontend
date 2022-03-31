@@ -19,6 +19,7 @@
         </div>
       </router-link>
     </div>
+    <p v-if="!boards" class="no-boards">You haven't boards yet. Go ahead and make your first board!</p>
   </div>
 </template>
 
