@@ -18,23 +18,30 @@
         }
     }
 
-    .boards-list {
+    .more-options {
         max-height: 464px;
         min-height: 50px;
-        padding: 0 12px;
-        .board-details{
+        margin-bottom: 8px;
+        .option-preview{
             display: flex;
-            font-weight: 700;
             height: 32px;
             padding: 0;
             position: relative;
             text-decoration: none;
             -webkit-user-select: none;
             user-select: none;
+            padding: 0 12px;
+            align-items: center;
+            justify-content: space-between;
+
+            .arrow{
+                transform: rotate(270deg);
+            }
 
             &:hover {
                 background-color: #ebecf0;
                 border-radius: 3px;
+                cursor: pointer;
       
                 .board-cover-container {
                     opacity: 0.6;

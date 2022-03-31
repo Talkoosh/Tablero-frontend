@@ -1,55 +1,62 @@
 @media (max-width: 750px) {
     .boards-page {
-     
-
-        .board-link{
+        .board-link {
             width: calc(100% + 130px);
             padding: 14px;
         }
 
-        .board-card{
+        .board-card {
             margin-right: 22% !important;
             margin-bottom: 15px !important;
         }
     }
-}
 
+    .main-header {
+        .right-nav-btn {
+            display: inline !important;
+        }
+
+        .right-navbar {
+            .board-search {
+                display: none;
+            }
+        }
+    }
+}
 
 @media (max-width: 600px) {
     .boards-page {
-        .homepage-nav{
+        .homepage-nav {
             display: none;
         }
-        .all-boards{
+        .all-boards {
             margin: 0 16px;
         }
 
-        .board-link{
+        .board-link {
             width: calc(100% + 80px);
             padding: 14px;
         }
 
-        .board-card{
+        .board-card {
             margin-right: 18% !important;
             margin-bottom: 15px !important;
         }
     }
 }
 
-
 @media (max-width: 520px) {
     .boards-page {
-      
-        .all-boards{
+        .all-boards {
             padding-left: 5%;
         }
 
-        .board-link{
+        .board-link {
             width: calc(100% + 30px);
             padding: 14px;
         }
 
-        .board-card{
+        .board-card {
             margin-right: 10% !important;
             margin-bottom: 10px !important;
         }
@@ -58,39 +65,48 @@
 
 @media (max-width: 520px) {
     .boards-page {
-      padding-top: 0px !important;
-        .all-boards{
+        padding-top: 15px !important;
+        .all-boards {
             padding-left: 25%;
         }
 
-        .board-link{
+        .board-link {
             width: calc(100% + 50px);
         }
 
-        .board-card{
+        .board-card {
             margin-right: 12% !important;
         }
     }
-}
 
-@media (max-width: 750px) {
     .main-header {
+        .left-navbar {
+            .main-header-dropdowns {
+                .more-drop {
+                    display: inline;
+                }
 
-        .right-nav-btn{
-            display: inline !important;
-        }
-
-        .right-navbar{
-
-            .board-search{
-                display: none;
-                
+                .recent-drop {
+                    display: none;
+                }
+                .starred-drop {
+                    display: none;
+                }
             }
-
-
-
         }
-     
+    }
+
+    .create-board {
+        .create-board-modal {
+            left: 100px !important;
+        }
+    }
+
+    .recent-drop-content{
+        left: 100px !important;
+    }
+    .starred-drop-content{
+        left: 100px !important;
     }
 }
 

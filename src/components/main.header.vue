@@ -107,6 +107,7 @@
 import createBoardDrop from "./create.board.drop.vue";
 import recentBoardsDrop from "./recent.boards.drop.vue"
 import starredBoardsDrop from "./starred.boards.drop.vue"
+import moreDrop from './more.drop.vue'
 import { utilService } from "../services/util.service.js";
 
 export default {
@@ -114,7 +115,8 @@ export default {
   components: {
     createBoardDrop,
     recentBoardsDrop,
-    starredBoardsDrop
+    starredBoardsDrop,
+    moreDrop
   },
   created() {
   },
