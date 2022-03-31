@@ -255,8 +255,12 @@
                     .star {
                       @include icon;
                       // color: #fff;
+                      opacity: 0;
 
                       display: initial !important;
+                      height: 0;
+                      width: 0;
+                      padding: 0;
 
                       &::before {
                         content: "\e966";
@@ -264,7 +268,7 @@
                       }
 
                       &:hover::before {
-                        font-size: 18px;
+                        font-size: 16px;
                       }
                     }
 

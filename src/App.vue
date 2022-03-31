@@ -18,6 +18,7 @@ import createBoardDrop from "./components/create.board.drop.vue";
 import recentBoardsDrop from "./components/recent.boards.drop.vue";
 import starredBoardsDrop from "./components/starred.boards.drop.vue";
 import acountDrop from './components/acount.drop.vue'
+import moreDrop from './components/more.drop.vue'
 import { socketService } from "./services/socket.service.js";
 
 export default {
@@ -27,7 +28,8 @@ export default {
     recentBoardsDrop,
     starredBoardsDrop,
     mainHeader,
-    acountDrop
+    acountDrop,
+    moreDrop
   },
   emits: ["openDrop", "open-drop"],
   created() {
