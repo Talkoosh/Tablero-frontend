@@ -4,8 +4,10 @@
 @import "basics/typography";
 @import "basics/base";
 @import "basics/scrollbar";
+@import "basics/media.queries";
 
 // COMPONENTS
+@import "components/avatar.profile";
 @import "components/main.header";
 @import "components/task.details";
 @import "components/task.activities";
@@ -19,6 +21,8 @@
 @import "components/task.details.attachments";
 @import "components/board.header";
 @import "components/task.preview";
+@import "components/members.menu";
+@import "components/task.members";
 @import "components/board.group";
 @import "components/board.menu";
 @import "components/homepage.nav";
@@ -30,6 +34,7 @@
 @import "components/badge.preview";
 @import "components/quick.edit";
 @import "components/invite.members";
+@import "components/more.drop";
 
 // VIEWS
 @import "views/home";

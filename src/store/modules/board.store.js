@@ -29,6 +29,10 @@ export const boardStore = {
       const board = state.boards.find((b) => b._id === state.currBoardId);
       return JSON.parse(JSON.stringify(board));
     },
+    boardMembers(state){
+      const board = state.boards.find(b => b._id === state.currBoardId);
+      return board.members;
+    },
     currTask(state) {
       if (!state.currTask) return;
       return JSON.parse(JSON.stringify(state.currTask));
