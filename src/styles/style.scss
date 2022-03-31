@@ -6,6 +6,7 @@
 @import "basics/scrollbar";
 
 // COMPONENTS
+@import "components/avatar.profile";
 @import "components/main.header";
 @import "components/task.details";
 @import "components/task.activities";
@@ -19,6 +20,8 @@
 @import "components/task.details.attachments";
 @import "components/board.header";
 @import "components/task.preview";
+@import "components/members.menu";
+@import "components/task.members";
 @import "components/board.group";
 @import "components/board.menu";
 @import "components/homepage.nav";
