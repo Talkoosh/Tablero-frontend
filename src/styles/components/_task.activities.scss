@@ -4,9 +4,14 @@
     @include icon;
     @include icon-lg;
     position: absolute;
-    left: -40px;  
-    &::before{
+    left: -40px;
+    &::before {
       content: "\e900";
+    }
+  }
+  .comment-box {
+    .save-comment {
+      @include button-default;
     }
   }
   .header {
