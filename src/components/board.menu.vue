@@ -66,7 +66,8 @@ export default {
     },
     data() {
         return {
-            currNav: 'Menu'
+            currNav: 'Menu',
+            photos: null,
         }
     },
     methods: {

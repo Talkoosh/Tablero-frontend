@@ -20,6 +20,8 @@
         font-size: 18px;
         font-weight: 700;
         line-height: 32px;
+        height: 32px;
+        text-overflow: ellipsis;
       }
       input {
         font-size: 18px;
@@ -30,6 +32,7 @@
     }
     .board-members {
       height: 32px;
+      bottom: 2px;
       display: flex;
       align-items: center;
       padding: 5px 0;
@@ -38,6 +41,7 @@
       > * {
         position: absolute;
       }
+      .avatar-pic,
       img {
         width: 28px;
         height: 28px;
@@ -46,7 +50,7 @@
         transform: translateY(3px);
         position: relative;
         cursor: pointer;
-        border: 0.5px solid rgba(255, 255, 255, 0.509);
+        border: 0.5px solid #ffffff26;
       }
       .member-details {
         z-index: 10;
@@ -101,6 +105,7 @@
     button {
       display: flex;
       gap: 3px;
+      top: 2px;
       height: 30px;
       align-items: center;
       background-color: $clr1;

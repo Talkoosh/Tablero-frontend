@@ -41,7 +41,10 @@
                 <div class="details-main">
                     <div class="content">
                         <div class="task-top-actions module">
-                            <task-members @open-menu="setCurrAction('membersMenu')" :members="taskMembers"></task-members>
+                            <task-members
+                                @open-menu="setCurrAction('membersMenu')"
+                                :members="taskMembers"
+                            ></task-members>
                             <div v-if="task.labelIds?.length" class="task-labels">
                                 <h4>Labels</h4>
                                 <div class="task-details-labels-container">
@@ -360,11 +363,12 @@ export default {
         boardMembers() {
             return this.$store.getters.boardMembers;
         },
-        taskMembers(){
-            const members = []; 
-            this.task.memberIds.forEach(memberId=> {
-                this.boardMembers.forEach(member=>{
-                    if(member._id === memberId) members.push(member)
+        taskMembers() {
+            if (!this.task.memberIds) return
+            const members = [];
+            this.task.memberIds.forEach(memberId => {
+                this.boardMembers.forEach(member => {
+                    if (member._id === memberId) members.push(member)
                 })
             })
             return members
