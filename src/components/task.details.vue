@@ -121,9 +121,9 @@
                             @set-photo="onSetPhoto"
                         ></task-attachments>
                         <task-checklists
-                        :checklists="task.checklists"
-                        @checklists-update="updateTask"
-                        @convert-todo="convertToCard"
+                            :checklists="task.checklists"
+                            @checklists-update="updateTask"
+                            @convert-todo="convertToCard"
                         ></task-checklists>
                         <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
                     </div>
@@ -311,8 +311,8 @@ export default {
         setChecklistTitle(title) {
             this.$store.dispatch({ type: 'saveChecklist', title, task: this.task })
         },
-        convertToCard(txt){
-            this.$store.dispatch({type: 'convertTodoToTask', txt, currTask: this.task})
+        convertToCard(txt) {
+            this.$store.dispatch({ type: 'convertTodoToTask', txt, currTask: this.task })
         }
 
     },

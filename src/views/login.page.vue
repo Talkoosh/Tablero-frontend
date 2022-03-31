@@ -3,7 +3,7 @@
     <div class="logo-container">
       <!-- <div class="logo-img"></div> -->
       <!-- <div class="logo-text"> -->
-      <img src="@/assets/assets/t-icon.png" class="logo-icon" />
+      <img src="@/assets/t-icon.png" class="logo-icon" />
       <span class="logo-text">ablero</span>
       <!-- </div> -->
     </div>
@@ -11,16 +11,8 @@
     <section class="login-content-container">
       <div class="content-wrapper">
         <div class="login-content">
-          <h1
-            v-if="!this.isSignUpPageOpen"
-            class="header"
-            @click="toggleLoginPage"
-          >
-            Login to Tablero
-          </h1>
-          <h1 v-else class="header" @click="toggleLoginPage">
-            Sign up for your acount
-          </h1>
+          <h1 v-if="!this.isSignUpPageOpen" class="header" @click="toggleLoginPage">Login to Tablero</h1>
+          <h1 v-else class="header" @click="toggleLoginPage">Sign up for your acount</h1>
 
           <div class="login-password-container">
             <div class="email-password">
@@ -54,13 +46,7 @@
                 value="Log in"
                 @click="login"
               />
-              <input
-                v-else
-                type="submit"
-                value="Sign Up"
-                :class="isValidMail"
-                @click="signup"
-              />
+              <input v-else type="submit" value="Sign Up" :class="isValidMail" @click="signup" />
             </div>
 
             <div :style="checkTypingSignUp" class="login-methods-container">
@@ -88,17 +74,13 @@
                 v-if="!this.isSignUpPageOpen"
                 class="sign-up"
                 @click="toggleLoginPage"
-              >
-                Sign up for an acount
-              </div>
+              >Sign up for an acount</div>
               <div
                 v-else
                 :to="'/login/'"
                 class="sign-up"
                 @click="toggleLoginPage"
-              >
-                Already have an acount? Log in
-              </div>
+              >Already have an acount? Log in</div>
             </li>
           </ul>
         </div>
@@ -119,7 +101,7 @@
 <script>
 export default {
   components: {},
-  created() {},
+  created() { },
   data() {
     return {
       isSignUpPageOpen: false,
@@ -197,6 +179,6 @@ export default {
       return this.user.email.includes("@") ? "login-submit" : "unvalid-mail";
     },
   },
-  unmounted() {},
+  unmounted() { },
 };
 </script>

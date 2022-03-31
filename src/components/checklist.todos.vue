@@ -10,7 +10,7 @@
                         @change="updateChecklist"
                         v-model="todo.isDone"
                     />
-                    <p>{{ todo.txt }}</p>
+                    <p :style="todo.isDone ? 'text-decoration: line-through' : ''">{{ todo.txt }}</p>
                 </div>
                 <span class="todo-more" @click="currOpenMore = todo._id">...</span>
                 <div
