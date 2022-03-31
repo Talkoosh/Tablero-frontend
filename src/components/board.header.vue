@@ -12,12 +12,12 @@
                         <input
                             v-else
                             type="text"
-                            v-model="boardToEdit.title"
+                            v-model="board.title"
                             ref="titleEdit"
                             v-clickoutside="stopEdit"
                             @input="saveBoardTitle"
                             @keyup.enter="toggleEditTitle"
-                            :style="'width:' + (boardToEdit.title.length * 10 + 15) + 'px'"
+                            :style="'width:' + (board.title.length * 10 + 15) + 'px'"
                         />
                     </div>
                 </div>
@@ -63,17 +63,16 @@
 <script>
 export default {
     props: {
-        board: Object,
+        // board: Object,
     },
     components: {
     },
     created() {
-        this.boardToEdit = JSON.parse(JSON.stringify(this.board))
     },
     data() {
         return {
             isEditTitle: false,
-            boardToEdit: null,
+            board: this.$store.getters.currBoard
         }
     },
     methods: {
@@ -84,7 +83,7 @@ export default {
             }, 100)
         },
         saveBoardTitle() {
-            this.$emit('board-title-changed', JSON.parse(JSON.stringify(this.boardToEdit)))
+            this.$emit('board-title-changed', JSON.parse(JSON.stringify(this.board)))
         },
         stopEdit() {
             this.isEditTitle = !this.isEditTitle
@@ -107,6 +106,9 @@ export default {
         }
     },
     computed: {
+        board() {
+            return this.$store.getters.currBoard
+        },
         bgc() {
             return this.$store.getters.boardBgc
         },
@@ -126,6 +128,5 @@ export default {
             return this.board.isStarred ? 'starred' : 'not-starred'
         }
     },
-    unmounted() { },
 }
 </script>

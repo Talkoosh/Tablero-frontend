@@ -66,6 +66,7 @@ async function addBoard(title, style) {
 async function updateBoard(board) {
   try {
     board = await httpService.put(KEY + '/' + board._id, board);
+    console.log('bobobobob', board)
     socketService.emit('board-updated')
     return board
   } catch (err) {

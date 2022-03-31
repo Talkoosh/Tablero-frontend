@@ -206,11 +206,12 @@
   font-weight: 400;
   box-sizing: border-box;
   display: inline-flex;
+  gap: 6px;
   align-items: center;
   justify-content: center;
   border-radius: 3px;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 6px 6px 6px 8px;
   text-decoration: none;
   white-space: normal;
   box-shadow: none;

@@ -1,7 +1,7 @@
  <template>
   <div class="acount-drop-content">
     <header class="drop-header">
-      <div class="header-text">{{ loggedinUser?.username || 'Guest' }}</div>
+      <div class="header-text">Account</div>
       <button class="close-header" @click="closeDropdown()">X</button>
     </header>
     <div class="options-list">
@@ -81,3 +81,4 @@ export default {
   },
 };
 </script>
+

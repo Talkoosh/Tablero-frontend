@@ -4,7 +4,6 @@
             <board-header
                 @board-title-changed="saveBoard"
                 @open-menu="openMenu"
-                :board="board"
                 @open-invite="toggleInvite"
             />
         </header>

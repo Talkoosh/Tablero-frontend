@@ -17,7 +17,7 @@
                         v-model="groupToEdit.title"
                     />
                     <div @click="toggleExtrasMenu" class="group-extras">
-                        <div>...</div>
+                        <span class="dots-icon">...</span>
                     </div>
                 </div>
                 <div
