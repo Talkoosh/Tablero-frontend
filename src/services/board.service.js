@@ -17,6 +17,7 @@ export const boardService = {
   getTask,
   removeTask,
   addMembersToBoard,
+  removeUserFromBoard
 };
 
 const KEY = 'board';
@@ -49,8 +50,14 @@ async function addBoard(title, style) {
   const boardToSave = _getEmptyBoard();
   if (user) {
     boardToSave.members.push(user)
+    boardToSave.createdBy = user
   } else {
-    boardToSave.members.push({ _id: "u123", username: 'Guest' })
+    boardToSave.createdBy = {
+      username: 'Admin',
+      email: 'Admin@gmail.com',
+      imgUrl: 'https://icon-library.com/images/member-icon/member-icon-19.jpg',
+    }
+    boardToSave.members.push({ _id: "u123", username: 'Guest', imgUrl: 'https://icon-library.com/images/member-icon/member-icon-19.jpg' })
   }
   boardToSave.createdAt = Date.now();
   boardToSave.title = title;
@@ -65,10 +72,9 @@ async function addBoard(title, style) {
 
 async function updateBoard(board) {
   try {
-    board = await httpService.put(KEY + '/' + board._id, board);
-    console.log('bobobobob', board)
+    const returnedBoard = await httpService.put(KEY + '/' + board._id, board);
     socketService.emit('board-updated')
-    return board
+    return returnedBoard
   } catch (err) {
     throw err;
   }
@@ -81,6 +87,19 @@ async function addMembersToBoard(users, boardId) {
       if (board.members.some(m => m._id === u._id)) return
       else (board.members.push(u))
     })
+    return await updateBoard(board)
+  } catch (err) {
+    throw err
+  }
+}
+
+async function removeUserFromBoard(memberId, boardId) {
+  try {
+    const board = await getBoardById(boardId);
+    const idx = board.members.findIndex(m => {
+      return m._id === memberId
+    })
+    board.members.splice(idx, 1)
     return await updateBoard(board)
   } catch (err) {
     throw err
@@ -171,6 +190,7 @@ async function getTask(taskId, boardId) {
     throw err;
   }
 }
+
 
 async function removeTask(taskId, boardId) {
   try {

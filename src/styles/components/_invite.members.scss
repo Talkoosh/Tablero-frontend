@@ -74,7 +74,7 @@
             overflow-x: hidden;
             height: 188px;
             width: 200px;
-            padding: 8px 4px;
+            padding: 8px 6px 8px 8px;
             margin: 4px;
             border-radius: 3px;
             box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
@@ -89,14 +89,16 @@
             }
 
             .member-container {
-                @include button-default;
-                padding: 4px 8px;
-                margin-top: 4px;
-                height: 34px;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                gap: 20px;
+                div {
+                    @include button-default;
+                    // padding: 4px 8px;
+                    margin-top: 4px;
+                    height: 38px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 20px;
+                }
                 &:hover {
                     background-color: #091e420a;
                 }

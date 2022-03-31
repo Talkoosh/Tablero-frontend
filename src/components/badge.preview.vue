@@ -32,7 +32,7 @@
                 <span class="badge-text">{{ checklistDisplay }}</span>
             </div>
         </div>
-        <div class="task-members" v-if="task.members?.length">
+        <div class="task-members" v-if="task.membersIds?.length">
             <div class="member-img" v-for="member in task.members">
                 <img :src="member.imgUrl" :title="member.fullname" />
             </div>
