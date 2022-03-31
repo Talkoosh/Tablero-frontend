@@ -92,6 +92,7 @@
           @label-add="onAddLabel"
           @label-set="onSetLabel"
           @label-delete="onDeleteLabel"
+          @close-action="closeActions"
           class="label-menu"
         ></label-menu>
 
@@ -115,6 +116,7 @@
           @color-set="onSetColor"
           @photo-set="onSetPhoto"
           @cover-size-set="onSetCoverSize"
+          @close-action="closeActions"
           :task="taskToEdit"
           :attachments="taskToEdit.attachments"
           v-if="isCoverMenuOpen"
@@ -141,6 +143,7 @@
 
         <dates-menu
           @date-set="setDate"
+          @close-action="closeActions"
           v-if="isDatesMenuOpen"
           :style="modalDirection"
         ></dates-menu>
@@ -187,6 +190,13 @@ export default {
     };
   },
   methods: {
+    closeActions(ev) {
+      ev.stopPropagation();
+      ev.preventDefault();
+      this.isLabelMenuOpen = false;
+      this.isCoverMenuOpen = false;
+      this.isDatesMenuOpen = false;
+    },
     closeQuickEdit() {
       this.$emit("close-quick-edit");
     },

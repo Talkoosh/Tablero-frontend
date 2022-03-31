@@ -6,7 +6,7 @@
         X
       </button>
     </header>
-    <div class="boards-list" v-for="board in starredBoards" :key="board._id">
+    <div class="boards-list" v-for="board in starredBoards" :key="board._id" >
       <router-link class="board-details" :to="'/board/' + board._id">
         <div
           class="board-cover-container"
@@ -21,6 +21,8 @@
         </div> -->
       </router-link>
     </div>
+
+    <p v-if="!starredBoards.length" class="no-starred-boards">Star important boards to access them quickly and easily.</p>
   </div>
 </template>
 

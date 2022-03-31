@@ -6,6 +6,12 @@
     top: 48px;
     left: 107px;
 
+    .no-boards{
+        text-align: center;
+        color: #5E6C84;
+        margin-top: 12px;
+    }
+
     .drop-header {
         @include dropdwonn-header;
 
