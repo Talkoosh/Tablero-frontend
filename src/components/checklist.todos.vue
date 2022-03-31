@@ -2,7 +2,13 @@
     <section>
         <el-progress :percentage="todoPercentage" :status="progressColor" class="progress-bar"></el-progress>
         <ul>
-            <li class="todo" v-for="todo in checklist.todos" :key="todo._id">
+            <li
+                @mouseover="showMore(todo._id)"
+                @mouseleave="showMore('')"
+                class="todo"
+                v-for="todo in checklist.todos"
+                :key="todo._id"
+            >
                 <div class="todo-text-container">
                     <input
                         class="is-done-btn"
@@ -12,7 +18,7 @@
                     />
                     <p :style="todo.isDone ? 'text-decoration: line-through' : ''">{{ todo.txt }}</p>
                 </div>
-                <span class="todo-more" @click="currOpenMore = todo._id">...</span>
+                <span :ref="todo._id" class="todo-more" @click="currOpenMore = todo._id">...</span>
                 <div
                     v-clickoutside="closeMoreMenus"
                     v-if="currOpenMore === todo._id"
@@ -38,6 +44,7 @@
 </template>
 
 <script>
+import { reduce } from "lodash";
 import { utilService } from "../services/util.service"
 
 export default {
@@ -47,7 +54,7 @@ export default {
     data() {
         return {
             txt: '',
-            currOpenMore: ''
+            currOpenMore: '',
         }
     },
     created() {
@@ -66,17 +73,17 @@ export default {
         updateChecklist() {
             this.$emit('checklistUpdated', this.checklist);
         },
-        removeTodo(todoId) {
-            const idx = this.checklist.todos.findIndex(t => t._id === todoId);
-            this.checklist.todos.splice(idx, 1);
-            this.updateChecklist();
-        },
         closeMoreMenus() {
             this.currOpenMore = '';
         },
         convertToCard(todo) {
-            this.$emit('convert-todo', todo.txt);
-            this.removeTodo(todo._id)
+            this.$emit('convert-todo', { ...todo }, JSON.parse(JSON.stringify(this.checklist)));
+        },
+        showMore(todoId){
+           for(let ref in this.$refs){
+               if(ref === todoId) this.$refs[ref][0].style.visibility = 'visible'
+               else this.$refs[ref][0].style.visibility = 'hidden'
+           } 
         }
     },
     computed: {

@@ -27,6 +27,7 @@
         ul {
             list-style: none;
             .todo {
+                height: 35px;
                 position: relative;
                 display: flex;
                 justify-content: space-between;
@@ -37,7 +38,7 @@
                 border-radius: 3px;
                 &:hover {
                     cursor: pointer;
-                    background-color: $task-btn-hvr;
+                    background-color: #091e420a;
                 }
                 .todo-text-container {
                     display: flex;
@@ -46,9 +47,13 @@
                 }
                 .is-done-btn {
                     cursor: pointer;
+                    width: 12px;
+                    height: 12px;
+                    border: 1px solid grey;
                 }
                 .todo-more {
                     transform: translateY(-15%);
+                    visibility: hidden
                 }
             }
         }
@@ -112,7 +117,7 @@
                     padding: 0 12px 0 12px;
                     margin-left: -12px;
                     cursor: pointer;
-                    &:hover{
+                    &:hover {
                         background-color: $task-btn-hvr;
                     }
                 }

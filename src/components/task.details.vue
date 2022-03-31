@@ -49,11 +49,12 @@
                                             v-if="task.labelIds.includes(label._id)"
                                             class="task-details-label"
                                             :style="{ backgroundColor: label.color }"
+                                            @click="setCurrAction('labelMenu')"
                                         >
                                             <span class="task-details-label-title">{{ label.title }}</span>
                                         </span>
                                     </span>
-                                    <span class="task-details-label add-btn">
+                                    <span @click="setCurrAction('labelMenu')" class="task-details-label add-btn">
                                         <span class="add-icon"></span>
                                     </span>
                                 </div>
@@ -311,8 +312,15 @@ export default {
         setChecklistTitle(title) {
             this.$store.dispatch({ type: 'saveChecklist', title, task: this.task })
         },
-        convertToCard(txt) {
-            this.$store.dispatch({ type: 'convertTodoToTask', txt, currTask: this.task })
+        async convertToCard(todo, checklist) {
+            await this.$store.dispatch({ type: 'convertTodoToTask', txt: todo.txt, currTask: this.task })
+            
+            const idx = checklist.todos.findIndex(t => t._id === todo._id);
+            checklist.todos.splice(idx, 1);
+
+            const checklistIdx = this.task.checklists.findIndex(c => c._id === checklist._id);
+            this.task.checklists.splice(checklistIdx, 1, checklist);
+            this.updateTask();
         }
 
     },

@@ -200,6 +200,42 @@
 
               &:hover {
                 opacity: 1;
+
+                .board-card-details {
+                  .card-star {
+                    .card-star-container {
+
+                      .star {
+                        @include icon;
+                        // bottom: 0;
+                        // color: #fff;
+                        // font-size: 14px;
+                        // height: 18px;
+                        // line-height: 18px;
+                        // opacity: 0;
+                        // right: 0;
+                        // top: 0;
+                        opacity: 1;
+
+                        // -webkit-transform: translateZ(0);
+                        // transition-duration: 0.15s;
+                        // transition-property: color, background, opacity, transform, width, margin;
+                        // width: 0;
+
+                        &::before {
+                          content: "\e966";
+                        }
+
+                        // &:hover{
+                        //   &::before {
+                        //     content: "\e966";
+                        //     font-size: 18px;
+                        //   }
+                        // }
+                      }
+                    }
+                  }
+                }
               }
 
               .link-block {
@@ -235,27 +271,39 @@
 
                   .card-star-container {
                     position: relative;
-                    right: -4px;
+                    right: -9px;
+                    top: 4px;
 
                     .star {
                       @include icon;
-                      color: #f2d600;
-                      margin-right: 6px;
-                      opacity: 1;
-                      width: 18px;
-                      transform: translateY(5px);
-                      padding: 0px;
+                      // color: #fff;
+                      bottom: 0;
+                      transform: translateY(7px);
+                      display: initial !important;
+                      opacity: 0;
+                      right: 0;
+                      width: 0;
+
+                      // margin-right: 6px;
+                      // opacity: 1;
+                      // width: 18px;
+                      // transform: translateY(5px);
+                      // padding: 0px;
+                      -webkit-transform: translateZ(0);
+                      transition-duration: 0.15s;
+                      transition-property: color, background, opacity, transform, width, margin;
 
                       &::before {
-                        content: "\e967";
+                        content: "\e966";
+                        font-size: 16px;
                       }
 
-                      &:hover {
-                        font-size: 18px;
-                        &::before {
-                          content: "\e966";
-                        }
-                      }
+                      // &:hover {
+                      //   font-size: 18px;
+                      //   &::before {
+                      //     content: "\e966";
+                      //   }
+                      // }
                     }
 
                     .unstar {

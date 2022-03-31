@@ -25,9 +25,9 @@
               unique - accomplish it all with Tablero.
             </p>
             <form action class="form-container">
-              <div class="input-container">
+              <!-- <div class="input-container">
                 <input type="email" class="email-input" placeholder="Email" />
-              </div>
+              </div> -->
               <div class="start-btn-container">
                 <router-link :to="'/board/'" class="start-btn"
                   >Try live demo!</router-link
