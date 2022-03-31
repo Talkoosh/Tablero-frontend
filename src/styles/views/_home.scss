@@ -1,7 +1,7 @@
 .home-page {
   min-height: 100vh;
   background: linear-gradient(0deg, #fff, #eae6ff 100%);
-
+  min-width: 1200px;
   .home-header {
     position: fixed;
     top: 0;
@@ -228,7 +228,8 @@
                 // width: 100%;
                 font-weight: 400;
                 text-align: center;
-                padding: 8px 2rem;
+                padding: 1rem 2rem;
+                // margin-left: 20%;
 
                 &:hover {
                   color: #fff;
