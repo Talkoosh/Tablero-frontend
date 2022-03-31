@@ -29,15 +29,20 @@
                         <span :class="isStarred"></span>
                     </a>
                 </div>
-                <div class="board-members" :style="'width: ' + board.members.length * 20 + 'px'">
+                <div class="board-members" :style="'width: ' + board.members.length * 21 + 'px'">
                     <span
                         v-for="(member, idx) in board.members"
                         href
-                        :style="'left:' + idx * 20 + 'px;'"
+                        :style="'left:' + idx * 21 + 'px;'"
                     >
-                        <img
+                        <!-- <img
                             :src="member.imgUrl"
                             alt="member img"
+                            @click="openMemberDetails = member._id"
+                            :title="member.email"
+                        />-->
+                        <avatar-profile
+                            :username="member.username"
                             @click="openMemberDetails = member._id"
                             :title="member.email"
                         />
@@ -84,10 +89,12 @@
 </template>
 
 <script>
+import avatarProfile from "./avatar.profile.vue"
 export default {
     props: {
     },
     components: {
+        avatarProfile
     },
     created() {
     },
@@ -158,7 +165,7 @@ export default {
         },
         loggedinUser() {
             return this.$store.getters.loggedinUser
-        }
+        },
     },
 }
 </script>

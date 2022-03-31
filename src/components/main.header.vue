@@ -6,7 +6,7 @@
     </router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
-           <div class="more-drop">
+        <div class="more-drop">
           <button
             :style="textColor"
             class="drop-btn more-btn"
@@ -81,9 +81,15 @@
             @click="openDropdown('createBoardDrop')"
             :class="toggleCreateBtnBGC"
             :style="textColor"
-          >Create</button>
+          >
+            Create
+          </button>
         </div>
-        <div v-if="isCreateBoardOpen" class="create-board-modal" :class="toggleCreateBoardModal"></div>
+        <div
+          v-if="isCreateBoardOpen"
+          class="create-board-modal"
+          :class="toggleCreateBoardModal"
+        ></div>
       </div>
 
       <div class="seperator"></div>
@@ -107,10 +113,32 @@
             />
           </svg>
         </span>
-        <input class="main-input" :style="textColor" type="text" placeholder="Search" />
+        <input
+          class="main-input"
+          :style="textColor"
+          type="text"
+          placeholder="Search"
+        />
       </div>
       <div class="right-nav-btn">
-      <span class="search">?</span>
+        <span class="little-search" role="img" aria-label="SearchIcon">
+          <svg
+          class="magnifying-glass"
+            width="20"
+            height="20"
+            role="presentation"
+            focusable="false"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5C18 12.2269 17.4164 13.8175 16.4356 15.0852L20.3769 19.0953C20.764 19.4892 20.7586 20.1223 20.3647 20.5095C19.9708 20.8966 19.3376 20.8911 18.9505 20.4972L15.0129 16.4909C13.7572 17.4383 12.1942 18 10.5 18ZM16 10.5C16 13.5376 13.5376 16 10.5 16C7.46243 16 5 13.5376 5 10.5C5 7.46243 7.46243 5 10.5 5C13.5376 5 16 7.46243 16 10.5Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
       </div>
 
       <div @click="openDropdown('acountDrop')" class="main-header-icon">
@@ -122,19 +150,20 @@
 
 <script>
 import createBoardDrop from "./create.board.drop.vue";
-import recentBoardsDrop from "./recent.boards.drop.vue"
-import starredBoardsDrop from "./starred.boards.drop.vue"
+import recentBoardsDrop from "./recent.boards.drop.vue";
+import starredBoardsDrop from "./starred.boards.drop.vue";
+import moreDrop from "./more.drop.vue";
 import { utilService } from "../services/util.service.js";
 
 export default {
-  emits: ['openDrop', 'open-drop'],
+  emits: ["openDrop", "open-drop"],
   components: {
     createBoardDrop,
     recentBoardsDrop,
-    starredBoardsDrop
+    starredBoardsDrop,
+    moreDrop,
   },
-  created() {
-  },
+  created() {},
   data() {
     return {
       isRecentDropOpen: false,
@@ -151,36 +180,36 @@ export default {
     openDropdown(cmpName) {
       this.$emit("open-drop", cmpName);
     },
-
   },
   computed: {
     boards() {
       return this.$store.getters.boards;
     },
     toggleCreateBtnBGC() {
-      return
+      return;
     },
     isCreateBoardOpen() {
-      return
+      return;
     },
     bgc() {
-      return this.$store.getters.boardBgc
+      return this.$store.getters.boardBgc;
     },
     boardBgStyle() {
-      if (!this.bgc) return
-      return this.bgc.isLight ?
-        'background-color:' + this.bgc.bgc + '; opacity: .9;'
-        : 'background-color:' + this.bgc.bgc + '; opacity: .9;'
+      if (!this.bgc) return;
+      return this.bgc.isLight
+        ? "background-color:" + this.bgc.bgc + "; opacity: .9;"
+        : "background-color:" + this.bgc.bgc + "; opacity: .9;";
     },
     textColor() {
-      if (!this.bgc) return
-      return this.bgc.isLight ? 'color: #172b4d' : 'color: white'
-
+      if (!this.bgc) return;
+      return this.bgc.isLight ? "color: #172b4d" : "color: white";
     },
     iconColor() {
-      if (!this.bgc) return 'src/assets/t-icon.png'
-      return this.bgc.isLight ? 'src/assets/t-icon.png' : 'src/assets/t-icon-white.png'
-    }
+      if (!this.bgc) return "src/assets/t-icon.png";
+      return this.bgc.isLight
+        ? "src/assets/t-icon.png"
+        : "src/assets/t-icon-white.png";
+    },
   },
 };
 </script>

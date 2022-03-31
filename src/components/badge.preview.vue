@@ -1,6 +1,6 @@
 <template>
     <section
-        v-if="(task.members?.length || task.dueDate || task.attachments?.length || task.checklists?.length) && !task.style.isBackground"
+        v-if="(task.memberIds?.length || task.dueDate || task.attachments?.length || task.checklists?.length) && !task.style.isBackground || task.description"
     >
         <div class="badges">
             <div v-if="task.watching" class="watch">
@@ -27,42 +27,49 @@
                 <span class="attachments-icon badge-icon"></span>
                 <span class="badge-text">{{ attachmentsCount }}</span>
             </div>
-            <div class="checklist" v-if="task.checklists?.length">
+            <div class="checklist" v-if="task.checklists?.length" :style="checklistBg">
                 <span class="checklist-icon badge-icon"></span>
                 <span class="badge-text">{{ checklistDisplay }}</span>
             </div>
         </div>
-        <div class="task-members" v-if="task.membersIds?.length">
-            <div class="member-img" v-for="member in task.members">
-                <img :src="member.imgUrl" :title="member.fullname" />
+        <div class="task-members" v-if="task.memberIds">
+            <div class="member-img" v-for="member in taskMembers" :key="member">
+                <avatar-profile
+                    :username="member.username"
+                    class="member-img"
+                    :title="member.username"
+                />
             </div>
         </div>
     </section>
 </template>
 
 <script>
-
+import avatarProfile from "./avatar.profile.vue"
 export default {
     props: {
         task: Object,
     },
-    components: {},
+    components: {
+        avatarProfile
+    },
     created() {
-        this.taskToEdit = { ...this.task }
     },
     data() {
         return {
-            taskToEdit: null
         }
     },
     methods: {
         toggleDateDone() {
-            this.taskToEdit.dueDate.isComplete = !this.taskToEdit.dueDate.isComplete
+            this.task.dueDate.isComplete = !this.task.dueDate.isComplete
             const boardId = this.$route.params.boardId;
-            this.$store.dispatch({ type: 'saveTask', task: JSON.parse(JSON.stringify(this.taskToEdit)), boardId })
+            this.$store.dispatch({ type: 'saveTask', task: JSON.parse(JSON.stringify(this.task)), boardId })
         }
     },
     computed: {
+        board() {
+            return this.$store.getters.currBoard
+        },
         date() {
             const time = new Date(this.task.dueDate.dueDate)
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -97,6 +104,17 @@ export default {
             })
             return `${doneAmount}/${totalAmount}`
         },
+        checklistBg() {
+            var totalAmount = 0
+            var doneAmount = 0
+            this.task.checklists.forEach(c => {
+                c.todos.forEach(t => {
+                    totalAmount++
+                    if (t.isDone) doneAmount++
+                })
+            })
+            return (doneAmount === totalAmount) ? 'background-color: #61bd4f; color:white' : ''
+        },
         dateBadgeBg() {
             if (this.task.dueDate.isComplete) return 'background-color: #61bd4f; color: #fff'
             const today = new Date(Date.now()).getDate()
@@ -104,6 +122,18 @@ export default {
             const diff = this.task.dueDate - Date.now()
             if (diff > 86400000) return
             if (dueDay - today === 1) return 'background-color: #f2d600; color: #fff;'
+        },
+        boardMembers() {
+            return this.$store.getters.boardMembers
+        },
+        taskMembers() {
+            const members = [];
+            this.task.memberIds.forEach(memberId => {
+                this.boardMembers.forEach(member => {
+                    if (member._id === memberId) members.push(member)
+                })
+            })
+            return members
         }
     },
     unmounted() { },
