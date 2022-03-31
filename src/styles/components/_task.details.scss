@@ -180,7 +180,6 @@
   }
 
   .task-dates {
-    transform: translateY(-8%);
 
     h4 {
       color: $clr5;
@@ -221,7 +220,6 @@
 
   .task-labels {
     width: fit-content;
-    margin-top: -15px;
     h4 {
       color: $clr5;
       font-size: 12px;
@@ -243,6 +241,7 @@
       border-radius: 3px;
       &:hover {
         cursor: pointer;
+        opacity: .8;
       }
       .task-details-label-title {
         color: white;
@@ -259,6 +258,9 @@
       min-width: unset;
       width: 32px;
       position: relative;
+      &:hover{
+        background-color: #091e4214;
+      }
       .add-icon {
         @include icon;
         position: absolute;
@@ -277,8 +279,8 @@
 
     .task-top-actions {
       display: flex;
+      flex-wrap: wrap;
       gap: 20px;
-      align-items: flex-end;
       height: fit-content;
     }
 

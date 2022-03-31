@@ -214,8 +214,8 @@ export const boardStore = {
       boardService.saveTask(task, boardId);
     },
     async addTask({ commit }, { task, boardId }) {
+      console.log('from store',task, boardId);
       const taskToAdd = await boardService.saveTask(task, boardId);
-      console.log(taskToAdd);
       commit({ type: 'addTask', task: taskToAdd, groupId: task.groupId });
     },
     async editGroup({ commit }, { groupToEdit, boardId }) {

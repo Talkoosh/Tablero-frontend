@@ -39,8 +39,8 @@ export default {
             this.checklists.splice(idx, 1);
             this.$emit('checklists-update', this.checklists)
         },
-        convertToCard(txt){
-            this.$emit('convert-todo', txt)
+        convertToCard(todo, checklist){
+            this.$emit('convert-todo', todo, checklist)
         }
     },
     computed: {
