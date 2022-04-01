@@ -11,6 +11,7 @@
     <section class="login-content-container">
       <div class="content-wrapper">
         <div class="login-content">
+          <div class="error-msg" v-if="errorMsg">{{ errorMsg }}</div>
           <h1 v-if="!this.isSignUpPageOpen" class="header" @click="toggleLoginPage">Login to Tablero</h1>
           <h1 v-else class="header" @click="toggleLoginPage">Sign up for your acount</h1>
 
@@ -33,7 +34,7 @@
                   autofocus
                 />
                 <input
-                  type="text"
+                  type="password"
                   v-model="user.password"
                   class="login-input"
                   placeholder="Enter password"
@@ -98,7 +99,8 @@
   </section>
 </template>
 
-<script>
+<script>import { userService } from "../services/user.service";
+
 export default {
   components: {},
   created() { },
@@ -109,11 +111,24 @@ export default {
         email: "",
         password: "",
       },
+      errorMsg: '',
     };
   },
   methods: {
-    log(e) {
-      console.log(e);
+    async log() {
+      // const googleUser = await this.$gAuth.signIn();
+      // const isUser = userService.getById(googleUser.getBasicProfile().getId())
+      // if (isUser) {
+      //   // userService.googleLogin(isUser)
+      // } else {
+
+      //   console.log(googleUser.getBasicProfile())
+      //   const user = {
+      //     email: googleUser.getBasicProfile().getEmail(),
+      //     // username: ,
+
+      //   }
+      // }
     },
     toggleLoginPage() {
       this.isSignUpPageOpen = !this.isSignUpPageOpen;
@@ -135,12 +150,19 @@ export default {
       try {
         if (!this.testMail(this.user.email) || !this.user.password) {
           this.$refs.mailInput.focus();
+          this.errorMsg = 'Password and email required'
+          setTimeout(() => {
+            this.errorMsg = ''
+          }, 3000)
           return;
         } else {
           await this.$store.dispatch({ type: "login", user: this.user });
         }
       } catch (err) {
-        throw err;
+        this.errorMsg = 'Username or password incorrect'
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000)
       }
     },
     async signup() {
@@ -156,7 +178,11 @@ export default {
           await this.$store.dispatch({ type: "signup", user: this.user });
         }
       } catch (err) {
-        throw err;
+        console.log(err)
+        this.errorMsg = 'Username or email already taken'
+        setTimeout(() => {
+          this.errorMsg = ''
+        }, 3000)
       }
     },
     testMail(mail) {

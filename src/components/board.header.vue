@@ -67,7 +67,7 @@
                 >
                     <button>
                         <span class="invite-icon"></span>
-                        <span>Invite</span>
+                        <span class="invite-txt">Invite</span>
                     </button>
                 </button>
             </div>
@@ -75,7 +75,7 @@
                 <div class="board-header-btn board-menu" :style="btnBgc">
                     <button @click="openMenu" class="menu-btn" :style="textColor">
                         <span class="menu-icon"></span>
-                        <span>Show menu</span>
+                        <span class="show-menu-txt">Show menu</span>
                     </button>
                 </div>
             </div>
@@ -108,6 +108,7 @@ export default {
                 }, 100)
         },
         saveBoardTitle() {
+            if (!this.board.title) return
             this.$emit('board-title-changed', JSON.parse(JSON.stringify(this.board)))
         },
         stopEdit() {

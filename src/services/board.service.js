@@ -287,7 +287,7 @@ async function AddNewUserBoard() {
       "groups": [
         {
           "_id": "bqIL3",
-          "title": "We are tablero",
+          "title": "We are Tablero",
           "tasks": [
             {
               "title": "Press here to see the description!",
@@ -394,7 +394,7 @@ async function AddNewUserBoard() {
               }
             },
             {
-              "title": "Invite members to you board",
+              "title": "Invite members to your board",
               "description": "You can invite members to your board. Your members can be your employees, friend or family, after they are signed up to our app!\nWhoever you will add will be able to see and update tasks, add lists and this way you will get your project very efficient!",
               "_id": "IHgIH",
               "createdAt": 1648803628093.0,

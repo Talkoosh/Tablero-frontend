@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../backend/public',
+    outDir: '../Tablero-backend/public',
     emptyOutDir: true,
   },
 });

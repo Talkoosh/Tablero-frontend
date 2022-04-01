@@ -56,6 +56,15 @@
                 line-height: 1.44em;
                 min-width: 370px;
 
+                .error-msg {
+                    width: fit-content;
+                    margin: auto;
+                    padding: 6px;
+                    border-radius: 3px;
+                    background-color: #eb5a46;
+                    color: white;
+                }
+
                 .header {
                     text-align: center;
                     color: #5e6c84;

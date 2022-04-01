@@ -48,6 +48,41 @@
             }
         }
     }
+
+    .board-header {
+        .board-header-left {
+            .title {
+                max-width: 140px;
+                input {
+                    max-width: 140px;
+                }
+            }
+            .board-members {
+                display: none;
+            }
+
+            .invite-btn {
+                margin-left: 5px;
+                top: 1px;
+                .invite-txt {
+                    display: none;
+                }
+            }
+        }
+        .board-header-right {
+            .board-menu {
+                .menu-btn {
+                    padding: 0;
+                    .menu-icon {
+                        transform: translateX(4px);
+                    }
+                    .show-menu-txt {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 600px) {

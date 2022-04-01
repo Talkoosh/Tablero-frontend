@@ -55,8 +55,11 @@
       .member-details {
         z-index: 10;
         position: absolute;
+        top: 35px;
+        left: 5px;
         width: 304px;
         background-color: #fff;
+        border-radius: 3px;
 
         .member-details-header {
           background: rgb(0, 121, 191);

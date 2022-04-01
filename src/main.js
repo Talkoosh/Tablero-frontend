@@ -6,6 +6,9 @@ import debounce from './services/debouncer.js'
 import './styles/style.scss';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import gAuthPlugin from 'vue3-google-oauth2'
+
+const gAuthClientId = '451808055099-btekebrng89906acj1fjos3b9r7kf0fe.apps.googleusercontent.com'
 
 const app = createApp(App);
 app.directive('clickoutside', {
@@ -36,5 +39,7 @@ app.directive('debounce', (el, binding) => debounce(el, binding))
 
 app.use(store);
 app.use(router);
+app.use(gAuthPlugin, { clientId: gAuthClientId, scope: 'email', promp: 'consent' })
+
 
 app.mount('#app');

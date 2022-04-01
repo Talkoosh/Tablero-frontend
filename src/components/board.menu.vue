@@ -1,5 +1,5 @@
 <template>
-    <nav class="board-nav">
+    <nav class="board-nav" :style="display">
         <header>
             <div class="title">
                 <h3>{{ currNav || 'Menu' }}</h3>

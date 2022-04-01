@@ -59,6 +59,7 @@
         @close-menu="closeMenu"
         :class="menuStatus"
         :board="board"
+        :style="menuDisplay"
     />
     <router-view></router-view>
 </template>
@@ -99,6 +100,7 @@ export default {
             isMenuOpen: false,
             isAddMemberOpen: false,
             invitePos: null,
+            menuDisplay: 'display: none'
         }
     },
     methods: {
@@ -132,7 +134,10 @@ export default {
             this.$store.dispatch({ type: 'editGroup', groupToEdit, boardId: this.board._id })
         },
         openMenu() {
-            this.isMenuOpen = true
+            this.menuDisplay = 'display:block'
+            setTimeout(() => {
+                this.isMenuOpen = true
+            }, 10)
         },
         changeBoardBgc(bgc) {
             this.$store.dispatch({ type: 'changeBoardBgc', bgc, boardId: this.board._id })
@@ -142,6 +147,9 @@ export default {
         },
         closeMenu() {
             this.isMenuOpen = false
+            setTimeout(() => {
+                this.menuDisplay = 'display:none'
+            }, 150)
         },
         onDrop(dropResult) {
             this.board.groups = this.applyDrag(this.board.groups, dropResult);

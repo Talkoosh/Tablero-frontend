@@ -4,7 +4,6 @@
 @import "basics/typography";
 @import "basics/base";
 @import "basics/scrollbar";
-@import "basics/media.queries";
 
 // COMPONENTS
 @import "components/avatar.profile";
@@ -41,3 +40,5 @@
 @import "views/board.page";
 @import "views/boards.page";
 @import "views/login.page";
+
+@import "basics/media.queries";

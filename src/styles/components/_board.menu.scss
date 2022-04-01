@@ -1,6 +1,6 @@
 .board-nav {
   overflow: hidden;
-
+  max-width: 100vh;
   margin-top: 44px;
   width: 339px;
   height: 100vh;
@@ -42,7 +42,7 @@
       cursor: pointer;
       left: 12px;
       top: 12px;
-      transition: transform .2s;
+      transition: transform 0.2s;
       .back-icon {
         @include icon;
         &::before {
@@ -78,7 +78,7 @@
         cursor: pointer;
         border-radius: 3px;
         padding: 6px 6px 6px 40px;
-        
+
         h4 {
           font-weight: 650;
         }
