@@ -8,6 +8,7 @@
     .members-container {
         display: flex;
         gap: 3px;
+        flex-wrap: wrap;
     }
     .member{
         cursor: pointer;
