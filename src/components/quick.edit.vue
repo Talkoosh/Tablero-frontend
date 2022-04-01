@@ -1,6 +1,6 @@
  <template>
   <div class="quick-edit-page">
-    <span class="close-icon" @click="closeQuickEdit"></span>
+    <span class="close-quick-edit" @click="closeQuickEdit"></span>
 
     <div
       class="quick-edit-card-container"
@@ -96,10 +96,21 @@
           class="label-menu"
         ></label-menu>
 
-        <div class="edit-option change-members" :class="menuOptionPos">
+        <div
+          @click="isMembersMenuOpen = true"
+          class="edit-option change-members"
+          :class="menuOptionPos"
+        >
           <span class="change-members-icon icon"></span>
           <span class="edit-option-text">Change members</span>
         </div>
+
+        <members-menu
+          v-if="isMembersMenuOpen"
+          class="members-menu"
+          :style="menuStyle"
+          @close-action="closeActions"
+        ></members-menu>
 
         <div
           @click="isCoverMenuOpen = true"
@@ -165,6 +176,7 @@
 import labelMenu from "./label.menu.vue";
 import coverMenu from "./cover.menu.vue";
 import datesMenu from "./dates.menu.vue";
+import membersMenu from "./members.menu.vue";
 export default {
   props: {
     task: Object,
@@ -174,6 +186,7 @@ export default {
     labelMenu,
     coverMenu,
     datesMenu,
+    membersMenu,
   },
   created() {
     this.taskToEdit = { ...this.task };
@@ -186,6 +199,7 @@ export default {
       isLabelMenuOpen: false,
       isCoverMenuOpen: false,
       isDatesMenuOpen: false,
+      isMembersMenuOpen: false,
       isMenuChangeDirection: false,
     };
   },
@@ -196,6 +210,7 @@ export default {
       this.isLabelMenuOpen = false;
       this.isCoverMenuOpen = false;
       this.isDatesMenuOpen = false;
+      this.isMembersMenuOpen = false;
     },
     closeQuickEdit() {
       this.$emit("close-quick-edit");
@@ -305,8 +320,8 @@ export default {
     },
     menuStyle() {
       return this.isMenuChangeDirection
-        ? "transform: translateY(-40%);overflow-y: auto;max-height: 400px;right: 0.4%;"
-        : "transform: translateY(-40%);overflow-y: auto;max-height: 400px;margin-left:8px;";
+        ? "transform: translateY(-40%);overflow-y: auto;max-height: 400px;right: 0.4%;overflow-x: hidden;"
+        : "transform: translateY(-40%);overflow-y: auto;max-height: 400px;margin-left:8px;overflow-x: hidden;";
     },
     labels() {
       return this.$store.getters.boardLabels;
@@ -384,7 +399,9 @@ export default {
     },
     menuPosX() {
       if (document.body.clientWidth < 600) {
-        return this.pos.x > document.body.clientWidth / 2 ? "left: -250px" : "left: 100%";
+        return this.pos.x > document.body.clientWidth / 2
+          ? "left: -250px"
+          : "left: 100%";
       }
 
       let diff = document.body.clientWidth - this.pos.x - this.menuDivSize; //340 is the menu div size

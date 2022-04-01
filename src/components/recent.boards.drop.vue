@@ -30,7 +30,8 @@ export default {
   components: {},
   created() {},
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     closeDropdown(cmpName) {

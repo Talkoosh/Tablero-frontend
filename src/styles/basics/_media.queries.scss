@@ -6,22 +6,22 @@
         }
 
         .board-card {
-            margin-right: 22% !important;
-            margin-bottom: 15px !important;
+            margin-right: 22% ;
+            margin-bottom: 15px ;
         }
     }
 
     .create-new-board-card {
-        flex-basis: auto !important;
-        width: 267px !important;
+        flex-basis: auto ;
+        width: 267px ;
         .new-board-card {
-            width: 267px !important ;
+            width: 267px;
         }
     }
 
     .main-header {
         .right-nav-btn {
-            display: inline !important;
+            display: inline;
         }
 
         .right-navbar {
@@ -65,32 +65,32 @@
         }
 
         .board-card {
-            margin-right: 18% !important;
-            margin-bottom: 15px !important;
+            margin-right: 18% ;
+            margin-bottom: 15px ;
         }
 
         .create-new-board-card {
-            width: 217px !important;
+            width: 217px ;
 
             .new-board-card {
-                width: 217px !important;
+                width: 217px;
             }
         }
     }
 
     .home-page-content-container {
         .home-page-right {
-            width: 60% !important;
+            width: 60% ;
         }
 
         .home-page-left {
             .header {
-                font-size: 2.1rem !important;
+                font-size: 2.1rem;
             }
 
             .home-text {
-                font-weight: 100 !important;
-                padding-right: 0px !important;
+                font-weight: 100 ;
+                padding-right: 0px;
             }
         }
     }
@@ -103,20 +103,20 @@
         }
 
         .board-link {
-            width: calc(100% + 110px) !important;
+            width: calc(100% + 110px) ;
             padding: 14px;
         }
 
         .board-card {
-            margin-right: 10% !important;
-            margin-bottom: 10px !important;
+            margin-right: 10%;
+            margin-bottom: 10px ;
         }
 
         .create-new-board-card {
-            width: 247px !important;
+            width: 247px ;
 
             .new-board-card {
-                width: 247px !important;
+                width: 247px ;
             }
         }
     }
@@ -124,7 +124,7 @@
 
 @media (max-width: 520px) {
     .boards-page {
-        padding-top: 15px !important;
+        padding-top: 15px ;
         .all-boards {
             padding-left: 25%;
         }
@@ -134,7 +134,7 @@
         }
 
         .board-card {
-            margin-right: 12% !important;
+            margin-right: 12% ;
         }
     }
 
@@ -157,14 +157,14 @@
 
     .create-board {
         .create-board-modal {
-            left: 100px !important;
+            left: 100px ;
         }
     }
 
     .recent-drop-content {
-        left: 100px !important;
+        left: 100px ;
     }
     .starred-drop-content {
-        left: 100px !important;
+        left: 100px ;
     }
 }
