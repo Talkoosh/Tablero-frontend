@@ -123,7 +123,7 @@
       <div class="right-nav-btn">
         <span class="little-search" role="img" aria-label="SearchIcon">
           <svg
-          class="magnifying-glass"
+            class="magnifying-glass"
             width="20"
             height="20"
             role="presentation"
@@ -142,7 +142,12 @@
       </div>
 
       <div @click="openDropdown('acountDrop')" class="main-header-icon">
-        <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" />
+        <!-- <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" /> -->
+        <avatar-profile
+  
+          class="member-pic "
+          :username="userName"
+        ></avatar-profile>
       </div>
     </div>
   </section>
@@ -153,6 +158,7 @@ import createBoardDrop from "./create.board.drop.vue";
 import recentBoardsDrop from "./recent.boards.drop.vue";
 import starredBoardsDrop from "./starred.boards.drop.vue";
 import moreDrop from "./more.drop.vue";
+import avatarProfile from "./avatar.profile.vue";
 import { utilService } from "../services/util.service.js";
 
 export default {
@@ -162,6 +168,7 @@ export default {
     recentBoardsDrop,
     starredBoardsDrop,
     moreDrop,
+    avatarProfile,
   },
   created() {},
   data() {
@@ -180,6 +187,7 @@ export default {
     openDropdown(cmpName) {
       this.$emit("open-drop", cmpName);
     },
+ 
   },
   computed: {
     boards() {
@@ -210,6 +218,9 @@ export default {
         ? "src/assets/t-icon.png"
         : "src/assets/t-icon-white.png";
     },
+    userName(){
+      return this.$store.getters.loggedinUser?.username;
+    }
   },
 };
 </script>
