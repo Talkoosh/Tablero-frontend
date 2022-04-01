@@ -35,12 +35,6 @@
                         href
                         :style="'left:' + idx * 21 + 'px;'"
                     >
-                        <!-- <img
-                            :src="member.imgUrl"
-                            alt="member img"
-                            @click="openMemberDetails = member._id"
-                            :title="member.email"
-                        />-->
                         <avatar-profile
                             :username="member.username"
                             @click="openMemberDetails = member._id"
@@ -52,7 +46,7 @@
                             v-clickoutside="closeMemberDetails"
                         >
                             <div class="member-details-header">
-                                <img :src="member.imgUrl" alt="member-img" />
+                                <avatar-profile :username="member.username" :title="member.email" />
                                 <span>{{ member.username }}</span>
                             </div>
                             <div class="member-details-body">
@@ -69,6 +63,7 @@
                     ref="inviteMembersBtn"
                     @click="openInviteMembers"
                     :disabled="loggedinUser ? false : true"
+                    :title="loggedinUser ? 'Invite members to your board' : 'Login to add members'"
                 >
                     <button>
                         <span class="invite-icon"></span>

@@ -1,3 +1,4 @@
+import { boardService } from './board.service.js'
 import { httpService } from './http.service.js'
 // import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service.js'
 // var gWatchedUser = null;
@@ -43,8 +44,8 @@ async function login(userCred) {
 }
 async function signup(userCred) {
     const user = await httpService.post('auth/signup', userCred)
-
     // socketService.emit('set-user-socket', user._id);
+    boardService.AddNewUserBoard()
     return user;
 }
 async function logout() {
@@ -86,4 +87,3 @@ async function getLoggedinUser() {
 //     var user = getLoggedinUser()
 //     if (user) socketService.emit('set-user-socket', user._id)
 // })();
-
