@@ -7,7 +7,7 @@
       </button>
     </header>
     <div class="boards-list" v-for="board in boards" :key="board._id">
-      <router-link class="board-details" :to="'/board/' + board._id">
+      <a class="board-details" @click="goToBoard(board._id)">
         <div
           v-if="board"
           class="board-cover-container"
@@ -17,7 +17,7 @@
           <div class="board-title">{{ board.title }}</div>
           <!-- <div class="board-user">{{ board.createdBy.fullname }} board</div> -->
         </div>
-      </router-link>
+      </a>
     </div>
     <p v-if="!boards" class="no-boards">You haven't boards yet. Go ahead and make your first board!</p>
   </div>
@@ -36,6 +36,12 @@ export default {
     closeDropdown(cmpName) {
       this.$emit("close-drop", cmpName);
     },
+   async goToBoard(boardId){
+      await this.$store.dispatch('loadBoards');
+      this.$store.commit({type:'setCurrBoardId',boardId})
+      this.$router.push('/board/' + boardId);
+
+    }
   },
   computed: {
     boards() {

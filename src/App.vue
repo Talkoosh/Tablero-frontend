@@ -1,5 +1,5 @@
 <template>
-  <section :style="bodyOverflow" class="app-container">
+  <section :style="bodyOverflow" class="app-container" ref="appContainer">
     <main-header v-if="!isHomePage" @open-drop="openDrop" />
     <router-view />
     <component
@@ -68,6 +68,9 @@ export default {
         this.isHomePage = false
       }
       if ((this.$route.name === 'login' || this.$route.name === 'home') && this.loggedinUser) this.$router.push('/board')
+
+       if (this.$route.name === 'home') this.$refs.appContainer.style = " background: linear-gradient(0deg, #fff, #eae6ff 100%);"
+       else this.$refs.appContainer.style = " background: white"
     },
     'loggedinUser': {
       async handler() {
@@ -76,7 +79,9 @@ export default {
         }
         else this.$router.push('/')
       }
+
     }
+
   },
 };
 </script>

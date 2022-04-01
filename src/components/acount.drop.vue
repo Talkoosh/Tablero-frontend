@@ -10,11 +10,15 @@
           <div class="user-img">
             <div class="img-container">
               <img src="@/assets/img/headerIcon.png" alt class="img" />
+              <!-- <avatar-profile
+                class="member-pic"
+                :username="userName"
+              ></avatar-profile> -->
             </div>
           </div>
           <div class="user-details">
-            <div class="user-name">{{ loggedinUser?.username || 'Guest' }}</div>
-            <span class="user-email">{{ loggedinUser?.email || 'guest' }}</span>
+            <div class="user-name">{{ loggedinUser?.username || "Guest" }}</div>
+            <span class="user-email">{{ loggedinUser?.email || "guest" }}</span>
           </div>
         </div>
 
@@ -54,7 +58,7 @@
 export default {
   name: "",
   components: {},
-  created() { },
+  created() {},
   data() {
     return {};
   },
@@ -63,21 +67,22 @@ export default {
       this.$emit("close-drop", cmpName);
     },
     logout() {
-      this.$store.dispatch({ type: 'logout' })
-      console.log('loggin out')
-      this.closeDropdown()
-      this.$router.push('/')
-
-    }
+      this.$store.dispatch({ type: "logout" });
+      console.log("loggin out");
+      this.closeDropdown();
+      this.$router.push("/");
+    },
   },
   computed: {
     boards() {
       return this.$store.getters.boards;
     },
     loggedinUser() {
-      return this.$store.getters.loggedinUser
-    }
-
+      return this.$store.getters.loggedinUser;
+    },
+    userName() {
+      return this.$store.getters.loggedinUser?.username;
+    },
   },
 };
 </script>

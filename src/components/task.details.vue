@@ -373,14 +373,9 @@ export default {
             return this.$store.getters.boardMembers;
         },
         taskMembers() {
-<<<<<<< HEAD
-            const members = [];
-            this.task.memberIds?.forEach(memberId => {
-=======
             if (!this.task.memberIds) return
             const members = [];
             this.task.memberIds.forEach(memberId => {
->>>>>>> 4cb9af316e3099d409dd9bf2c709155d6f253731
                 this.boardMembers.forEach(member => {
                     if (member._id === memberId) members.push(member)
                 })

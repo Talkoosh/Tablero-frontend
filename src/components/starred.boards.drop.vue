@@ -7,7 +7,7 @@
       </button>
     </header>
     <div class="boards-list" v-for="board in starredBoards" :key="board._id" >
-      <router-link class="board-details" :to="'/board/' + board._id">
+      <a class="board-details" @click="goToBoard(board._id)">
         <div
           class="board-cover-container"
           :style="cardBG(board.style)"
@@ -19,10 +19,10 @@
         <!-- <div class="star-container">
           <span class="star"></span>
         </div> -->
-      </router-link>
+      </a>
     </div>
 
-    <p v-if="!starredBoards.length" class="no-starred-boards">Star important boards to access them quickly and easily.</p>
+    <p v-if="!starredBoards.length" class="no-starred-boards">Star important boards to access\n them quickly and easily.</p>
   </div>
 </template>
 
@@ -39,6 +39,12 @@ export default {
     closeDropdown(cmpName) {
       this.$emit("close-drop", cmpName);
     },
+     async goToBoard(boardId){
+      await this.$store.dispatch('loadBoards');
+      this.$store.commit({type:'setCurrBoardId',boardId})
+      this.$router.push('/board/' + boardId);
+
+    }
   },
   computed: {
     starredBoards() {
@@ -50,6 +56,7 @@ export default {
         else return `background-color: ${style.backgroundColor}`;
       };
     },
+ 
   },
 };
 </script>
