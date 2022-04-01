@@ -134,7 +134,14 @@
                             @checklists-update="updateTask"
                             @convert-todo="convertToCard"
                         ></task-checklists>
-                        <task-activities @add-comment="addComment" :comments="task.comments"></task-activities>
+                        <task-activities
+                            @add-comment="addComment"
+                            @delete-comment="deleteComment"
+                            @save-comment="saveComment"
+                            :comments="task.comments"
+                            :members="taskMembers"
+                            :user="currUser"
+                        ></task-activities>
                     </div>
                     <div class="actions-menu">
                         <h3>Add to card</h3>
@@ -217,7 +224,6 @@ import checklistMenu from './checklist.menu.vue'
 import membersMenu from './members.menu.vue'
 import taskMembers from './task.members.vue'
 import FastAverageColor from 'fast-average-color'
-import boardHeaderVue from './board.header.vue'
 
 export default {
     data() {
@@ -233,12 +239,20 @@ export default {
     },
     methods: {
         async addComment(txt) {
-            if (!this.task.comments || this.task.comments.length) this.task.comments = [];
+            if (!this.task.comments || !this.task.comments.length) this.task.comments = [];
 
             const comment = {
                 txt,
                 createdAt: Date.now(),
+                byMember: this.currUser,
             }
+            this.$store.dispatch({ type: 'addComment', comment, task: this.task })
+        },
+        deleteComment(commentId){
+            this.$store.dispatch({type:'deleteComment', commentId, task: this.task})
+        },
+        saveComment(txt, commentId){
+            this.$store.dispatch({type:'saveComment', txt, commentId, task:this.task})
         },
         async setDescTxt() {
             const boardId = this.$route.params.boardId;
@@ -373,14 +387,9 @@ export default {
             return this.$store.getters.boardMembers;
         },
         taskMembers() {
-<<<<<<< HEAD
-            const members = [];
-            this.task.memberIds?.forEach(memberId => {
-=======
             if (!this.task.memberIds) return
             const members = [];
             this.task.memberIds.forEach(memberId => {
->>>>>>> 4cb9af316e3099d409dd9bf2c709155d6f253731
                 this.boardMembers.forEach(member => {
                     if (member._id === memberId) members.push(member)
                 })
@@ -395,6 +404,9 @@ export default {
                 if (group) currGroup = group;
             })
             return currGroup
+        },
+        currUser() {
+            return this.$store.getters.loggedinUser;
         }
     },
     components: {

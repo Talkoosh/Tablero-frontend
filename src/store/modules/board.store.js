@@ -29,7 +29,7 @@ export const boardStore = {
       const board = state.boards.find((b) => b._id === state.currBoardId);
       return JSON.parse(JSON.stringify(board));
     },
-    boardMembers(state){
+    boardMembers(state) {
       const board = state.boards.find(b => b._id === state.currBoardId);
       return board.members;
     },
@@ -364,6 +364,21 @@ export const boardStore = {
     async removeUserFromBoard({ commit }, { memberId, boardId }) {
       const board = await boardService.removeUserFromBoard(memberId, boardId)
       commit({ type: 'removeUserFromBoard', memberId })
+    },
+    async addComment({ dispatch, state }, { comment, task }) {
+      comment._id = utilService.makeId();
+      task.comments.push(comment);
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
+    },
+    async deleteComment({ dispatch, state }, { commentId, task }) {
+      const idx = task.comments.findIndex(c => c._id === commentId);
+      task.comments.splice(idx, 1);
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
+    },
+    async saveComment({dispatch, state}, {txt, commentId, task}){
+      const idx = task.comments.findIndex(c => c._id === commentId);
+      task.comments[idx].txt = txt; 
+      dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
     }
   }
 }
