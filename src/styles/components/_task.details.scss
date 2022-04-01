@@ -229,6 +229,8 @@
 
     .task-details-labels-container {
       display: flex;
+      max-width: 100%;
+      flex-wrap: wrap;
     }
 
     .task-details-label {

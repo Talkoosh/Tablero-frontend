@@ -15,7 +15,7 @@
     font-weight: 400;
     line-height: 20px;
 
-    .close-icon {
+    .close-quick-edit {
         @include icon;
         color: #fff9;
         padding: 9px;
@@ -41,6 +41,8 @@
     }
 
     .quick-edit-card-container {
+
+      
       
         width: 256px;
         position: absolute;
@@ -279,6 +281,11 @@
             position: absolute;
             transition: opacity 85ms ease-in, transform 85ms ease-in;
             width: 240px;
+
+            .members-menu
+            {
+                transform: translateY(0) !important;
+            }
 
         
 
