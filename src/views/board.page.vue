@@ -24,13 +24,12 @@
                     />
                 </Draggable>
             </Container>
-            <div
-                class="add-group"
-                :class="addGroupCondition"
-                @click="toggleAddGroup"
-                :style="isAddGroup ? '' : btnBgc"
-            >
-                <span v-if="!isAddGroup" :style="textColor">+ Add another list</span>
+            <div class="add-group" :class="addGroupCondition" :style="isAddGroup ? '' : btnBgc">
+                <span
+                    v-if="!isAddGroup"
+                    :style="textColor"
+                    @click="toggleAddGroup"
+                >+ Add another list</span>
                 <div v-else v-clickoutside="toggleAddGroup">
                     <input
                         ref="addGroup"
@@ -38,7 +37,6 @@
                         v-model="groupToAdd.title"
                         placeholder="Enter list title..."
                         @keyup.enter="addGroup"
-                        @click="toggleAddGroup"
                     />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>

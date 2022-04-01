@@ -3,8 +3,8 @@
     <div class="logo-container">
       <!-- <div class="logo-img"></div> -->
       <!-- <div class="logo-text"> -->
-      <img src="@/assets/t-icon.png" class="logo-icon" />
-      <span class="logo-text">ablero</span>
+      <img src="src/assets/main-logo.png" class="logo-icon" />
+      <span class="logo-text">Tablero</span>
       <!-- </div> -->
     </div>
 
