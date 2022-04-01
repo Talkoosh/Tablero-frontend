@@ -1,7 +1,7 @@
 <template>
   <section :style="bodyOverflow" class="app-container">
     <main-header v-if="!isHomePage" @open-drop="openDrop" />
-    <router-view />
+    <router-view @open-drop="openDrop" />
     <component
       :is="currDropDown"
       v-if="currDropDown"

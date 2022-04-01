@@ -11,11 +11,7 @@
         </div>
         <div class="starred-boards-list-container">
           <ul class="starred-boards-list">
-            <li
-              class="board-card"
-              v-for="board in starredBoards"
-              :key="board._id"
-            >
+            <li class="board-card" v-for="board in starredBoards" :key="board._id">
               <router-link
                 class="board-link"
                 :to="'/board/' + board._id"
@@ -25,10 +21,7 @@
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
                   <div class="card-star">
-                    <span
-                      @click.prevent="starBoard(board._id)"
-                      class="card-star-container"
-                    >
+                    <span @click.prevent="starBoard(board._id)" class="card-star-container">
                       <span class="star"></span>
                     </span>
                   </div>
@@ -56,20 +49,14 @@
                 <div class="board-card-details">
                   <div class="card-header-name">{{ board.title }}</div>
                   <div class="card-star">
-                    <span
-                      @click.prevent="starBoard(board._id)"
-                      class="card-star-container"
-                    >
+                    <span @click.prevent="starBoard(board._id)" class="card-star-container">
                       <span class="star"></span>
                     </span>
                   </div>
                 </div>
               </router-link>
             </li>
-            <li
-              class="create-new-board-card"
-              @click="openDropdown('createBoardDrop')"
-            >
+            <li class="create-new-board-card" @click="openDropdown('createBoardDrop')">
               <div class="new-board-card">
                 <p>
                   <span>Create new board</span>
@@ -108,7 +95,6 @@ export default {
       this.$emit("open-drop", cmpName);
     },
     async starBoard(boardId) {
-      console.log(boardId);
       await this.$store.dispatch({
         type: "starBoard",
         boardId,
@@ -134,7 +120,7 @@ export default {
       return this.$store.getters.loggedinUser;
     },
   },
-  unmounted() {},
+  unmounted() { },
   watch: {
     loggedinUser: {
       handler() {

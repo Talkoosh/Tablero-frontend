@@ -32,7 +32,7 @@
                 <span class="badge-text">{{ checklistDisplay }}</span>
             </div>
         </div>
-        <div class="task-members" v-if="task.memberIds">
+        <div class="task-members" v-if="task.memberIds?.length">
             <div class="member-img" v-for="member in taskMembers" :key="member">
                 <avatar-profile
                     :username="member.username"
