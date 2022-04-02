@@ -32,15 +32,17 @@
         background-color: transparent;
 
         .logo-icon {
-          width: 20px;
-          height: 20px;
+          height: 29px;
           transform: translateY(4px);
         }
 
         .logo-text {
           display: inline-block;
-          transform: translateX(-5px);
+          transform: translate(3px, 2px);
           color: #222236;
+          font-size: 30px;
+          letter-spacing: -1px;
+          font-family: Ubuntu;
         }
       }
 

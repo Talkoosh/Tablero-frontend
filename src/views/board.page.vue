@@ -24,13 +24,12 @@
                     />
                 </Draggable>
             </Container>
-            <div
-                class="add-group"
-                :class="addGroupCondition"
-                @click="toggleAddGroup"
-                :style="isAddGroup ? '' : btnBgc"
-            >
-                <span v-if="!isAddGroup" :style="textColor">+ Add another list</span>
+            <div class="add-group" :class="addGroupCondition" :style="isAddGroup ? '' : btnBgc">
+                <span
+                    v-if="!isAddGroup"
+                    :style="textColor"
+                    @click="toggleAddGroup"
+                >+ Add another list</span>
                 <div v-else v-clickoutside="toggleAddGroup">
                     <input
                         ref="addGroup"
@@ -38,7 +37,6 @@
                         v-model="groupToAdd.title"
                         placeholder="Enter list title..."
                         @keyup.enter="addGroup"
-                        @click="toggleAddGroup"
                     />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>
@@ -204,7 +202,8 @@ export default {
         linear() {
             if (!this.board.style.backgroundColor && !this.board.style.photo) return
             if (this.board.style.backgroundColor) return ``
-            else return `background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);`
+            if(!this.bgc.isLight) return `background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);`
+            else return 'background: linear-gradient(rgb(254 245 245 / 24%) 0px, rgb(255 255 255 / 24%) 48px, rgb(255 254 254 / 0%) 80px, rgb(248 248 248 / 0%))'
         }
     },
     watch: {
