@@ -1,6 +1,6 @@
 <template>
     <section
-        v-if="(task.memberIds?.length || task.dueDate || task.attachments?.length || task.checklists?.length) && !task.style.isBackground || task.description"
+        v-if="(task.memberIds?.length || task.dueDate || task.attachments?.length || task.checklists?.length || task.comments?.length) && !task.style.isBackground || task.description"
     >
         <div class="badges">
             <div v-if="task.watching" class="watch">
@@ -19,7 +19,7 @@
             <div class="description" v-if="task.description">
                 <span class="description-icon badge-icon"></span>
             </div>
-            <div class="comments" v-if="task.comments">
+            <div class="comments" v-if="task.comments?.length">
                 <span class="comments-icon badge-icon"></span>
                 <span class="badge-text">{{ commentCount }}</span>
             </div>
@@ -54,6 +54,7 @@ export default {
         avatarProfile
     },
     created() {
+        console.log(this.task)
     },
     data() {
         return {
@@ -88,7 +89,7 @@ export default {
             }
         },
         commentCount() {
-            return this.task.comments.length
+            return this.task.comments?.length
         },
         attachmentsCount() {
             return this.task.attachments?.count

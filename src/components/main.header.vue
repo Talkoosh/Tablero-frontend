@@ -194,10 +194,10 @@ export default {
       return this.bgc.isLight ? "color: #172b4d" : "color: white";
     },
     iconColor() {
-      if (!this.bgc) return "/src/assets/main-logo.png";
+      if (!this.bgc) return "/src/assets/logo.png";
       return this.bgc.isLight
-        ? "/src/assets/main-logo-darkblue.png"
-        : "/src/assets/main-logo-white.png";
+        ? "/src/assets/logodarkblue.png"
+        : "/src/assets/logowhite.png";
     },
     userName() {
       return this.$store.getters.loggedinUser?.username;

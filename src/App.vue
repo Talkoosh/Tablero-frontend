@@ -23,7 +23,6 @@ import moreDrop from './components/more.drop.vue'
 import { socketService } from "./services/socket.service.js";
 
 export default {
-  // props: [''],
   components: {
     createBoardDrop,
     recentBoardsDrop,
@@ -69,8 +68,8 @@ export default {
       }
       if ((this.$route.name === 'login' || this.$route.name === 'home') && this.loggedinUser) this.$router.push('/board')
 
-       if (this.$route.name === 'home') this.$refs.appContainer.style = " background: linear-gradient(0deg, #fff, #eae6ff 100%);"
-       else this.$refs.appContainer.style = " background: white"
+      if (this.$route.name === 'home') this.$refs.appContainer.style = " background: linear-gradient(0deg, #fff, #eae6ff 100%);"
+      else this.$refs.appContainer.style = " background: white"
     },
     'loggedinUser': {
       async handler() {

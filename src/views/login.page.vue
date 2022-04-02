@@ -3,7 +3,7 @@
     <div class="logo-container">
       <!-- <div class="logo-img"></div> -->
       <!-- <div class="logo-text"> -->
-      <img src="@/assets/main-logo.png" class="logo-icon" />
+      <img src="@/assets/logo.png" class="logo-icon" />
       <span class="logo-text">Tablero</span>
       <!-- </div> -->
     </div>
