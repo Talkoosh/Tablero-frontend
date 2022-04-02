@@ -2,16 +2,12 @@
   <section class="main-header" :style="boardBgStyle">
     <router-link :style="textColor" class="main-logo" :to="'/board/'">
       <img :src="iconColor" class="logo-icon" />
-      <span class="logo-text">ablero</span>
+      <span class="logo-text">Tablero</span>
     </router-link>
     <div class="left-navbar">
       <div class="main-header-dropdowns">
         <div class="more-drop">
-          <button
-            :style="textColor"
-            class="drop-btn more-btn"
-            @click="openDropdown('moreDrop')"
-          >
+          <button :style="textColor" class="drop-btn more-btn" @click="openDropdown('moreDrop')">
             <span>More</span>
             <svg
               width="16"
@@ -81,15 +77,9 @@
             @click="openDropdown('createBoardDrop')"
             :class="toggleCreateBtnBGC"
             :style="textColor"
-          >
-            Create
-          </button>
+          >Create</button>
         </div>
-        <div
-          v-if="isCreateBoardOpen"
-          class="create-board-modal"
-          :class="toggleCreateBoardModal"
-        ></div>
+        <div v-if="isCreateBoardOpen" class="create-board-modal" :class="toggleCreateBoardModal"></div>
       </div>
 
       <div class="seperator"></div>
@@ -113,12 +103,7 @@
             />
           </svg>
         </span>
-        <input
-          class="main-input"
-          :style="textColor"
-          type="text"
-          placeholder="Search"
-        />
+        <input class="main-input" :style="textColor" type="text" placeholder="Search" />
       </div>
       <div class="right-nav-btn">
         <span class="little-search" role="img" aria-label="SearchIcon">
@@ -143,11 +128,7 @@
 
       <div @click="openDropdown('acountDrop')" class="main-header-icon">
         <!-- <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" /> -->
-        <avatar-profile
-  
-          class="member-pic "
-          :username="userName"
-        ></avatar-profile>
+        <avatar-profile class="member-pic" :username="userName"></avatar-profile>
       </div>
     </div>
   </section>
@@ -170,7 +151,7 @@ export default {
     moreDrop,
     avatarProfile,
   },
-  created() {},
+  created() { },
   data() {
     return {
       isRecentDropOpen: false,
@@ -187,7 +168,7 @@ export default {
     openDropdown(cmpName) {
       this.$emit("open-drop", cmpName);
     },
- 
+
   },
   computed: {
     boards() {
@@ -213,12 +194,12 @@ export default {
       return this.bgc.isLight ? "color: #172b4d" : "color: white";
     },
     iconColor() {
-      if (!this.bgc) return "src/assets/t-icon.png";
+      if (!this.bgc) return "src/assets/main-logo.png";
       return this.bgc.isLight
-        ? "src/assets/t-icon.png"
-        : "src/assets/t-icon-white.png";
+        ? "src/assets/main-logo-darkblue.png"
+        : "src/assets/main-logo-white.png";
     },
-    userName(){
+    userName() {
       return this.$store.getters.loggedinUser?.username;
     }
   },
