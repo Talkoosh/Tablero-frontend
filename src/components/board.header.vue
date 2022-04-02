@@ -154,7 +154,8 @@ export default {
         },
         bgDarkness() {
             if (this.board.style.backgroundColor) return ``
-            else return `background: #0000003d;`
+            if(!this.bgc.isLight) return `background: #0000003d;`
+            else return 'background: rgb(255 255 255 / 24%);'
         },
         isStarred() {
             return this.board.isStarred ? 'starred' : 'not-starred'
