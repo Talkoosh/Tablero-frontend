@@ -56,7 +56,7 @@
               <div class="login-methods">
                 <div class="method-btn">
                   <span class="google-icon"></span>
-                  <span @click="log" class="text">Continue with Google</span>
+                  <span @click="googleLogin" class="text">Continue with Google</span>
                 </div>
 
                 <div class="method-btn">
@@ -115,20 +115,18 @@ export default {
     };
   },
   methods: {
-    async log() {
-      // const googleUser = await this.$gAuth.signIn();
-      // const isUser = userService.getById(googleUser.getBasicProfile().getId())
-      // if (isUser) {
-      //   // userService.googleLogin(isUser)
-      // } else {
+    async googleLogin() {
+      const googleUser = await this.$gAuth.signIn();
+      const newUser = googleUser.getBasicProfile()
 
-      //   console.log(googleUser.getBasicProfile())
-      //   const user = {
-      //     email: googleUser.getBasicProfile().getEmail(),
-      //     // username: ,
-
-      //   }
-      // }
+      const user = {
+        email: newUser.getEmail(),
+        username: newUser.getName(),
+        googleId: newUser.getId(),
+        password: newUser.getId(),
+        imgUrl: newUser.getImageUrl()
+      }
+      this.$store.dispatch({ type: 'googleLogin', user });
     },
     toggleLoginPage() {
       this.isSignUpPageOpen = !this.isSignUpPageOpen;
