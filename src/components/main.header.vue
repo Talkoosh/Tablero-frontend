@@ -128,7 +128,7 @@
 
       <div @click="openDropdown('acountDrop')" class="main-header-icon">
         <!-- <img src="@/assets/img/headerIcon.png" class="main-header-icon-img" /> -->
-        <avatar-profile class="member-pic" :username="userName"></avatar-profile>
+        <avatar-profile class="member-pic" :imgURL="userImg" :username="userName" ></avatar-profile>
       </div>
     </div>
   </section>
@@ -201,6 +201,9 @@ export default {
     },
     userName() {
       return this.$store.getters.loggedinUser?.username;
+    },
+    userImg(){
+      return this.$store.getters.loggedinUser?.imgUrl
     }
   },
 };

@@ -16,7 +16,7 @@
                 @click="addMemberToTask(member._id)"
             >
                 <div class="content-container">
-                    <avatar-profile class="member-profile" :username="member.username"></avatar-profile>
+                    <avatar-profile class="member-profile" :username="member.username" :imgURL="member.imgUrl"></avatar-profile>
                     <span class="member-username">{{ member.username }}</span>
                 </div>
                 <span v-if="taskMembers?.includes(member._id)" class="icon checkmark-icon"></span>
