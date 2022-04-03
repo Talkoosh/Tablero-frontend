@@ -31,10 +31,12 @@ app.directive('clickoutside', {
   },
 });
 
+const gAuthOptions = { clientId: '451808055099-btekebrng89906acj1fjos3b9r7kf0fe.apps.googleusercontent.com', scope: 'email', prompt: 'consent' }
+app.use(gAuthPlugin, gAuthOptions)
+
 app.use(ElementPlus)
 
 app.directive('debounce', (el, binding) => debounce(el, binding))
-
 
 app.use(store);
 app.use(router);
