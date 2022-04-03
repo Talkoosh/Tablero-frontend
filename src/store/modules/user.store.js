@@ -51,7 +51,6 @@ export const userStore = {
         },
         async googleLogin({ commit }, { user }) {
             const returnedUser = await userService.googleLogin(user);
-            console.log('STORE', returnedUser);
             commit({ type: 'login', user: returnedUser })
 
         },
