@@ -36,6 +36,7 @@
             <div class="member-img" v-for="member in taskMembers" :key="member">
                 <avatar-profile
                     :username="member.username"
+                    :imgURL="member.imgUrl"
                     class="member-img"
                     :title="member.username"
                 />
@@ -54,7 +55,6 @@ export default {
         avatarProfile
     },
     created() {
-        console.log(this.task)
     },
     data() {
         return {

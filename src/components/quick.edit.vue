@@ -2,22 +2,10 @@
   <div class="quick-edit-page">
     <span class="close-quick-edit" @click="closeQuickEdit"></span>
 
-    <div
-      class="quick-edit-card-container"
-      :style="taskPos"
-      v-clickoutside="closeQuickEdit"
-    >
+    <div class="quick-edit-card-container" :style="taskPos" v-clickoutside="closeQuickEdit">
       <div class="quick-edit-task">
-        <div
-          v-if="taskToEdit.style.photo"
-          class="task-cover-img"
-          :style="coverPhoto"
-        ></div>
-        <div
-          v-if="taskToEdit.style.color"
-          class="task-cover-color"
-          :style="coverColor"
-        ></div>
+        <div v-if="taskToEdit.style.photo" class="task-cover-img" :style="coverPhoto"></div>
+        <div v-if="taskToEdit.style.color" class="task-cover-color" :style="coverColor"></div>
         <div class="task-details-container">
           <div class="task-labels">
             <span
@@ -28,11 +16,7 @@
             ></span>
             <!-- <span class="label">-->
           </div>
-          <textarea
-            class="task-text"
-            dir="auto"
-            v-model="taskToEdit.title"
-          ></textarea>
+          <textarea class="task-text" dir="auto" v-model="taskToEdit.title"></textarea>
           <div class="task-badges">
             <span class="badges-container">
               <div v-if="taskToEdit.dueDate?.dueDate" class="date-badge">
@@ -47,22 +31,13 @@
           </div>
           <div class="task-members">
             <div class="member">
-              <img
-                class="member-img"
-                src="@/assets/img/headerIcon.png"
-                alt=""
-              />
+              <img class="member-img" src="@/assets/img/headerIcon.png" alt />
             </div>
           </div>
         </div>
       </div>
 
-      <input
-        class="save-btn"
-        type="submit"
-        value="Save"
-        @click="saveTaskTitle"
-      />
+      <input class="save-btn" type="submit" value="Save" @click="saveTaskTitle" />
 
       <div class="quick-edit-options" :style="[menuPosY, menuPosX]">
         <router-link
@@ -75,11 +50,7 @@
           <span class="edit-option-text">Open card</span>
         </router-link>
 
-        <div
-          @click="isLabelMenuOpen = true"
-          class="edit-option edit-labels"
-          :class="menuOptionPos"
-        >
+        <div @click="isLabelMenuOpen = true" class="edit-option edit-labels" :class="menuOptionPos">
           <span class="edit-labels-icon icon"></span>
           <span class="edit-option-text">Edit labels</span>
         </div>
@@ -143,11 +114,7 @@
           <span class="edit-option-text">Copy</span>
         </div>
 
-        <div
-          @click="isDatesMenuOpen = true"
-          class="edit-option edit-dates"
-          :class="menuOptionPos"
-        >
+        <div @click="isDatesMenuOpen = true" class="edit-option edit-dates" :class="menuOptionPos">
           <span class="edit-dates-icon icon"></span>
           <span class="edit-option-text">Edit dates</span>
         </div>
@@ -159,11 +126,7 @@
           :style="modalDirection"
         ></dates-menu>
 
-        <div
-          @click="archive"
-          class="edit-option archive"
-          :class="menuOptionPos"
-        >
+        <div @click="archive" class="edit-option archive" :class="menuOptionPos">
           <span class="archive-icon icon"></span>
           <span class="edit-option-text">Archive</span>
         </div>
@@ -331,9 +294,7 @@ export default {
     },
     labelStyle() {
       return (labelId) => {
-        console.log(labelId);
         const label = this.getLabel(labelId);
-        console.log(label);
         return `background-color: ${label?.color}`;
       };
     },
@@ -419,7 +380,6 @@ export default {
       return diff < 0 ? "left-menu" : "right-menu";
     },
     modalDirection() {
-      console.log(this.isMenuChangeDirection);
       return this.isMenuChangeDirection
         ? "right: 0.4%;transform: translateY(-25%);"
         : " margin-left:8px;transform: translateY(-25%);";

@@ -5,6 +5,8 @@
         <!-- <router-link class="main-logo" :to="'/board/'">Tablero</router-link> -->
         <router-link :style="textColor" class="main-logo" :to="'/board/'">
           <img src="../assets/logo.png" class="logo-icon" />
+          <img src="../assets/logowhite.png" class="logo-icon" style="display:none" />
+          <img src="../assets/logodarkblue.png" class="logo-icon" style="display:none" />
           <span class="logo-text">Tablero</span>
         </router-link>
         <div class="login-container">

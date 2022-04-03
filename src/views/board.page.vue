@@ -14,6 +14,7 @@
                 orientation="horizontal"
                 @drop="onDrop"
                 class="drag-container"
+                drag-handle-selector=".column-drag-handle"
             >
                 <Draggable v-for="group in board.groups" :key="group._id">
                     <board-group
@@ -202,7 +203,7 @@ export default {
         linear() {
             if (!this.board.style.backgroundColor && !this.board.style.photo) return
             if (this.board.style.backgroundColor) return ``
-            if(!this.bgc.isLight) return `background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);`
+            if (!this.bgc.isLight) return `background: linear-gradient(180deg, #0000003d 0, #0000003d 48px, #0000 80px, #0000);`
             else return 'background: linear-gradient(rgb(254 245 245 / 24%) 0px, rgb(255 255 255 / 24%) 48px, rgb(255 254 254 / 0%) 80px, rgb(248 248 248 / 0%))'
         }
     },

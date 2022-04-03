@@ -9,11 +9,7 @@
         <div class="user-details-container">
           <div class="user-img">
             <div class="img-container">
-              <img src="@/assets/img/headerIcon.png" alt class="img" />
-              <!-- <avatar-profile
-                class="member-pic"
-                :username="userName"
-              ></avatar-profile> -->
+              <avatar-profile class="member-pic" :username="userName" :imgURL="userImg"></avatar-profile>
             </div>
           </div>
           <div class="user-details">
@@ -54,11 +50,14 @@
 </template>
 
 <script>
-// import '' from ''
+import avatarProfile from './avatar.profile.vue'
+
 export default {
   name: "",
-  components: {},
-  created() {},
+  components: {
+    avatarProfile
+  },
+  created() { },
   data() {
     return {};
   },
@@ -68,7 +67,6 @@ export default {
     },
     logout() {
       this.$store.dispatch({ type: "logout" });
-      console.log("loggin out");
       this.closeDropdown();
       this.$router.push("/");
     },
@@ -83,6 +81,9 @@ export default {
     userName() {
       return this.$store.getters.loggedinUser?.username;
     },
+    userImg() {
+      return this.$store.getters.loggedinUser?.imgUrl
+    }
   },
 };
 </script>

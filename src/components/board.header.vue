@@ -37,6 +37,7 @@
                     >
                         <avatar-profile
                             :username="member.username"
+                            :imgURL="member.imgUrl"
                             @click="openMemberDetails = member._id"
                             :title="member.email"
                         />
@@ -46,7 +47,11 @@
                             v-clickoutside="closeMemberDetails"
                         >
                             <div class="member-details-header">
-                                <avatar-profile :username="member.username" :title="member.email" />
+                                <avatar-profile
+                                    :username="member.username"
+                                    :imgURL="member.imgUrl"
+                                    :title="member.email"
+                                />
                                 <span>{{ member.username }}</span>
                             </div>
                             <div class="member-details-body">
@@ -154,7 +159,7 @@ export default {
         },
         bgDarkness() {
             if (this.board.style.backgroundColor) return ``
-            if(!this.bgc.isLight) return `background: #0000003d;`
+            if (!this.bgc.isLight) return `background: #0000003d;`
             else return 'background: rgb(255 255 255 / 24%);'
         },
         isStarred() {

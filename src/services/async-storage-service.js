@@ -35,7 +35,6 @@ function post(entityType, newEntity) {
 }
 
 function postMany(entityType, newEntities) {
-  console.log('posting many');
   return query(entityType).then((entities) => {
     entities.push(...newEntities);
     _save(entityType, entities);
