@@ -2,7 +2,7 @@
     <section>
         <div class="group-container">
             <div class="group">
-                <div class="group-header">
+                <div class="group-header column-drag-handle">
                     <h2
                         @click="toggleEditGroupTitle"
                         v-if="!isEditGroupTitle"

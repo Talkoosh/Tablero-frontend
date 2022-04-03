@@ -71,7 +71,7 @@
     }
   }
   .main-menu {
-    padding: 12px 6px 12px 12px;
+    padding: 8px 6px 12px 12px;
     .menu-home {
       .change-bg {
         position: relative;
@@ -166,17 +166,32 @@
       }
     }
     .bg-photos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      transition: transform 0.2s;
-      overflow-y: auto;
-      max-height: 83vh;
-      .photo-card {
-        @include nav-card;
-        flex-basis: 48%;
-        background-size: cover;
-        background-position: center;
+      input {
+        width: 98%;
+        height: 34px;
+        padding-left: 32px;
+        margin: 0 0 15px 0;
+        font-weight: 500;
+      }
+      .search-icon {
+        position: absolute;
+        left: 9px;
+        top: 7px;
+        color: #757575;
+      }
+      .photos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        transition: transform 0.2s;
+        max-height: calc(100vh - 180px);
+        overflow-y: auto;
+        .photo-card {
+          @include nav-card;
+          flex-basis: 48%;
+          background-size: cover;
+          background-position: center;
+        }
       }
     }
   }
