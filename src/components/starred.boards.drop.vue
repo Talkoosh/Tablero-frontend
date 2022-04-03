@@ -22,7 +22,7 @@
       </a>
     </div>
 
-    <p v-if="!starredBoards.length" class="no-starred-boards">Star important boards to access\n them quickly and easily.</p>
+    <p v-if="!starredBoards.length" class="no-starred-boards">Star important boards to access them quickly and easily.</p>
   </div>
 </template>
 
