@@ -1,5 +1,5 @@
 <template>
-    <section style="height:100%">
+    <section>
         <div class="group-container">
             <div class="group">
                 <div class="group-header">

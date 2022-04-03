@@ -28,7 +28,7 @@
                 font-size: 11px;
                 position: absolute;
                 left: -33px;
-                top: 33px
+                top: 33px;
             }
             .progress-bar-actual {
                 height: 100%;
@@ -103,7 +103,7 @@
                     }
                 }
                 .todo-more {
-                    transform: translateY(-15%);
+                    transform: translate(-6px, -15%);
                     visibility: hidden;
                 }
             }

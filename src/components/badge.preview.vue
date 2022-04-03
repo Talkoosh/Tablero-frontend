@@ -54,7 +54,6 @@ export default {
         avatarProfile
     },
     created() {
-        console.log(this.task)
     },
     data() {
         return {

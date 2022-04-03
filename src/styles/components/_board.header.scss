@@ -22,6 +22,8 @@
         line-height: 32px;
         height: 32px;
         text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       input {
         font-size: 18px;
