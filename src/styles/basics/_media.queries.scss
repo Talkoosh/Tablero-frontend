@@ -44,7 +44,7 @@
 
         .board-card {
             margin-right: 22% !important;
-            margin-bottom: 15px !important;
+            margin-bottom: 6% !important;
         }
     }
 
@@ -71,6 +71,14 @@
     .homepage-nav {
         .login-container {
             margin-right: 30px;
+        }
+    }
+
+    .home-page-content{
+        .home-page-content-container{
+            .home-page-right{
+                width: 50% !important;
+            }
         }
     }
 
@@ -135,6 +143,20 @@
             }
         }
     }
+
+    .home-page-content-container {
+
+        .home-page-left {
+            .header {
+                font-size: 2.1rem !important;
+            }
+
+            .home-text {
+                font-weight: 100 !important;
+                padding-right: 0px !important;
+            }
+        }
+    }
 }
 
 @media (max-width: 600px) {
@@ -153,7 +175,7 @@
 
         .board-card {
             margin-right: 18% !important;
-            margin-bottom: 15px !important;
+            margin-bottom: 6% !important;
         }
 
         .create-new-board-card {
@@ -165,22 +187,7 @@
         }
     }
 
-    .home-page-content-container {
-        .home-page-right {
-            width: 60% ;
-        }
-
-        .home-page-left {
-            .header {
-                font-size: 2.1rem;
-            }
-
-            .home-text {
-                font-weight: 100 ;
-                padding-right: 0px;
-            }
-        }
-    }
+ 
 }
 
 @media (max-width: 540px) {
@@ -247,17 +254,18 @@
 
 @media (max-width: 520px) {
     .boards-page {
-        padding-top: 15px !important;
+        padding-top: 50px !important;
         .all-boards {
-            padding-left: 25% !important;
+            padding-left: 22% !important;
         }
 
         .board-link {
-            width: calc(100% + 50px) !important;
+            width: calc(100% + 110px) !important;
         }
 
         .board-card {
             margin-right: 12% !important;
+            margin-bottom: 6% !important;
         }
     }
 
@@ -289,5 +297,28 @@
     }
     .starred-drop-content {
         left: 100px ;
+    }
+
+
+    .home-header{
+        .homepage-nav{
+            .main-logo{
+                transform: translateX(-60px);
+            }
+        }
+    }
+
+    .home-container{
+        .home-page-content{
+            .home-page-right{
+                width: 45%;
+            }
+
+            .home-page-content-container{
+                margin-left: 0px !important;
+                margin-top: 80px !important;
+                transform: translateY(-100px);
+            }
+        }
     }
 }
