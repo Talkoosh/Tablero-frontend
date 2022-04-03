@@ -49,10 +49,9 @@
         height: 28px;
         border-radius: 25em;
         object-fit: cover;
-        transform: translateY(3px);
+        transform: translateY(1px);
         position: relative;
         cursor: pointer;
-        border: 0.5px solid #ffffff26;
       }
       .member-details {
         z-index: 10;
@@ -75,7 +74,6 @@
             width: 85px;
             height: 85px;
             font-size: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.605);
           }
           span {
             width: 50%;

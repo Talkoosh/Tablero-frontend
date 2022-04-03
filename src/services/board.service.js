@@ -163,6 +163,7 @@ async function saveTask(task, boardId) {
 
       group.tasks[idx] = task;
       await updateBoard(board);
+      socketService.emit('task-updated')
       return task;
 
     } else {

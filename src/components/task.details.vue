@@ -224,6 +224,7 @@ import checklistMenu from './checklist.menu.vue'
 import membersMenu from './members.menu.vue'
 import taskMembers from './task.members.vue'
 import FastAverageColor from 'fast-average-color'
+import { socketService } from '../services/socket.service'
 
 export default {
     data() {
@@ -237,7 +238,17 @@ export default {
             isArchiving: false,
         }
     },
+    created() {
+        const taskId = this.$route.params.taskId;
+        socketService.emit('task-entered', taskId);
+        socketService.on('update-task', this.updateCurrTask);
+    },
     methods: {
+       async updateCurrTask(){
+            const boardId = this.$route.params.boardId;
+            await this.$store.dispatch('loadBoards'); 
+            this.$store.dispatch({type: 'getTask', taskId: this.task._id, boardId})
+        },
         async addComment(txt) {
             if (!this.task.comments || !this.task.comments.length) this.task.comments = [];
 

@@ -7,7 +7,7 @@
                 <button>Hide details</button>
             </div>
             <div ref="comment-box" class="comment-box" v-clickoutside="hideButton">
-                <avatar-profile :username="user.username"></avatar-profile>
+                <avatar-profile :username="user.username" :imgURL="user.imgUrl"></avatar-profile>
                 <textarea
                     ref="textarea"
                     @focus="showButton"

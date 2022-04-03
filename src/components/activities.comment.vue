@@ -1,6 +1,6 @@
 <template>
     <section>
-        <avatar-profile :username="comment?.byMember?.username"></avatar-profile>
+        <avatar-profile :username="comment?.byMember?.username" :imgURL="comment?.byMember.imgUrl"></avatar-profile>
         <div class="content">
             <div class="comment-header">
                 <span class="comment-fullname">{{ comment?.byMember?.username }}</span>
