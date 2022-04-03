@@ -17,7 +17,7 @@
     .drag-container {
       display: flex;
       gap: 8px;
-      // height: 100%;
+      height: fit-content;
       min-width: fit-content;
     }
     .add-group {
