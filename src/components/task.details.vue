@@ -411,8 +411,8 @@ export default {
             const board = this.$store.getters.currBoard;
             let currGroup;
             board.groups.forEach(g => {
-                const group = g.tasks.find(t => t._id === this.task._id)
-                if (group) currGroup = group;
+                const task = g.tasks.find(t => t._id === this.task._id)
+                if (task) currGroup = g;
             })
             return currGroup
         },
