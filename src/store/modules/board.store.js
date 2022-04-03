@@ -99,7 +99,6 @@ export const boardStore = {
       state.boards[boardIdx] = board;
     },
     addBoard(state, { savedBoard }) {
-      console.log(savedBoard);
       state.boards.unshift(savedBoard);
     },
     changeHeaderBgc(state, { bgc, isLight }) {
@@ -233,7 +232,6 @@ export const boardStore = {
       boardService.saveTask(task, boardId);
     },
     async addTask({ commit }, { task, boardId }) {
-      console.log('from store', task, boardId);
       const taskToAdd = await boardService.saveTask(task, boardId);
       commit({ type: 'addTask', task: taskToAdd, groupId: task.groupId });
     },
@@ -375,9 +373,9 @@ export const boardStore = {
       task.comments.splice(idx, 1);
       dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
     },
-    async saveComment({dispatch, state}, {txt, commentId, task}){
+    async saveComment({ dispatch, state }, { txt, commentId, task }) {
       const idx = task.comments.findIndex(c => c._id === commentId);
-      task.comments[idx].txt = txt; 
+      task.comments[idx].txt = txt;
       dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
     }
   }

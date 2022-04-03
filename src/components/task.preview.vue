@@ -68,9 +68,6 @@ export default {
     },
   },
   computed: {
-    labelStyle(label) {
-      console.log(label);
-    },
     isBackgroundImage() {
       return (this.task.style.photo && this.task.style.isBackground) ? 'text-bold' : ''
     },

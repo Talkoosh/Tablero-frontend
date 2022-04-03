@@ -13,7 +13,7 @@
               <!-- <avatar-profile
                 class="member-pic"
                 :username="userName"
-              ></avatar-profile> -->
+              ></avatar-profile>-->
             </div>
           </div>
           <div class="user-details">
@@ -58,7 +58,7 @@
 export default {
   name: "",
   components: {},
-  created() {},
+  created() { },
   data() {
     return {};
   },
@@ -68,7 +68,6 @@ export default {
     },
     logout() {
       this.$store.dispatch({ type: "logout" });
-      console.log("loggin out");
       this.closeDropdown();
       this.$router.push("/");
     },

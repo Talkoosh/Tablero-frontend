@@ -248,11 +248,11 @@ export default {
             }
             this.$store.dispatch({ type: 'addComment', comment, task: this.task })
         },
-        deleteComment(commentId){
-            this.$store.dispatch({type:'deleteComment', commentId, task: this.task})
+        deleteComment(commentId) {
+            this.$store.dispatch({ type: 'deleteComment', commentId, task: this.task })
         },
-        saveComment(txt, commentId){
-            this.$store.dispatch({type:'saveComment', txt, commentId, task:this.task})
+        saveComment(txt, commentId) {
+            this.$store.dispatch({ type: 'saveComment', txt, commentId, task: this.task })
         },
         async setDescTxt() {
             const boardId = this.$route.params.boardId;
@@ -440,7 +440,6 @@ export default {
             async handler() {
                 if (!this.task) return
                 if (this.task.style.photo) {
-                    console.log(this.task);
                     const fac = new FastAverageColor();
                     const color = await fac.getColorAsync(this.task.style.photo);
                     this.setCoverStyle(color.hexa, this.task.style.photo)

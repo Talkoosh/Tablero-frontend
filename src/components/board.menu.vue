@@ -150,7 +150,6 @@ export default {
         searchKey: {
             async handler() {
                 if (!this.searchKey) this.searchKey = 'nature'
-                console.log(this.searchPhotos)
                 this.getPhotosBySearch();
             },
             immediate: true
