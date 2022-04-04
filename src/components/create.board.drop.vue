@@ -4,7 +4,7 @@
     <div class="create-board-modal" :class="toggleCreateBoardModal">
       <header class="modal-header">
         <div class="modal-title">Create board</div>
-        <button class="close-create-modal-btn" @click="closeDropdown">X</button>
+        <span class="close-create-modal-btn" @click="closeDropdown"></span>
       </header>
       <div class="modal-content">
         <div class="background-display">
