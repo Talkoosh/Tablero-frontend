@@ -2,7 +2,7 @@
   <div class="more-drop-content dropdown">
     <header class="drop-header">
       <div class="header-text">More</div>
-      <button class="close-header" @click="closeDropdown()">X</button>
+      <span class="close-header" @click="closeDropdown()"></span>
     </header>
     <div class="more-options">
       <div class="option-preview" @click="openDropdown('recentBoardsDrop')">

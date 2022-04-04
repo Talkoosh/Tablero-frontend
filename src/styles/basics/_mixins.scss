@@ -80,17 +80,28 @@
 }
 
 @mixin close-dropdwon-btn {
-  background: transparent;
-  border: none;
-  color: #6b778c;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  z-index: 2;
-  outline: none;
+  font-family: trellicons;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  height: 30px;
+  width: 30px;
+  line-height: 20px;
+  padding-top: 10px;
+  padding-right: 20px;
+  opacity: 0.8;
 
-  &:hover {
-    color: black;
+  &:hover{
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  &::before {
+      content: "\e91c";
+      font-size: 20px;
+      opacity: 0.8;
+      font-weight: 400;
   }
 }
 @mixin action-menu {
@@ -229,6 +240,8 @@
   transform: translateY(2px);
   
 }
+
+
   
 
   

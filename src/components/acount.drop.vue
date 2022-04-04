@@ -2,7 +2,7 @@
   <div class="acount-drop-content">
     <header class="drop-header">
       <div class="header-text">Account</div>
-      <button class="close-header" @click="closeDropdown()">X</button>
+      <span class="close-header" @click="closeDropdown()"></span>
     </header>
     <div class="options-list">
       <ul class="list-container">
