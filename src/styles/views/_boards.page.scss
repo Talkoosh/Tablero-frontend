@@ -21,9 +21,24 @@
   .all-boards {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     margin-top: 15px;
     width: 100%;
+    .not-logged-title {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3px;
+      .watch-icon {
+        @include icon;
+        @include icon-lg;
 
+        &::before {
+          content: "\e969";
+        }
+      }
+    }
     .starred-boards-container {
       padding: 0 0 20px;
 
