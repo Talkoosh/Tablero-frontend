@@ -2,8 +2,11 @@
   <section class="boards-page">
     <!-- <div class="boards-page-nav"></div> -->
     <hompage-nav />
-
     <div class="all-boards">
+      <div class="not-logged-title" v-if="!loggedinUser">
+        <span class="watch-icon"></span>
+        <h3>When not logged, all the boards below are visible and editable to everyone</h3>
+      </div>
       <div v-if="starredBoards.length" class="starred-boards-container">
         <div class="starred-boards-title">
           <span class="member-icon"></span>
