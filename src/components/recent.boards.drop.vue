@@ -2,9 +2,9 @@
   <div class="recent-drop-content dropdown">
     <header class="drop-header">
       <div class="header-text">Recent boards</div>
-      <button class="close-header" @click="closeDropdown()">
-        X
-      </button>
+      <span class="close-header" @click="closeDropdown()">
+        
+      </span>
     </header>
     <div class="boards-list" v-for="board in boards" :key="board._id">
       <a class="board-details" @click="goToBoard(board._id)">
