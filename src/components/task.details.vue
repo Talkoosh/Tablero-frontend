@@ -244,10 +244,10 @@ export default {
         socketService.on('update-task', this.updateCurrTask);
     },
     methods: {
-       async updateCurrTask(){
+        async updateCurrTask() {
             const boardId = this.$route.params.boardId;
-            await this.$store.dispatch('loadBoards'); 
-            this.$store.dispatch({type: 'getTask', taskId: this.task._id, boardId})
+            await this.$store.dispatch('loadBoards');
+            this.$store.dispatch({ type: 'getTask', taskId: this.task._id, boardId })
         },
         async addComment(txt) {
             if (!this.task.comments || !this.task.comments.length) this.task.comments = [];
@@ -463,6 +463,9 @@ export default {
             immediate: true,
             deep: true
         },
-    }
+    },
+    unmounted() {
+        socketService.off('update-task');
+    },
 }
 </script>
