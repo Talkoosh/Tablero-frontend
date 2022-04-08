@@ -222,6 +222,11 @@
         .actions-menu{
             width: 100%;
             transform: translateX(-4%);
+            text-align: center;
+            button{
+                text-align: center;
+                padding-inline-start: 0;
+            }
         }
     }
 }
