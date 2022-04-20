@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <li class="first-option option">
+        <!-- <li class="first-option option">
           <div class="option-wrapper">
             <span class="option-text">Profile and visibilty</span>
           </div>
@@ -37,7 +37,8 @@
           <div class="option-wrapper">
             <span class="option-text">Settings</span>
           </div>
-        </li>
+        </li>-->
+        <hr />
 
         <li @click="logout" class="logout-option">
           <button class="logout-btn">

@@ -365,7 +365,7 @@ export const boardStore = {
     },
     async addComment({ dispatch, state }, { comment, task }) {
       comment._id = utilService.makeId();
-      task.comments.push(comment);
+      task.comments.unshift(comment);
       dispatch({ type: 'saveTask', task, boardId: state.currBoardId })
     },
     async deleteComment({ dispatch, state }, { commentId, task }) {

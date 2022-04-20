@@ -74,9 +74,9 @@
         }
     }
 
-    .home-page-content{
-        .home-page-content-container{
-            .home-page-right{
+    .home-page-content {
+        .home-page-content-container {
+            .home-page-right {
                 width: 50% !important;
             }
         }
@@ -145,7 +145,6 @@
     }
 
     .home-page-content-container {
-
         .home-page-left {
             .header {
                 font-size: 2.1rem !important;
@@ -186,8 +185,6 @@
             }
         }
     }
-
- 
 }
 
 @media (max-width: 540px) {
@@ -208,7 +205,7 @@
             right: 0;
         }
 
-        .task-labels{
+        .task-labels {
             max-width: 100%;
             .task-details-labels-container {
                 max-width: 100%;
@@ -219,7 +216,7 @@
             flex-direction: column;
             align-items: center;
         }
-        .actions-menu{
+        .actions-menu {
             width: 100%;
             transform: translateX(-4%);
             text-align: center;
@@ -235,6 +232,7 @@
     .boards-page {
         .all-boards {
             padding-left: 5% !important;
+            margin: 0 10px;
         }
 
         .board-link {
@@ -293,33 +291,32 @@
 
     .create-board {
         .create-board-modal {
-            left: 100px ;
+            left: 100px;
         }
     }
 
     .recent-drop-content {
-        left: 100px ;
+        left: 100px;
     }
     .starred-drop-content {
-        left: 100px ;
+        left: 100px;
     }
 
-
-    .home-header{
-        .homepage-nav{
-            .main-logo{
+    .home-header {
+        .homepage-nav {
+            .main-logo {
                 transform: translateX(-60px);
             }
         }
     }
 
-    .home-container{
-        .home-page-content{
-            .home-page-right{
+    .home-container {
+        .home-page-content {
+            .home-page-right {
                 width: 45%;
             }
 
-            .home-page-content-container{
+            .home-page-content-container {
                 margin-left: 0px !important;
                 margin-top: 80px !important;
                 transform: translateY(-100px);

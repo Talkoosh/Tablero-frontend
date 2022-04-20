@@ -26,7 +26,7 @@
       opacity: 0;
       left: 12px;
       bottom: 8px;
-      transition: opacity .1s;
+      transition: opacity 0.1s;
     }
   }
   .header {
@@ -63,7 +63,7 @@
     position: relative;
     .comment {
       margin-top: 20px;
-      .content{
+      .content {
         height: fit-content;
       }
       .avatar-pic {
@@ -78,8 +78,10 @@
           margin-bottom: 6px;
         }
         span:nth-child(2) {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 400;
+          transform: translateY(1px);
+          color: #5e6c84;
         }
         display: flex;
         justify-content: flex-start;
@@ -93,46 +95,46 @@
         box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
         text-overflow: ellipsis;
       }
-      .comment-edit{
+      .comment-edit {
         background-color: white;
-        textarea{
+        textarea {
           padding: 0;
         }
-        div{
+        div {
           display: flex;
           gap: 5px;
         }
-        button{
+        button {
           @include button-default;
           background-color: #0079bf;
           color: white;
           border: none;
-          &:hover{
+          &:hover {
             background-color: #026aa7;
           }
         }
-        .exit-icon{
+        .exit-icon {
           @include icon;
           @include icon-lg;
-          opacity: .7;
+          opacity: 0.7;
           cursor: pointer;
-          &::before{
+          &::before {
             content: "\e91c";
           }
-          &:hover{
+          &:hover {
             opacity: 1;
           }
         }
       }
-      .comment-btns{
-        button{
+      .comment-btns {
+        button {
           background-color: transparent;
           border: none;
           cursor: pointer;
           font-size: 12px;
           text-decoration: underline;
           color: #5e6c84;
-          &:hover{
+          &:hover {
             color: #172b4d;
           }
         }

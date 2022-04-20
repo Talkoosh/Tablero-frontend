@@ -45,7 +45,7 @@ export default {
         deleteComment(commentId) {
             this.$emit('delete-comment', commentId)
         },
-        saveComment(){
+        saveComment() {
             this.$emit('save-comment', this.editTxt, this.comment._id);
             this.isEditing = false;
         }
@@ -53,9 +53,20 @@ export default {
     computed: {
         commentTime() {
             return timestamp => {
-                const date = new Date(timestamp).toString().split(' ');
-                const newDate = date[0] + ' ' + date[1] + ' ' + date[2] + ' ' + date[3]
-                return newDate;
+                const now = Date.now()
+                const diff = now - timestamp
+                if (diff < 60 * 1000) return 'Just now'
+                else if (diff < 60 * 60 * 1000) {
+                    const minutes = Math.round(diff / 60000)
+                    return `${minutes} minutes ago`
+                } else if (diff < 60 * 60 * 24 * 1000) {
+                    const hours = Math.round(diff / (60 * 60 * 1000))
+                    return `${hours} hours ago`
+                } else {
+                    const date = new Date(timestamp).toString().split(' ');
+                    const newDate = date[0] + ' ' + date[1] + ' ' + date[2] + ' ' + date[3]
+                    return newDate;
+                }
             }
         }
     },
