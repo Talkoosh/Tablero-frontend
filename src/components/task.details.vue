@@ -163,8 +163,8 @@
                             :members="boardMembers"
                             :taskMembers="task.memberIds"
                             :labels="labels"
-                            :is="currAction"
                             :attachments="task.attachments"
+                            :is="currAction"
                         ></component>
                         <button @click="setCurrAction('membersMenu')">
                             <span class="icon members-icon"></span>
