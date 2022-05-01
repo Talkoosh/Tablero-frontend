@@ -2,13 +2,8 @@
   <section :style="bodyOverflow" class="app-container" ref="appContainer">
     <main-header v-if="!isHomePage" @open-drop="openDrop" />
     <router-view @open-drop="openDrop" />
-    <component
-      :is="currDropDown"
-      v-if="currDropDown"
-      @close-drop="closeDrop"
-      @open-drop="openDrop"
-      v-clickoutside="closeDrop"
-    />
+    <component :is="currDropDown" v-if="currDropDown" @close-drop="closeDrop" @open-drop="openDrop"
+      v-clickoutside="closeDrop" />
   </section>
 </template>
 
@@ -34,6 +29,10 @@ export default {
   emits: ["openDrop", "open-drop"],
   created() {
     this.$store.dispatch({ type: 'getLoggedinUser' })
+    document.body.addEventListener('touchend', () => {
+      document.querySelector('body').classList.remove('smooth-dnd-disable-touch-action')
+      document.querySelector('body').classList.remove('smooth-dnd-no-user-select')
+    })
   },
   data() {
     return {

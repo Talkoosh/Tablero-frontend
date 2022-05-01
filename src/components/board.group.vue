@@ -3,28 +3,15 @@
         <div class="group-container">
             <div class="group">
                 <div class="group-header column-drag-handle">
-                    <h2
-                        @click="toggleEditGroupTitle"
-                        v-if="!isEditGroupTitle"
-                        class="group-title"
-                    >{{ group.title }}</h2>
-                    <input
-                        v-clickoutside="saveGroupTitle"
-                        @keyup.enter="saveGroupTitle"
-                        v-else
-                        ref="editGroupTitle"
-                        type="text"
-                        v-model="groupToEdit.title"
-                    />
+                    <h2 @click="toggleEditGroupTitle" v-if="!isEditGroupTitle" class="group-title">{{ group.title }}
+                    </h2>
+                    <input v-clickoutside="saveGroupTitle" @keyup.enter="saveGroupTitle" v-else ref="editGroupTitle"
+                        type="text" v-model="groupToEdit.title" />
                     <div @click="toggleExtrasMenu" class="group-extras">
                         <span class="dots-icon">...</span>
                     </div>
                 </div>
-                <div
-                    class="group-extras-menu"
-                    v-if="isExtrasOpen"
-                    v-clickoutside="toggleExtrasMenu"
-                >
+                <div class="group-extras-menu" v-if="isExtrasOpen" v-clickoutside="toggleExtrasMenu">
                     <h3 class="menu-title">List actions</h3>
                     <span class="extras-exit"></span>
                     <hr />
@@ -45,13 +32,8 @@
                 </div>
                 <!-- v-if="group.tasks.length" -->
                 <div class="group-tasks">
-                    <Container
-                        group-name="1"
-                        :get-child-payload="getChildPayload"
-                        orientation="vertical"
-                        @drop="onDrop"
-                        class="drag-task-container"
-                    >
+                    <Container group-name="1" :get-child-payload="getChildPayload" orientation="vertical" @drop="onDrop"
+                        class="drag-task-container">
                         <Draggable v-for="task in group.tasks" :key="task._id">
                             <task-preview :task="task" :boardId="boardId" />
                         </Draggable>
@@ -65,11 +47,8 @@
                     <div v-clickoutside="toggleAddTask" class="add-task-active" v-else>
                         <!-- <div class="add-task-area-container"> -->
                         <div class="textarea-container">
-                            <textarea
-                                v-model="taskToAdd.title"
-                                ref="addTask"
-                                placeholder="Enter a title for this card..."
-                            />
+                            <textarea v-model="taskToAdd.title" ref="addTask"
+                                placeholder="Enter a title for this card..." />
                         </div>
                         <div class="add-task-btns">
                             <button @mouseup="addTask" class="add-task-btn">Add Card</button>

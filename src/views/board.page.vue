@@ -1,44 +1,22 @@
 <template>
     <div v-if="board" class="main-board" :style="boardBg">
         <header>
-            <board-header
-                @board-title-changed="saveBoard"
-                @open-menu="openMenu"
-                @open-invite="toggleInvite"
-            />
+            <board-header @board-title-changed="saveBoard" @open-menu="openMenu" @open-invite="toggleInvite" />
         </header>
 
         <div class="groups-container" :style="linear">
-            <Container
-                v-if="board.groups.length"
-                orientation="horizontal"
-                @drop="onDrop"
-                class="drag-container"
-                drag-handle-selector=".column-drag-handle"
-            >
+            <Container v-if="board.groups.length" orientation="horizontal" @drop="onDrop" class="drag-container"
+                drag-handle-selector=".column-drag-handle">
                 <Draggable v-for="group in board.groups" :key="group._id">
-                    <board-group
-                        @group-title-changed="updateGroup"
-                        @task-added="addTask"
-                        :group="group"
-                        :boardId="board._id"
-                    />
+                    <board-group @group-title-changed="updateGroup" @task-added="addTask" :group="group"
+                        :boardId="board._id" />
                 </Draggable>
             </Container>
             <div class="add-group" :class="addGroupCondition" :style="isAddGroup ? '' : btnBgc">
-                <span
-                    v-if="!isAddGroup"
-                    :style="textColor"
-                    @click="toggleAddGroup"
-                >+ Add another list</span>
+                <span v-if="!isAddGroup" :style="textColor" @click="toggleAddGroup">+ Add another list</span>
                 <div v-else v-clickoutside="toggleAddGroup">
-                    <input
-                        ref="addGroup"
-                        type="text"
-                        v-model="groupToAdd.title"
-                        placeholder="Enter list title..."
-                        @keyup.enter="addGroup"
-                    />
+                    <input ref="addGroup" type="text" v-model="groupToAdd.title" placeholder="Enter list title..."
+                        @keyup.enter="addGroup" />
                     <div class="add-group-btns">
                         <button @click="addGroup" class="add-group-btn">Add list</button>
                         <button @click="toggleAddGroup" class="cancel-add-group-btn">
@@ -52,14 +30,8 @@
 
     <invite-members v-if="isAddMemberOpen" :clickPos="invitePos" @close-invite="toggleInvite" />
 
-    <board-menu
-        @change-board-bgc="changeBoardBgc"
-        @change-board-bgp="changeBoardBgp"
-        @close-menu="closeMenu"
-        :class="menuStatus"
-        :board="board"
-        :style="menuDisplay"
-    />
+    <board-menu @change-board-bgc="changeBoardBgc" @change-board-bgp="changeBoardBgp" @close-menu="closeMenu"
+        :class="menuStatus" :board="board" :style="menuDisplay" />
     <router-view></router-view>
 </template>
 
@@ -151,10 +123,12 @@ export default {
             }, 150)
         },
         onDrop(dropResult) {
+            console.log(dropResult)
             this.board.groups = this.applyDrag(this.board.groups, dropResult);
             this.$store.dispatch({ type: 'saveBoard', board: this.board })
         },
         applyDrag(arr, dragResult) {
+            console.log(arr, dragResult)
             const { removedIndex, addedIndex, payload } = dragResult;
 
             if (removedIndex === null && addedIndex === null) return arr;
