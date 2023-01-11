@@ -1,4 +1,4 @@
-import { createStore } from 'Vuex';
+import { createStore } from 'vuex';
 
 import { boardStore } from './modules/board.store.js'
 // import { toyStore } from './modules/toy.store.js';
