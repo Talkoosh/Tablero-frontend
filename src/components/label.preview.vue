@@ -1,5 +1,5 @@
 <template>
-    <span @click.prevent="showTitle" class="label" :style="labelStyle" :class="isLabelOpen">
+    <span @click.stop.prevent="showTitle" class="label" :style="labelStyle" :class="isLabelOpen">
         <span class="label-text" :style="textAnimationBehavior">{{ labelTitle }}</span>
     </span>
 </template>

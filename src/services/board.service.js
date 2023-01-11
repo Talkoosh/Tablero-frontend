@@ -304,6 +304,17 @@ async function AddNewUserBoard() {
               }
             },
             {
+              "title": "About us: Tal",
+              "description": "Hey, my name is Tal, I am one of the three developers of Tablero.\nI am currently 24 years old, born in Israel. I am a passionate web developer currently working in the industry!",
+              "_id": "tKbdt",
+              "createdAt": 1648802659198.0,
+              "labelIds": [],
+              "style": {
+                "isBackground": true,
+                "photo": "https://images.unsplash.com/photo-1554730501-8dd4db2b18cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDg4MDI4MzQ&ixlib=rb-1.2.1&q=80&w=1080"
+              }
+            },
+            {
               "title": "About us: Ben",
               "description": "Hey, my name is Ben, I am one of the three developers of Tablero.\nI am currently 25 years old, born in Israel, and currently learning how to be a web developer!",
               "_id": "KQWzA",
@@ -323,17 +334,6 @@ async function AddNewUserBoard() {
               "style": {
                 "isBackground": true,
                 "photo": "https://images.unsplash.com/photo-1569337042150-c21c85b80a10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDg4MDI3ODQ&ixlib=rb-1.2.1&q=80&w=1080"
-              }
-            },
-            {
-              "title": "About us: Tal",
-              "description": "Hey, my name is Tal, I am one of the three developers of Tablero.\nI am currently 23 years old, born in Israel, and currently learning how to be a web developer!",
-              "_id": "tKbdt",
-              "createdAt": 1648802659198.0,
-              "labelIds": [],
-              "style": {
-                "isBackground": true,
-                "photo": "https://images.unsplash.com/photo-1554730501-8dd4db2b18cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMTM3MDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDg4MDI4MzQ&ixlib=rb-1.2.1&q=80&w=1080"
               }
             }
           ]

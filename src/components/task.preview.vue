@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="main-task-container">
-      <router-link class="task-preview-container" :to="'/board/' + boardId + '/card/' + task._id">
+      <span class="task-preview-container"  @click.stop.prevent="navigateToTask">
         <div
           v-if="
             (task.style.color && !task.style.isBackground) ||
@@ -18,9 +18,9 @@
           <div v-if="task.style.photo && task.style.isBackground" class="text-shadowing"></div>
           <span class="task-title" :class="isBackgroundImage">{{ task.title }}</span>
           <badge-preview :task="task" class="task-badges" />
-          <span @click.prevent="openQuickEdit" class="task-quick-edit" ref="quickEditBtn"></span>
+          <span @click.stop.prevent="openQuickEdit" class="task-quick-edit" ref="quickEditBtn"></span>
         </div>
-      </router-link>
+      </span>
       <quickEdit
         :task="task"
         :pos="quickEditPos"
@@ -63,6 +63,9 @@ export default {
     closeQuickEdit() {
       this.isQuickEditOpen = false;
     },
+    navigateToTask(){
+      this.$router.push(`/board/${this.boardId}/card/${this.task._id}`)
+    }
   },
   computed: {
     isBackgroundImage() {
