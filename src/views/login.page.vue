@@ -53,7 +53,7 @@
             <div :style="checkTypingSignUp" class="login-methods-container">
               <div class="login-methods-seperator">OR</div>
 
-              <div class="login-methods">
+              <!-- <div class="login-methods">
                 <div class="method-btn">
                   <span class="google-icon"></span>
                   <span @click="googleLogin" class="text">Continue with Google</span>
@@ -63,7 +63,7 @@
                   <span class="facebook-icon"></span>
                   <span class="text">Continue with Facebook</span>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
 
